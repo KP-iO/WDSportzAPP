@@ -1,39 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/sign_in_screen_background"
     tools:context=".MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:theme="@style/AppTheme.AppBarOverlay" />
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="291dp"
+        android:layout_height="268dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="79dp"
+        android:layout_marginBottom="312dp"
+        app:srcCompat="@drawable/wd_logo"
+        android:contentDescription="@string/todo" />
 
-    </com.google.android.material.appbar.AppBarLayout>
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="380dp"
+        android:layout_height="45dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="430dp"
+        android:layout_marginBottom="300dp"
+        android:background="#FFEB3B"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:paddingLeft="3dp"
+        android:paddingTop="10dp"
+        android:paddingRight="3dp"
+        android:paddingBottom="10dp"
+        android:text="@string/login"
+        android:autofillHints="" />
 
-    <include layout="@layout/registration" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="380dp"
+        android:layout_height="45dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="380dp"
+        android:layout_marginBottom="314dp"
+        android:background="#FFEB3B"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="3dp"
+        android:paddingTop="10dp"
+        android:paddingRight="3dp"
+        android:paddingBottom="10dp"
+        android:text="@string/username"
+        android:autofillHints="" />
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="440dp"
-        android:text="Button" />
+        android:id="@+id/button3"
+        android:layout_width="380dp"
+        android:layout_height="45dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="510dp"
+        android:background="@drawable/sign_in_button_rectangle"
+        android:text="@string/sign_in"
+        android:textColor="#FFFFFF" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</RelativeLayout>

@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">wdsportz</string>
     <string name="action_settings">Settings</string>
+    <string name="todo">TODO</string>
+    <string name="sign_in">SIGN IN</string>
+    <string name="login">Login</string>
+    <string name="username">Username</string>
 </resources>
