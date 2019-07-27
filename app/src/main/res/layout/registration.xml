@@ -20,7 +20,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/top_yellow_rectangle" />
+        app:srcCompat="@drawable/yellow_seperator_line" />
 
     <ImageView
         android:id="@+id/top_yellow_container2"
@@ -31,7 +31,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/top_yellow_rectangle" />
+        app:srcCompat="@drawable/yellow_seperator_line" />
 
     <ImageView
         android:id="@+id/Green_profile_circle"
