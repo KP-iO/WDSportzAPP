@@ -9,7 +9,7 @@ public class IniTeamSelection extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.selectteams);
+        setContentView(R.layout.homepage);
 
     }
 };

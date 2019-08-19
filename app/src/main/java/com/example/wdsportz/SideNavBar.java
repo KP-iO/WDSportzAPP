@@ -14,7 +14,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 
-public class HomeFeed extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class SideNavBar extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 private DrawerLayout drawer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

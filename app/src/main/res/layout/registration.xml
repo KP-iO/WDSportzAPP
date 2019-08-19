@@ -159,7 +159,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
-        android:id="@+id/BtnCreateAcc"
+        android:id="@+id/btnCreateAcc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
@@ -168,22 +168,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/sign_in_screen__create_accout__btn" />
-
-    <EditText
-        android:id="@+id/LblCreateAcc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="96dp"
-        android:layout_marginBottom="28dp"
-        android:backgroundTint="#00000000"
-        android:ems="10"
-        android:fontFamily="sans-serif"
-        android:inputType="textPersonName"
-        android:text="Create Account"
-        android:textAlignment="center"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/line1"
@@ -256,7 +240,7 @@
         app:layout_constraintTop_toTopOf="@+id/Green_profile_circle" />
 
     <EditText
-        android:id="@+id/txt"
+        android:id="@+id/Name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="148dp"
@@ -275,7 +259,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/txtPassword"
+        android:id="@+id/Password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="196dp"
@@ -289,7 +273,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/Email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="196dp"
@@ -305,7 +289,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText5"
+        android:id="@+id/DOB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="196dp"
