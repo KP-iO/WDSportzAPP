@@ -8,6 +8,7 @@
     android:background="@drawable/grey_background"
     android:backgroundTint="#00FFFFFF"
     android:orientation="vertical"
+    app:layout_constraintTop_toTopOf="parent"
     tools:layout_editor_absoluteY="25dp">
     tools:layout_editor_absoluteY="81dp">
 
