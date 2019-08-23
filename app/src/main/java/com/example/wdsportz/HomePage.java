@@ -2,10 +2,7 @@ package com.example.wdsportz;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
@@ -14,17 +11,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class HomePage extends AppCompatActivity {
@@ -32,8 +24,8 @@ public class HomePage extends AppCompatActivity {
     private DrawerLayout drawer;
     private NavigationView.OnNavigationItemSelectedListener NavItemListen;
 
-    MyRecyclerViewAdapter adapter;
-    MyRecyclerViewAdapter.ItemClickListener adapterlistening;
+    MainFeedRecyclerViewAdapter adapter;
+    MainFeedRecyclerViewAdapter.ItemClickListener adapterlistening;
     private ArrayList<RecyclerViewModel> ArticleArrayList;
 
     private BottomNavigationView mMainNav;
@@ -66,24 +58,23 @@ public class HomePage extends AppCompatActivity {
         // Navigation View Listener Setup
         navigationView.setNavigationItemSelectedListener(NavItemListen);
 
-        //
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
-                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        // Toggle on Action Bar Setup
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-
-
+        //Main Feed define and setup
         RecyclerView recyclerView = findViewById(R.id.Main_feed);
-        ArticleArrayList = eatFruits();
+        ArticleArrayList = populateFeed();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new MyRecyclerViewAdapter(this, ArticleArrayList);
+        adapter = new MainFeedRecyclerViewAdapter(this, ArticleArrayList);
         adapter.setClickListener(adapterlistening);
         recyclerView.setAdapter(adapter);
 
+        // Bottom Nav Bar
 
-        mMainFrame = (RelativeLayout) findViewById(R.id.main_frame);
-        mMainNav = (BottomNavigationView) findViewById(R.id.bottom_nav);
+       //Redundant? >>mMainFrame = (RelativeLayout) findViewById(R.id.main_frame);
+        mMainNav = findViewById(R.id.bottom_nav);
         homefragment = new Home();
         moreFragment = new More();
         scoresFragment = new Scores();
@@ -125,7 +116,7 @@ public class HomePage extends AppCompatActivity {
 
     }
 
-
+    // Side Bar Toggle Selection options and actions
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_message:
@@ -140,8 +131,7 @@ public class HomePage extends AppCompatActivity {
         return true;
     }
 
-
-
+    // Drawer go back action
     @Override
     public void onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -152,7 +142,9 @@ public class HomePage extends AppCompatActivity {
     }
 
 
-    private ArrayList<RecyclerViewModel> eatFruits() {
+    // Function to populate feed **The Loop ONLY permits 7 objects ATM**
+
+    private ArrayList<RecyclerViewModel> populateFeed() {
 
         ArrayList<RecyclerViewModel> list = new ArrayList<>();
 

@@ -10,16 +10,15 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
+public class MainFeedRecyclerViewAdapter extends RecyclerView.Adapter<MainFeedRecyclerViewAdapter.ViewHolder> {
 
         private ArrayList<RecyclerViewModel> mData;
         private LayoutInflater mInflater;
         private ItemClickListener mClickListener;
 
         // data is passed into the constructor
-        MyRecyclerViewAdapter(Context context, ArrayList<RecyclerViewModel> data) {
+        MainFeedRecyclerViewAdapter(Context context, ArrayList<RecyclerViewModel> data) {
             this.mInflater = LayoutInflater.from(context);
             this.mData = data;
         }
