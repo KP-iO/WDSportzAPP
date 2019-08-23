@@ -20,6 +20,9 @@ private DrawerLayout drawer;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.navhome);
+
+
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -32,11 +35,7 @@ private DrawerLayout drawer;
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-if (savedInstanceState == null){
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new SettingsSegment()).commit();
-        navigationView.setCheckedItem(R.id.nav_message);
 
-    }
     }
 
 

@@ -11,7 +11,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -27,6 +29,9 @@ import java.util.ArrayList;
 
 public class HomePage extends AppCompatActivity {
 
+    private DrawerLayout drawer;
+    private NavigationView.OnNavigationItemSelectedListener NavItemListen;
+
     MyRecyclerViewAdapter adapter;
     MyRecyclerViewAdapter.ItemClickListener adapterlistening;
     private ArrayList<RecyclerViewModel> ArticleArrayList;
@@ -39,13 +44,35 @@ public class HomePage extends AppCompatActivity {
     private Watch watchFragment;
 
 
+    // Temporary Feed Population Arrays
+
     private int[] NewsImages = new int[]{R.drawable.arsenal_team_logo,R.drawable.bowers___fc,R.drawable.barking_fv,R.drawable.chestnut_fv,R.drawable.enfield_fc, R.drawable.ware_fc,R.drawable.folkestone_fc,R.drawable.molesey_fc};
-    private String[] NewsTitles = new String[]{"Coventry Dominates in a 5 -1 Win Over Nottingham","New Manager Decided For Bowers FC","Lorem ipsum dolor sit amet."," Consectetur Adipiscing Elit, Sed Do Eiusmod Tempor Incididunt","Sed Do Eiusmod Tempor Incididunt","Duis aute irure dolor in reprehenderit in voluptate"," sunt in culpa qui officia deserunt mollit"};
+    private String[] NewsTitles = new String[]{"Coventry Dominates in a 4 -1 Win Over Nottingham","New Manager Decided For Bowers FC","Lorem ipsum dolor sit amet."," Consectetur Adipiscing Elit, Sed Do Eiusmod Tempor Incididunt","Sed Do Eiusmod Tempor Incididunt","Duis aute irure dolor in reprehenderit in voluptate"," sunt in culpa qui officia deserunt mollit"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.homepage);
+
+
+        // Toolbar define and set up
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        // Drawer and Navigation View Define
+        drawer = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+
+        // Navigation View Listener Setup
+        navigationView.setNavigationItemSelectedListener(NavItemListen);
+
+        //
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+
 
         RecyclerView recyclerView = findViewById(R.id.Main_feed);
         ArticleArrayList = eatFruits();
@@ -99,6 +126,31 @@ public class HomePage extends AppCompatActivity {
     }
 
 
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.nav_message:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new SettingsSegment()).commit();
+                break;
+            case R.id.nav_share:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new ProfileSegment()).commit();
+                break;
+        }
+        drawer.closeDrawer(GravityCompat.START);
+
+        return true;
+    }
+
+
+
+    @Override
+    public void onBackPressed() {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
 
     private ArrayList<RecyclerViewModel> eatFruits() {
 
@@ -113,6 +165,10 @@ public class HomePage extends AppCompatActivity {
 
         return list;
     }
+
+
+
+
 
 }
 
