@@ -2,6 +2,7 @@ package com.example.wdsportz;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.RelativeLayout;
 
 
@@ -20,6 +21,9 @@ import com.google.android.material.navigation.NavigationView;
 import java.util.ArrayList;
 
 public class HomePage extends AppCompatActivity {
+
+    //temp
+    RecyclerView tv;
 
     private DrawerLayout drawer;
     private NavigationView.OnNavigationItemSelectedListener NavItemListen;
@@ -81,6 +85,8 @@ public class HomePage extends AppCompatActivity {
         watchFragment = new Watch();
 
 
+        tv = (RecyclerView) findViewById(R.id.Main_feed);
+
         mMainNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -88,6 +94,7 @@ public class HomePage extends AppCompatActivity {
                 switch (menuItem.getItemId()) {
 
                     case R.id.nav_home:
+
                         getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, new Home()).commit();
 
 
@@ -95,7 +102,7 @@ public class HomePage extends AppCompatActivity {
 
                     case R.id.nav_more:
                         getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, new More()).commit();
-
+                        tv.setVisibility(View.GONE);
                         return true;
 
                     case R.id.nav_score:
