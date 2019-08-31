@@ -96,23 +96,26 @@ public class HomePage extends AppCompatActivity {
                     case R.id.nav_home:
 
                         getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, new Home()).commit();
-
+                        tv.setVisibility(View.VISIBLE);
 
                         return true;
 
                     case R.id.nav_more:
                         getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, new More()).commit();
+
+                        // >> remmoves recycler view
                         tv.setVisibility(View.GONE);
+
                         return true;
 
                     case R.id.nav_score:
                         getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, new Scores()).commit();
-
+                        tv.setVisibility(View.GONE);
                         return true;
 
                     case R.id.nav_watch:
                         getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, new Watch()).commit();
-
+                        tv.setVisibility(View.GONE);
                         return true;
 
                     default:
