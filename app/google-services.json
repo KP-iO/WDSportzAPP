@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "999253176460",
+    "firebase_url": "https://wdsportz-3e91f.firebaseio.com",
+    "project_id": "wdsportz-3e91f",
+    "storage_bucket": "wdsportz-3e91f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:999253176460:android:842e5f22616f8449",
+        "android_client_info": {
+          "package_name": "com.example.wdsportz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "999253176460-ek8q4srv9bp1m4b51dn7f5ojf74u5umc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.wdsportz",
+            "certificate_hash": "c92dbc7e50f335d6767c8fb372b67df4fb938fc0"
+          }
+        },
+        {
+          "client_id": "999253176460-beq29khn7qj1ll3tgtbghmj0nfgc1r5e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBx6PvlYdXvezoCVx3XvxTmjhJ8nvt1Jwk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "999253176460-beq29khn7qj1ll3tgtbghmj0nfgc1r5e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
