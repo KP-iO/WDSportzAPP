@@ -1,5 +1,9 @@
 package com.example.wdsportz;
 
+import android.content.ContentValues;
+import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,11 +23,55 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class Register extends AppCompatActivity {
-    EditText _txtEmail, _txtName, _txtPassword, _txtDOB;
-    ImageButton _btnCreateAcc;
-    Spinner country_spinner, city_spinner;
-    private FirebaseAuth mAuth;
-    private static final String TAG = "EmailPassword";
+    SQLiteOpenHelper openHelper;
+    SQLiteDatabase db;
+    ImageButton _btnreg;
+    EditText _txtfname, _txtlname, _txtpass, _txtemail, _txtphone;
+
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.registration);
+        openHelper=new DatabaseHelper(this);
+        _btnreg = (ImageButton)findViewById(R.id.btnCreateAcc);
+        _txtfname = (EditText) findViewById(R.id.Name);
+        _txtpass = (EditText)findViewById(R.id.Password);
+        _txtemail = (EditText)findViewById(R.id.Email);
+       // _txtphone = (EditText)findViewById(R.id.txtphone);
+       // _btnlogin = (Button)findViewById(R.id.btnlog);
+        _btnreg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                db=openHelper.getWritableDatabase();
+                String fname=_txtfname.getText().toString();
+                //String lname=_txtlname.getText().toString();
+                String pass=_txtpass.getText().toString();
+                String email=_txtemail.getText().toString();
+              //  String phone=_txtphone.getText().toString();
+                insertdata(fname,pass,email);
+                Toast.makeText(getApplicationContext(), "Successfully Registered", Toast.LENGTH_LONG).show();
+                openloginscreen();
+            }
+        });
+
+    }
+    public void openloginscreen(){
+        Intent intent = new Intent(Register.this, Login.class);
+        startActivity(intent);
+    }
+
+
+    public void insertdata(String fname, String pass, String email){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(DatabaseHelper.COL_2,fname);
+        //contentValues.put(DatabaseHelper.COL_3,lname);
+        contentValues.put(DatabaseHelper.COL_3,pass);
+        contentValues.put(DatabaseHelper.COL_4,email);
+       // contentValues.put(DatabaseHelper.COL_6,phone);
+        long id = db.insert(DatabaseHelper.TABLE_NAME,null, contentValues);
+    }
 }
 
 

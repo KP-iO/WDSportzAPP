@@ -11,10 +11,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String TABLE_NAME="register";
     public static final String COL_1="ID";
     public static final String COL_2="FirstName";
-    public static final String COL_3="LastName";
-    public static final String COL_4="Password";
-    public static final String COL_5="Email";
-    public static final String COL_6="Phone";
+    //public static final String COL_3="LastName";
+    public static final String COL_3="Password";
+    public static final String COL_4="Email";
+    //public static final String COL_6="Phone";
     public DatabaseHelper(Context context){
         super(context, DATABASE_NAME, null, 1);
     }

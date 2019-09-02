@@ -14,40 +14,26 @@
 
     <ImageView
         android:id="@+id/imageView6"
-        android:layout_width="291dp"
-        android:layout_height="268dp"
+        android:layout_width="292dp"
+        android:layout_height="313dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="79dp"
-        android:layout_marginBottom="312dp"
+        android:layout_marginBottom="339dp"
         android:contentDescription="@string/todo"
         app:srcCompat="@drawable/wd_logo" />
 
-    <EditText
-        android:id="@+id/editText2"
-        android:layout_width="380dp"
-        android:layout_height="45dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="430dp"
-        android:layout_marginBottom="300dp"
-        android:autofillHints=""
-        android:background="#FFEB3B"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:paddingLeft="3dp"
-        android:paddingTop="10dp"
-        android:paddingRight="3dp"
-        android:paddingBottom="10dp"
-        android:text="@string/login" />
 
     <EditText
         android:id="@+id/username"
         android:layout_width="380dp"
         android:layout_height="45dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="380dp"
-        android:layout_marginBottom="314dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="17dp"
+        android:layout_marginBottom="284dp"
         android:autofillHints=""
         android:background="#FFEB3B"
         android:ems="10"
@@ -57,6 +43,23 @@
         android:paddingRight="3dp"
         android:paddingBottom="10dp"
         android:text="@string/username" />
+
+    <EditText
+        android:id="@+id/Pass"
+        android:layout_width="380dp"
+        android:layout_height="45dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="450dp"
+        android:layout_marginBottom="314dp"
+        android:autofillHints=""
+        android:background="#FFEB3B"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="3dp"
+        android:paddingTop="10dp"
+        android:paddingRight="3dp"
+        android:paddingBottom="10dp"
+        android:text="@string/password1" />
 
     <Button
         android:id="@+id/button3"
