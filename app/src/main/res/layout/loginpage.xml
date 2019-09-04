@@ -12,18 +12,21 @@
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay" />
 
+
     <ImageView
         android:id="@+id/imageView6"
-        android:layout_width="292dp"
-        android:layout_height="313dp"
+        android:layout_width="254dp"
+        android:layout_height="282dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="79dp"
-        android:layout_marginBottom="339dp"
+        android:layout_marginStart="78dp"
+        android:layout_marginTop="95dp"
+        android:layout_marginEnd="79dp"
+        android:layout_marginBottom="353dp"
         android:contentDescription="@string/todo"
         app:srcCompat="@drawable/wd_logo" />
-
 
     <EditText
         android:id="@+id/username"

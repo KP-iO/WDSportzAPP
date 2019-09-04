@@ -129,10 +129,10 @@ public class HomePage extends AppCompatActivity {
     // Side Bar Toggle Selection options and actions
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.nav_message:
+            case R.id.settings:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new SettingsSegment()).commit();
                 break;
-            case R.id.nav_share:
+            case R.id.Profile:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new ProfileSegment()).commit();
                 break;
         }
