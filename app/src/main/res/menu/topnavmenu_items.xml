@@ -25,6 +25,10 @@
                 android:id="@+id/help"
                 android:icon="@drawable/ic_help_black_24dp"
                 android:title="@string/help" />
+            <item
+                android:id="@+id/signout"
+                android:icon="@drawable/ic_exit_to_app_black_24dp"
+                android:title="@string/sign_out" />
 
         </menu>
     </item>

@@ -1,8 +1,11 @@
 package com.example.wdsportz;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
@@ -13,14 +16,27 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class SideNavBar extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    FirebaseAuth firebaseAuth;
+    FirebaseUser firebaseUser;
+
+    TextView userEmail;
+    Button userSignout;
 private DrawerLayout drawer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.navhome);
+        userEmail = findViewById(R.id.tvUserEmail);
+        userSignout = findViewById(R.id.signout);
 
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
+
+        userEmail.setText(firebaseUser.getEmail());
 
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -48,6 +64,9 @@ private DrawerLayout drawer;
             case R.id.Profile:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new ProfileSegment()).commit();
                 break;
+            case R.id.signout:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new Signout()).commit();
+
         }
         drawer.closeDrawer(GravityCompat.START);
 
