@@ -62,80 +62,22 @@
         android:backgroundTint="#00FFFFFF"
         app:srcCompat="@drawable/search_icon" />
 
-    <ScrollView
-        android:id="@+id/container_scroll_view"
-        android:layout_width="match_parent"
-        android:layout_height="1000dp"
+
+    // Initialised by SelectTeamsRecyclerViewAdapter.java
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/RecyclerView"
+        android:layout_width="311dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/activitychooserbackground"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="130dp"
-        android:layout_marginTop="87dp"
-        android:layout_marginEnd="15dp">
-
-        <GridLayout
-            android:id="@+id/container"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginStart="0dp"
-            android:columnCount="16">
-
-            <ImageButton
-                android:id="@+id/imageButton2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_row="0"
-                android:layout_column="0"
-                android:background="#FFFFFF"
-                app:srcCompat="@drawable/barking_fv" />
-
-            <ImageButton
-                android:id="@+id/imageButton3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_row="1"
-                android:layout_column="1"
-                android:background="#FFFFFF"
-                app:srcCompat="@drawable/bowers___fc" />
-
-            <ImageButton
-                android:id="@+id/imageButton5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_row="2"
-                android:layout_column="0"
-                android:background="#FFFFFF"
-                app:srcCompat="@drawable/arsenal_team_logo" />
-
-            <ImageButton
-                android:id="@+id/imageButton4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_row="3"
-                android:layout_column="1"
-                android:background="#FFFFFF"
-                app:srcCompat="@drawable/enfield_fc" />
-
-            <ImageButton
-                android:id="@+id/imageButton6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_row="4"
-                android:layout_column="0"
-                android:background="#FFFFFF"
-                app:srcCompat="@drawable/loughbrough" />
-
-            <ImageButton
-                android:id="@+id/imageButton7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_row="5"
-                android:layout_column="1"
-                app:srcCompat="@drawable/ware_fc" />
-
-        </GridLayout>
-
-
-    </ScrollView>
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="85dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="6dp"/>
 
 
 </RelativeLayout>
