@@ -6,7 +6,7 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/Profile"
+            android:id="@+id/profileSegment"
             android:icon="@drawable/ic_account_box_black_24dp"
             android:title="@string/profile" />
         <item
@@ -18,7 +18,7 @@
     <item android:title="">
         <menu>
             <item
-                android:id="@+id/settings"
+                android:id="@+id/settingsSegment"
                 android:icon="@drawable/settings"
                 android:title="@string/settings" />
             <item

@@ -58,10 +58,10 @@ private DrawerLayout drawer;
 @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.settings:
+            case R.id.settingsSegment:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new SettingsSegment()).commit();
                 break;
-            case R.id.Profile:
+            case R.id.profileSegment:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new ProfileSegment()).commit();
                 break;
             case R.id.signout:
