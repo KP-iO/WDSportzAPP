@@ -34,5 +34,6 @@
     <string name="sign_out">Sign Out</string>
     <string name="name" />
     <string name="view_match">View Match</string>
+    <string name="video">Video</string>
 
 </resources>
