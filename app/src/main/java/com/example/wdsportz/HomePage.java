@@ -37,7 +37,7 @@ public class HomePage extends AppCompatActivity {
     private Home homefragment;
     private More moreFragment;
     private Scores scoresFragment;
-    private Watch watchFragment;
+    private Watchfrag watchFragment;
 
 
     // Temporary Feed Population Arrays
@@ -82,7 +82,7 @@ public class HomePage extends AppCompatActivity {
         homefragment = new Home();
         moreFragment = new More();
         scoresFragment = new Scores();
-        watchFragment = new Watch();
+        watchFragment = new Watchfrag();
 
 
         tv = (RecyclerView) findViewById(R.id.Main_feed);
@@ -114,7 +114,7 @@ public class HomePage extends AppCompatActivity {
                         return true;
 
                     case R.id.nav_watch:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, new Watch()).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, new Watchfrag()).commit();
                         tv.setVisibility(View.GONE);
                         return true;
 

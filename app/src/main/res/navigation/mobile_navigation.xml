@@ -60,7 +60,7 @@
         tools:layout="@layout/fragment_signout" />
     <fragment
         android:id="@+id/watch"
-        android:name="com.example.wdsportz.Watch"
+        android:name="com.example.wdsportz.Watchfrag"
         android:label="fragment_watch"
         tools:layout="@layout/fragment_watch" />
         <action

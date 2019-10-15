@@ -1,83 +1,57 @@
 package com.example.wdsportz;
 
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import androidx.recyclerview.widget.RecyclerView;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.MediaController;
+import android.widget.VideoView;
 
-import java.util.ArrayList;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import com.example.wdsportz.Watch;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
-public class VideoViewAdapter extends RecyclerView.Adapter<VideoViewAdapter.ViewHolder> {
-
-        private ArrayList<RecyclerViewModel> mData;
-        private LayoutInflater mInflater;
-        private ItemClickListener mClickListener;
-
-        // data is passed into the constructor
-        VideoViewAdapter(Context context, ArrayList<RecyclerViewModel> data) {
-            this.mInflater = LayoutInflater.from(context);
-            this.mData = data;
-        }
-
-        // inflates the row layout from xml when needed
-        @Override
-        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = mInflater.inflate(R.layout.fragment_mainfeed_row, parent, false);
-            return new ViewHolder(view);
-        }
-
-        // binds the data to the TextView in each row
-        @Override
-        public void onBindViewHolder(ViewHolder holder, int position) {
-
-            holder.myTextView.setText(mData.get(position).getName());
-            holder.myImageView.setImageResource(mData.get(position).getImage_drawable());
-
-        }
-
-        // total number of rows
-        @Override
-        public int getItemCount() {
-            return mData.size();
-        }
+public class VideoPlayback extends AppCompatActivity {
+    VideoView videoView;
+    String VidUri;
+    FirebaseFirestore fireStoreDB = FirebaseFirestore.getInstance();
+    private static final String TAG = "Video Playback";
 
 
-        // stores and recycles views as they are scrolled off screen
-        public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-            TextView myTextView;
-            ImageView myImageView;
+    @Override
+    protected void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.viewmatches);
+        Intent intent = getIntent();
 
-            ViewHolder(View itemView) {
-                super(itemView);
-                myTextView = itemView.findViewById(R.id.textView2);
-                myImageView = itemView.findViewById(R.id.imageView2);
 
-                itemView.setOnClickListener(this);
-            }
+        MediaController mediaController = new MediaController(this);
 
-            @Override
-            public void onClick(View view) {
-                if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
-            }
-        }
 
-        // convenience method for getting data at click position
-       // String getItem(int id) {
-         //   return mData.get(id);
-       // }
+        videoView = findViewById(R.id.Watch_view);
+        videoView.setMediaController(mediaController);
+        mediaController.setAnchorView(videoView);
 
-        // allows clicks events to be caught
-        void setClickListener(ItemClickListener itemClickListener) {
-            this.mClickListener = itemClickListener;
-        }
+        String str = "https://firebasestorage.googleapis.com/v0/b/wdsportz-3e91f.appspot.com/o/Videos%2FMovie%20on%2017-09-2019%20at%2011.45%20%232.mov?alt=media&token=c2ab79e0-d8b3-4915-9002-8c7f4ce9b926";
+        Uri uri = Uri.parse(str);
+        videoView.setVideoURI(uri);
+        videoView.requestFocus();
 
-        // parent activity will implement this method to respond to click events
-        public interface ItemClickListener {
-            void onItemClick(View view, int position);
-        }
+
+
+
     }
 
+
+
+
+
+
+
+}
