@@ -1,6 +1,7 @@
 package com.example.wdsportz;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,17 +13,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.VideoView;
+
 import com.example.wdsportz.Adapter.VideoViewAdapter;
+import com.example.wdsportz.viewmodels.VideoViewModel;
+import com.example.wdsportz.Watch;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Watch extends Fragment {
+public class Watchfrag extends Fragment {
 
 
-    public Watch() {
-        // Required empty public constructor
+    public Watchfrag() {
+
     }
 
 
@@ -31,13 +36,14 @@ public class Watch extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_watch, container, false);
-
-        RecyclerView recyclerViewVM = (RecyclerView) view.findViewById(R.id.RecyclerViewVM);
-        RecyclerView recyclerViewV = (RecyclerView) view.findViewById(R.id.RecyclerViewV);
-
-        VideoViewAdapter videoViewAdapter = new VideoViewAdapter();
-        recyclerViewV.setAdapter(videoViewAdapter);
-        recyclerViewV.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        Intent firstpage= new Intent(getActivity(), Watch.class);
+      startActivity(firstpage);
+////        RecyclerView recyclerViewVM = (RecyclerView) view.findViewById(R.id.RecyclerViewVM);
+//        RecyclerView recyclerViewV = (RecyclerView) view.findViewById(R.id.RecyclerViewV);
+//
+//        VideoViewAdapter videoViewAdapter = new VideoViewAdapter();
+//        recyclerViewV.setAdapter(videoViewAdapter);
+//        recyclerViewV.setLayoutManager(new GridLayoutManager(getActivity(), 2));
 
 
 

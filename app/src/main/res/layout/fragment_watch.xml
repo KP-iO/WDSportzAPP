@@ -8,61 +8,44 @@
     >
 
     <!-- TODO: Update blank fragment layout -->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-        <ScrollView
-            android:id="@+id/scrollView1"
 
-            android:layout_width="409dp"
-            android:layout_height="235dp"
-            android:layout_marginEnd="2dp"
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
-            android:scrollbars="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/RecyclerViewVM"
 
-            <GridLayout
-                android:id="@+id/full_matches"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
-                android:columnCount="16" >
+        android:layout_width="407dp"
+        android:layout_height="270dp"
+        android:layout_marginEnd="2dp"
+        android:scrollbars="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-            </GridLayout>
-        </ScrollView>
 
-        <ScrollView
-            android:id="@+id/scrollView4"
-            android:layout_width="416dp"
-            android:layout_height="452dp"
-            android:scrollbars="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/scrollView1"
-            app:layout_constraintVertical_bias="1.0">
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/RecyclerViewV"
+        android:layout_width="415dp"
+        android:layout_height="418dp"
+        android:scrollbars="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/RecyclerViewVM"
+        app:layout_constraintVertical_bias="1.0" />
 
-            <GridLayout
-                android:id="@+id/video"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
-                android:columnCount="16" />
-        </ScrollView>
-
-        <TextView
+    <TextView
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/video"
             android:textSize="30sp"
-            app:layout_constraintBottom_toTopOf="@+id/scrollView4"
+            app:layout_constraintBottom_toTopOf="@+id/RecyclerViewV"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/scrollView1" />
+            app:layout_constraintTop_toBottomOf="@+id/RecyclerViewVM"
+            app:layout_constraintVertical_bias="0.0" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

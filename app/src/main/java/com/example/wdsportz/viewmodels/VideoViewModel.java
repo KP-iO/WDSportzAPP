@@ -6,6 +6,7 @@ package com.example.wdsportz.viewmodels;
 public class VideoViewModel {
     String title;
     String videoimageURL;
+    String videoURL;
 
 
 
@@ -13,10 +14,22 @@ public class VideoViewModel {
 
     }
 
-    public VideoViewModel(String title, String videoimageURL) {
+    public VideoViewModel(String title, String videoimageURL, String videoURL) {
         this.title = title;
         this.videoimageURL = videoimageURL;
+        this.videoURL = videoURL;
     }
+
+
+
+
+    public  String getVideoURL() {
+        return videoURL;
+    }
+
+    public void setVideoURL(String videoURL) {this.videoURL = videoURL; }
+
+
 
     public String getVideoimageURL() {
         return videoimageURL;

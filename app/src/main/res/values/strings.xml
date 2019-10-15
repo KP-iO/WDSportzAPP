@@ -35,5 +35,6 @@
     <string name="name" />
     <string name="view_match">View Match</string>
     <string name="video">Video</string>
+    <string name="home">Home</string>
 
 </resources>
