@@ -28,7 +28,7 @@ public class SelectTeamsRecyclerViewAdapter extends RecyclerView.Adapter<SelectT
     private Context context;
 
     // data is passed into the constructor
-    SelectTeamsRecyclerViewAdapter(Context context, List<SelectTeamsRecyclerViewModel> data) {
+    public SelectTeamsRecyclerViewAdapter(Context context, List<SelectTeamsRecyclerViewModel> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
         this.context = context;
@@ -81,7 +81,7 @@ public class SelectTeamsRecyclerViewAdapter extends RecyclerView.Adapter<SelectT
     }
 
     // convenience method for getting data at click position
-    String getItem(int id) {
+    public String getItem(int id) {
 
         return mData.get(id).teamName;
     }

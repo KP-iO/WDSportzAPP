@@ -1,4 +1,4 @@
-package com.example.wdsportz;
+package com.example.wdsportz.LoginDatabase_Temp;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -26,7 +26,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     }
-
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);

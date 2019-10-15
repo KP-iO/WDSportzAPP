@@ -3,32 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation1"
-    app:startDestination="@id/home3">
+    app:startDestination="@+id/activity_Main">
 
-    <fragment
-        android:id="@+id/home3"
-        android:name="com.example.wdsportz.Home"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_home3_to_more"
-            app:destination="@id/more" />
-        <action
-            android:id="@+id/action_home3_to_watch"
-            app:destination="@id/watch" />
-        <action
-            android:id="@+id/action_home3_to_scores"
-            app:destination="@id/scores" />
-        <action
-            android:id="@+id/action_home3_to_profileSegment"
-            app:destination="@id/profileSegment" />
-        <action
-            android:id="@+id/action_home3_to_settingsSegment"
-            app:destination="@id/settingsSegment" />
-        <action
-            android:id="@+id/action_home3_to_signout2"
-            app:destination="@id/signout2" />
-    </fragment>
+    <action
+        android:id="@+id/action_blankFragment_to_home3"
+        app:destination="@id/activity_Main" />
     <fragment
         android:id="@+id/profileSegment"
         android:name="com.example.wdsportz.ProfileSegment"
@@ -43,7 +22,7 @@
         android:id="@+id/scores"
         android:name="com.example.wdsportz.Scores"
         android:label="fragment_scores"
-        tools:layout="@layout/fragment_scores" >
+        tools:layout="@layout/fragment_scores">
         <action
             android:id="@+id/action_scores_to_watch"
             app:destination="@id/watch" />
@@ -63,9 +42,39 @@
         android:name="com.example.wdsportz.Watch"
         android:label="fragment_watch"
         tools:layout="@layout/fragment_watch" />
+    <fragment
+        android:id="@+id/activity_Main"
+        android:name="com.example.wdsportz.MainActivities.Frag_Home_TempStart"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home_tempstart">
         <action
-            android:id="@+id/action_blankFragment_to_home3"
-            app:destination="@id/home3" />
+            android:id="@+id/action_HomeActivity_to_frag_Test_1"
+            app:destination="@id/frag_Test_1"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/action_HomeActivity_to_select_Teams_Frag"
+            app:destination="@id/select_Teams_Frag" />
+    </fragment>
+    <fragment
+        android:id="@+id/frag_Test_1"
+        android:name="com.example.wdsportz.MainActivities.Frag_Test_1"
+        android:label="fragment_frag__test_1"
+        tools:layout="@layout/fragment_frag__test_1" />
+    <fragment
+        android:id="@+id/select_Teams_Frag"
+        android:name="com.example.wdsportz.MainActivities.Frag_IniTeamSelection"
+        android:label="fragment_select__teams"
+        tools:layout="@layout/fragment_ini_team_selection">
+        <action
+            android:id="@+id/action_select_Teams_Frag_to_frag_HomePage"
+            app:destination="@id/frag_HomePage" />
+    </fragment>
+    <fragment
+        android:id="@+id/frag_HomePage"
+        android:name="com.example.wdsportz.MainActivities.Frag_HomePage"
+        android:label="Frag_HomePage"
+        tools:layout="@layout/fragment_homepage" />
 
 
 </navigation>

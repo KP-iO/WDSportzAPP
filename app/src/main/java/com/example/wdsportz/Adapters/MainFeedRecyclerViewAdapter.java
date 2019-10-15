@@ -1,4 +1,4 @@
-package com.example.wdsportz;
+package com.example.wdsportz.Adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,9 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.wdsportz.R;
+import com.example.wdsportz.RecyclerViewModel;
+
 import java.util.ArrayList;
 
 public class MainFeedRecyclerViewAdapter extends RecyclerView.Adapter<MainFeedRecyclerViewAdapter.ViewHolder> {
@@ -18,7 +21,7 @@ public class MainFeedRecyclerViewAdapter extends RecyclerView.Adapter<MainFeedRe
         private ItemClickListener mClickListener;
 
         // data is passed into the constructor
-        MainFeedRecyclerViewAdapter(Context context, ArrayList<RecyclerViewModel> data) {
+        public MainFeedRecyclerViewAdapter(Context context, ArrayList<RecyclerViewModel> data) {
             this.mInflater = LayoutInflater.from(context);
             this.mData = data;
         }
@@ -71,7 +74,7 @@ public class MainFeedRecyclerViewAdapter extends RecyclerView.Adapter<MainFeedRe
        // }
 
         // allows clicks events to be caught
-        void setClickListener(ItemClickListener itemClickListener) {
+        public void setClickListener(ItemClickListener itemClickListener) {
             this.mClickListener = itemClickListener;
         }
 

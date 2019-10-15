@@ -1,4 +1,4 @@
-package com.example.wdsportz.Adapter;
+package com.example.wdsportz.Adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,21 +11,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wdsportz.R;
-import com.example.wdsportz.viewmodels.VideoViewModel;
-import com.squareup.picasso.Picasso;
+import com.example.wdsportz.ViewModels.VideoViewModel;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
  * Created by khrishawn
  */
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+public class WatchPageVideoAdapter extends RecyclerView.Adapter<WatchPageVideoAdapter.MyViewHolder> {
 
     Context context;
     ArrayList<VideoViewModel>videoViewModels;
 
-    public MyAdapter(Context c, ArrayList<VideoViewModel> v)
+    public WatchPageVideoAdapter(Context c, ArrayList<VideoViewModel> v)
     {
         context = c;
         videoViewModels = v;
