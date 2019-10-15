@@ -54,7 +54,7 @@ public class Watch extends FragmentActivity implements VideoViewAdapter.ItemClic
 
 // Implement error handling for all cases e.g (Name/ Logo not accessible) ------>
 
-        Task<QuerySnapshot> docRef = fireStoreDB.collection("Isthmian_Teams")
+        Task<QuerySnapshot> docRef = fireStoreDB.collection("Videos")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
 
@@ -69,13 +69,13 @@ public class Watch extends FragmentActivity implements VideoViewAdapter.ItemClic
 
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
-                                String Uri1 = document.get("Team_Video_Play").toString();
+
 
 
                                 Log.d(TAG, "DOCUMENT PRINT :" + document.getData().toString());
-                                Log.d(TAG, "Team Added to List " + document.get("Team_Name").toString());
+                                Log.d(TAG, "Team Added to List " + document.get("Match_Name").toString());
 
-                                list.add(new VideoViewModel(document.get("Team_Name").toString(), document.get("Team_Logo_Location").toString(), document.get("Team_Video_Play").toString()));
+                                list.add(new VideoViewModel(document.get("Match_Name").toString(), document.get("Match_Image").toString(), document.get("Match_Video").toString()));
 
                                 //Log.d(TAG, ("LOGO URL: " + list.));
 
