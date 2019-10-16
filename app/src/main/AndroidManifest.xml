@@ -21,7 +21,7 @@
 
         <activity
             android:name=".Watch"
-            android:theme="@style/AppTheme.NoActionBar2">
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.DEFAULT" />
             </intent-filter>
@@ -40,7 +40,7 @@
         <activity
             android:name=".VideoPlayback"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
