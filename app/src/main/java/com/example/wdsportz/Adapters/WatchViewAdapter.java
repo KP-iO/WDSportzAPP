@@ -1,4 +1,4 @@
-package com.example.wdsportz.Adapter;
+package com.example.wdsportz.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,13 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.wdsportz.R;
-import com.example.wdsportz.SelectTeamsRecyclerViewModel;
 import com.example.wdsportz.VideoPlayback;
-import com.example.wdsportz.Watch;
-import com.example.wdsportz.viewmodels.VideoViewModel;
+import com.example.wdsportz.ViewModels.WatchViewModel;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static android.view.LayoutInflater.from;
@@ -28,13 +25,13 @@ import static android.view.LayoutInflater.from;
 /**
  * Created by khrishawn
  */
-public class VideoViewAdapter extends RecyclerView.Adapter<VideoViewAdapter.MyViewHolder> {
-    private List<VideoViewModel> videoViewModels;
+public class WatchViewAdapter extends RecyclerView.Adapter<com.example.wdsportz.Adapters.WatchViewAdapter.MyViewHolder> {
+    private List<WatchViewModel> videoViewModels;
     private LayoutInflater lInflater;
     private ItemClickListener lClickListener;
     private Context context;
 
-    public VideoViewAdapter(Context context, List<VideoViewModel> list) {
+    public WatchViewAdapter(Context context, List<WatchViewModel> list) {
         this.lInflater = LayoutInflater.from(context);
         this.videoViewModels = list;
         this.context = context;
@@ -43,7 +40,7 @@ public class VideoViewAdapter extends RecyclerView.Adapter<VideoViewAdapter.MyVi
 
 
 
-//    public VideoViewAdapter(Context context, List<VideoViewModel> videoViewModels) {
+//    public WatchViewAdapter(Context context, List<VideoViewModel> videoViewModels) {
 //
 //    }
 
@@ -62,7 +59,7 @@ public class VideoViewAdapter extends RecyclerView.Adapter<VideoViewAdapter.MyVi
         Glide.with(context)
                 .load(currentUrl)
                 .into(holder.btnimg);
-        
+
 
     }
 

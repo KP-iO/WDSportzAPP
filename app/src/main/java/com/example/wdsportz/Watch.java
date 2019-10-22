@@ -1,11 +1,9 @@
 package com.example.wdsportz;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
@@ -13,8 +11,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.wdsportz.Adapter.VideoViewAdapter;
-import com.example.wdsportz.viewmodels.VideoViewModel;
+import com.example.wdsportz.ViewModels.VideoViewModel;
+import com.example.wdsportz.ViewModels.WatchViewModel;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -27,7 +26,7 @@ import java.util.List;
 /**
  * Created by khrishawn
  */
-public class Watch extends FragmentActivity implements VideoViewAdapter.ItemClickListener {
+public class Watch extends FragmentActivity implements com.example.wdsportz.Adapters.WatchViewAdapter.ItemClickListener {
 
     Watch watch = this;
     private static final String TAG = "Video Activity";
@@ -36,7 +35,8 @@ public class Watch extends FragmentActivity implements VideoViewAdapter.ItemClic
     private RecyclerView recyclerView1;
 
 
-    private VideoViewAdapter videoViewAdapter;
+    private com.example.wdsportz.Adapters.WatchViewAdapter watchViewAdapter;
+
     String VidUri;
 
 
@@ -62,7 +62,7 @@ public class Watch extends FragmentActivity implements VideoViewAdapter.ItemClic
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
 
-                            List<VideoViewModel> list = new ArrayList<>();
+                            List<WatchViewModel> list = new ArrayList<>();
 
 
 ////// Change FROM download url to stroage url in firestore?
@@ -70,19 +70,16 @@ public class Watch extends FragmentActivity implements VideoViewAdapter.ItemClic
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
 
-
-
                                 Log.d(TAG, "DOCUMENT PRINT :" + document.getData().toString());
                                 Log.d(TAG, "Team Added to List " + document.get("Match_Name").toString());
 
-                                list.add(new VideoViewModel(document.get("Match_Name").toString(), document.get("Match_Image").toString(), document.get("Match_Video").toString()));
+                                list.add(new WatchViewModel(document.get("Match_Name").toString(), document.get("Match_Image").toString(), document.get("Match_Video").toString()));
 
                                 //Log.d(TAG, ("LOGO URL: " + list.));
 
-                                videoViewAdapter = new VideoViewAdapter(watch, list);
-                                recyclerView.setAdapter(videoViewAdapter);
-                                recyclerView1.setAdapter(videoViewAdapter);
-
+                                watchViewAdapter = new com.example.wdsportz.Adapters.WatchViewAdapter(watch, list);
+                                recyclerView.setAdapter(watchViewAdapter);
+                                recyclerView1.setAdapter(watchViewAdapter);
 
                             }
 

@@ -36,7 +36,7 @@ private DrawerLayout drawer;
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
 
-        userEmail.setText(firebaseUser.getEmail());
+//        userEmail.setText(firebaseUser.getEmail());
 
 
         Toolbar toolbar = findViewById(R.id.toolbar);
