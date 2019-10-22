@@ -25,7 +25,7 @@ import static android.view.LayoutInflater.from;
 /**
  * Created by khrishawn
  */
-public class WatchViewAdapter extends RecyclerView.Adapter<com.example.wdsportz.Adapters.WatchViewAdapter.MyViewHolder> {
+public class WatchViewAdapter extends RecyclerView.Adapter<WatchViewAdapter.MyViewHolder> {
     private List<WatchViewModel> videoViewModels;
     private LayoutInflater lInflater;
     private ItemClickListener lClickListener;
