@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.wdsportz.Adapters.WatchViewAdapter;
 import com.example.wdsportz.ViewModels.VideoViewModel;
 import com.example.wdsportz.ViewModels.WatchViewModel;
 
@@ -26,7 +27,7 @@ import java.util.List;
 /**
  * Created by khrishawn
  */
-public class Watch extends FragmentActivity implements com.example.wdsportz.Adapters.WatchViewAdapter.ItemClickListener {
+public class Watch extends FragmentActivity implements WatchViewAdapter.ItemClickListener {
 
     Watch watch = this;
     private static final String TAG = "Video Activity";
@@ -35,7 +36,7 @@ public class Watch extends FragmentActivity implements com.example.wdsportz.Adap
     private RecyclerView recyclerView1;
 
 
-    private com.example.wdsportz.Adapters.WatchViewAdapter watchViewAdapter;
+    private WatchViewAdapter watchViewAdapter;
 
     String VidUri;
 
