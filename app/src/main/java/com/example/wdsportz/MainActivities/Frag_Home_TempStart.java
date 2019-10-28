@@ -5,8 +5,12 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
@@ -44,6 +48,9 @@ public class Frag_Home_TempStart extends Fragment {
 
     public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+        //ActionBar toolbar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+        //toolbar.hide();
+
         return inflater.inflate(R.layout.fragment_home_tempstart, container, false);
     }
 
@@ -63,20 +70,5 @@ public class Frag_Home_TempStart extends Fragment {
 
     });
 
-
-//        drawer = findViewById(R.id.drawer_layout);
-//        NavigationView navigationView = findViewById(R.id.nav_view);
-//
-//        AppBarConfiguration appBarConfiguration =
-//                new AppBarConfiguration.Builder(navController.getGraph())
-//                        .setDrawerLayout(R.id.drawer_layout)
-//                        .build();
-//
-
-
-
-
-       // return v;
-   // }
 }
 }

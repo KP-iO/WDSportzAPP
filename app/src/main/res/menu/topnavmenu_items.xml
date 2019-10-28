@@ -7,7 +7,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/profileSegment"
-            android:icon="@drawable/ic_account_box_black_24dp"
+            android:icon="@drawable/blank_blank_man_profile_picturre"
             android:title="@string/profile" />
         <item
             android:id="@+id/Saved"
@@ -15,21 +15,5 @@
             android:title="@string/saved" />
     </group>
 
-    <item android:title="">
-        <menu>
-            <item
-                android:id="@+id/settingsSegment"
-                android:icon="@drawable/settings"
-                android:title="@string/settings" />
-            <item
-                android:id="@+id/help"
-                android:icon="@drawable/ic_help_black_24dp"
-                android:title="@string/help" />
-            <item
-                android:id="@+id/signout"
-                android:icon="@drawable/ic_exit_to_app_black_24dp"
-                android:title="@string/sign_out" />
-
-        </menu>
-    </item>
 </menu>
+

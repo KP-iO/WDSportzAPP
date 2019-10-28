@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
 
     <item
         android:id="@+id/nav_home"
         android:icon="@drawable/home_icon"
         android:title="@string/nav_home"
         android:visible="true" />
-    <item
-        android:id="@+id/nav_more"
-        android:icon="@drawable/more_icon"
-        android:title="@string/nav_more"
-        android:visible="true" />
+
     <item
         android:id="@+id/nav_score"
         android:icon="@drawable/score_icon"
@@ -22,4 +18,11 @@
         android:icon="@drawable/watch_icon"
         android:title="@string/nav_watch"
         android:visible="true" />
+    <item
+    android:id="@+id/nav_more"
+    android:icon="@drawable/more_icon"
+    android:title="@string/nav_more"
+    android:visible="true" />
+
+
 </menu>

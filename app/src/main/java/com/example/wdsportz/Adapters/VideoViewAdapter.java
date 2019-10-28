@@ -1,4 +1,4 @@
-package com.example.wdsportz.Adapter;
+package com.example.wdsportz.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,13 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.wdsportz.R;
-import com.example.wdsportz.SelectTeamsRecyclerViewModel;
 import com.example.wdsportz.VideoPlayback;
-import com.example.wdsportz.Watch;
 import com.example.wdsportz.viewmodels.VideoViewModel;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static android.view.LayoutInflater.from;
