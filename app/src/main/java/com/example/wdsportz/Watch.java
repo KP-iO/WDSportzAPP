@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wdsportz.Adapters.WatchViewAdapter;
-import com.example.wdsportz.ViewModels.VideoViewModel;
+
 import com.example.wdsportz.ViewModels.WatchViewModel;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -78,7 +78,7 @@ public class Watch extends FragmentActivity implements WatchViewAdapter.ItemClic
 
                                 //Log.d(TAG, ("LOGO URL: " + list.));
 
-                                watchViewAdapter = new com.example.wdsportz.Adapters.WatchViewAdapter(watch, list);
+//                                watchViewAdapter = new WatchViewAdapter(watch, list);
                                 recyclerView.setAdapter(watchViewAdapter);
                                 recyclerView1.setAdapter(watchViewAdapter);
 

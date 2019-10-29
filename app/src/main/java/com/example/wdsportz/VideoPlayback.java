@@ -38,7 +38,7 @@ public class VideoPlayback extends AppCompatActivity {
         videoView.setMediaController(mediaController);
         mediaController.setAnchorView(videoView);
 
-        String str = "https://firebasestorage.googleapis.com/v0/b/wdsportz-3e91f.appspot.com/o/Videos%2FMatches%2FEngland%20run%20riot%20amidst%20racist%20chants%20%20%20Bulgaria%200-6%20England%20%20%20UEFA%20Euro%202020%20Qualifiers.mp4?alt=media&token=3fb83930-21ac-4022-8e0e-eae4a47576d4";
+        String str = getIntent().getStringExtra("Video");
         Uri uri = Uri.parse(str);
         videoView.setVideoURI(uri);
         videoView.requestFocus();

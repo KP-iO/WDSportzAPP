@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.example.wdsportz.R;
 import com.example.wdsportz.VideoPlayback;
 import com.example.wdsportz.ViewModels.WatchViewModel;
+import com.example.wdsportz.Watchfragment;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
@@ -52,13 +53,23 @@ public class WatchViewAdapter extends RecyclerView.Adapter<WatchViewAdapter.MyVi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final MyViewHolder holder, int position) {
         holder.title.setText(videoViewModels.get(position).getTitle());
         String currentUrl = videoViewModels.get(position).getVideoimageURL();
-        String Video = videoViewModels.get(position).getVideoURL();
+        final String Video1 = (videoViewModels.get(position).getVideoURL());
+
         Glide.with(context)
                 .load(currentUrl)
                 .into(holder.btnimg);
+
+        holder.btnimg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(), VideoPlayback.class);
+                i.putExtra("Video", Video1);
+                v.getContext().startActivity(i);
+            }
+        });
 
 
     }
@@ -82,14 +93,24 @@ public class WatchViewAdapter extends RecyclerView.Adapter<WatchViewAdapter.MyVi
 
         MyViewHolder(View itemView) {
             super(itemView);
+
             title= itemView.findViewById(R.id.video_text);
             btnimg = itemView.findViewById(R.id.BtnImgVideo);
             btnimg.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent i= new Intent(view.getContext(),VideoPlayback.class);
-//                    i.putExtra("VideoURL", VideoViewModel.getVideoURL() );
-                    view.getContext().startActivity(i);
+//                    Intent i= new Intent(view.getContext(),VideoPlayback.class);
+                    Log.d("CLICK", title.getText() + "  Clicked");
+
+//                    int itemPosition = getLayoutPosition();
+//                    Log.d("position", Integer.toString(itemPosition));
+//
+//                    MyViewHolder item = (MyViewHolder) WatchViewModel.getItem(itemPosition);
+//                    String url = item.getUrl();
+
+
+//                    view.getContext().startActivity(i);
+
 
                 }
             });
@@ -104,7 +125,11 @@ public class WatchViewAdapter extends RecyclerView.Adapter<WatchViewAdapter.MyVi
              if (lClickListener != null) lClickListener.onItemClick(view, getAdapterPosition());
              Log.d("CLICK", title.getText() + "  Clicked");
 
-
+//             int itemPosition = getLayoutPosition();
+//             Log.d("position", Integer.toString(itemPosition));
+//
+//             YourItemClass item = (YourItemClass)adapter.getItem(itemPosition);
+//             String url = item.getUrl();
          }
     }
 public String getItem(int id) {

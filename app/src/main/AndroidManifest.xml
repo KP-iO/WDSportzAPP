@@ -20,6 +20,14 @@
         </activity>
 
         <activity
+            android:name=".Watchfragment"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
             android:name=".Watch"
             android:theme="@style/AppTheme">
             <intent-filter>
