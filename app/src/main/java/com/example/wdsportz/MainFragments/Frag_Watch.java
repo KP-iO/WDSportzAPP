@@ -16,9 +16,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.wdsportz.Adapters.VideoViewAdapter;
+import com.example.wdsportz.Adapters.WatchViewAdapter;
 import com.example.wdsportz.R;
-import com.example.wdsportz.viewmodels.VideoViewModel;
+import com.example.wdsportz.ViewModels.VideoViewModel;
+import com.example.wdsportz.ViewModels.WatchViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -54,7 +55,7 @@ public class Frag_Watch extends Fragment {
     public RecyclerView recyclerView;
     public RecyclerView recyclerView1;
 
-    private VideoViewAdapter videoViewAdapter;
+    private WatchViewAdapter videoViewAdapter;
     String VidUri;
 
     public Frag_Watch() {
@@ -102,8 +103,8 @@ public class Frag_Watch extends Fragment {
 
         final Context context = getContext();
 
-        recyclerView = view.findViewById(R.id.RecyclerViewV1);
-        recyclerView1 = view.findViewById(R.id.RecyclerViewVM1);
+        recyclerView = view.findViewById(R.id.RecyclerViewV);
+        recyclerView1 = view.findViewById(R.id.RecyclerViewVM);
         int numberOfColumns = 2;
         recyclerView.setLayoutManager(new GridLayoutManager(context, numberOfColumns));
         recyclerView1.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
@@ -119,7 +120,7 @@ public class Frag_Watch extends Fragment {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
 
-                            List<VideoViewModel> list = new ArrayList<>();
+                            List<WatchViewModel> list = new ArrayList<>();
 
 
 ////// Change FROM download url to stroage url in firestore?
@@ -130,11 +131,11 @@ public class Frag_Watch extends Fragment {
                                 Log.d(TAG, "DOCUMENT PRINT :" + document.getData().toString());
                                 Log.d(TAG, "Team Added to List " + document.get("Match_Name").toString());
 
-                                list.add(new VideoViewModel(document.get("Match_Name").toString(), document.get("Match_Image").toString(), document.get("Match_Video").toString()));
+                                list.add(new WatchViewModel(document.get("Match_Name").toString(), document.get("Match_Image").toString(), document.get("Match_Video").toString()));
 
                                 //Log.d(TAG, ("LOGO URL: " + list.));
 
-                                videoViewAdapter = new VideoViewAdapter(context, list);
+                                videoViewAdapter = new WatchViewAdapter(context, list);
                                 recyclerView.setAdapter(videoViewAdapter);
                                 recyclerView1.setAdapter(videoViewAdapter);
 
