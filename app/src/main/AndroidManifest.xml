@@ -2,23 +2,20 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.wdsportz">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        >
-
+        android:theme="@style/AppTheme1">
         <activity
-            android:name=".SideNavBar"
-            android:theme="@style/AppTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.DEFAULT" />
-            </intent-filter>
-        </activity>
-
+            android:name=".MainActivities.Auth_Main"
+            android:label="@string/title_activity_auth__main"
+            android:theme="@style/AppTheme1.NoActionBar"></activity>
         <activity
             android:name=".Watchfragment"
             android:theme="@style/AppTheme">
@@ -29,16 +26,15 @@
 
         <activity
             android:name=".Watch"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme1">
             <intent-filter>
                 <action android:name="android.intent.action.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".Login"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme1">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -48,52 +44,43 @@
         <activity
             android:name=".VideoPlayback"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme1">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".Register"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme1">
             <intent-filter>
                 <action android:name="android.intent.action.DEFAULT" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name=".MainActivities.Frag_IniTeamSelection"
-            android:theme="@style/AppTheme">
+            android:name=".MainFragments.Frag_IniTeamSelection"
+            android:theme="@style/AppTheme1">
             <intent-filter>
                 <action android:name="android.intent.action.DEFAULT" />
-
-
             </intent-filter>
         </activity>
-
         <activity
-            android:name=".MainActivities.Frag_HomePage"
-            android:theme="@style/AppTheme">
+            android:name=".MainFragments.Frag_HomePage"
+            android:theme="@style/AppTheme1">
             <intent-filter>
                 <action android:name="android.intent.action.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
             android:name=".MainActivities.Main_Activity"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme1">
             <intent-filter>
                 <action android:name="android.intent.action.DEFAULT" />
             </intent-filter>
         </activity>
-
-
     </application>
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 </manifest>

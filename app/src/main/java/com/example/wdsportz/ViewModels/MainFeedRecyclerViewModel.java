@@ -1,4 +1,4 @@
-package com.example.wdsportz;
+package com.example.wdsportz.viewmodels;
 
 public class MainFeedRecyclerViewModel {
 

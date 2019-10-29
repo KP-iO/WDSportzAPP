@@ -1,4 +1,4 @@
-package com.example.wdsportz.MainActivities;
+package com.example.wdsportz.MainFragments;
 
 
 import android.content.Context;
@@ -8,23 +8,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 
 
 import androidx.annotation.Nullable;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wdsportz.Adapters.MainFeedRecyclerViewAdapter;
-import com.example.wdsportz.More;
 import com.example.wdsportz.R;
 import com.example.wdsportz.RecyclerViewModel;
-import com.example.wdsportz.Scores;
-import com.example.wdsportz.Watch;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 
@@ -41,35 +34,21 @@ public class Frag_HomePage extends Fragment {
     private String mParam1;
     private String mParam2;
 
+
     private OnFragmentInteractionListener mListener;
-
-    //temp
-    RecyclerView tv;
-
-    private DrawerLayout drawer;
-    private NavigationView.OnNavigationItemSelectedListener NavItemListen;
 
     MainFeedRecyclerViewAdapter adapter;
     MainFeedRecyclerViewAdapter.ItemClickListener adapterlistening;
     private ArrayList<RecyclerViewModel> ArticleArrayList;
-
-    private BottomNavigationView mMainNav;
-    private RelativeLayout mMainFrame;
-    private Frag_Home_TempStart homefragment;
-    private More moreFragment;
-    private Scores scoresFragment;
-    private Watch watchFragment;
 
     // Temporary Feed Population Arrays
     private int[] NewsImages = new int[]{R.drawable.arsenal_team_logo,R.drawable.bowers___fc,R.drawable.barking_fv,R.drawable.chestnut_fv,R.drawable.enfield_fc, R.drawable.ware_fc,R.drawable.folkestone_fc,R.drawable.molesey_fc};
     private String[] NewsTitles = new String[]{"Coventry Dominates in a 4 -1 Win Over Nottingham","New Manager Decided For Bowers FC","Lorem ipsum dolor sit amet."," Consectetur Adipiscing Elit, Sed Do Eiusmod Tempor Incididunt","Sed Do Eiusmod Tempor Incididunt","Duis aute irure dolor in reprehenderit in voluptate"," sunt in culpa qui officia deserunt mollit"};
 
 
-
     public Frag_HomePage(){
 
     }
-
 
     /**
      * Use this factory method to create a new instance of
@@ -104,13 +83,16 @@ public class Frag_HomePage extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_homepage, container, false);
+
     }
 
 
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
+                /// Move feed load to external function
         final Context context = view.getContext();
         final String Tag = "FEED TEST";
 
@@ -127,14 +109,9 @@ public class Frag_HomePage extends Fragment {
         recyclerView.setAdapter(adapter);
 
         Log.d("RecyclerTest" , "onViewCreated:111 ");
+
     }
 
-
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
 
     @Override
     public void onAttach(Context context) {
@@ -153,35 +130,6 @@ public class Frag_HomePage extends Fragment {
         super.onDetach();
         mListener = null;
     }
-
-
-    // Side Bar Toggle Selection options and actions
-    //public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-      //  switch (item.getItemId()) {
-        //    case R.id.settingsSegment:
-          //      getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new SettingsSegment()).commit();
-            //    break;
-           // case R.id.profileSegment:
-             //   getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new ProfileSegment()).commit();
-               // break;
-        //}
-        //drawer.closeDrawer(GravityCompat.START);
-
-        //return true;
-    //}
-
-    // Drawer go back action
-   // @Override
-    //public void onBackPressed() {
-        //if (drawer.isDrawerOpen(GravityCompat.START)) {
-          //  drawer.closeDrawer(GravityCompat.START);
-        //} else {
-          //  super.onBackPressed();
-       // }
-    //}
-
-
-    // Function to populate feed **The Loop ONLY permits 7 objects ATM**
 
     private ArrayList<RecyclerViewModel> populateFeed() {
 

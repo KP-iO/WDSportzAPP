@@ -7,8 +7,8 @@
     <string name="username">Username</string>
     <string name="message">Message</string>
     <string name="wdsportz">WDSportz</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
     <string name="title_activity_login">Sign in</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
@@ -36,5 +36,7 @@
     <string name="view_match">View Match</string>
     <string name="video">Video</string>
     <string name="home">Home</string>
+    <string name="title_activity_auth__main">Auth_Main</string>
+
 
 </resources>

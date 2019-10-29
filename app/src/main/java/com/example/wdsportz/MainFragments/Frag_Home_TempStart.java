@@ -1,4 +1,4 @@
-package com.example.wdsportz.MainActivities;
+package com.example.wdsportz.MainFragments;
 
 
 import android.os.Bundle;
@@ -44,6 +44,9 @@ public class Frag_Home_TempStart extends Fragment {
 
     public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+        //ActionBar toolbar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+        //toolbar.hide();
+
         return inflater.inflate(R.layout.fragment_home_tempstart, container, false);
     }
 
@@ -63,20 +66,5 @@ public class Frag_Home_TempStart extends Fragment {
 
     });
 
-
-//        drawer = findViewById(R.id.drawer_layout);
-//        NavigationView navigationView = findViewById(R.id.nav_view);
-//
-//        AppBarConfiguration appBarConfiguration =
-//                new AppBarConfiguration.Builder(navController.getGraph())
-//                        .setDrawerLayout(R.id.drawer_layout)
-//                        .build();
-//
-
-
-
-
-       // return v;
-   // }
 }
 }

@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 
 import com.example.wdsportz.LoginDatabase_Temp.DatabaseHelper;
-import com.example.wdsportz.MainActivities.Frag_HomePage;
+import com.example.wdsportz.MainFragments.Frag_HomePage;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;

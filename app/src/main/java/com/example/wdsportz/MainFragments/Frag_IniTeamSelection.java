@@ -1,4 +1,4 @@
-package com.example.wdsportz.MainActivities;
+package com.example.wdsportz.MainFragments;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wdsportz.R;
-import com.example.wdsportz.SelectTeamsRecyclerViewAdapter;
-import com.example.wdsportz.SelectTeamsRecyclerViewModel;
+import com.example.wdsportz.Adapters.SelectTeamsRecyclerViewAdapter;
+import com.example.wdsportz.viewmodels.SelectTeamsRecyclerViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
@@ -73,7 +73,6 @@ public class Frag_IniTeamSelection extends Fragment implements SelectTeamsRecycl
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //////setContentView(R.layout.fragment_ini_team_selection);
 
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
@@ -86,6 +85,7 @@ public class Frag_IniTeamSelection extends Fragment implements SelectTeamsRecycl
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_ini_team_selection, container, false);
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -110,13 +110,14 @@ public class Frag_IniTeamSelection extends Fragment implements SelectTeamsRecycl
     }
 
 
-
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         final Context context = view.getContext();
         // set up the RecyclerView
         recyclerView = getView().findViewById(R.id.RecyclerView);
         int numberOfColumns = 2;
         recyclerView.setLayoutManager(new GridLayoutManager(context , numberOfColumns));
+
+        //getActivity().findViewById(R.id.bottom_nav).setVisibility(View.INVISIBLE);
 
 
 // Implement error handling for all cases e.g (Name/ Logo not accessible) ------>
