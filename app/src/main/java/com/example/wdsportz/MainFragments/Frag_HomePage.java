@@ -1,4 +1,4 @@
-package com.example.wdsportz.MainActivities;
+package com.example.wdsportz.MainFragments;
 
 
 import android.content.Context;
@@ -8,27 +8,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.ui.AppBarConfiguration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wdsportz.Adapters.MainFeedRecyclerViewAdapter;
-import com.example.wdsportz.More;
 import com.example.wdsportz.R;
 import com.example.wdsportz.RecyclerViewModel;
-import com.example.wdsportz.Scores;
-import com.example.wdsportz.Watch;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 

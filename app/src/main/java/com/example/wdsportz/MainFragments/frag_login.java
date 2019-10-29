@@ -1,4 +1,4 @@
-package com.example.wdsportz.MainActivities;
+package com.example.wdsportz.MainFragments;
 
 import android.content.Context;
 import android.net.Uri;
@@ -12,16 +12,15 @@ import android.view.ViewGroup;
 
 import com.example.wdsportz.R;
 
-
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link Frag_Test_1.OnFragmentInteractionListener} interface
+ * {@link frag_login.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link Frag_Test_1#newInstance} factory method to
+ * Use the {@link frag_login#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Frag_Test_1 extends Fragment {
+public class frag_login extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -33,7 +32,7 @@ public class Frag_Test_1 extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public Frag_Test_1() {
+    public frag_login() {
         // Required empty public constructor
     }
 
@@ -43,11 +42,11 @@ public class Frag_Test_1 extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Frag_Test_1.
+     * @return A new instance of fragment frag_login.
      */
     // TODO: Rename and change types and number of parameters
-    public static Frag_Test_1 newInstance(String param1, String param2) {
-        Frag_Test_1 fragment = new Frag_Test_1();
+    public static frag_login newInstance(String param1, String param2) {
+        frag_login fragment = new frag_login();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -68,16 +67,15 @@ public class Frag_Test_1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_frag__test_1, container, false);
+        return inflater.inflate(R.layout.fragment_login, container, false);
     }
 
-
+    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
     }
-
 
     @Override
     public void onAttach(Context context) {
@@ -90,8 +88,6 @@ public class Frag_Test_1 extends Fragment {
         }
     }
 
-
-    // Called when the fragment is no longer attached to activity
     @Override
     public void onDetach() {
         super.onDetach();

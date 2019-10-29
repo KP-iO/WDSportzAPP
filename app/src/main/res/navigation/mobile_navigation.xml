@@ -10,29 +10,21 @@
         app:destination="@id/activity_Main" />
     <fragment
         android:id="@+id/activity_Main"
-        android:name="com.example.wdsportz.MainActivities.Frag_Home_TempStart"
+        android:name="com.example.wdsportz.MainFragments.Frag_Home_TempStart"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home_tempstart">
         <action
-            android:id="@+id/action_HomeActivity_to_frag_Test_1"
-            app:destination="@id/frag_Test_1"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/fade_out" />
-        <action
             android:id="@+id/action_HomeActivity_to_select_Teams_Frag"
             app:destination="@id/select_Teams_Frag" />
-        <action
-            android:id="@+id/action_activity_Main_to_navigation22"
-            app:destination="@id/navigation2" />
     </fragment>
     <fragment
         android:id="@+id/frag_Test_1"
-        android:name="com.example.wdsportz.MainActivities.Frag_Test_1"
+        android:name="com.example.wdsportz.MainFragments.Frag_Test_1"
         android:label="fragment_frag__test_1"
         tools:layout="@layout/fragment_frag__test_1" />
     <fragment
         android:id="@+id/select_Teams_Frag"
-        android:name="com.example.wdsportz.MainActivities.Frag_IniTeamSelection"
+        android:name="com.example.wdsportz.MainFragments.Frag_IniTeamSelection"
         android:label="fragment_select__teams"
         tools:layout="@layout/fragment_ini_team_selection">
         <action
@@ -40,58 +32,7 @@
             app:destination="@id/navigation2" />
     </fragment>
 
-    <navigation
-        android:id="@+id/navigation2"
-        app:startDestination="@id/frag_HomePage">
-        <fragment
-            android:id="@+id/frag_HomePage"
-            android:name="com.example.wdsportz.MainActivities.Frag_HomePage"
-            android:label="Frag_HomePage"
-            tools:layout="@layout/fragment_homepage">
-            <action
-                android:id="@+id/action_frag_HomePage_to_watch2"
-                app:destination="@id/watch2" />
-        </fragment>
-        <activity
-            android:id="@+id/watch2"
-            android:name="com.example.wdsportz.Watch"
-            android:label="fragment_watch"
-            tools:layout="@layout/fragment_watch" />
-        <fragment
-            android:id="@+id/settingsSegment"
-            android:name="com.example.wdsportz.SettingsSegment"
-            android:label="fragment_settings"
-            tools:layout="@layout/fragment_settings" />
-        <fragment
-            android:id="@+id/signout2"
-            android:name="com.example.wdsportz.Signout"
-            android:label="fragment_signout"
-            tools:layout="@layout/fragment_signout" />
-        <fragment
-            android:id="@+id/scores"
-            android:name="com.example.wdsportz.Scores"
-            android:label="fragment_scores"
-            tools:layout="@layout/fragment_scores">
-            <action
-                android:id="@+id/action_scores_to_watch"
-                app:destination="@id/watch" />
-        </fragment>
-        <fragment
-            android:id="@+id/watch"
-            android:name="com.example.wdsportz.Watchfrag"
-            android:label="fragment_watch"
-            tools:layout="@layout/fragment_watch" />
-        <fragment
-            android:id="@+id/more"
-            android:name="com.example.wdsportz.More"
-            android:label="fragment_more"
-            tools:layout="@layout/fragment_more" />
-        <fragment
-            android:id="@+id/profileSegment"
-            android:name="com.example.wdsportz.ProfileSegment"
-            android:label="fragment_profile"
-            tools:layout="@layout/fragment_profile" />
-    </navigation>
+    <include app:graph="@navigation/navigation2" />
 
 
 </navigation>

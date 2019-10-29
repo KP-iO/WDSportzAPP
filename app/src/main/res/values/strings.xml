@@ -36,7 +36,7 @@
     <string name="view_match">View Match</string>
     <string name="video">Video</string>
     <string name="home">Home</string>
-
+    <string name="title_activity_auth__main">Auth_Main</string>
 
 
 </resources>

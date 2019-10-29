@@ -1,4 +1,4 @@
-package com.example.wdsportz.MainActivities;
+package com.example.wdsportz.MainFragments;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -108,7 +108,6 @@ public class Frag_IniTeamSelection extends Fragment implements SelectTeamsRecycl
         }
 
     }
-
 
 
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {

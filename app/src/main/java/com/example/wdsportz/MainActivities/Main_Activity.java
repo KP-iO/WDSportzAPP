@@ -1,6 +1,5 @@
 package com.example.wdsportz.MainActivities;
 
-import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,24 +9,21 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
-import androidx.navigation.NavHost;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.wdsportz.MainFragments.Frag_HomePage;
+import com.example.wdsportz.MainFragments.Frag_IniTeamSelection;
+import com.example.wdsportz.MainFragments.Frag_Test_1;
+import com.example.wdsportz.MainFragments.Frag_Watch;
 import com.example.wdsportz.R;
-import com.example.wdsportz.Watch;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
@@ -35,7 +31,7 @@ import com.google.android.material.navigation.NavigationView;
 
 
 
-public class Main_Activity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, Frag_Test_1.OnFragmentInteractionListener, Frag_IniTeamSelection.OnFragmentInteractionListener, Frag_HomePage.OnFragmentInteractionListener {
+public class Main_Activity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, Frag_Test_1.OnFragmentInteractionListener, Frag_IniTeamSelection.OnFragmentInteractionListener, Frag_HomePage.OnFragmentInteractionListener, Frag_Watch.OnFragmentInteractionListener {
 
 
     // Collect all listeners in one interface ^^^ and pass through to main activity?
@@ -44,9 +40,9 @@ public class Main_Activity extends AppCompatActivity implements NavigationView.O
     private NavigationView nvDrawer;
     private ActionBarDrawerToggle drawerToggle;
 
-    BottomNavigationView bottomNav;
-    Toolbar toolbar;
-    NavController navController;
+    public BottomNavigationView bottomNav;
+    public Toolbar toolbar;
+    public NavController navController;
 
     AppBarConfiguration appBarConfiguration;
 
@@ -73,20 +69,48 @@ public class Main_Activity extends AppCompatActivity implements NavigationView.O
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        navController = Navigation.findNavController(this, R.id.NavHostFragment);
+        //navController = Navigation.findNavController(this, R.id.NavHostFragment);
         bottomNav = findViewById(R.id.bottom_nav);
         NavigationUI.setupWithNavController(bottomNav, navController);
+
+
+        bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.nav_home:
+                        //navController.navigate(R.id.action_frag_HomePage_self);
+                        break;
+                    case R.id.nav_score:
+                        //navController.navigate(R.id.);
+                        Log.d("Bottom Nav Test", "nav_score");
+                        break;
+                    case R.id.nav_watch:
+                        Log.d("Bottom Nav Test", "nav_watch");
+                        navController.navigate(R.id.action_global_frag_watch);
+
+                        break;
+                    case R.id.nav_more:
+                        Log.d("Bottom Nav Test", "nav_more");
+
+                        break;
+                }
+                return true;
+            }
+        });
 
        visibiltyNavElements(navController);
     }
 
 
-    public void visibiltyNavElements (NavController navController) {
+    public void visibiltyNavElements (final NavController navController) {
 
          navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
              @Override
              public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
-                 if (destination.getId() == R.id.frag_HomePage) {
+                 if (navController.getCurrentDestination().getId() == R.id.frag_HomePage)  {
+
+//                     Log.d("graph test",navController.getGraph().getLabel().toString());
 
                      toolbar.setVisibility(View.VISIBLE);
                      bottomNav.setVisibility(View.VISIBLE);
