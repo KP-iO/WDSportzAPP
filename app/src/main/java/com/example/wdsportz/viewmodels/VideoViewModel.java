@@ -1,4 +1,4 @@
-package com.example.wdsportz.viewmodels;
+package com.example.wdsportz.ViewModels;
 
 /**
  * Created by khrishawn
