@@ -16,11 +16,16 @@
         </fragment>
         <fragment
             android:id="@+id/frag_watch"
-            android:name="com.example.wdsportz.MainFragments.Frag_Watch"
+            android:name="com.example.wdsportz.MainFragments.Watchfragment"
             android:label="fragment_watch"
             tools:layout="@layout/fragment_watch" />
         <action
             android:id="@+id/action_global_frag_watch"
             app:destination="@id/frag_watch"
             app:enterAnim="@anim/fade_in" />
-    </navigation>
+    <fragment
+        android:id="@+id/livestream"
+        android:name="com.example.wdsportz.Livestream"
+        android:label="fragment_livestream"
+        tools:layout="@layout/fragment_livestream" /><action android:id="@+id/action_global_livestream" app:destination="@id/livestream"/>
+</navigation>

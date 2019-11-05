@@ -16,7 +16,6 @@ import com.bumptech.glide.Glide;
 import com.example.wdsportz.R;
 import com.example.wdsportz.VideoPlayback;
 import com.example.wdsportz.ViewModels.WatchViewModel;
-import com.example.wdsportz.Watchfragment;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;

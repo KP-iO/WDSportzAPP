@@ -17,8 +17,8 @@
             android:label="@string/title_activity_auth__main"
             android:theme="@style/AppTheme1.NoActionBar"></activity>
         <activity
-            android:name=".Watchfragment"
-            android:theme="@style/AppTheme">
+            android:name=".MainFragments.Watchfragment"
+            android:theme="@style/AppTheme1">
             <intent-filter>
                 <action android:name="android.intent.action.DEFAULT" />
             </intent-filter>
