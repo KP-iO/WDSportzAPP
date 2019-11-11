@@ -9,16 +9,25 @@
         android:id="@+id/frag_HomePage"
         android:name="com.example.wdsportz.MainFragments.Frag_HomePage"
         android:label="fragment_homepage"
-        tools:layout="@layout/fragment_homepage" >
-        <action
-            android:id="@+id/action_frag_HomePage_to_watchfragment"
-            app:destination="@id/watchfragment" />
-    </fragment>
+        tools:layout="@layout/fragment_homepage" />
     <fragment
         android:id="@+id/watchfragment"
         android:name="com.example.wdsportz.MainFragments.Watchfragment"
         android:label="fragment_watchfragment"
         tools:layout="@layout/fragment_watchfragment" />
+    <fragment
+        android:id="@+id/scores"
+        android:name="com.example.wdsportz.Scores"
+        android:label="fragment_scores"
+        tools:layout="@layout/fragment_scores" />
+    <action android:id="@+id/action_global_frag_HomePage" app:destination="@id/frag_HomePage" />
+    <action android:id="@+id/action_global_watchfragment" app:destination="@id/watchfragment" />
+    <action android:id="@+id/action_global_scores" app:destination="@id/scores" />
+    <fragment
+        android:id="@+id/more"
+        android:name="com.example.wdsportz.More"
+        android:label="fragment_more"
+        tools:layout="@layout/fragment_more" /><action android:id="@+id/action_global_more" app:destination="@id/more"/>
 
 
 </navigation>

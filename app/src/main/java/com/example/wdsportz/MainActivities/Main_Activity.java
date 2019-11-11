@@ -74,27 +74,26 @@ public class Main_Activity extends AppCompatActivity implements NavigationView.O
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.nav_home:
-
-                        /// CHANGE NAVIAGATE ACTION BELOW
-
+                        navController.navigate(R.id.action_global_frag_HomePage);
                         Log.d("Bottom Nav Test", "nav_home");
 
                         break;
 
                     case R.id.nav_watch:
                         Log.d("Bottom Nav Test", "nav_watch");
-                        navController.navigate(R.id.action_frag_HomePage_to_watchfragment);
+                        navController.navigate(R.id.action_global_watchfragment);
 
                         break;
 
 
                     case R.id.nav_score:
-                        //navController.navigate(R.id.action_global_livestream);
+                        navController.navigate(R.id.action_global_scores);
                         Log.d("Bottom Nav Test", "nav_score");
 
                         break;
 
                     case R.id.nav_more:
+                        navController.navigate(R.id.action_global_more);
                         Log.d("Bottom Nav Test", "nav_more");
 
                         break;
