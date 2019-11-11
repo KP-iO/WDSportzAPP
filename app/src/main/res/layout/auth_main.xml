@@ -7,16 +7,14 @@
     android:orientation="vertical">
 
     <fragment
-        android:id="@+id/auth_main_fragment"
-        android:name="com.example.wdsportz.MainFragments.frag_login"
-        android:layout_width="413dp"
-        android:layout_height="729dp"
-        android:layout_marginBottom="2dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:navGraph="@navigation/navigation2"
-        app:defaultNavHost="true"/>
+        android:id="@+id/auth_main"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:foreground="@color/colorBlack"
+        android:foregroundTint="#000E0808"
+        android:visibility="visible"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/auth_navigation" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

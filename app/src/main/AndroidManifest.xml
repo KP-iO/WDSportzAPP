@@ -13,9 +13,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme1">
         <activity
-            android:name=".MainActivities.Auth_Main"
+            android:name=".MainActivities.Auth_Activity"
             android:label="@string/title_activity_auth__main"
-            android:theme="@style/AppTheme1.NoActionBar"></activity>
+            android:theme="@style/AppTheme1.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivities.Auth_Activity" />
+            <intent-filter>
+                <action android:name="android.intent.action.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".MainFragments.Watchfragment"
             android:theme="@style/AppTheme1">
@@ -60,6 +67,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".MainFragments.Frag_IniTeamSelection"
             android:theme="@style/AppTheme1">
@@ -67,6 +75,8 @@
                 <action android:name="android.intent.action.DEFAULT" />
             </intent-filter>
         </activity>
+
+
         <activity
             android:name=".MainFragments.Frag_HomePage"
             android:theme="@style/AppTheme1">
@@ -74,6 +84,7 @@
                 <action android:name="android.intent.action.DEFAULT" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".MainActivities.Main_Activity"
             android:theme="@style/AppTheme1">

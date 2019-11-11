@@ -54,7 +54,7 @@ public class Register extends AppCompatActivity {
                                     Toast.makeText(Register.this, "Registered successfully", Toast.LENGTH_SHORT).show();
                                     _txtemail.setText("");
                                     _txtpass.setText("");
-                                    openloginscreen();
+            //                        openloginscreen();
                                 } else {
                                     Toast.makeText(Register.this, task.getException().getMessage(),
                                             Toast.LENGTH_LONG).show();
@@ -64,10 +64,10 @@ public class Register extends AppCompatActivity {
             }
         });
     }
-    public void openloginscreen(){
-        Intent intent = new Intent(Register.this, Login.class);
-        startActivity(intent);
-    }
+   // public void openloginscreen(){
+      //  Intent intent = new Intent(Register.this, Login.class);
+       // startActivity(intent);
+    //}
 }
 
 

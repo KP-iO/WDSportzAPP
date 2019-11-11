@@ -1,4 +1,4 @@
-package com.example.wdsportz.ViewModels;
+package com.example.wdsportz.viewmodels;
 
 public class WatchViewModel {
     String title;

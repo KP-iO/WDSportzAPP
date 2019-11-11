@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wdsportz.Adapters.WatchViewAdapter;
 import com.example.wdsportz.R;
-import com.example.wdsportz.ViewModels.WatchViewModel;
+import com.example.wdsportz.viewmodels.WatchViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
