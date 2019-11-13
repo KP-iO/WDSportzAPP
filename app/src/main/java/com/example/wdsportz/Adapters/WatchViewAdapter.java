@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.wdsportz.R;
-import com.example.wdsportz.MainFragments.Watchfragment;
+import com.example.wdsportz.MainFragments.Frag_Watch;
 import com.example.wdsportz.viewmodels.WatchViewModel;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -64,7 +64,7 @@ public class WatchViewAdapter extends RecyclerView.Adapter<WatchViewAdapter.MyVi
         holder.btnimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(v.getContext(), Watchfragment.class);
+                Intent i = new Intent(v.getContext(), Frag_Watch.class);
                 i.putExtra("Video", Video1);
                 v.getContext().startActivity(i);
             }

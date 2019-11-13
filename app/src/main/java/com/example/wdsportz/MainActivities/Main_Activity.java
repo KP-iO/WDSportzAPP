@@ -21,14 +21,16 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.wdsportz.MainFragments.Frag_HomePage;
 import com.example.wdsportz.MainFragments.Frag_IniTeamSelection;
+import com.example.wdsportz.MainFragments.Frag_Profile;
 import com.example.wdsportz.MainFragments.Frag_Test_1;
+import com.example.wdsportz.MainFragments.frag_login;
 import com.example.wdsportz.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
 // Note: Change name of other classes to 'ClassName'_Fragment
 
-public class Main_Activity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, Frag_Test_1.OnFragmentInteractionListener, Frag_IniTeamSelection.OnFragmentInteractionListener, Frag_HomePage.OnFragmentInteractionListener {
+public class Main_Activity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, Frag_Test_1.OnFragmentInteractionListener, Frag_IniTeamSelection.OnFragmentInteractionListener, Frag_HomePage.OnFragmentInteractionListener, Frag_Profile.OnFragmentInteractionListener {
     // Collect all listeners in one interface ^^^ and pass through to main activity?
 
     public Toolbar toolbar;
@@ -58,10 +60,10 @@ public class Main_Activity extends AppCompatActivity implements NavigationView.O
         drawerLayout = findViewById(R.id.main_feed_drawerlayout);
         navigationView = findViewById(R.id.main_feed_nv_View);
         navController = Navigation.findNavController(this, R.id.NavHostFragment);
-
         navigationView.setNavigationItemSelectedListener(this);
 
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).setDrawerLayout(drawerLayout).build();
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(R.id.frag_HomePage,R.id.frag_watch).setDrawerLayout(drawerLayout).build();
+        //AppBarConfiguration.Builder(navController.getGraph()).build(); <--- Drawer only on homepage (replace above)
         NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration);
 
 
@@ -81,7 +83,7 @@ public class Main_Activity extends AppCompatActivity implements NavigationView.O
 
                     case R.id.nav_watch:
                         Log.d("Bottom Nav Test", "nav_watch");
-                        navController.navigate(R.id.action_global_watchfragment);
+                        navController.navigate(R.id.action_global_frag_watch);
 
                         break;
 
@@ -101,8 +103,26 @@ public class Main_Activity extends AppCompatActivity implements NavigationView.O
                 return true;
             }
         });
+
+
     }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.Frag_Profile:
+                navController.navigate(R.id.action_frag_HomePage_to_frag_Profile);
+                break;
+
+           // case R.id.Frag_Saved:
+             //   navController.navigate(R.id.action_frag_HomePage_to_frag_Profile);
+              //  break;
+
+        }
+
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+    }
 
     @Override
     public void onBackPressed() {
@@ -113,11 +133,6 @@ public class Main_Activity extends AppCompatActivity implements NavigationView.O
         }
     }
 
-
-     @Override
-     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            return false;
-        }
 
     @Override
     public void onFragmentInteraction(Uri uri) {

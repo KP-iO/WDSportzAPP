@@ -4,26 +4,23 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.example.wdsportz.R;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link frag_login.OnFragmentInteractionListener} interface
+ * {@link Frag_Profile.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link frag_login#newInstance} factory method to
+ * Use the {@link Frag_Profile#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class frag_login extends Fragment {
+public class Frag_Profile extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -35,7 +32,7 @@ public class frag_login extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public frag_login() {
+    public Frag_Profile() {
         // Required empty public constructor
     }
 
@@ -45,11 +42,11 @@ public class frag_login extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment frag_login.
+     * @return A new instance of fragment Frag_Profile.
      */
     // TODO: Rename and change types and number of parameters
-    public static frag_login newInstance(String param1, String param2) {
-        frag_login fragment = new frag_login();
+    public static Frag_Profile newInstance(String param1, String param2) {
+        Frag_Profile fragment = new Frag_Profile();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -70,23 +67,8 @@ public class frag_login extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_loginpage, container, false);
+        return inflater.inflate(R.layout.fragment_profile, container, false);
     }
-
-    public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
-
-        Button button = view.findViewById(R.id.Btn_Test);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_global_frag_IniTeamSelection);
-            }
-
-
-        });
-
-    }
-
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {

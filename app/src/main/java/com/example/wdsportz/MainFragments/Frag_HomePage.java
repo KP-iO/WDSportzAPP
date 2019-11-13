@@ -80,7 +80,6 @@ public class Frag_HomePage extends Fragment {
 
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -88,7 +87,6 @@ public class Frag_HomePage extends Fragment {
         return inflater.inflate(R.layout.fragment_homepage, container, false);
 
     }
-
 
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 

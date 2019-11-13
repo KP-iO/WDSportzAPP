@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import com.example.wdsportz.MainFragments.Frag_HomePage;
 import com.example.wdsportz.MainFragments.Frag_IniTeamSelection;
+import com.example.wdsportz.MainFragments.frag_login;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -20,7 +21,7 @@ import android.widget.EditText;
 
 import com.example.wdsportz.R;
 
-public class Auth_Activity extends AppCompatActivity implements Frag_IniTeamSelection.OnFragmentInteractionListener,Frag_HomePage.OnFragmentInteractionListener {
+public class Auth_Activity extends AppCompatActivity implements Frag_IniTeamSelection.OnFragmentInteractionListener,Frag_HomePage.OnFragmentInteractionListener, frag_login.OnFragmentInteractionListener  {
 
 
     @Override

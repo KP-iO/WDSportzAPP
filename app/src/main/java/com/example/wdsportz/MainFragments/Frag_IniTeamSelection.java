@@ -174,7 +174,6 @@ public class Frag_IniTeamSelection extends Fragment implements SelectTeamsRecycl
                 ((Auth_Activity)getActivity()).goToMainFeed();
             }
 
-
         });
 
 
