@@ -3,6 +3,10 @@ package com.example.wdsportz.MainFragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,15 +15,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.example.wdsportz.Adapters.WatchViewAdapter;
 import com.example.wdsportz.R;
-import com.example.wdsportz.ViewModels.VideoViewModel;
-import com.example.wdsportz.ViewModels.WatchViewModel;
+import com.example.wdsportz.viewmodels.WatchViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -28,6 +26,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -48,28 +47,22 @@ public class Frag_Watch extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
-
-    Frag_Watch fragWatch = this;
+    private Frag_Watch fragWatch;
     private static final String TAG = "Video Activity";
     FirebaseFirestore fireStoreDB = FirebaseFirestore.getInstance();
-    public RecyclerView recyclerView;
-    public RecyclerView recyclerView1;
+    private RecyclerView recyclerView;
+    private RecyclerView recyclerView1;
 
-    private WatchViewAdapter videoViewAdapter;
+
+    private WatchViewAdapter watchViewAdapter;
+
     String VidUri;
 
     public Frag_Watch() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Frag_Watch.
-     */
+
     // TODO: Rename and change types and number of parameters
     public static Frag_Watch newInstance(String param1, String param2) {
         Frag_Watch fragment = new Frag_Watch();
@@ -96,15 +89,18 @@ public class Frag_Watch extends Fragment {
         return inflater.inflate(R.layout.fragment_watch, container, false);
     }
 
+    // TODO: Rename method, update argument and hook method into UI event
+    public void onButtonPressed(Uri uri) {
+        if (mListener != null) {
+            mListener.onFragmentInteraction(uri);
+        }
+    }
 
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        final Context context = view.getContext();
 
-        //setContentView(R.layout.fragment_watch);
-
-        final Context context = getContext();
-
-        recyclerView = view.findViewById(R.id.RecyclerViewV);
-        recyclerView1 = view.findViewById(R.id.RecyclerViewVM);
+        recyclerView = getView().findViewById(R.id.RecyclerViewV);
+        recyclerView1 = getView().findViewById(R.id.RecyclerViewVM);
         int numberOfColumns = 2;
         recyclerView.setLayoutManager(new GridLayoutManager(context, numberOfColumns));
         recyclerView1.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
@@ -135,10 +131,9 @@ public class Frag_Watch extends Fragment {
 
                                 //Log.d(TAG, ("LOGO URL: " + list.));
 
-                                videoViewAdapter = new WatchViewAdapter(context, list);
-                                recyclerView.setAdapter(videoViewAdapter);
-                                recyclerView1.setAdapter(videoViewAdapter);
-
+                                watchViewAdapter = new WatchViewAdapter(context, list);
+                                recyclerView.setAdapter(watchViewAdapter);
+                                recyclerView1.setAdapter(watchViewAdapter);
 
                             }
 
@@ -147,6 +142,7 @@ public class Frag_Watch extends Fragment {
 
                                 Log.d(TAG, (" Team Name = " + list.get(i).getTitle()));
                                 Log.d(TAG, "List Url test   " + list.get(i).getVideoimageURL());
+                                Log.d(TAG, "Video Url test   " + list.get(i).getVideoURL());
                             }
 
                         } else {
@@ -156,27 +152,22 @@ public class Frag_Watch extends Fragment {
                     }
 
                 });
+
+
     }
 
 
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
+//
+//    @Override
+////    public void onAttach(Context context) {
+////        super.onAttach(context);
+////        if (context instanceof OnFragmentInteractionListener) {
+////            mListener = (OnFragmentInteractionListener) context;
+////        } else {
+////            throw new RuntimeException(context.toString()
+////                    + " must implement OnFragmentInteractionListener");
+////        }
+////    }
 
     @Override
     public void onDetach() {

@@ -24,8 +24,8 @@
             app:destination="@id/frag_watch"
             app:enterAnim="@anim/fade_in" />
     <fragment
-        android:id="@+id/blankFragment"
-        android:name="com.example.wdsportz.BlankFragment"
-        android:label="fragment_blank"
-        tools:layout="@layout/fragment_blank" /><action android:id="@+id/action_global_blankFragment" app:destination="@id/blankFragment"/>
+        android:id="@+id/livestream"
+        android:name="com.example.wdsportz.Livestream"
+        android:label="fragment_livestream"
+        tools:layout="@layout/fragment_livestream" /><action android:id="@+id/action_global_livestream" app:destination="@id/livestream"/>
 </navigation>

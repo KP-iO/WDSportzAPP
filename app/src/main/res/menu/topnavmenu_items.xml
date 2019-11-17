@@ -1,18 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn='navigation_view'
-    >
+    tools:showIn='navigation_view'>
 
-    <group android:checkableBehavior="single">
+    <group android:checkableBehavior="single"
+        android:id="@+id/group1">
         <item
-            android:id="@+id/profileSegment"
+            android:id="@+id/Frag_Profile"
             android:icon="@drawable/blank_blank_man_profile_picturre"
             android:title="@string/profile" />
         <item
-            android:id="@+id/Saved"
+            android:id="@+id/Frag_Saved"
             android:icon="@drawable/saved"
             android:title="@string/saved" />
+
+        <item
+            android:id="@+id/Trending"
+            android:icon="@drawable/_likes__flames"
+            android:title="Trending" />
+
+    </group>
+
+
+    <group android:checkableBehavior="single"
+        android:id="@+id/group2">
+        <item
+            android:id="@+id/SignOut"
+            android:icon="@drawable/saved"
+            android:title="Signout" />
+
+        <item
+            android:id="@+id/About"
+            android:icon="@mipmap/information1"
+            android:title="About" />
     </group>
 
 </menu>

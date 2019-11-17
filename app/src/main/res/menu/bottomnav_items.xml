@@ -9,14 +9,14 @@
         android:visible="true" />
 
     <item
-        android:id="@+id/nav_score"
-        android:icon="@drawable/score_icon"
-        android:title="@string/nav_score"
-        android:visible="true" />
-    <item
         android:id="@+id/nav_watch"
         android:icon="@drawable/watch_icon"
         android:title="@string/nav_watch"
+        android:visible="true" />
+    <item
+        android:id="@+id/nav_score"
+        android:icon="@drawable/score_icon"
+        android:title="@string/nav_score"
         android:visible="true" />
     <item
     android:id="@+id/nav_more"

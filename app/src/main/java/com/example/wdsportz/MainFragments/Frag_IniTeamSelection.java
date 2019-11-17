@@ -11,6 +11,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.wdsportz.MainActivities.Auth_Activity;
 import com.example.wdsportz.R;
 import com.example.wdsportz.Adapters.SelectTeamsRecyclerViewAdapter;
 import com.example.wdsportz.viewmodels.SelectTeamsRecyclerViewModel;
@@ -110,7 +111,7 @@ public class Frag_IniTeamSelection extends Fragment implements SelectTeamsRecycl
     }
 
 
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         final Context context = view.getContext();
         // set up the RecyclerView
         recyclerView = getView().findViewById(R.id.RecyclerView);
@@ -170,12 +171,8 @@ public class Frag_IniTeamSelection extends Fragment implements SelectTeamsRecycl
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {
-                NavController navController = Navigation.findNavController(getActivity(), R.id.NavHostFragment);
-                navController.navigate(R.id.action_select_Teams_Frag_to_frag_HomePage);
+                ((Auth_Activity)getActivity()).goToMainFeed();
             }
-
-
-            //View v = inflater.inflate(R.layout.fragment_home, container, false);
 
         });
 

@@ -35,7 +35,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:visibility="visible"
-        app:headerLayout="@layout/nav_header"
+        app:headerLayout="@layout/main_drawer"
 
         app:menu="@menu/topnavmenu_items">
 

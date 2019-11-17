@@ -58,7 +58,7 @@ public class Frag_Home_TempStart extends Fragment {
             @Override
               public void onClick (View v) {
                NavController navController = Navigation.findNavController(getActivity(), R.id.NavHostFragment);
-               navController.navigate(R.id.action_HomeActivity_to_select_Teams_Frag);
+             //   navController.navigate(R.id.action_activity_Main_to_frag_HomePage);
             }
 
 
