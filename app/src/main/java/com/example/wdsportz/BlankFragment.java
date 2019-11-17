@@ -1,7 +1,8 @@
-
 package com.example.wdsportz;
 
+
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +15,47 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.Abs
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.utils.YouTubePlayerUtils;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
-public class YouTubeFragment extends Fragment {
 
+/**
+ * A simple {@link Fragment} subclass.
+ * 
+ * 
+ * 
+ */
+
+
+
+public class BlankFragment extends Fragment  {
+    String videoId;
+    private static final String TAG = "livstreamID" ;
     private YouTubePlayerView youTubePlayerView;
+    String Video = getActivity().getIntent().getStringExtra("Video");
 
-    public YouTubeFragment() {
+    public BlankFragment() {
     }
+
+
+    String getVideoId() {
+        return videoId;
+    }
+
+//    class VideoIds {private String[] videoIds = {"6JYIGclVQdw", "LvetJ9U_tVY", "S0Q4gqBUs7c", "zOa-rSM4nms"};
+//
+//
+//        int liveIds = liveVideoIds.length();
+//
+//        private String[] Ids = new String[liveIds];
+//        private Random random = new Random();
+//
+//        public String getNextVideoId() {
+//            return videoIds[random.nextInt(videoIds.length)];
+//        }
+//
+//        public  String getNextLiveVideoId() {
+//            return Ids[random.nextInt(liveIds)];
+//        }
+//    }
+    
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -29,21 +65,26 @@ public class YouTubeFragment extends Fragment {
 
         initYouTubePlayerView();
 
+
+
+
         return view;
     }
 
     private void initYouTubePlayerView() {
 
+        Log.d(TAG, videoId );
         getLifecycle().addObserver(youTubePlayerView);
 
         youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
             @Override
             public void onReady(@NonNull YouTubePlayer youTubePlayer) {
                 YouTubePlayerUtils.loadOrCueVideo(
-                        youTubePlayer, getLifecycle(),
-                        VideoIdsProvider.getNextLiveVideoId(), 0f
+                        youTubePlayer, getLifecycle(),videoId
+                        , 0f
                 );
             }
         });
     }
+
 }

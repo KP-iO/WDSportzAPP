@@ -108,6 +108,60 @@ public class Watchfragment extends Fragment {
 
 // Implement error handling for all cases e.g (Name/ Logo not accessible) ------>
 
+        BottomRecycler(context);
+        TopRecycler(context);
+
+
+    }
+
+
+    private void TopRecycler(final Context context) {
+        Task<QuerySnapshot> docRef = fireStoreDB.collection("Live Stream")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+
+                            List<WatchViewModel> list = new ArrayList<>();
+
+
+////// Change FROM download url to stroage url in firestore?
+
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+
+                                Log.d(TAG, "DOCUMENT PRINT :" + document.getData().toString());
+                                Log.d(TAG, "Team Added to List " + document.get("Match_Name").toString());
+
+                                list.add(new WatchViewModel(document.get("Match_Name").toString(), document.get("Match_Image").toString(), document.get("Match_Video").toString()));
+
+                                //Log.d(TAG, ("LOGO URL: " + list.));
+
+                                watchViewAdapter = new WatchViewAdapter(context, list);
+                                recyclerView1.setAdapter(watchViewAdapter);
+
+                            }
+
+                            // List check (in Log)
+                            for (int i = 0; i < list.size() - 1; i++) {
+
+                                Log.d(TAG, (" Team Name = " + list.get(i).getTitle()));
+                                Log.d(TAG, "List Url test   " + list.get(i).getVideoimageURL());
+                                Log.d(TAG, "Video Url test   " + list.get(i).getVideoURL());
+                            }
+
+                        } else {
+                            Log.d(TAG, "No such document");
+                        }
+
+                    }
+
+                });
+    }
+
+    private void BottomRecycler(final Context context) {
         Task<QuerySnapshot> docRef = fireStoreDB.collection("Videos")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -133,7 +187,7 @@ public class Watchfragment extends Fragment {
 
                                 watchViewAdapter = new WatchViewAdapter(context, list);
                                 recyclerView.setAdapter(watchViewAdapter);
-                                recyclerView1.setAdapter(watchViewAdapter);
+//                                recyclerView1.setAdapter(watchViewAdapter);
 
                             }
 
@@ -152,8 +206,6 @@ public class Watchfragment extends Fragment {
                     }
 
                 });
-
-
     }
 
 

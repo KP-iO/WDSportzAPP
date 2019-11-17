@@ -25,13 +25,6 @@
         </activity>
 
         <activity
-            android:name=".Watch"
-            android:theme="@style/AppTheme1">
-            <intent-filter>
-                <action android:name="android.intent.action.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".Login"
             android:label="@string/app_name"
             android:theme="@style/AppTheme1">
@@ -69,6 +62,13 @@
         </activity>
         <activity
             android:name=".MainFragments.Frag_HomePage"
+            android:theme="@style/AppTheme1">
+            <intent-filter>
+                <action android:name="android.intent.action.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Y"
             android:theme="@style/AppTheme1">
             <intent-filter>
                 <action android:name="android.intent.action.DEFAULT" />

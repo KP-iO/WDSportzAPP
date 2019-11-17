@@ -82,7 +82,7 @@ public class Main_Activity extends AppCompatActivity implements NavigationView.O
                         //navController.navigate(R.id.action_frag_HomePage_self);
                         break;
                     case R.id.nav_score:
-                        navController.navigate(R.id.action_global_livestream);
+                        navController.navigate(R.id.action_global_blankFragment);
                         Log.d("Bottom Nav Test", "nav_score");
                         break;
                     case R.id.nav_watch:
