@@ -15,9 +15,10 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.wdsportz.Adapters.LiveStreamAdapter;
 import com.example.wdsportz.Adapters.WatchViewAdapter;
 import com.example.wdsportz.R;
-import com.example.wdsportz.viewmodels.WatchViewModel;
+import com.example.wdsportz.ViewModels.WatchViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -31,9 +32,9 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link Frag_Watch.OnFragmentInteractionListener} interface
+ * {@link Watchfragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link Frag_Watch#newInstance} factory method to
+ * Use the {@link Watchfragment#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class Frag_Watch extends Fragment {
@@ -47,7 +48,7 @@ public class Frag_Watch extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
-    private Frag_Watch fragWatch;
+    private Watchfragment watchfragment;
     private static final String TAG = "Video Activity";
     FirebaseFirestore fireStoreDB = FirebaseFirestore.getInstance();
     private RecyclerView recyclerView;
@@ -55,6 +56,7 @@ public class Frag_Watch extends Fragment {
 
 
     private WatchViewAdapter watchViewAdapter;
+    private LiveStreamAdapter liveStreamAdapter;
 
     String VidUri;
 
@@ -64,8 +66,8 @@ public class Frag_Watch extends Fragment {
 
 
     // TODO: Rename and change types and number of parameters
-    public static Frag_Watch newInstance(String param1, String param2) {
-        Frag_Watch fragment = new Frag_Watch();
+    public static Watchfragment newInstance(String param1, String param2) {
+        Watchfragment fragment = new Watchfragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -108,6 +110,60 @@ public class Frag_Watch extends Fragment {
 
 // Implement error handling for all cases e.g (Name/ Logo not accessible) ------>
 
+        BottomRecycler(context);
+        TopRecycler(context);
+
+
+    }
+
+
+    private void TopRecycler(final Context context) {
+        Task<QuerySnapshot> docRef = fireStoreDB.collection("Live Stream")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+
+                            List<WatchViewModel> list = new ArrayList<>();
+
+
+////// Change FROM download url to stroage url in firestore?
+
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+
+                                Log.d(TAG, "DOCUMENT PRINT :" + document.getData().toString());
+                                Log.d(TAG, "Team Added to List " + document.get("Match_Name").toString());
+
+                                list.add(new WatchViewModel(document.get("Match_Name").toString(), document.get("Match_Image").toString(), document.get("Match_Video").toString()));
+
+                                //Log.d(TAG, ("LOGO URL: " + list.));
+
+                                liveStreamAdapter = new LiveStreamAdapter(context, list);
+                                recyclerView1.setAdapter(liveStreamAdapter);
+
+                            }
+
+                            // List check (in Log)
+                            for (int i = 0; i < list.size() - 1; i++) {
+
+                                Log.d(TAG, (" Team Name = " + list.get(i).getTitle()));
+                                Log.d(TAG, "List Url test   " + list.get(i).getVideoimageURL());
+                                Log.d(TAG, "Video Url test   " + list.get(i).getVideoURL());
+                            }
+
+                        } else {
+                            Log.d(TAG, "No such document");
+                        }
+
+                    }
+
+                });
+    }
+
+    private void BottomRecycler(final Context context) {
         Task<QuerySnapshot> docRef = fireStoreDB.collection("Videos")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -133,7 +189,7 @@ public class Frag_Watch extends Fragment {
 
                                 watchViewAdapter = new WatchViewAdapter(context, list);
                                 recyclerView.setAdapter(watchViewAdapter);
-                                recyclerView1.setAdapter(watchViewAdapter);
+//                                recyclerView1.setAdapter(watchViewAdapter);
 
                             }
 
@@ -152,8 +208,6 @@ public class Frag_Watch extends Fragment {
                     }
 
                 });
-
-
     }
 
 

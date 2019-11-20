@@ -29,7 +29,7 @@ public class BlankFragment extends Fragment  {
     String videoId;
     private static final String TAG = "livstreamID" ;
     private YouTubePlayerView youTubePlayerView;
-    String Video = getActivity().getIntent().getStringExtra("Video");
+
 
     public BlankFragment() {
     }
@@ -72,7 +72,7 @@ public class BlankFragment extends Fragment  {
     }
 
     private void initYouTubePlayerView() {
-
+        final String Video = getActivity().getIntent().getStringExtra("Video");
         Log.d(TAG, videoId );
         getLifecycle().addObserver(youTubePlayerView);
 
@@ -80,7 +80,7 @@ public class BlankFragment extends Fragment  {
             @Override
             public void onReady(@NonNull YouTubePlayer youTubePlayer) {
                 YouTubePlayerUtils.loadOrCueVideo(
-                        youTubePlayer, getLifecycle(),videoId
+                        youTubePlayer, getLifecycle(),Video
                         , 0f
                 );
             }

@@ -1,6 +1,7 @@
 
 package com.example.wdsportz;
 
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,12 +19,12 @@ public class YouTubeFragment extends Fragment {
 
     private YouTubePlayerView youTubePlayerView;
 
-    public YouTubeFragment() {
-    }
+
+    public YouTubeFragment() {}
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_live, container, false);
+        View view = inflater.inflate(R.layout.fragment_blank, container, false);
 
         youTubePlayerView = view.findViewById(R.id.youtube_player_view);
 
@@ -33,6 +34,10 @@ public class YouTubeFragment extends Fragment {
     }
 
     private void initYouTubePlayerView() {
+        // The player will automatically release itself when the fragment is destroyed.
+        // The player will automatically pause when the fragment is stopped
+        // If you don't add YouTubePlayerView as a lifecycle observer, you will have to release it manually.
+        getLifecycle().addObserver(youTubePlayerView);
 
         getLifecycle().addObserver(youTubePlayerView);
 
@@ -41,9 +46,11 @@ public class YouTubeFragment extends Fragment {
             public void onReady(@NonNull YouTubePlayer youTubePlayer) {
                 YouTubePlayerUtils.loadOrCueVideo(
                         youTubePlayer, getLifecycle(),
-                        VideoIdsProvider.getNextLiveVideoId(), 0f
+                        VideoIdsProvider.getNextLiveVideoId(),0f
                 );
             }
         });
     }
+
+
 }

@@ -13,9 +13,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.wdsportz.BlankFragment;
 import com.example.wdsportz.R;
 import com.example.wdsportz.ViewModels.WatchViewModel;
+import com.example.wdsportz.YouTube_playback;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
@@ -66,7 +66,7 @@ public class LiveStreamAdapter extends RecyclerView.Adapter<LiveStreamAdapter.My
         holder.btnimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(v.getContext(), BlankFragment.class);
+                Intent i = new Intent(v.getContext(), YouTube_playback.class);
                 i.putExtra("Video", Video1);
                 v.getContext().startActivity(i);
             }
