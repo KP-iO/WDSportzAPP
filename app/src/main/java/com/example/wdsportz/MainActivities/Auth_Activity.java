@@ -4,24 +4,15 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.wdsportz.MainFragments.Frag_HomePage;
 import com.example.wdsportz.MainFragments.Frag_IniTeamSelection;
+import com.example.wdsportz.MainFragments.frag_Register;
 import com.example.wdsportz.MainFragments.frag_login;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-
 import com.example.wdsportz.R;
 
-public class Auth_Activity extends AppCompatActivity implements Frag_IniTeamSelection.OnFragmentInteractionListener,Frag_HomePage.OnFragmentInteractionListener, frag_login.OnFragmentInteractionListener  {
+public class Auth_Activity extends AppCompatActivity implements Frag_IniTeamSelection.OnFragmentInteractionListener,Frag_HomePage.OnFragmentInteractionListener, frag_login.OnFragmentInteractionListener, frag_Register.OnFragmentInteractionListener  {
 
 
     @Override

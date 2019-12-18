@@ -25,4 +25,16 @@
             android:id="@+id/action_frag_login_to_mobile_navigation1"
             app:destination="@id/mobile_navigation1" />
     </fragment><action android:id="@+id/action_global_frag_IniTeamSelection" app:destination="@id/frag_IniTeamSelection"/>
+    <fragment
+        android:id="@+id/frag_Register"
+        android:name="com.example.wdsportz.MainFragments.frag_Register"
+        android:label="fragment_blank_fragment2"
+        tools:layout="@layout/registration" >
+        <action
+            android:id="@+id/action_RegisterToLogin"
+            app:destination="@id/frag_login" />
+    </fragment>
+    <action
+        android:id="@+id/globalAction_Register"
+        app:destination="@id/frag_Register" />
 </navigation>

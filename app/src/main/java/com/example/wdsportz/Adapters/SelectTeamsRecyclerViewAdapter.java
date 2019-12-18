@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.wdsportz.R;
-import com.example.wdsportz.viewmodels.SelectTeamsRecyclerViewModel;
+import com.example.wdsportz.ViewModels.SelectTeamsRecyclerViewModel;
 
 import java.util.List;
 

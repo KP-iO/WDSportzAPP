@@ -41,6 +41,7 @@
     <string name="home">Home</string>
     <string name="title_activity_auth__main">Auth_Main</string>
     <string name="google_developer_api_key">AIzaSyCysvDpijwEinE1mQOhUp8h-Ik1c_ju0WM</string>
+    <string name="sign_up">Sign Up</string>
 
 
 </resources>

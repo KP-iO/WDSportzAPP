@@ -9,22 +9,34 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.wdsportz.Adapters.MainFeedRecyclerViewAdapter;
+import com.example.wdsportz.Adapters.NewsFeedAdapter;
 import com.example.wdsportz.R;
-import com.example.wdsportz.RecyclerViewModel;
+import com.example.wdsportz.ViewModels.NewsFeedViewModel;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
+/**
+ * A simple {@link Fragment} subclass.
+ * Activities that contain this fragment must implement the
+ * {@link Watchfragment.OnFragmentInteractionListener} interface
+ * to handle interaction events.
+ * Use the {@link Watchfragment#newInstance} factory method to
+ * create an instance of this fragment.
+ */
 public class Frag_HomePage extends Fragment {
-
-
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -34,33 +46,27 @@ public class Frag_HomePage extends Fragment {
     private String mParam1;
     private String mParam2;
 
-
     private OnFragmentInteractionListener mListener;
-
-    MainFeedRecyclerViewAdapter adapter;
-    MainFeedRecyclerViewAdapter.ItemClickListener adapterlistening;
-    private ArrayList<RecyclerViewModel> ArticleArrayList;
-
-    // Temporary Feed Population Arrays
-    private int[] NewsImages = new int[]{R.drawable.arsenal_team_logo,R.drawable.bowers___fc,R.drawable.barking_fv,R.drawable.chestnut_fv,R.drawable.enfield_fc, R.drawable.ware_fc,R.drawable.folkestone_fc,R.drawable.molesey_fc};
-    private String[] NewsTitles = new String[]{"Coventry Dominates in a 4 -1 Win Over Nottingham","New Manager Decided For Bowers FC","Lorem ipsum dolor sit amet."," Consectetur Adipiscing Elit, Sed Do Eiusmod Tempor Incididunt","Sed Do Eiusmod Tempor Incididunt","Duis aute irure dolor in reprehenderit in voluptate"," sunt in culpa qui officia deserunt mollit"};
+    private Frag_HomePage frag_homePage;
+    private static final String TAG = "Video Activity";
+    FirebaseFirestore fireStoreDB = FirebaseFirestore.getInstance();
+    private RecyclerView recyclerView;
+    private RecyclerView recyclerView1;
 
 
-    public Frag_HomePage(){
 
+    private NewsFeedAdapter newsFeedAdapter;
+
+    String VidUri;
+
+    public Frag_HomePage() {
+        // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Frag_Test_1.
-     */
+
     // TODO: Rename and change types and number of parameters
-    public static Frag_HomePage newInstance(String param1, String param2) {
-        Frag_HomePage fragment = new Frag_HomePage();
+    public static Watchfragment newInstance(String param1, String param2) {
+        Watchfragment fragment = new Watchfragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -68,87 +74,128 @@ public class Frag_HomePage extends Fragment {
         return fragment;
     }
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_homepage, container, false);
-
     }
 
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-
-                /// Move feed load to external function
-        final Context context = view.getContext();
-        final String Tag = "FEED TEST";
-
-        Log.d("RecyclerTest" , "onViewCreated: ");
-
-        RecyclerView recyclerView = getView().findViewById(R.id.Main_feed);
-        ArticleArrayList = populateFeed();
-
-        Log.d(Tag,  ArticleArrayList.toString());
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        adapter = new MainFeedRecyclerViewAdapter(context, ArticleArrayList);
-        adapter.setClickListener(adapterlistening);
-        recyclerView.setAdapter(adapter);
-
-        Log.d("RecyclerTest" , "onViewCreated:111 ");
-
-    }
-
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+    // TODO: Rename method, update argument and hook method into UI event
+    public void onButtonPressed(Uri uri) {
+        if (mListener != null) {
+            mListener.onFragmentInteraction(uri);
         }
     }
 
-    // Called when the fragment is no longer attached to activity
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        final Context context = view.getContext();
+
+
+        recyclerView1 = getView().findViewById(R.id.Main_feed);
+        recyclerView1.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
+
+
+// Implement error handling for all cases e.g (Name/ Logo not accessible) ------>
+
+        
+        newsFeed(context);
+
+
+
+    }
+
+
+    private void newsFeed(final Context context) {
+        Task<QuerySnapshot> docRef = fireStoreDB.collection("fl_content")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+
+                            List<NewsFeedViewModel> list = new ArrayList<>();
+
+
+////// Change FROM download url to stroage url in firestore?
+
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+
+                                Log.d(TAG, "DOCUMENT PRINT :" + document.getData().toString());
+                                Log.d(TAG, "Team Added to List " + document.get("title").toString());
+
+                                list.add(new NewsFeedViewModel(document.get("title").toString(), document.get("newsImage").toString(), document.get("description").toString()));
+
+                                //Log.d(TAG, ("LOGO URL: " + list.));
+
+                                newsFeedAdapter = new NewsFeedAdapter(context, list);
+                                recyclerView1.setAdapter(newsFeedAdapter);
+
+                            }
+
+                            // List check (in Log)
+                            for (int i = 0; i < list.size() - 1; i++) {
+
+                                Log.d(TAG, (" News Title = " + list.get(i).getTitle()));
+                                Log.d(TAG, " News Description =   " + list.get(i).getNewsDesc());
+                                Log.d(TAG, "Image URL =   " + list.get(i).getNewsImageURL());
+                            }
+
+                        } else {
+                            Log.d(TAG, "No such document");
+                        }
+
+                    }
+
+                });
+    }
+
+ 
+
+
+//
+//    @Override
+////    public void onAttach(Context context) {
+////        super.onAttach(context);
+////        if (context instanceof OnFragmentInteractionListener) {
+////            mListener = (OnFragmentInteractionListener) context;
+////        } else {
+////            throw new RuntimeException(context.toString()
+////                    + " must implement OnFragmentInteractionListener");
+////        }
+////    }
+
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
     }
 
-    private ArrayList<RecyclerViewModel> populateFeed() {
-
-        ArrayList<RecyclerViewModel> list = new ArrayList<>();
-
-        for (int i = 0; i < 7 ; i++) {
-            RecyclerViewModel FullArticle = new RecyclerViewModel();
-            FullArticle.setName(NewsTitles[i]);
-            FullArticle.setImage_drawable(NewsImages[i]);
-            list.add(FullArticle);
-        }
-
-        return list;
-    }
-
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated
+     * to the activity and potentially other fragments contained in that
+     * activity.
+     * <p>
+     * See the Android Training lesson <a href=
+     * "http://developer.android.com/training/basics/fragments/communicating.html"
+     * >Communicating with Other Fragments</a> for more information.
+     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-
-
 }
 
 

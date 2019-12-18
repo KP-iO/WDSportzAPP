@@ -1,14 +1,17 @@
 package com.example.wdsportz.MainFragments;
 
+/**
+ * Created by khrishawn
+ */
+
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -25,12 +28,12 @@ import com.google.firebase.auth.FirebaseAuth;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link frag_login.OnFragmentInteractionListener} interface
+ * {@link frag_Register.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link frag_login#newInstance} factory method to
+ * Use the {@link frag_Register#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class frag_login extends Fragment {
+public class frag_Register extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -39,11 +42,10 @@ public class frag_login extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private OnFragmentInteractionListener mListener;
-    public FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
-    public frag_login() {
+    public frag_Register() {
         // Required empty public constructor
     }
 
@@ -56,8 +58,8 @@ public class frag_login extends Fragment {
      * @return A new instance of fragment frag_Register.
      */
     // TODO: Rename and change types and number of parameters
-    public static frag_login newInstance(String param1, String param2) {
-        frag_login fragment = new frag_login();
+    public static frag_Register newInstance(String param1, String param2) {
+        frag_Register fragment = new frag_Register();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -78,52 +80,43 @@ public class frag_login extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_loginpage, container, false);
+        return inflater.inflate(R.layout.fragment_register, container, false);
     }
 
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
-        final TextView txtUsername = view.findViewById(R.id.username);
-        final TextView txtPassword = view.findViewById(R.id.password);
-        Button btnSignUp = view.findViewById(R.id.signUp);
-        Button signIn = view.findViewById(R.id.btn_signIn);
-
-        signIn.setOnClickListener(new OnClickListener(){
-            public void onClick(final View view) {
-                firebaseAuth.signInWithEmailAndPassword(txtUsername.getText().toString(), txtPassword.getText().toString())   // Code used to authenticate user
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>(){
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task){
-                                if(task.isSuccessful()) {
-                                    Navigation.findNavController(view).navigate(R.id.action_global_frag_IniTeamSelection);
-                                }else{
-                                    Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                                }
-
-                            }
-
-                        });
-
-            }
-        });
-        btnSignUp.setOnClickListener(new OnClickListener(){
-            public void onClick(final View view) {
-                Navigation.findNavController(view).navigate(R.id.globalAction_Register);
-
-                                         }
-        });
+        final EditText _txtpass =  view.findViewById(R.id.Password);
+        final EditText _txtemail =  view.findViewById(R.id.Email);
+        ImageButton _btnreg =  view.findViewById(R.id.btnCreateAcc);
+        EditText _txtfname =  view.findViewById(R.id.Name);
+        ImageButton button = view.findViewById(R.id.btnCreateAcc);
 
 
-
-
-        Button button = view.findViewById(R.id.Btn_Test);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_global_frag_IniTeamSelection);
+            public void onClick(final View view) {
+                //   progressBar.setVisibility(View.VISIBLE);
+                firebaseAuth.createUserWithEmailAndPassword(_txtemail.getText().toString(),
+                        _txtpass.getText().toString())      // code used to create user
+                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                //progressBar.setVisibility(View.GONE);
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(getActivity(), "Registered successfully", Toast.LENGTH_SHORT).show();
+                                    _txtemail.setText("");
+                                    _txtpass.setText("");
+                                    Navigation.findNavController(view).navigate(R.id.action_RegisterToLogin);
+                                } else {
+                                    Toast.makeText(getActivity(), task.getException().getMessage(),
+                                            Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        });
             }
-
-
         });
+
+
+     
 
     }
 

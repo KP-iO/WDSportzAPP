@@ -5,7 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/sign_in_screen_background"
-    tools:context=".Login">
+    >
+
+    <Button
+        android:id="@+id/signUp"
+        android:layout_width="380dp"
+        android:layout_height="45dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="22dp"
+        android:layout_marginBottom="110dp"
+        android:background="@drawable/sign_in_button_rectangle"
+        android:text="@string/sign_up"
+        android:textColor="#FFFFFF" />
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -48,12 +60,14 @@
         android:text="@string/username" />
 
     <EditText
-        android:id="@+id/Pass"
+        android:id="@+id/password"
         android:layout_width="380dp"
         android:layout_height="45dp"
-        android:layout_centerHorizontal="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:layout_marginTop="450dp"
-        android:layout_marginBottom="314dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="236dp"
         android:autofillHints=""
         android:background="#FFEB3B"
         android:ems="10"
@@ -65,24 +79,17 @@
         android:text="@string/password1" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btn_signIn"
         android:layout_width="380dp"
         android:layout_height="45dp"
-        android:layout_centerHorizontal="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:layout_marginTop="510dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="182dp"
         android:background="@drawable/sign_in_button_rectangle"
         android:text="@string/sign_in"
         android:textColor="#FFFFFF" />
-
-    <TextView
-        android:id="@+id/signup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="182dp"
-        android:layout_marginBottom="107dp"
-        android:text="Signup" />
 
     <Button
         android:id="@+id/Btn_Test"
