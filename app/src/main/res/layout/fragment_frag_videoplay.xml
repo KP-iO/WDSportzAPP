@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="187dp"
             android:padding="0dp"
-             />
+            />
     </RelativeLayout>
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -44,10 +44,10 @@
 
     <Button
         android:id="@+id/add"
-        android:layout_width="56dp"
-        android:layout_height="33dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginBottom="34dp"
+        android:layout_width="62dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="68dp"
         android:text="Add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/edit_box" />
@@ -56,8 +56,8 @@
         android:id="@+id/edit_box"
         android:layout_width="190dp"
         android:layout_height="40dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="64dp"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/avatar" />
@@ -68,29 +68,27 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="13dp"
         android:layout_marginEnd="320dp"
-        android:layout_marginBottom="36dp"
+        android:layout_marginBottom="2dp"
         android:text="01/04/2020"
         app:layout_constraintBottom_toTopOf="@+id/chat_box"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/match_title"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/match_title" />
 
     <TextView
         android:id="@+id/chat_box"
-        android:layout_width="406dp"
-        android:layout_height="240dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginBottom="7dp"
+        android:layout_width="405dp"
+        android:layout_height="191dp"
+        android:layout_marginTop="44dp"
         android:text="Chat"
-        app:layout_constraintBottom_toTopOf="@+id/avatar"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/date" />
 
     <ImageView
         android:id="@+id/avatar"
         android:layout_width="77dp"
         android:layout_height="75dp"
         android:layout_marginStart="12dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="56dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:srcCompat="@tools:sample/avatars" />

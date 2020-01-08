@@ -1,26 +1,25 @@
-package com.example.wdsportz.MainFragments;
+package com.example.wdsportz.SideNav;
 
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.fragment.app.Fragment;
 
 import com.example.wdsportz.R;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link Frag_Profile.OnFragmentInteractionListener} interface
+ * {@link Frag_Notifications.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link Frag_Profile#newInstance} factory method to
+ * Use the {@link Frag_Notifications#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Frag_Profile extends Fragment {
+public class Frag_Notifications extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -32,7 +31,7 @@ public class Frag_Profile extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public Frag_Profile() {
+    public Frag_Notifications() {
         // Required empty public constructor
     }
 
@@ -42,11 +41,11 @@ public class Frag_Profile extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Frag_Profile.
+     * @return A new instance of fragment Frag_Notifications.
      */
     // TODO: Rename and change types and number of parameters
-    public static Frag_Profile newInstance(String param1, String param2) {
-        Frag_Profile fragment = new Frag_Profile();
+    public static Frag_Notifications newInstance(String param1, String param2) {
+        Frag_Notifications fragment = new Frag_Notifications();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -67,7 +66,7 @@ public class Frag_Profile extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        return inflater.inflate(R.layout.fragment_frag_notifications, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

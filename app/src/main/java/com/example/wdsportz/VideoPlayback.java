@@ -28,7 +28,7 @@ public class VideoPlayback extends AppCompatActivity {
         MediaController mediaController = new MediaController(this);
 
 
-        videoView = findViewById(R.id.Watch_view);
+        videoView = findViewById(R.id.Watch_view1);
         videoView.setMediaController(mediaController);
         mediaController.setAnchorView(videoView);
 

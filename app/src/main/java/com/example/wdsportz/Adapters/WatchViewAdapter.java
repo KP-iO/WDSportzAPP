@@ -1,7 +1,7 @@
 package com.example.wdsportz.Adapters;
 
 import android.content.Context;
-import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,11 +10,12 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.wdsportz.R;
-import com.example.wdsportz.VideoPlayback;
 import com.example.wdsportz.ViewModels.WatchViewModel;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -30,6 +31,7 @@ public class WatchViewAdapter extends RecyclerView.Adapter<WatchViewAdapter.MyVi
     private LayoutInflater lInflater;
     private ItemClickListener lClickListener;
     private Context context;
+    public NavController navController;
 
     public WatchViewAdapter(Context context, List<WatchViewModel> list) {
         this.lInflater = LayoutInflater.from(context);
@@ -64,9 +66,15 @@ public class WatchViewAdapter extends RecyclerView.Adapter<WatchViewAdapter.MyVi
         holder.btnimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(v.getContext(), VideoPlayback.class);
-                i.putExtra("Video", Video1);
-                v.getContext().startActivity(i);
+                // used to bundle strings and enable it to be collected
+                Bundle bundle = new Bundle();
+                bundle.putString("amount", Video1);
+                bundle.putString("title", "Movie");
+                Navigation.findNavController(v).navigate(R.id.action_global_frag_videoplay, bundle);
+                for (String key: bundle.keySet())
+                {
+                    Log.d ("myApplication", key + " is a key in the bundle");
+                }
             }
         });
 

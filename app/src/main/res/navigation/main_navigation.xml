@@ -33,9 +33,44 @@
         tools:layout="@layout/fragment_more" /><action android:id="@+id/action_global_more" app:destination="@id/more"/>
     <fragment
         android:id="@+id/frag_Profile"
-        android:name="com.example.wdsportz.MainFragments.Frag_Profile"
+        android:name="com.example.wdsportz.SideNav.Frag_Profile"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" /><action android:id="@+id/action_global_frag_watch" app:destination="@id/frag_watch"/>
+    <fragment
+        android:id="@+id/LiveGuide"
+        android:name="com.example.wdsportz.SideNav.Frag_LiveGuide"
+        android:label="fragment_frag__live_guide"
+        tools:layout="@layout/fragment_frag__live_guide" />
+    <fragment
+        android:id="@+id/frag_About"
+        android:name="com.example.wdsportz.SideNav.Frag_About"
+        android:label="fragment_frag_about"
+        tools:layout="@layout/fragment_frag_about" />
+    <fragment
+        android:id="@+id/Explore"
+        android:name="com.example.wdsportz.SideNav.Frag_Explore"
+        android:label="fragment_frag_explore"
+        tools:layout="@layout/fragment_frag_explore" />
+    <fragment
+        android:id="@+id/Notifications"
+        android:name="com.example.wdsportz.SideNav.Frag_Notifications"
+        android:label="fragment_frag_notifications"
+        tools:layout="@layout/fragment_frag_notifications" />
+    <fragment
+        android:id="@+id/settingsSegment"
+        android:name="com.example.wdsportz.SettingsSegment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" /><action android:id="@+id/action_global_frag_About" app:destination="@id/frag_About"/><action android:id="@+id/action_global_frag_Profile" app:destination="@id/frag_Profile"/><action android:id="@+id/action_global_Explore" app:destination="@id/Explore"/><action android:id="@+id/action_global_LiveGuide" app:destination="@id/LiveGuide"/><action android:id="@+id/action_global_settingsSegment" app:destination="@id/settingsSegment"/><action android:id="@+id/action_global_Notifications" app:destination="@id/Notifications"/>
+    <fragment
+        android:id="@+id/frag_videoplay"
+        android:name="com.example.wdsportz.Frag_videoplay"
+        android:label="fragment_frag_videoplay"
+        tools:layout="@layout/fragment_frag_videoplay" >
+        <argument
+            android:name="videolink"
+            app:argType="string" />
+    </fragment>
+    <action android:id="@+id/action_global_frag_videoplay" app:destination="@id/frag_videoplay" />
 
 
 </navigation>

@@ -3,13 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SideNav.Frag_Profile">
+    tools:context=".SideNav.Frag_LiveGuide">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/profile"
-        android:textSize="36sp" />
+        android:text="@string/LiveGuide"
+        android:textSize="30sp"/>
 
 </FrameLayout>

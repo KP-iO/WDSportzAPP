@@ -6,18 +6,23 @@
     <group android:checkableBehavior="single"
         android:id="@+id/group1">
         <item
-            android:id="@+id/Frag_Profile"
+            android:id="@+id/frag_Profile"
             android:icon="@drawable/blank_blank_man_profile_picturre"
             android:title="@string/profile" />
         <item
-            android:id="@+id/Frag_Saved"
+            android:id="@+id/Explore"
             android:icon="@drawable/saved"
-            android:title="@string/saved" />
+            android:title="@string/explore" />
 
         <item
-            android:id="@+id/Trending"
+            android:id="@+id/LiveGuide"
             android:icon="@drawable/_likes__flames"
-            android:title="Trending" />
+            android:title="@string/LiveGuide" />
+
+        <item
+            android:id="@+id/Notifications"
+            android:icon="@drawable/_likes__flames"
+            android:title="@string/notifications" />
 
     </group>
 
@@ -25,12 +30,12 @@
     <group android:checkableBehavior="single"
         android:id="@+id/group2">
         <item
-            android:id="@+id/SignOut"
+            android:id="@+id/settingsSegment"
             android:icon="@drawable/saved"
-            android:title="Signout" />
+            android:title="@string/settings" />
 
         <item
-            android:id="@+id/About"
+            android:id="@+id/frag_About"
             android:icon="@mipmap/information1"
             android:title="About" />
     </group>
