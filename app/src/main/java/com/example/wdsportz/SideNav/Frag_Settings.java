@@ -1,9 +1,9 @@
 package com.example.wdsportz.SideNav;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +11,8 @@ import android.widget.Button;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
 
-import com.example.wdsportz.MainActivities.Auth_Activity;
 import com.example.wdsportz.R;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -34,6 +34,8 @@ public class Frag_Settings extends Fragment {
     private String mParam1;
     private String mParam2;
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    NavController navController;
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -77,18 +79,22 @@ public class Frag_Settings extends Fragment {
 
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState){
 
-        Button _signout = view.findViewById(R.id.sign_out1);
+
+       Button _signout = getView().findViewById(R.id.button2);
 
         _signout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(view.getContext(), Auth_Activity.class));
+                Log.d("Sign", "Signout pressed");
+                firebaseAuth.getInstance().signOut();
+                navController.navigate(R.id.action_global_frag_login3);
             }
         });
 
 
     }
+
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {

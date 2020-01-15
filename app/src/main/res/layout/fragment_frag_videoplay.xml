@@ -74,7 +74,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/match_title" />
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chat_box"
         android:layout_width="405dp"
         android:layout_height="191dp"

@@ -137,7 +137,7 @@ public class Frag_Watch extends Fragment {
                                 Log.d(TAG, "DOCUMENT PRINT :" + document.getData().toString());
                                 Log.d(TAG, "Team Added to List " + document.get("Match_Name").toString());
 
-                                list.add(new WatchViewModel(document.get("Match_Name").toString(), document.get("Match_Image").toString(), document.get("Match_Video").toString()));
+                                list.add(new WatchViewModel(document.get("Match_Name").toString(), document.get("Match_Image").toString(), document.get("Match_Video").toString(),document.get("Chatbox_ID").toString()));
 
                                 //Log.d(TAG, ("LOGO URL: " + list.));
 
@@ -183,7 +183,7 @@ public class Frag_Watch extends Fragment {
                                 Log.d(TAG, "DOCUMENT PRINT :" + document.getData().toString());
                                 Log.d(TAG, "Team Added to List " + document.get("Match_Name").toString());
 
-                                list.add(new WatchViewModel(document.get("Match_Name").toString(), document.get("Match_Image").toString(), document.get("Match_Video").toString()));
+                                list.add(new WatchViewModel(document.get("Match_Name").toString(), document.get("Match_Image").toString(), document.get("Match_Video").toString(), document.get("Chatbox_ID").toString()));
 
                                 //Log.d(TAG, ("LOGO URL: " + list.));
 
@@ -199,6 +199,7 @@ public class Frag_Watch extends Fragment {
                                 Log.d(TAG, (" Team Name = " + list.get(i).getTitle()));
                                 Log.d(TAG, "List Url test   " + list.get(i).getVideoimageURL());
                                 Log.d(TAG, "Video Url test   " + list.get(i).getVideoURL());
+                                Log.d(TAG, "Video Url test   " + list.get(i).getChatBox_ID());
                             }
 
                         } else {

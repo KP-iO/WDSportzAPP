@@ -58,6 +58,7 @@ public class WatchViewAdapter extends RecyclerView.Adapter<WatchViewAdapter.MyVi
         holder.title.setText(videoViewModels.get(position).getTitle());
         String currentUrl = videoViewModels.get(position).getVideoimageURL();
         final String Video1 = (videoViewModels.get(position).getVideoURL());
+        final String chat_ID = (videoViewModels.get(position).getChatBox_ID());
 
         Glide.with(context)
                 .load(currentUrl)
@@ -69,7 +70,7 @@ public class WatchViewAdapter extends RecyclerView.Adapter<WatchViewAdapter.MyVi
                 // used to bundle strings and enable it to be collected
                 Bundle bundle = new Bundle();
                 bundle.putString("amount", Video1);
-                bundle.putString("title", "Movie");
+                bundle.putString("title", chat_ID);
                 Navigation.findNavController(v).navigate(R.id.action_global_frag_videoplay, bundle);
                 for (String key: bundle.keySet())
                 {

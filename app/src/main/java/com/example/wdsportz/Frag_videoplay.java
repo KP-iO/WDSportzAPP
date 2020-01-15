@@ -17,14 +17,23 @@ import android.widget.VideoView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.wdsportz.Adapters.CommentAdapter;
 import com.example.wdsportz.ViewModels.Comments;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -54,6 +63,10 @@ public class Frag_videoplay extends Fragment {
     private MediaController mediaController;
     private Uri uri;
     String postKey;
+    RecyclerView RvComment;
+    CommentAdapter commentAdapter;
+    List<Comments> listComments;
+    static String COMMENT_KEY = "Comment";
 
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
@@ -109,9 +122,9 @@ public class Frag_videoplay extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
         final Context context = view.getContext();
 
+        RvComment = getView().findViewById(R.id.chat_box);
         textView = getView().findViewById(R.id.match_title);
         textView2 = getView().findViewById(R.id.date);
-        textView3 = getView().findViewById(R.id.chat_box);
         imageView = getView().findViewById(R.id.avatar);
         editText = getView().findViewById(R.id.edit_box);
         button = getView().findViewById(R.id.add);
@@ -126,7 +139,7 @@ public class Frag_videoplay extends Fragment {
             public void onClick(View view) {
 
                 button.setVisibility(View.INVISIBLE);
-                DatabaseReference commentReference =firebaseDatabase.getReference("Comment").child(getPostKey()).push();
+                DatabaseReference commentReference =firebaseDatabase.getReference(COMMENT_KEY).child(getPostKey()).push();
                 String comment_content = editText.getText().toString();
                 String uid = firebaseUser.getUid();
                 String uname = firebaseUser.getDisplayName();
@@ -176,10 +189,43 @@ public class Frag_videoplay extends Fragment {
 
 
 
-
+        iniRvComment();
 
 
         setVideoView(context);
+
+
+
+    }
+
+    private void iniRvComment() {
+
+        RvComment.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        String postKey1 = getArguments().getString("title");
+        DatabaseReference commentRef = firebaseDatabase.getReference(COMMENT_KEY).child(postKey1);
+
+
+        commentRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                listComments = new ArrayList<>();
+                for (DataSnapshot snap:dataSnapshot.getChildren()){
+
+                    Comments comments = snap.getValue(Comments.class);
+                    listComments.add(comments);
+                }
+
+                commentAdapter = new CommentAdapter(getContext(),listComments);
+                RvComment.setAdapter(commentAdapter);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
 
 

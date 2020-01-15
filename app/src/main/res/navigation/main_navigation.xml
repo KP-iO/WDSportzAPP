@@ -56,11 +56,8 @@
         android:name="com.example.wdsportz.SideNav.Frag_Notifications"
         android:label="fragment_frag_notifications"
         tools:layout="@layout/fragment_frag_notifications" />
-    <fragment
-        android:id="@+id/settingsSegment"
-        android:name="com.example.wdsportz.SettingsSegment"
-        android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" /><action android:id="@+id/action_global_frag_About" app:destination="@id/frag_About"/><action android:id="@+id/action_global_frag_Profile" app:destination="@id/frag_Profile"/><action android:id="@+id/action_global_Explore" app:destination="@id/Explore"/><action android:id="@+id/action_global_LiveGuide" app:destination="@id/LiveGuide"/><action android:id="@+id/action_global_settingsSegment" app:destination="@id/settingsSegment"/><action android:id="@+id/action_global_Notifications" app:destination="@id/Notifications"/>
+    <action android:id="@+id/action_global_frag_About" app:destination="@id/frag_About"/><action android:id="@+id/action_global_frag_Profile" app:destination="@id/frag_Profile"/><action android:id="@+id/action_global_Explore" app:destination="@id/Explore"/><action android:id="@+id/action_global_LiveGuide" app:destination="@id/LiveGuide"/>
+    <action android:id="@+id/action_global_Notifications" app:destination="@id/Notifications"/>
     <fragment
         android:id="@+id/frag_videoplay"
         android:name="com.example.wdsportz.Frag_videoplay"
@@ -71,6 +68,17 @@
             app:argType="string" />
     </fragment>
     <action android:id="@+id/action_global_frag_videoplay" app:destination="@id/frag_videoplay" />
+    <fragment
+        android:id="@+id/frag_Settings"
+        android:name="com.example.wdsportz.SideNav.Frag_Settings"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+    <action android:id="@+id/action_global_frag_Settings" app:destination="@id/frag_Settings" />
+    <fragment
+        android:id="@+id/frag_login3"
+        android:name="com.example.wdsportz.MainFragments.frag_login"
+        android:label="fragment_loginpage"
+        tools:layout="@layout/fragment_loginpage" /><action android:id="@+id/action_global_frag_login3" app:destination="@id/frag_login3"/>
 
 
 </navigation>

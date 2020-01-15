@@ -36,5 +36,5 @@
     </fragment>
     <action
         android:id="@+id/globalAction_Register"
-        app:destination="@id/frag_Register" />
+        app:destination="@id/frag_Register" /><action android:id="@+id/action_global_frag_login" app:destination="@id/frag_login"/>
 </navigation>

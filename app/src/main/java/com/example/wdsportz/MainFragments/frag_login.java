@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.example.wdsportz.R;
+import com.example.wdsportz.ViewModels.LoginViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -42,6 +43,7 @@ public class frag_login extends Fragment {
 
     private OnFragmentInteractionListener mListener;
     public FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    private LoginViewModel viewModel;
 
     public frag_login() {
         // Required empty public constructor
@@ -82,6 +84,10 @@ public class frag_login extends Fragment {
     }
 
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+
+
         final TextView txtUsername = view.findViewById(R.id.username);
         final TextView txtPassword = view.findViewById(R.id.password);
         Button btnSignUp = view.findViewById(R.id.signUp);
@@ -89,6 +95,7 @@ public class frag_login extends Fragment {
 
         signIn.setOnClickListener(new OnClickListener(){
             public void onClick(final View view) {
+//                viewModel.authenticate();
                 firebaseAuth.signInWithEmailAndPassword(txtUsername.getText().toString(), txtPassword.getText().toString())   // Code used to authenticate user
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>(){
                             @Override
@@ -116,7 +123,7 @@ public class frag_login extends Fragment {
 
 
         Button button = view.findViewById(R.id.Btn_Test);
-        button.setOnClickListener(new View.OnClickListener() {
+        button.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 Navigation.findNavController(v).navigate(R.id.action_global_frag_IniTeamSelection);

@@ -124,7 +124,7 @@ public class Main_Activity extends AppCompatActivity implements NavigationView.O
                 break;
 
             case R.id.settingsSegment:
-                navController.navigate(R.id.action_global_settingsSegment);
+                navController.navigate(R.id.action_global_frag_Settings);
                 break;
             case R.id.frag_About:
                 navController.navigate(R.id.action_global_frag_About);
