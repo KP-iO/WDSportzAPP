@@ -6,13 +6,13 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.wdsportz.MainFragments.Frag_iniTeamSelect;
 import com.example.wdsportz.MainFragments.Frag_HomePage;
-import com.example.wdsportz.MainFragments.Frag_IniTeamSelection;
 import com.example.wdsportz.MainFragments.frag_Register;
 import com.example.wdsportz.MainFragments.frag_login;
 import com.example.wdsportz.R;
 
-public class Auth_Activity extends AppCompatActivity implements Frag_IniTeamSelection.OnFragmentInteractionListener,Frag_HomePage.OnFragmentInteractionListener, frag_login.OnFragmentInteractionListener, frag_Register.OnFragmentInteractionListener  {
+public class Auth_Activity extends AppCompatActivity implements Frag_iniTeamSelect.OnFragmentInteractionListener,Frag_HomePage.OnFragmentInteractionListener, frag_login.OnFragmentInteractionListener, frag_Register.OnFragmentInteractionListener  {
 
 
     @Override
