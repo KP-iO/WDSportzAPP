@@ -10,12 +10,7 @@
         android:id="@+id/frag_IniTeamSelection"
         android:name="com.example.wdsportz.MainFragments.Frag_IniTeamSelection"
         android:label="fragment_ini_team_selection"
-        tools:layout="@layout/fragment_ini_team_selection" >
-        <action
-            android:id="@+id/action_frag_IniTeamSelection_to_mobile_navigation1"
-            app:destination="@+id/mobile_navigation1"
-            app:enterAnim="@anim/fade_in" />
-    </fragment>
+        tools:layout="@layout/fragment_ini_team_selection" />
     <fragment
         android:id="@+id/frag_login"
         android:name="com.example.wdsportz.MainFragments.frag_login"
@@ -37,4 +32,14 @@
     <action
         android:id="@+id/globalAction_Register"
         app:destination="@id/frag_Register" /><action android:id="@+id/action_global_frag_login" app:destination="@id/frag_login"/>
+    <fragment
+        android:id="@+id/settingsSegment2"
+        android:name="com.example.wdsportz.SettingsSegment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsSegment2_to_frag_login"
+            app:destination="@id/frag_login" />
+    </fragment>
+    <action android:id="@+id/action_global_settingsSegment2" app:destination="@id/settingsSegment2" />
 </navigation>

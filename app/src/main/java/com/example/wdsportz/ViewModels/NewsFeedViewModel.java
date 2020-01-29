@@ -4,6 +4,7 @@ public class NewsFeedViewModel {
     String title;
     String newsImageURL;
     String newsDesc;
+    String date;
 
 
 
@@ -11,10 +12,11 @@ public class NewsFeedViewModel {
 
     }
 
-    public NewsFeedViewModel(String title, String newsImageURL, String newsDesc) {
+    public NewsFeedViewModel(String title, String newsImageURL, String newsDesc, String date) {
         this.title = title;
         this.newsImageURL = newsImageURL;
         this.newsDesc = newsDesc;
+        this.date = date;
     }
 
 
@@ -25,6 +27,12 @@ public class NewsFeedViewModel {
     }
 
     public void setNewsDesc(String newsDesc) {this.newsDesc = newsDesc; }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {this.date = date; }
 
 
 

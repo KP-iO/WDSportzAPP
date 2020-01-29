@@ -47,6 +47,7 @@
     <string name="explore">Explore</string>
     <string name="notifications">Notifications</string>
     <string name="sign_out">Sign Out</string>
+    <string name="invalid_credentials">Invalid Login</string>
 
 
 </resources>

@@ -1,20 +1,28 @@
 package com.example.wdsportz.SideNav;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.wdsportz.MainActivities.Auth_Activity;
+import com.bumptech.glide.Glide;
 import com.example.wdsportz.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,6 +42,13 @@ public class Frag_Profile extends Fragment {
     private String mParam1;
     private String mParam2;
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    DatabaseReference databaseReference;
+
+    //views
+    ImageView avatarIv;
+    TextView nameTv, emailTv, phoneTv;
 
     private OnFragmentInteractionListener mListener;
 
@@ -72,19 +87,61 @@ public class Frag_Profile extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        final View view =  inflater.inflate(R.layout.fragment_profile, container, false);
+
+        databaseReference = firebaseDatabase.getReference("Users");
+
+
+        avatarIv = view.findViewById(R.id.avatarIv);
+        nameTv = view.findViewById(R.id.nameTv);
+        emailTv = view.findViewById(R.id.emailTv);
+        phoneTv = view.findViewById(R.id.phoneTv);
+
+        Query query = databaseReference.orderByChild("email").equalTo(user.getEmail());
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for(DataSnapshot ds: dataSnapshot.getChildren()){
+                    //get data
+
+                    String name = "" + ds.child("name").getValue();
+                    String email = "" + ds.child("email").getValue();
+                    String phone = "" + ds.child("phone").getValue();
+                    String image = "" + ds.child("image").getValue();
+
+                    //set data
+                    nameTv.setText(name);
+                    emailTv.setText(email);
+                    phoneTv.setText(phone);
+                    try {
+                        Glide.with(view)
+                                .load(image)
+                                .into(avatarIv);
+                    }
+                    catch (Exception e){
+                        Glide.with(view)
+                                .load(R.drawable.ic_add_image)
+                                .into(avatarIv);
+
+                    }
+
+
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        return view;
     }
 
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState){
-        Button _signout = view.findViewById(R.id.signUp);
 
-        _signout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(view.getContext(), Auth_Activity.class));
-            }
-        });
 
 
     }

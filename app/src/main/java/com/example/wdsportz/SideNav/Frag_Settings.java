@@ -1,6 +1,7 @@
 package com.example.wdsportz.SideNav;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 
+import com.example.wdsportz.MainActivities.Auth_Activity;
 import com.example.wdsportz.R;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -35,6 +37,8 @@ public class Frag_Settings extends Fragment {
     private String mParam2;
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     NavController navController;
+
+
 
 
     private OnFragmentInteractionListener mListener;
@@ -80,6 +84,9 @@ public class Frag_Settings extends Fragment {
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState){
 
 
+
+
+
        Button _signout = getView().findViewById(R.id.button2);
 
         _signout.setOnClickListener(new View.OnClickListener() {
@@ -87,13 +94,19 @@ public class Frag_Settings extends Fragment {
             public void onClick(View view) {
                 Log.d("Sign", "Signout pressed");
                 firebaseAuth.getInstance().signOut();
-                navController.navigate(R.id.action_global_frag_login3);
+                goToLogIn();
             }
         });
 
 
     }
-
+    public void goToLogIn() {
+        Intent intent = new Intent(getContext(), Auth_Activity.class);
+        //EditText editText = (EditText) findViewById(R.id.editText);
+        //String message = editText.getText().toString();
+        //intent.putExtra(EXTRA_MESSAGE, message);
+        startActivity(intent);
+    }
 
 
     // TODO: Rename method, update argument and hook method into UI event

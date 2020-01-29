@@ -72,13 +72,22 @@
         android:id="@+id/frag_Settings"
         android:name="com.example.wdsportz.SideNav.Frag_Settings"
         android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_frag_Settings_to_frag_login3"
+            app:destination="@id/frag_login3" />
+    </fragment>
     <action android:id="@+id/action_global_frag_Settings" app:destination="@id/frag_Settings" />
     <fragment
         android:id="@+id/frag_login3"
         android:name="com.example.wdsportz.MainFragments.frag_login"
         android:label="fragment_loginpage"
         tools:layout="@layout/fragment_loginpage" /><action android:id="@+id/action_global_frag_login3" app:destination="@id/frag_login3"/>
+    <fragment
+        android:id="@+id/newsDetail"
+        android:name="com.example.wdsportz.newsDetail"
+        android:label="fragment_news_detail"
+        tools:layout="@layout/fragment_news_detail" /><action android:id="@+id/action_global_newsDetail" app:destination="@id/newsDetail"/>
 
 
 </navigation>

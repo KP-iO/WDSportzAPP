@@ -3,9 +3,9 @@ package com.example.wdsportz.MainFragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
@@ -14,6 +14,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 
 import com.example.wdsportz.R;
@@ -40,10 +42,11 @@ public class frag_login extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    private static final String TAG = "MyActivity";
     private OnFragmentInteractionListener mListener;
     public FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private LoginViewModel viewModel;
+
 
     public frag_login() {
         // Required empty public constructor
@@ -85,6 +88,17 @@ public class frag_login extends Fragment {
 
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        viewModel = ViewModelProviders.of(requireActivity()).get(LoginViewModel.class);
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -93,17 +107,23 @@ public class frag_login extends Fragment {
         Button btnSignUp = view.findViewById(R.id.signUp);
         Button signIn = view.findViewById(R.id.btn_signIn);
 
-        signIn.setOnClickListener(new OnClickListener(){
+        signIn.setOnClickListener(new View.OnClickListener(){
             public void onClick(final View view) {
-//                viewModel.authenticate();
+
+
+
+
                 firebaseAuth.signInWithEmailAndPassword(txtUsername.getText().toString(), txtPassword.getText().toString())   // Code used to authenticate user
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>(){
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task){
                                 if(task.isSuccessful()) {
-                                    Navigation.findNavController(view).navigate(R.id.action_global_frag_IniTeamSelection);
-                                }else{
-                                    Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                    viewModel.authenticate(txtUsername.getText().toString(),
+                                            txtPassword.getText().toString());
+//                                    Navigation.findNavController(view).navigate(R.id.action_global_frag_IniTeamSelection);
+                                
+//                                    viewModel.refuseAuthentication();
+//                                    Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
                                 }
 
                             }
@@ -112,7 +132,7 @@ public class frag_login extends Fragment {
 
             }
         });
-        btnSignUp.setOnClickListener(new OnClickListener(){
+        btnSignUp.setOnClickListener(new View.OnClickListener(){
             public void onClick(final View view) {
                 Navigation.findNavController(view).navigate(R.id.globalAction_Register);
 
@@ -123,7 +143,7 @@ public class frag_login extends Fragment {
 
 
         Button button = view.findViewById(R.id.Btn_Test);
-        button.setOnClickListener(new OnClickListener() {
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Navigation.findNavController(v).navigate(R.id.action_global_frag_IniTeamSelection);
@@ -131,6 +151,23 @@ public class frag_login extends Fragment {
 
 
         });
+
+
+        viewModel.authenticationState.observe(getViewLifecycleOwner(),
+                new Observer<LoginViewModel.AuthenticationState>() {
+                    @Override
+                    public void onChanged(LoginViewModel.AuthenticationState authenticationState) {
+                        switch (authenticationState) {
+                            case AUTHENTICATED:
+                                Navigation.findNavController(view).navigate(R.id.action_global_frag_IniTeamSelection);
+                                break;
+                            case INVALID_AUTHENTICATION:
+                                Log.d(TAG, "Wrongggg");
+                                Toast.makeText(getActivity(), "Invalid text", Toast.LENGTH_LONG).show();
+                                break;
+                        }
+                    }
+                });
 
     }
 
