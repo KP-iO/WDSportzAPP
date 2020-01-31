@@ -16,6 +16,7 @@ import androidx.navigation.NavController;
 
 import com.example.wdsportz.MainActivities.Auth_Activity;
 import com.example.wdsportz.R;
+import com.example.wdsportz.utils.PreferenceUtils;
 import com.google.firebase.auth.FirebaseAuth;
 
 /**
@@ -94,6 +95,8 @@ public class Frag_Settings extends Fragment {
             public void onClick(View view) {
                 Log.d("Sign", "Signout pressed");
                 firebaseAuth.getInstance().signOut();
+                PreferenceUtils.saveEmail("", getContext());
+                PreferenceUtils.savePassword("", getContext());
                 goToLogIn();
             }
         });

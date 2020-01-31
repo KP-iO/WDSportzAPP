@@ -20,6 +20,7 @@ import androidx.navigation.Navigation;
 
 import com.example.wdsportz.R;
 import com.example.wdsportz.ViewModels.LoginViewModel;
+import com.example.wdsportz.utils.PreferenceUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -77,17 +78,33 @@ public class frag_login extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_loginpage, container, false);
+
+
     }
 
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
+        if (PreferenceUtils.getEmail(getContext()) != null && !PreferenceUtils.getEmail(getContext()).equals("")) {
+            Navigation.findNavController(view).navigate(R.id.action_global_frag_IniTeamSelection);
+        }else {
+
+        }
+
+
+
         viewModel = ViewModelProviders.of(requireActivity()).get(LoginViewModel.class);
 
 
@@ -109,17 +126,21 @@ public class frag_login extends Fragment {
 
         signIn.setOnClickListener(new View.OnClickListener(){
             public void onClick(final View view) {
+                final String email = txtUsername.getText().toString();
+                final String password = txtPassword.getText().toString();
 
 
 
 
-                firebaseAuth.signInWithEmailAndPassword(txtUsername.getText().toString(), txtPassword.getText().toString())   // Code used to authenticate user
+                firebaseAuth.signInWithEmailAndPassword(email, password )   // Code used to authenticate user
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>(){
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task){
                                 if(task.isSuccessful()) {
-                                    viewModel.authenticate(txtUsername.getText().toString(),
-                                            txtPassword.getText().toString());
+                                    viewModel.authenticate(email,
+                                            password);
+                                    PreferenceUtils.saveEmail(email, getContext());
+                                    PreferenceUtils.savePassword(password, getContext());
 //                                    Navigation.findNavController(view).navigate(R.id.action_global_frag_IniTeamSelection);
                                 
 //                                    viewModel.refuseAuthentication();
