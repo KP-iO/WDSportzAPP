@@ -57,7 +57,7 @@
         android:paddingTop="10dp"
         android:paddingRight="3dp"
         android:paddingBottom="10dp"
-        android:text="@string/username" />
+        android:hint="@string/username" />
 
     <EditText
         android:id="@+id/password"
@@ -71,12 +71,13 @@
         android:autofillHints=""
         android:background="#FFEB3B"
         android:ems="10"
-        android:inputType="textEmailAddress"
+        android:hint="@string/password1"
+        android:inputType="textPassword"
         android:paddingLeft="3dp"
         android:paddingTop="10dp"
         android:paddingRight="3dp"
-        android:paddingBottom="10dp"
-        android:text="@string/password1" />
+        android:paddingBottom="10dp"/>
+<!--        android:text="@string/password1" />-->
 
     <Button
         android:id="@+id/btn_signIn"

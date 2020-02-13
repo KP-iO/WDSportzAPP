@@ -116,7 +116,7 @@ public class Frag_HomePage extends Fragment {
 
 
     private void newsFeed(final Context context) {
-        Task<QuerySnapshot> docRef = fireStoreDB.collection("fl_content")
+        Task<QuerySnapshot> docRef = fireStoreDB.collection("news_id")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
 
@@ -133,9 +133,9 @@ public class Frag_HomePage extends Fragment {
 
 
                                 Log.d(TAG, "DOCUMENT PRINT :" + document.getData().toString());
-                                Log.d(TAG, "Team Added to List " + document.get("title").toString());
+                                Log.d(TAG, "Team Added to List " + document.get("Title").toString());
 
-                                list.add(new NewsFeedViewModel(document.get("title").toString(), document.get("newsImage").toString(), document.get("description").toString()));
+                                list.add(new NewsFeedViewModel(document.get("Title").toString(), document.get("Image").toString(), document.get("Description").toString(),document.get("Date").toString()));
 
                                 //Log.d(TAG, ("LOGO URL: " + list.));
 

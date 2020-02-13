@@ -24,6 +24,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,6 +49,7 @@ public class frag_Register extends Fragment {
     private String mParam2;
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private OnFragmentInteractionListener mListener;
+
 
     public frag_Register() {
         // Required empty public constructor
@@ -102,6 +108,26 @@ public class frag_Register extends Fragment {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 //progressBar.setVisibility(View.GONE);
                                 if (task.isSuccessful()) {
+                                    FirebaseUser user1 = FirebaseAuth.getInstance().getCurrentUser();
+                                    String email = user1.getEmail();
+                                    String uid = user1.getUid();
+
+                                    HashMap<Object, String> hashMap = new HashMap<>();
+
+                                    hashMap.put("email", email);
+                                    hashMap.put("uid", uid);
+                                    hashMap.put("name", "");
+                                    hashMap.put("phone", "");
+                                    hashMap.put("image", "");
+                                    // firebase datatabase instance
+                                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                    //path to store data named "Users"
+                                    DatabaseReference reference = database.getReference("Users");
+                                    //put data within hashmap in database
+                                    reference.child(uid).setValue(hashMap);
+
+
+
                                     Toast.makeText(getActivity(), "Registered successfully", Toast.LENGTH_SHORT).show();
                                     _txtemail.setText("");
                                     _txtpass.setText("");

@@ -1,7 +1,7 @@
 package com.example.wdsportz.Adapters;
 
 import android.content.Context;
-import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,10 +11,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.wdsportz.NewsDetail;
 import com.example.wdsportz.R;
 import com.example.wdsportz.ViewModels.NewsFeedViewModel;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -63,6 +63,8 @@ public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.MyView
         holder.title.setText(newsFeedViewModels.get(position).getTitle());
         holder.description.setText(newsFeedViewModels.get(position).getNewsDesc());
         final String currentUrl = newsFeedViewModels.get(position).getNewsImageURL();
+        String date1 = newsFeedViewModels.get(position).getDate();
+
 
         final String description1 = newsFeedViewModels.get(position).getNewsDesc();
         final String title1 = newsFeedViewModels.get(position).getTitle();
@@ -77,14 +79,19 @@ public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.MyView
         holder.newsTile.setOnClickListener(new View.OnClickListener() {
                                                @Override
                                                public void onClick(View v) {
-                                                   Intent i = new Intent(v.getContext(), NewsDetail.class);
-                                                   i.putExtra("Description", description1);
-                                                   i.putExtra("Title", title1);
-                                                   i.putExtra("Image", currentUrl);
-                                                   v.getContext().startActivity(i);
-                                                   
+                                                   Bundle bundle = new Bundle();
+                                                   bundle.putString("image",currentUrl);
+                                                   bundle.putString("desc", description1);
+                                                   bundle.putString("title", title1);
+                                                   Navigation.findNavController(v).navigate(R.id.action_global_newsDetail, bundle);
+                                                   for (String key: bundle.keySet())
+                                                   {
+                                                       Log.d ("myApplication", key + " is a key in the bundle");
+                                                   }
                                                }
-                                           });
+                                                   
+                                               });
+
 //        holder.newsTile.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {

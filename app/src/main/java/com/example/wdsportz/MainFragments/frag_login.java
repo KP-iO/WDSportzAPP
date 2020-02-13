@@ -86,6 +86,8 @@ public class frag_login extends Fragment {
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
+
         final TextView txtUsername = view.findViewById(R.id.username);
         final TextView txtPassword = view.findViewById(R.id.password);
         Button btnSignUp = view.findViewById(R.id.signUp);
@@ -118,20 +120,13 @@ public class frag_login extends Fragment {
         });
 
 
+
+
         Button button = view.findViewById(R.id.Btn_Test);
         button.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TEST BUTTON (bypass creditianls) ----
-
-
-                TextView txtusername1 = view.findViewById(R.id.username);
-                TextView txtpassword1 =  view.findViewById(R.id.password);
-
-                txtusername1.setText("oreyusuf0@gmail.com");
-                txtpassword1.setText("password1");
-
-
+                Navigation.findNavController(v).navigate(R.id.action_global_frag_IniTeamSelection);
             }
 
 
