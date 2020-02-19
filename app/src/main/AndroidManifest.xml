@@ -12,19 +12,30 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme1">
+
         <activity
             android:name=".MainActivities.Auth_Activity"
             android:label="@string/title_activity_auth__main"
             android:theme="@style/AppTheme1.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivities.Auth_Activity" />
+                android:value=".MainActivities.Auth_Activity"
+                />
+            <meta-data android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".MainActivities.SearchResultsActivity" >
+        <intent-filter>
+            <action android:name="android.intent.action.SEARCH" />
+        </intent-filter>
+    </activity>
+
         <activity
             android:name=".MainFragments.Frag_Watch"
             android:theme="@style/AppTheme1">

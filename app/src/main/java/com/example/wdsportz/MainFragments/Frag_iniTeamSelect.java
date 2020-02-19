@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -81,6 +82,9 @@ public class Frag_iniTeamSelect extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        ((AppCompatActivity)getActivity()).findViewById(R.id.my_toolbar).setVisibility(View.VISIBLE);
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_initeamselection, container, false);
     }
