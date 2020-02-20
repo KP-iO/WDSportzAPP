@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.wdsportz.R;
 import com.example.wdsportz.ViewModels.SelectTeamsRecyclerViewModel;
 
@@ -35,7 +36,7 @@ public class SelectTeamsRecyclerViewAdapter extends RecyclerView.Adapter<SelectT
     @Override
     @NonNull
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.selectteam_recyclerviewitem, parent, false);
+        View view = mInflater.inflate(R.layout.ini_team_selection_item, parent, false);
         return new ViewHolder(view);
     }
 
@@ -46,6 +47,7 @@ public class SelectTeamsRecyclerViewAdapter extends RecyclerView.Adapter<SelectT
         String currentUrl = mData.get(position).teamLogoURl;
         Glide.with(context)
                 .load(currentUrl)
+                .apply(new RequestOptions().override(100, 200))
                 .into(holder.myImageView);
 
     }

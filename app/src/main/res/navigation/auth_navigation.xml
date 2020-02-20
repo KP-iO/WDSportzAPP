@@ -7,18 +7,13 @@
     app:startDestination="@id/frag_login">
     <include app:graph="@navigation/main_navigation" />
     <fragment
-        android:id="@+id/frag_IniTeamSelection"
-        android:name="com.example.wdsportz.MainFragments.Frag_IniTeamSelection"
-        android:label="fragment_ini_team_selection"
-        tools:layout="@layout/fragment_ini_team_selection" />
-    <fragment
         android:id="@+id/frag_login"
         android:name="com.example.wdsportz.MainFragments.frag_login"
         android:label="fragment_loginpage"
         tools:layout="@layout/fragment_loginpage" >
         <action
             android:id="@+id/action_frag_login_to_mobile_navigation1"
-            app:destination="@id/mobile_navigation1" />
+            app:destination="@id/main_navigation" />
     </fragment><action android:id="@+id/action_global_frag_IniTeamSelection" app:destination="@id/frag_IniTeamSelection"/>
     <fragment
         android:id="@+id/frag_Register"
@@ -32,14 +27,18 @@
     <action
         android:id="@+id/globalAction_Register"
         app:destination="@id/frag_Register" /><action android:id="@+id/action_global_frag_login" app:destination="@id/frag_login"/>
+
     <fragment
-        android:id="@+id/settingsSegment2"
-        android:name="com.example.wdsportz.SettingsSegment"
-        android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" >
+        android:id="@+id/frag_IniTeamSelection"
+        android:name="com.example.wdsportz.MainFragments.Frag_iniTeamSelect"
+        android:label="fragment_collection_demo"
+        tools:layout="@layout/fragment_initeamselection" >
         <action
-            android:id="@+id/action_settingsSegment2_to_frag_login"
-            app:destination="@id/frag_login" />
+            android:id="@+id/action_frag_IniTeamSelection_to_main_navigation"
+            app:destination="@id/main_navigation" />
     </fragment>
-    <action android:id="@+id/action_global_settingsSegment2" app:destination="@id/settingsSegment2" />
+    <action
+        android:id="@+id/action_global_collectionDemoFragment"
+        app:destination="@id/frag_IniTeamSelection"
+        app:enterAnim="@anim/fade_in" />
 </navigation>

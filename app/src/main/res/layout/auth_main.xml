@@ -1,20 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/linearLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ConstraintLayoutMain"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#2FD30A"
+        android:visibility="visible"
+        app:title="  ">
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingRight="20dp"
+            android:text="Select Your Favourite teams"
+            android:textColor="#FAF8F8"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:titleTextColor="#F7F3F3" />
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+
 
     <fragment
         android:id="@+id/auth_main"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:foreground="@color/colorBlack"
         android:foregroundTint="#000E0808"
         android:visibility="visible"
         app:defaultNavHost="true"
         app:navGraph="@navigation/auth_navigation" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

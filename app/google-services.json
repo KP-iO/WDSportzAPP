@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "999253176460-vhc88lpidrkj3tirr7ssllrf11jb84b9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.wdsportz",
+            "certificate_hash": "62ca194f0ad18f051bebf0939dd239715cbbd440"
+          }
+        },
+        {
+          "client_id": "999253176460-ks2i44ns6spdehlcmjq8h0idmv7dvemn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.wdsportz",
+            "certificate_hash": "35f0b0d659c705a751c94781c858acde37d295a2"
+          }
+        },
+        {
           "client_id": "999253176460-ek8q4srv9bp1m4b51dn7f5ojf74u5umc.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -29,7 +45,7 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBx6PvlYdXvezoCVx3XvxTmjhJ8nvt1Jwk"
+          "current_key": "AIzaSyBtTX6G1qLDqXLQ7BAFpsumXox17mMF0CE"
         }
       ],
       "services": {
