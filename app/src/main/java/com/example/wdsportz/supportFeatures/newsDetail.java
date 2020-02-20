@@ -1,4 +1,4 @@
-package com.example.wdsportz;
+package com.example.wdsportz.supportFeatures;
 
 import android.content.Context;
 import android.net.Uri;
@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
+import com.example.wdsportz.R;
 
 
 /**

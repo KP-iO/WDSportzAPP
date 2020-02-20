@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.wdsportz.R;
-import com.example.wdsportz.ViewModels.WatchViewModel;
+import com.example.wdsportz.ViewModels.LeagueViewModel;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
@@ -26,23 +26,23 @@ import static android.view.LayoutInflater.from;
 /**
  * Created by khrishawn
  */
-public class WatchViewAdapter extends RecyclerView.Adapter<WatchViewAdapter.MyViewHolder> {
-    private List<WatchViewModel> videoViewModels;
+public class LeagueAdapter extends RecyclerView.Adapter<LeagueAdapter.MyViewHolder> {
+    private List<LeagueViewModel> leagueViewModels;
     private LayoutInflater lInflater;
     private ItemClickListener lClickListener;
     private Context context;
     public NavController navController;
 
-    public WatchViewAdapter(Context context, List<WatchViewModel> list) {
+    public LeagueAdapter(Context context, List<LeagueViewModel> list) {
         this.lInflater = LayoutInflater.from(context);
-        this.videoViewModels = list;
+        this.leagueViewModels = list;
         this.context = context;
     }
 
 
 
 
-//    public WatchViewAdapter(Context context, List<VideoViewModel> videoViewModels) {
+//    public WatchViewAdapter(Context context, List<VideoViewModel> leagueViewModels) {
 //
 //    }
 
@@ -55,11 +55,10 @@ public class WatchViewAdapter extends RecyclerView.Adapter<WatchViewAdapter.MyVi
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, int position) {
-        holder.title.setText(videoViewModels.get(position).getTitle());
-        String currentUrl = videoViewModels.get(position).getVideoimageURL();
-        final String Video1 = (videoViewModels.get(position).getVideoURL());
-        final String chat_ID = (videoViewModels.get(position).getChatBox_ID());
-        final String title = (videoViewModels.get(position).getTitle());
+        holder.title.setText(leagueViewModels.get(position).getLeagueTitle());
+        String currentUrl = leagueViewModels.get(position).getLeagueImageURL();
+        final String leagueURL = (leagueViewModels.get(position).getLeagueURL());
+        final String title = (leagueViewModels.get(position).getLeagueTitle());
 
         Glide.with(context)
                 .load(currentUrl)
@@ -71,9 +70,8 @@ public class WatchViewAdapter extends RecyclerView.Adapter<WatchViewAdapter.MyVi
                 // used to bundle strings and enable it to be collected
                 Bundle bundle = new Bundle();
                 bundle.putString("title01", title);
-                bundle.putString("amount", Video1);
-                bundle.putString("title", chat_ID);
-                Navigation.findNavController(v).navigate(R.id.action_global_frag_videoplay, bundle);
+                bundle.putString("URL", leagueURL);
+                Navigation.findNavController(v).navigate(R.id.action_global_scores, bundle);
                 for (String key: bundle.keySet())
                 {
                     Log.d ("myApplication", key + " is a key in the bundle");
@@ -87,7 +85,7 @@ public class WatchViewAdapter extends RecyclerView.Adapter<WatchViewAdapter.MyVi
     @Override
     public int getItemCount() {
 
-        return videoViewModels.size();
+        return leagueViewModels.size();
 
     }
 
@@ -144,7 +142,7 @@ public class WatchViewAdapter extends RecyclerView.Adapter<WatchViewAdapter.MyVi
     }
 public String getItem(int id) {
 
-        return videoViewModels.get(id).getTitle();
+        return leagueViewModels.get(id).getLeagueTitle();
     }
 
     public interface ItemClickListener {

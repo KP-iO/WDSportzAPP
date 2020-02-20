@@ -1,11 +1,14 @@
-package com.example.wdsportz;
+package com.example.wdsportz.supportFeatures;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -20,7 +23,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.wdsportz.Adapters.CommentAdapter;
+import com.example.wdsportz.R;
 import com.example.wdsportz.ViewModels.Comments;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -70,6 +75,8 @@ public class Frag_videoplay extends Fragment {
 
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
+    DatabaseReference databaseReference;
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
 
     FirebaseDatabase firebaseDatabase;
@@ -109,6 +116,7 @@ public class Frag_videoplay extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_frag_videoplay, container, false);
     }
@@ -121,7 +129,7 @@ public class Frag_videoplay extends Fragment {
     }
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
         final Context context = view.getContext();
-
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         RvComment = getView().findViewById(R.id.chat_box);
         textView = getView().findViewById(R.id.match_title);
         textView2 = getView().findViewById(R.id.date);
@@ -134,17 +142,28 @@ public class Frag_videoplay extends Fragment {
         firebaseUser = firebaseAuth.getCurrentUser();
         firebaseDatabase = firebaseDatabase.getInstance();
 
+        String strTitle = getArguments().getString("title01");
+        textView.setText(strTitle);
+
+
+
+
         button.setOnClickListener(new View.OnClickListener() {
+
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
+
 
                 button.setVisibility(View.INVISIBLE);
                 DatabaseReference commentReference =firebaseDatabase.getReference(COMMENT_KEY).child(getPostKey()).push();
                 String comment_content = editText.getText().toString();
                 String uid = firebaseUser.getUid();
                 String uname = firebaseUser.getDisplayName();
-//                String uimg = firebaseUser.getPhotoUrl().toString();
-                Comments comments = new Comments(comment_content,uid,uname);
+                String uimg = firebaseUser.getPhotoUrl().toString();
+                Comments comments = new Comments(comment_content,uid,uname,uimg);
+                Glide.with(view)
+                        .load(uimg)
+                        .into(imageView);
 
                 commentReference.setValue(comments).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -152,6 +171,8 @@ public class Frag_videoplay extends Fragment {
                         showMessage("comment added");
                         editText.setText("");
                         button.setVisibility(View.VISIBLE);
+                        InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
 
 
                     }
@@ -198,8 +219,10 @@ public class Frag_videoplay extends Fragment {
 
     }
 
-    private void iniRvComment() {
 
+
+    private void iniRvComment() {
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         RvComment.setLayoutManager(new LinearLayoutManager(getContext()));
 
         String postKey1 = getArguments().getString("title");
@@ -233,6 +256,7 @@ public class Frag_videoplay extends Fragment {
 
 
     private void   showMessage(String message) {
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         Toast.makeText(getContext(), message,Toast.LENGTH_LONG).show();
     }
 
@@ -254,7 +278,9 @@ public class Frag_videoplay extends Fragment {
         postKey = getArguments().getString("title");
         return postKey;
     }
+    public static void hideKeyboardFrom() {
 
+    }
 
 //
 //    @Override

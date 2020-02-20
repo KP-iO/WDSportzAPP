@@ -3,12 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Livestream">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".LivestreamFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <com.google.android.youtube.player.YouTubePlayerView
-        android:id="@+id/youtube_view"
+
+    <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+        android:id="@+id/youtube_player_view"
         android:layout_width="match_parent"
-        android:layout_height="359dp" />
+        android:layout_height="wrap_content"
+
+        app:useWebUi="true" />
+
 
 </FrameLayout>

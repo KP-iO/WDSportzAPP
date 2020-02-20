@@ -60,7 +60,7 @@
     <action android:id="@+id/action_global_Notifications" app:destination="@id/Notifications"/>
     <fragment
         android:id="@+id/frag_videoplay"
-        android:name="com.example.wdsportz.Frag_videoplay"
+        android:name="com.example.wdsportz.supportFeatures.Frag_videoplay"
         android:label="fragment_frag_videoplay"
         tools:layout="@layout/fragment_frag_videoplay" >
         <argument
@@ -85,9 +85,20 @@
         tools:layout="@layout/fragment_loginpage" /><action android:id="@+id/action_global_frag_login3" app:destination="@id/frag_login3"/>
     <fragment
         android:id="@+id/newsDetail"
-        android:name="com.example.wdsportz.newsDetail"
+        android:name="com.example.wdsportz.supportFeatures.newsDetail"
         android:label="fragment_news_detail"
         tools:layout="@layout/fragment_news_detail" /><action android:id="@+id/action_global_newsDetail" app:destination="@id/newsDetail"/>
+    <fragment
+        android:id="@+id/livestreamFragment"
+        android:name="com.example.wdsportz.LivestreamFragment"
+        android:label="fragment_livestream"
+        tools:layout="@layout/fragment_livestream" />
+    <action android:id="@+id/action_global_livestreamFragment" app:destination="@id/livestreamFragment" />
+    <fragment
+        android:id="@+id/leagueFragment"
+        android:name="com.example.wdsportz.MainFragments.LeagueFragment"
+        android:label="fragment_league"
+        tools:layout="@layout/fragment_league" /><action android:id="@+id/action_global_leagueFragment" app:destination="@id/leagueFragment"/>
 
 
 </navigation>

@@ -44,7 +44,13 @@ public class LoginViewModel extends ViewModel {
     private boolean passwordIsValidForUsername(String username, String password) {
 
       return true;
-
-
 }
+
+    public String getUname() {
+        return username;
+    }
+
+    public void setUname(String uname) {
+        this.username = username;
+    }
 }

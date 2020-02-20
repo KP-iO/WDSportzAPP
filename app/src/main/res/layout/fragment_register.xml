@@ -92,51 +92,6 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Email Address" />
 
-    <TextView
-        android:id="@+id/lblDOB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="412dp"
-        android:fontFamily="sans-serif"
-        android:text="Date of Birth"
-        android:textColor="@android:color/black"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Date Of Birth" />
-
-    <TextView
-        android:id="@+id/LblCountry"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="464dp"
-        android:fontFamily="sans-serif"
-        android:text="Country"
-        android:textColor="@android:color/black"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Country" />
-
-    <TextView
-        android:id="@+id/lblCity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="516dp"
-        android:fontFamily="sans-serif"
-        android:text="City"
-        android:textColor="@android:color/black"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="City" />
-
     <CheckBox
         android:id="@+id/ChkBoxTC"
         android:layout_width="wrap_content"
@@ -185,33 +140,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="400dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/yellow_seperator_line" />
-
-    <ImageView
-        android:id="@+id/line4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="452dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/yellow_seperator_line" />
-
-    <ImageView
-        android:id="@+id/line5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="504dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/yellow_seperator_line" />
-
-    <ImageView
-        android:id="@+id/line6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="556dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/yellow_seperator_line" />
@@ -279,39 +207,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/DOB"
+    <Button
+        android:id="@+id/image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="196dp"
-        android:layout_marginTop="400dp"
-        android:autoText="false"
-        android:backgroundTint="#00FFFFFF"
-        android:ems="10"
-        android:inputType="date"
-        android:text="19/19/1990"
-        android:textAlignment="viewEnd"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <Spinner
-        android:id="@+id/country_spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="18dp"
-        android:layout_marginStart="360dp"
-        android:layout_marginTop="468dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Spinner
-        android:id="@+id/city_spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="18dp"
-        android:layout_marginStart="360dp"
-        android:layout_marginTop="528dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="Upload Profile Image"
+        tools:layout_editor_absoluteX="96dp"
+        tools:layout_editor_absoluteY="438dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

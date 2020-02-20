@@ -7,6 +7,7 @@ package com.example.wdsportz.MainFragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,10 +26,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
+
+import static com.google.android.gms.plus.PlusOneDummyView.TAG;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -95,6 +99,7 @@ public class frag_Register extends Fragment {
         ImageButton _btnreg =  view.findViewById(R.id.btnCreateAcc);
         EditText _txtfname =  view.findViewById(R.id.Name);
         ImageButton button = view.findViewById(R.id.btnCreateAcc);
+        String username = _txtfname.getText().toString();
 
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -119,12 +124,34 @@ public class frag_Register extends Fragment {
                                     hashMap.put("name", "");
                                     hashMap.put("phone", "");
                                     hashMap.put("image", "");
+
                                     // firebase datatabase instance
                                     FirebaseDatabase database = FirebaseDatabase.getInstance();
+
                                     //path to store data named "Users"
                                     DatabaseReference reference = database.getReference("Users");
+
                                     //put data within hashmap in database
                                     reference.child(uid).setValue(hashMap);
+
+                                    // Used to make FirebaseProfile for user
+                                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                                .setDisplayName(email)
+//                                                .setPhotoUri(Uri.parse("https://example.com/jane-q-user/profile.jpg"))
+                                                .build();
+
+                                        user1.updateProfile(profileUpdates)
+                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                        if (task.isSuccessful()) {
+                                                            Log.d(TAG, "User profile updated.");
+                                                        }
+                                                    }
+                                                });
+
+
+
 
 
 
@@ -164,6 +191,8 @@ public class frag_Register extends Fragment {
                     + " must implement OnFragmentInteractionListener");
         }
     }
+
+
 
     @Override
     public void onDetach() {
