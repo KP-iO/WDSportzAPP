@@ -47,7 +47,7 @@ public class SelectTeamsRecyclerViewAdapter extends RecyclerView.Adapter<SelectT
         String currentUrl = mData.get(position).teamLogoURl;
         Glide.with(context)
                 .load(currentUrl)
-                .apply(new RequestOptions().override(100, 200))
+                .apply(new RequestOptions().override(180, 270))
                 .into(holder.myImageView);
 
     }
