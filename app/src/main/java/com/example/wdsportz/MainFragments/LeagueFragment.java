@@ -1,5 +1,6 @@
 package com.example.wdsportz.MainFragments;
 
+
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,13 +13,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.wdsportz.Adapters.LiveStreamAdapter;
-import com.example.wdsportz.Adapters.WatchViewAdapter;
+import com.example.wdsportz.Adapters.LeagueAdapter;
 import com.example.wdsportz.R;
-import com.example.wdsportz.ViewModels.WatchViewModel;
+import com.example.wdsportz.ViewModels.LeagueViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -37,7 +36,7 @@ import java.util.List;
  * Use the {@link Watchfragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Frag_Watch extends Fragment {
+public class LeagueFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -55,12 +54,11 @@ public class Frag_Watch extends Fragment {
     private RecyclerView recyclerView1;
 
 
-    private WatchViewAdapter watchViewAdapter;
-    private LiveStreamAdapter liveStreamAdapter;
+   LeagueAdapter leagueAdapter;
 
     String VidUri;
 
-    public Frag_Watch() {
+    public LeagueFragment() {
         // Required empty public constructor
     }
 
@@ -88,7 +86,7 @@ public class Frag_Watch extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_watch, container, false);
+        return inflater.inflate(R.layout.fragment_league, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -101,72 +99,25 @@ public class Frag_Watch extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         final Context context = view.getContext();
 
-        recyclerView = getView().findViewById(R.id.RecyclerViewV);
-        recyclerView1 = getView().findViewById(R.id.RecyclerViewVM);
+        recyclerView = getView().findViewById(R.id.recycler);
         int numberOfColumns = 2;
         recyclerView.setLayoutManager(new GridLayoutManager(context, numberOfColumns));
-        recyclerView1.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
+
 
 
 // Implement error handling for all cases e.g (Name/ Logo not accessible) ------>
 
         BottomRecycler(context);
-        TopRecycler(context);
+
 
 
     }
 
 
-    private void TopRecycler(final Context context) {
-        Task<QuerySnapshot> docRef = fireStoreDB.collection("Live Stream")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
 
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-
-                            List<WatchViewModel> list = new ArrayList<>();
-
-
-////// Change FROM download url to stroage url in firestore?
-
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-
-
-                                Log.d(TAG, "DOCUMENT PRINT :" + document.getData().toString());
-                                Log.d(TAG, "Team Added to List " + document.get("Match_Name").toString());
-
-                                list.add(new WatchViewModel(document.get("Match_Name").toString(), document.get("Match_Image").toString(), document.get("Match_Video").toString(),document.get("Chatbox_ID").toString()));
-
-                                //Log.d(TAG, ("LOGO URL: " + list.));
-
-                                liveStreamAdapter = new LiveStreamAdapter(context, list);
-                                recyclerView1.setAdapter(liveStreamAdapter);
-
-                            }
-
-                            // List check (in Log)
-                            for (int i = 0; i < list.size() - 1; i++) {
-
-                                Log.d(TAG, (" Team Name = " + list.get(i).getTitle()));
-                                Log.d(TAG, "List Url test   " + list.get(i).getVideoimageURL());
-                                Log.d(TAG, "Video Url test   " + list.get(i).getVideoURL());
-                                Log.d(TAG, "Video Url test   " + list.get(i).getChatBox_ID());
-
-                            }
-
-                        } else {
-                            Log.d(TAG, "No such document");
-                        }
-
-                    }
-
-                });
-    }
 
     private void BottomRecycler(final Context context) {
-        Task<QuerySnapshot> docRef = fireStoreDB.collection("Videos")
+        Task<QuerySnapshot> docRef = fireStoreDB.collection("leaguedetails")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
 
@@ -174,7 +125,7 @@ public class Frag_Watch extends Fragment {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
 
-                            List<WatchViewModel> list = new ArrayList<>();
+                            List<LeagueViewModel> list = new ArrayList<>();
 
 
 ////// Change FROM download url to stroage url in firestore?
@@ -183,14 +134,14 @@ public class Frag_Watch extends Fragment {
 
 
                                 Log.d(TAG, "DOCUMENT PRINT :" + document.getData().toString());
-                                Log.d(TAG, "Team Added to List " + document.get("Match_Name").toString());
+                                Log.d(TAG, "Team Added to List " + document.get("League_Name").toString());
 
-                                list.add(new WatchViewModel(document.get("Match_Name").toString(), document.get("Match_Image").toString(), document.get("Match_Video").toString(), document.get("Chatbox_ID").toString()));
+                                list.add(new LeagueViewModel(document.get("League_Name").toString(), document.get("League_Image").toString(), document.get("League_URL").toString()));
 
                                 //Log.d(TAG, ("LOGO URL: " + list.));
 
-                                watchViewAdapter = new WatchViewAdapter(context, list);
-                                recyclerView.setAdapter(watchViewAdapter);
+                                leagueAdapter = new LeagueAdapter(context, list);
+                                recyclerView.setAdapter(leagueAdapter);
 //                                recyclerView1.setAdapter(watchViewAdapter);
 
                             }
@@ -198,10 +149,10 @@ public class Frag_Watch extends Fragment {
                             // List check (in Log)
                             for (int i = 0; i < list.size() - 1; i++) {
 
-                                Log.d(TAG, (" Team Name = " + list.get(i).getTitle()));
-                                Log.d(TAG, "List Url test   " + list.get(i).getVideoimageURL());
-                                Log.d(TAG, "Video Url test   " + list.get(i).getVideoURL());
-                                Log.d(TAG, "Video Url test   " + list.get(i).getChatBox_ID());
+                                Log.d(TAG, (" Team Name = " + list.get(i).getLeagueTitle()));
+                                Log.d(TAG, "List Url test   " + list.get(i).getLeagueImageURL());
+                                Log.d(TAG, "Video Url test   " + list.get(i).getLeagueURL());
+
                             }
 
                         } else {

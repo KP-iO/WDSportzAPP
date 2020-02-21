@@ -9,7 +9,7 @@ public class WatchViewModel {
 
 
 
-    public WatchViewModel() {
+    public WatchViewModel(String league_name, String league_image, String league_url) {
 
     }
 

@@ -1,7 +1,7 @@
 package com.example.wdsportz.Adapters;
 
 import android.content.Context;
-import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,12 +10,12 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.wdsportz.R;
 import com.example.wdsportz.ViewModels.WatchViewModel;
-import com.example.wdsportz.YouTube_playback;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
@@ -56,8 +56,9 @@ public class LiveStreamAdapter extends RecyclerView.Adapter<LiveStreamAdapter.My
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, int position) {
         holder.title.setText(videoViewModels.get(position).getTitle());
-        String currentUrl = videoViewModels.get(position).getVideoimageURL();
+        final String currentUrl = videoViewModels.get(position).getVideoimageURL();
         final String Video1 = (videoViewModels.get(position).getVideoURL());
+        final String chat_ID = (videoViewModels.get(position).getChatBox_ID());
 
         Glide.with(context)
                 .load(currentUrl)
@@ -66,10 +67,16 @@ public class LiveStreamAdapter extends RecyclerView.Adapter<LiveStreamAdapter.My
         holder.btnimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(v.getContext(), YouTube_playback.class);
-                i.putExtra("Video", Video1);
-                v.getContext().startActivity(i);
+                Bundle bundle = new Bundle();
+                bundle.putString("chat",chat_ID);
+                bundle.putString("video", Video1);
+                Navigation.findNavController(v).navigate(R.id.action_global_livestreamFragment, bundle);
+                for (String key: bundle.keySet())
+                {
+                    Log.d ("myApplication", key + " is a key in the bundle");
+                }
             }
+
         });
 
 

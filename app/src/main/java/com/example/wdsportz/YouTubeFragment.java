@@ -24,7 +24,7 @@ public class YouTubeFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_blank, container, false);
+        View view = inflater.inflate(R.layout.fragment_livestream, container, false);
 
         youTubePlayerView = view.findViewById(R.id.youtube_player_view);
 
@@ -32,6 +32,10 @@ public class YouTubeFragment extends Fragment {
 
         return view;
     }
+
+
+
+
 
     private void initYouTubePlayerView() {
         // The player will automatically release itself when the fragment is destroyed.
@@ -46,7 +50,7 @@ public class YouTubeFragment extends Fragment {
             public void onReady(@NonNull YouTubePlayer youTubePlayer) {
                 YouTubePlayerUtils.loadOrCueVideo(
                         youTubePlayer, getLifecycle(),
-                        VideoIdsProvider.getNextLiveVideoId(),0f
+                        "6JYIGclVQdw",0f
                 );
             }
         });

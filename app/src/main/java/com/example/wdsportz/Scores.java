@@ -29,7 +29,8 @@ public class Scores extends Fragment {
                              Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.fragment_scores, container, false);
         mWebView = (WebView) v.findViewById(R.id.webScores);
-        mWebView.loadUrl("https://www.betvictoristhmian.co.uk/match-info/fixtures");
+        String strTitle = getArguments().getString("URL");
+        mWebView.loadUrl(strTitle);
 
         // Enable Javascript
         WebSettings webSettings = mWebView.getSettings();
