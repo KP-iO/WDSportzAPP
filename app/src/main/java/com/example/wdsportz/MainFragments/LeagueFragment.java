@@ -99,7 +99,7 @@ public class LeagueFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         final Context context = view.getContext();
 
-        recyclerView = getView().findViewById(R.id.recycler);
+        recyclerView = getView().findViewById(R.id.recyclerleague);
         int numberOfColumns = 2;
         recyclerView.setLayoutManager(new GridLayoutManager(context, numberOfColumns));
 
@@ -116,6 +116,53 @@ public class LeagueFragment extends Fragment {
 
 
 
+//    private void BottomRecycler(final Context context) {
+//        Task<QuerySnapshot> docRef = fireStoreDB.collection("leaguedetails")
+//                .get()
+//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//
+//                    @Override
+//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                        if (task.isSuccessful()) {
+//
+//                            List<LeagueViewModel> list = new ArrayList<>();
+//
+//
+//////// Change FROM download url to stroage url in firestore?
+//
+//                            for (QueryDocumentSnapshot document : task.getResult()) {
+//
+//
+//                                Log.d(TAG, "DOCUMENT PRINT :" + document.getData().toString());
+//                                Log.d(TAG, "Team Added to List " + document.get("League_Name").toString());
+//
+//                                list.add(new LeagueViewModel(document.get("League_Name").toString(), document.get("League_Image").toString(), document.get("League_URL").toString()));
+//
+//                                //Log.d(TAG, ("LOGO URL: " + list.));
+//
+//                                leagueAdapter = new LeagueAdapter(context, list);
+//                                recyclerView.setAdapter(leagueAdapter);
+////                                recyclerView1.setAdapter(watchViewAdapter);
+//
+//                            }
+//
+//                            // List check (in Log)
+//                            for (int i = 0; i < list.size() - 1; i++) {
+//
+//                                Log.d(TAG, (" Team Name = " + list.get(i).getLeagueTitle()));
+//                                Log.d(TAG, "List Url test   " + list.get(i).getLeagueImageURL());
+//                                Log.d(TAG, "Video Url test   " + list.get(i).getLeagueURL());
+//
+//                            }
+//
+//                        } else {
+//                            Log.d(TAG, "No such document");
+//                        }
+//
+//                    }
+//
+//                });
+//    }
     private void BottomRecycler(final Context context) {
         Task<QuerySnapshot> docRef = fireStoreDB.collection("leaguedetails")
                 .get()
@@ -151,8 +198,7 @@ public class LeagueFragment extends Fragment {
 
                                 Log.d(TAG, (" Team Name = " + list.get(i).getLeagueTitle()));
                                 Log.d(TAG, "List Url test   " + list.get(i).getLeagueImageURL());
-                                Log.d(TAG, "Video Url test   " + list.get(i).getLeagueURL());
-
+                                Log.d(TAG, "Video Url test   " + list.get(i).getLeagueURL());;
                             }
 
                         } else {

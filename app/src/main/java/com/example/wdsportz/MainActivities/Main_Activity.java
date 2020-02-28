@@ -4,6 +4,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,22 +17,28 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.bumptech.glide.Glide;
 import com.example.wdsportz.MainFragments.Frag_HomePage;
-import com.example.wdsportz.MainFragments.Frag_IniTeamSelection;
+import com.example.wdsportz.MainFragments.Frag_Test_1;
+import com.example.wdsportz.MainFragments.Frag_iniTeamSelect;
+import com.example.wdsportz.R;
 import com.example.wdsportz.SideNav.Frag_About;
 import com.example.wdsportz.SideNav.Frag_Explore;
 import com.example.wdsportz.SideNav.Frag_LiveGuide;
 import com.example.wdsportz.SideNav.Frag_Notifications;
 import com.example.wdsportz.SideNav.Frag_Profile;
-import com.example.wdsportz.MainFragments.Frag_Test_1;
-import com.example.wdsportz.R;
 import com.example.wdsportz.SideNav.Frag_Settings;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 // Note: Change name of other classes to 'ClassName'_Fragment
 
-public class Main_Activity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, Frag_Test_1.OnFragmentInteractionListener, Frag_IniTeamSelection.OnFragmentInteractionListener, Frag_HomePage.OnFragmentInteractionListener, Frag_Profile.OnFragmentInteractionListener, Frag_Notifications.OnFragmentInteractionListener, Frag_About.OnFragmentInteractionListener, Frag_Explore.OnFragmentInteractionListener, Frag_LiveGuide.OnFragmentInteractionListener, Frag_Settings.OnFragmentInteractionListener {
+public class Main_Activity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, Frag_Test_1.OnFragmentInteractionListener, Frag_iniTeamSelect.OnFragmentInteractionListener, Frag_HomePage.OnFragmentInteractionListener, Frag_Profile.OnFragmentInteractionListener, Frag_Notifications.OnFragmentInteractionListener, Frag_About.OnFragmentInteractionListener, Frag_Explore.OnFragmentInteractionListener, Frag_LiveGuide.OnFragmentInteractionListener, Frag_Settings.OnFragmentInteractionListener {
     // Collect all listeners in one interface ^^^ and pass through to main activity?
 
     public Toolbar toolbar;
@@ -38,6 +46,12 @@ public class Main_Activity extends AppCompatActivity implements NavigationView.O
     public NavController navController;
     public NavigationView navigationView;
     public DrawerLayout drawerLayout;
+    TextView userName;
+    ImageView userImg;
+    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    DatabaseReference databaseReference;
+
     // AppBarConfiguration appBarConfiguration;
 
     @Override
@@ -45,17 +59,93 @@ public class Main_Activity extends AppCompatActivity implements NavigationView.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
        setupNavigation();
 
     }
 
     public void setupNavigation() {
+        databaseReference = firebaseDatabase.getReference("Users");
 
 
         toolbar = findViewById(R.id.main_feed_toolbar);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        navigationView = findViewById(R.id.main_feed_nv_View);
+        userName = (TextView)navigationView.getHeaderView(0).findViewById(R.id.usernameText1);
+        userImg = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.usernameImg1);
+
+//        Query query = databaseReference.orderByChild("email").equalTo(user.getEmail());
+//        query.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//
+//                for(DataSnapshot ds: dataSnapshot.getChildren()){
+//                    //get data
+//
+//
+//                    String image = "" + ds.child("image").getValue();
+//                    String name = "" + ds.child("name").getValue();
+//
+//
+//
+//                    Glide.with(getBaseContext())
+//                            .load(image)
+//                            .into(userImg);
+//
+//                    userName.setText(name);
+//
+//
+//
+//
+//
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//            }
+//        });
+
+
+
+
+
+
+
+
+
+
+
+        if (user != null) {
+            for (UserInfo profile : user.getProviderData()) {
+                // Id of the provider (ex: google.com)
+                String providerId = profile.getProviderId();
+
+                // UID specific to the provider
+                String uid = profile.getUid();
+
+                // Name, email address, and profile photo Url
+                String name = profile.getDisplayName();
+                String email = profile.getEmail();
+                Uri photoUrl = profile.getPhotoUrl();
+
+//                userName.setText(name);
+
+                Glide.with(getBaseContext())
+                        .load(photoUrl)
+                        .into(userImg);
+
+
+            }
+        }
+
+
+
+
 
         drawerLayout = findViewById(R.id.main_feed_drawerlayout);
         navigationView = findViewById(R.id.main_feed_nv_View);
@@ -89,7 +179,7 @@ public class Main_Activity extends AppCompatActivity implements NavigationView.O
 
 
                     case R.id.nav_score:
-                        navController.navigate(R.id.action_global_scores);
+                        navController.navigate(R.id.action_global_leagueFragment);
                         Log.d("Bottom Nav Test", "nav_score");
 
                         break;
@@ -103,6 +193,8 @@ public class Main_Activity extends AppCompatActivity implements NavigationView.O
                 return true;
             }
         });
+
+
 
 
     }
@@ -148,6 +240,7 @@ public class Main_Activity extends AppCompatActivity implements NavigationView.O
             super.onBackPressed();
         }
     }
+
 
 
     @Override

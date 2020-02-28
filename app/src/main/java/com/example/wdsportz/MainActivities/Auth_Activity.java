@@ -1,20 +1,15 @@
 package com.example.wdsportz.MainActivities;
 
-import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 
-import com.example.wdsportz.MainFragments.Frag_iniTeamSelect;
 import com.example.wdsportz.MainFragments.Frag_HomePage;
+import com.example.wdsportz.MainFragments.Frag_iniTeamSelect;
 import com.example.wdsportz.MainFragments.frag_Register;
 import com.example.wdsportz.MainFragments.frag_login;
 import com.example.wdsportz.R;
@@ -49,20 +44,20 @@ public class Auth_Activity extends AppCompatActivity implements Frag_iniTeamSele
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.options_menu, menu);
-
-        // Associate searchable configuration with the SearchView
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-
-        SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
-
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        MenuInflater inflater = getMenuInflater();
+//        inflater.inflate(R.menu.options_menu, menu);
+//
+//        // Associate searchable configuration with the SearchView
+//        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+//
+//        SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+//
+//        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+//
+//        return true;
+//    }
 
 
     public void goToMainFeed() {
