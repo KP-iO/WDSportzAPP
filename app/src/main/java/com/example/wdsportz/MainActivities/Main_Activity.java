@@ -133,7 +133,7 @@ public class Main_Activity extends AppCompatActivity implements NavigationView.O
                 String email = profile.getEmail();
                 Uri photoUrl = profile.getPhotoUrl();
 
-//                userName.setText(name);
+                userName.setText(name);
 
                 Glide.with(getBaseContext())
                         .load(photoUrl)

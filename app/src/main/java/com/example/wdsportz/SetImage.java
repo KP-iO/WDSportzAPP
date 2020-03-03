@@ -1,24 +1,21 @@
-package com.example.wdsportz.SideNav;
+package com.example.wdsportz;
 
 import android.Manifest;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
+import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,9 +23,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import com.bumptech.glide.Glide;
-import com.example.wdsportz.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -52,23 +49,22 @@ import java.util.HashMap;
 import static android.app.Activity.RESULT_OK;
 import static com.google.android.gms.plus.PlusOneDummyView.TAG;
 
+
 /**
  * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link Frag_Profile.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link Frag_Profile#newInstance} factory method to
+ * Use the {@link SetImage#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Frag_Profile extends Fragment {
+public class SetImage extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_PRAM2 = "param2";
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
@@ -98,10 +94,11 @@ public class Frag_Profile extends Fragment {
 
 
 
+    ImageView avatarREG;
 
-    private OnFragmentInteractionListener mListener;
+    Button next;
 
-    public Frag_Profile() {
+    public SetImage() {
         // Required empty public constructor
     }
 
@@ -111,14 +108,14 @@ public class Frag_Profile extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Frag_Profile.
+     * @return A new instance of fragment SetImage.
      */
     // TODO: Rename and change types and number of parameters
-    public static Frag_Profile newInstance(String param1, String param2) {
-        Frag_Profile fragment = new Frag_Profile();
+    public static SetImage newInstance(String param1, String param2) {
+        SetImage fragment = new SetImage();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+
         fragment.setArguments(args);
         return fragment;
     }
@@ -128,36 +125,44 @@ public class Frag_Profile extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        final View view =  inflater.inflate(R.layout.fragment_profile, container, false);
+        final View view =  inflater.inflate(R.layout.fragment_setimage, container, false);
 
-        databaseReference = firebaseDatabase.getReference("Users");
-        //init arrays of permissions
-        cameraPermissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-        storagePermissions = new String[]{ Manifest.permission.WRITE_EXTERNAL_STORAGE};
-        storageReference = FirebaseStorage.getInstance().getReference();
+        avatarREG = view.findViewById(R.id.avatarReg);
+        next = view.findViewById(R.id.button3);
 
-        avatarIv = view.findViewById(R.id.avatarIv);
-        nameTv = view.findViewById(R.id.nameTv);
-        emailTv = view.findViewById(R.id.emailTv);
-        phoneTv = view.findViewById(R.id.phoneTv);
-        fab = view.findViewById(R.id.fab);
-        coverIv = view.findViewById(R.id.coverIv);
 
         //progress dialog
         pd = new ProgressDialog(getActivity());
 
-        //permissions constantz
+        databaseReference = firebaseDatabase.getReference("Users");
+        cameraPermissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+        storagePermissions = new String[]{ Manifest.permission.WRITE_EXTERNAL_STORAGE};
+        storageReference = FirebaseStorage.getInstance().getReference();
+
+        // Inflate the layout for this fragment
 
 
 
+        avatarREG.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showEditProfileDialog();
+            }
+        });
+
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_blankFragment_to_frag_IniTeamSelection);
+            }
+        });
 
         Query query = databaseReference.orderByChild("email").equalTo(user.getEmail());
         query.addValueEventListener(new ValueEventListener() {
@@ -167,11 +172,9 @@ public class Frag_Profile extends Fragment {
                 for(DataSnapshot ds: dataSnapshot.getChildren()){
                     //get data
 
-                    String name = "" + ds.child("name").getValue();
-                    String email = "" + ds.child("email").getValue();
-                    String phone = "" + ds.child("phone").getValue();
+
                     String image = "" + ds.child("image").getValue();
-                    String cover = "" + ds.child("cover").getValue();
+
 
                     // Set to user
                     UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
@@ -188,23 +191,18 @@ public class Frag_Profile extends Fragment {
                                 }
                             });
 
-                    //set data
-                    nameTv.setText(name);
-                    emailTv.setText(email);
-                    phoneTv.setText(phone);
+
                     try {
 
                         Glide.with(view)
                                 .load(image)
-                                .into(avatarIv);
-                        Glide.with(view)
-                                .load(cover)
-                                .into(coverIv);
+                                .into(avatarREG);
+
                     }
                     catch (Exception e){
                         Glide.with(view)
                                 .load(R.drawable.ic_add_image)
-                                .into(avatarIv);
+                                .into(avatarREG);
 
                     }
 
@@ -218,16 +216,10 @@ public class Frag_Profile extends Fragment {
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
-// First thing
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showEditProfileDialog();
-            }
-        });
-
         return view;
     }
+
+
 
     private boolean checkStoragePermission(){
         //check
@@ -293,16 +285,7 @@ public class Frag_Profile extends Fragment {
                         profileOrCoverPhoto = "cover";
                         showImagePicDiolog();
                         break;
-                    case 2:
-                        //name clicked
-                        pd.setMessage("Updating Name");
-                        showNamePhoneUpdateDialog("name");
-                        break;
-                    case 3:
-                        //phone clicked
-                        pd.setMessage("Updating Phone");
-                        showNamePhoneUpdateDialog("phone");
-                        break;
+
                 }
 
 
@@ -312,70 +295,7 @@ public class Frag_Profile extends Fragment {
 
     }
 
-    private void showNamePhoneUpdateDialog(final String key) {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Update " + key);
-
-        //set layout of dialog
-        Context context;
-        LinearLayout linearLayout = new LinearLayout(getActivity());
-        linearLayout.setOrientation(LinearLayout.VERTICAL);
-        linearLayout.setPadding(10, 10, 10,10);
-        //add edit text
-        final EditText editText = new EditText(getActivity());
-        editText.setHint("Enter"+key);
-        linearLayout.addView(editText);
-
-        builder.setView(linearLayout);
-
-        //add buttons in dialog
-        builder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                //input text from edit text
-                String value = editText.getText().toString().trim();
-                //validate if user has entered something or not
-                if(!TextUtils.isEmpty(value)){
-                    pd.show();
-                    HashMap<String, Object> result = new HashMap<>();
-                    result.put(key, value);
-
-                    databaseReference.child(user.getUid()).updateChildren(result)
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    pd.dismiss();
-                                    Toast.makeText(getActivity(), "Updated...", Toast.LENGTH_SHORT).show();
-
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    pd.dismiss();
-                                    Toast.makeText(getActivity(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
-
-                                }
-                            });
-
-                }
-                else {
-                    Toast.makeText(getActivity(), "Please enter "+key,Toast.LENGTH_SHORT).show();
-                }
-
-            }
-        });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-
-            }
-        });
-        builder.create().show();
-
-    }
 
     private void showImagePicDiolog() {
         // show dialog containing options camera and Gallery to the image
@@ -392,11 +312,11 @@ public class Frag_Profile extends Fragment {
             public void onClick(DialogInterface dialog, int which) {
                 if (which == 0) {
                     //Camera clicked
-                     if(!checkCameraPermission()){
-                         requestCameraPermission();
-                     }
-                     else {pickFromCamera();
-                     }
+                    if(!checkCameraPermission()){
+                        requestCameraPermission();
+                    }
+                    else {pickFromCamera();
+                    }
                 } else if (which == 1){
                     //Gallery clicked
                     if (!checkStoragePermission()){
@@ -567,50 +487,5 @@ public class Frag_Profile extends Fragment {
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, image_uri);
         startActivityForResult(cameraIntent, IMAGE_PICK_CAMERA_CODE);
-    }
-
-    public void onViewCreated(final View view, @Nullable Bundle savedInstanceState){
-
-
-
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
     }
 }

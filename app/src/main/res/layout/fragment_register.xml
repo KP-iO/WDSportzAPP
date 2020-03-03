@@ -10,51 +10,25 @@
     android:orientation="vertical"
     app:layout_constraintTop_toTopOf="parent"
     tools:layout_editor_absoluteY="25dp">
-    tools:layout_editor_absoluteY="81dp">
 
     <ImageView
         android:id="@+id/top_yellow_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="400dp"
+        android:layout_marginBottom="308dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/yellow_seperator_line" />
 
-    <ImageView
-        android:id="@+id/Green_profile_circle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/blank_blank_man_profile_picture_green_background" />
-
-    <ImageButton
-        android:id="@+id/btn_profilepic_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:background="#00000000"
-        android:backgroundTint="#00404040"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/blank_blank_man_profile_picturre" />
-
     <TextView
         android:id="@+id/lblName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="248dp"
+        android:layout_width="133dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="300dp"
         android:fontFamily="sans-serif"
-        android:text="Name"
+        android:text="Username"
         android:textColor="@android:color/black"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -64,10 +38,10 @@
 
     <TextView
         android:id="@+id/lblPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="120dp"
+        android:layout_height="45dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="304dp"
+        android:layout_marginTop="368dp"
         android:fontFamily="sans-serif"
         android:text="Password"
         android:textColor="@android:color/black"
@@ -79,10 +53,10 @@
 
     <TextView
         android:id="@+id/lblEmailAddress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="161dp"
+        android:layout_height="45dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="356dp"
+        android:layout_marginTop="428dp"
         android:fontFamily="sans-serif"
         android:text="Email Address"
         android:textColor="@android:color/black"
@@ -119,7 +93,7 @@
         android:id="@+id/line1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="292dp"
+        android:layout_marginTop="288dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -130,7 +104,7 @@
         android:id="@+id/line2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="340dp"
+        android:layout_marginTop="364dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/yellow_seperator_line" />
@@ -139,41 +113,28 @@
         android:id="@+id/line3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="400dp"
+        android:layout_marginTop="488dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/yellow_seperator_line" />
-
-    <TextView
-        android:id="@+id/LblNameConfirm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="172dp"
-        android:fontFamily="sans-serif"
-        android:text="John Doe"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/Green_profile_circle" />
 
     <EditText
         android:id="@+id/Name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="148dp"
-        android:layout_marginTop="240dp"
+        android:layout_marginTop="300dp"
         android:backgroundTint="#00404040"
         android:ems="10"
         android:inputType="textPersonName"
         android:selectAllOnFocus="false"
         android:singleLine="false"
-        android:text="Full Name"
+        android:text="Enter Username"
         android:textAlignment="viewEnd"
         android:textColor="@android:color/darker_gray"
         android:textColorHint="@android:color/holo_green_dark"
         android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.891"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -181,13 +142,14 @@
         android:id="@+id/Password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="196dp"
-        android:layout_marginTop="292dp"
+        android:layout_marginTop="368dp"
         android:backgroundTint="#00FFFFFF"
         android:ems="10"
         android:inputType="textPassword"
         android:text="Password12345"
         android:textAlignment="viewEnd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.919"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -195,8 +157,7 @@
         android:id="@+id/Email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="196dp"
-        android:layout_marginTop="352dp"
+        android:layout_marginTop="424dp"
         android:backgroundTint="#00FFFFFF"
         android:ems="10"
         android:inputType="textEmailAddress"
@@ -204,16 +165,18 @@
         android:textAlignment="viewEnd"
         android:textColor="@android:color/darker_gray"
         android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.989"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/image"
+    <ImageView
+        android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Upload Profile Image"
-        tools:layout_editor_absoluteX="96dp"
-        tools:layout_editor_absoluteY="438dp" />
+        app:srcCompat="@drawable/wd_logo"
+        tools:layout_editor_absoluteX="70dp"
+        tools:layout_editor_absoluteY="16dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

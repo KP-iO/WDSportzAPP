@@ -99,7 +99,11 @@
         android:name="com.example.wdsportz.MainFragments.LeagueFragment"
         android:label="fragment_league"
         tools:layout="@layout/fragment_league" /><action android:id="@+id/action_global_leagueFragment" app:destination="@id/leagueFragment"/>
-
+    <fragment
+        android:id="@+id/blankFragment"
+        android:name="com.example.wdsportz.SetImage"
+        android:label="fragment_setimage"
+        tools:layout="@layout/fragment_setimage" /><action android:id="@+id/action_global_blankFragment" app:destination="@id/blankFragment"/>
 
 
 </navigation>

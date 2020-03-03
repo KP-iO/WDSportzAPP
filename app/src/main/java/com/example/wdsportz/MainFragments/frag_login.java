@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 
+import com.example.wdsportz.MainActivities.Auth_Activity;
 import com.example.wdsportz.R;
 import com.example.wdsportz.ViewModels.LoginViewModel;
 import com.example.wdsportz.utils.PreferenceUtils;
@@ -91,7 +92,7 @@ public class frag_login extends Fragment {
 
 
         if (PreferenceUtils.getEmail(getContext()) != null && !PreferenceUtils.getEmail(getContext()).equals("")) {
-            Navigation.findNavController(view).navigate(R.id.action_global_frag_IniTeamSelection);
+            ((Auth_Activity)getActivity()).goToMainFeed();
         }else {
 
         }
@@ -118,7 +119,7 @@ public class frag_login extends Fragment {
                                             password);
                                     PreferenceUtils.saveEmail(email, getContext());
                                     PreferenceUtils.savePassword(password, getContext());
-                                    Navigation.findNavController(view).navigate(R.id.action_global_frag_IniTeamSelection);
+                                    ((Auth_Activity)getActivity()).goToMainFeed();
 
                                 }else{
                                     Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
