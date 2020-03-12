@@ -41,6 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="120dp"
             android:layout_marginTop="50dp"
+            android:maxLines="3"
             android:text="Hello World "
             android:textSize="20sp" />
 
