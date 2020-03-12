@@ -124,6 +124,7 @@ public class frag_login extends Fragment {
 
                                 }else{
                                     Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getActivity(), "Unsuccessful", Toast.LENGTH_SHORT).show();
                                 }
 
                             }
