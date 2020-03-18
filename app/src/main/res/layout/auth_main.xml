@@ -7,6 +7,7 @@
     android:layout_height="fill_parent"
     android:orientation="vertical">
 
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
@@ -14,6 +15,7 @@
         android:background="#2FD30A"
         android:visibility="visible"
         app:title="  ">
+
 
         <TextView
             android:id="@+id/toolbar_title"
@@ -27,10 +29,12 @@
             android:textStyle="bold"
             app:titleTextColor="#F7F3F3" />
 
+        <SearchView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
 
     </androidx.appcompat.widget.Toolbar>
-
-
 
     <fragment
         android:id="@+id/auth_main"
@@ -41,5 +45,7 @@
         android:visibility="visible"
         app:defaultNavHost="true"
         app:navGraph="@navigation/auth_navigation" />
+
+
 
 </LinearLayout>

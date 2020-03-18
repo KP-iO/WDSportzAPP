@@ -27,12 +27,10 @@ import static android.view.LayoutInflater.from;
  * Created by khrishawn
  */
 public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.MyViewHolder> {
+
     private List<NewsFeedViewModel> newsFeedViewModels;
     private LayoutInflater lInflater;
     private ItemClickListener lClickListener;
-
-
-
     private Context context;
 
     public NewsFeedAdapter(Context context, List<NewsFeedViewModel> list) {
@@ -40,8 +38,6 @@ public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.MyView
         this.newsFeedViewModels = list;
         this.context = context;
     }
-
-
 
 
 //    public WatchViewAdapter(Context context, List<VideoViewModel> newsFeedViewModels) {
@@ -53,7 +49,7 @@ public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.MyView
     @Override
 
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new  MyViewHolder(from(context).inflate(R.layout.fragment_mainfeed_row, parent,false));
+        return new  MyViewHolder(from(context).inflate(R.layout.fragment_feeditem, parent,false));
     }
 
 
