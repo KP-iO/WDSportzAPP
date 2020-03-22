@@ -2,21 +2,87 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout"
+    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".More">
+    tools:context=".MainFragments.Frag_More">
 
     <!-- TODO: Update blank fragment layout -->
+
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="176dp"
-        android:layout_marginTop="248dp"
+        android:layout_marginEnd="341dp"
         android:text="More"
         android:textSize="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnManageProfile"
+        android:layout_width="281dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="66dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="66dp"
+        android:text="Manage Profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnOfficialWeb"
+        android:layout_width="279dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="66dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="66dp"
+        android:text="Official Website"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnManageProfile" />
+
+    <Button
+        android:id="@+id/btnTnC"
+        android:layout_width="279dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="66dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="66dp"
+        android:text="Terms and Conditions"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnContactUs" />
+
+    <Button
+        android:id="@+id/btnContactUs"
+        android:layout_width="279dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="66dp"
+        android:layout_marginTop="76dp"
+        android:layout_marginEnd="66dp"
+        android:text="Contact Us"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnOfficialWeb" />
+
+    <Button
+        android:id="@+id/btnSignOut"
+        android:layout_width="279dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="66dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="66dp"
+        android:text="Sign Out"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnTnC" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

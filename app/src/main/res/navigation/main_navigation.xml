@@ -28,7 +28,7 @@
     <action android:id="@+id/action_global_scores" app:destination="@id/scores" />
     <fragment
         android:id="@+id/more"
-        android:name="com.example.wdsportz.More"
+        android:name="com.example.wdsportz.MainFragments.Frag_More"
         android:label="fragment_more"
         tools:layout="@layout/fragment_more" /><action android:id="@+id/action_global_more" app:destination="@id/more"/>
     <fragment

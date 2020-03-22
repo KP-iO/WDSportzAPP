@@ -6,8 +6,6 @@ public class NewsFeedViewModel {
     String newsDesc;
     String date;
 
-
-
     public NewsFeedViewModel() {
 
     }
@@ -18,9 +16,6 @@ public class NewsFeedViewModel {
         this.newsDesc = newsDesc;
         this.date = date;
     }
-
-
-
 
     public  String getNewsDesc() {
         return newsDesc;
@@ -33,8 +28,6 @@ public class NewsFeedViewModel {
     }
 
     public void setDate(String date) {this.date = date; }
-
-
 
     public String getNewsImageURL() {
         return newsImageURL;
