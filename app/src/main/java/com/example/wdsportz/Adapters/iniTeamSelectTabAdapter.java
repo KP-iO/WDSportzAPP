@@ -10,9 +10,9 @@ import com.example.wdsportz.MainFragments.Frag_iniTeamSelect_teams;
 
 // extend FragmentPagerAdapter instead of FragmentStatePagerAdapter (Better implementation) >
 
-public class iniTeamSelectAdapter extends FragmentStateAdapter {
+public class iniTeamSelectTabAdapter extends FragmentStateAdapter {
 
-    public iniTeamSelectAdapter(Fragment fragment) {
+    public iniTeamSelectTabAdapter(Fragment fragment) {
         super(fragment);
     }
 
@@ -22,7 +22,7 @@ public class iniTeamSelectAdapter extends FragmentStateAdapter {
         // Return a NEW fragment instance in createFragment(int)
         Fragment fragment = new Frag_iniTeamSelect_teams();
         Bundle args = new Bundle();
-        // Our object is just an integer :-P
+        // Our object is just an integer /
         args.putInt(Frag_iniTeamSelect_teams.ARG_OBJECT, position + 1);
         fragment.setArguments(args);
         return fragment;

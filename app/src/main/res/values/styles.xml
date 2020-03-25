@@ -35,6 +35,12 @@
     <style name="AppTheme1.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme1.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    
+    <style name="Theme.App" parent="Theme.MaterialComponents">
+
+        <item name="materialCardViewStyle">@color/colorTransparent</item>
+
+    </style>
 
 
 </resources>
