@@ -15,7 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.wdsportz.Adapters.iniTeamSelectAdapter;
+import com.example.wdsportz.Adapters.iniTeamSelectTabAdapter;
 import com.example.wdsportz.MainActivities.Auth_Activity;
 import com.example.wdsportz.R;
 import com.google.android.material.tabs.TabLayout;
@@ -44,7 +44,7 @@ public class Frag_iniTeamSelect extends Fragment {
 
     // When requested, this adapter returns a Frag_iniTeamSelect_teams,
     // representing an object in the collection.
-    iniTeamSelectAdapter demoCollectionAdapter;
+    iniTeamSelectTabAdapter iniTeamSelectTabAdapter;
     ViewPager2 viewPager;
 
 
@@ -94,13 +94,9 @@ public class Frag_iniTeamSelect extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         TabLayout tabLayout = view.findViewById(R.id.tab_layout);
 
-        //new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> tab.setText("OBJECT " + (position + 1))).attach();
-
-        demoCollectionAdapter = new iniTeamSelectAdapter(this);
+        iniTeamSelectTabAdapter = new iniTeamSelectTabAdapter(this);
         viewPager = view.findViewById(R.id.view_pager);
-        viewPager.setAdapter(demoCollectionAdapter);
-
-        //viewPager.setAdapter(createCardAdapter());
+        viewPager.setAdapter(iniTeamSelectTabAdapter);
 
         new TabLayoutMediator(tabLayout, viewPager, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override

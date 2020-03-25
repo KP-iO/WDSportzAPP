@@ -1,6 +1,8 @@
 package com.example.wdsportz.Adapters;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.telephony.IccOpenLogicalChannelResponse;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.wdsportz.R;
 import com.example.wdsportz.ViewModels.SelectTeamsRecyclerViewModel;
+import com.google.android.material.card.MaterialCardView;
 
 import java.util.List;
 
@@ -40,15 +43,50 @@ public class SelectTeamsRecyclerViewAdapter extends RecyclerView.Adapter<SelectT
         return new ViewHolder(view);
     }
 
+    // stores and recycles views as they are scrolled off screen
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        MaterialCardView cardView;
+        TextView TextView;
+        ImageView ImageView;
+
+        ViewHolder(View itemView) {
+            super(itemView);
+            cardView = itemView.findViewById(R.id.newsCard);
+            TextView = itemView.findViewById(R.id.info_text);
+            ImageView = itemView.findViewById(R.id.BtnImgTeamLogo);
+
+
+            itemView.setOnClickListener(this);
+           // cardView.setOnClickListener(this);
+
+        }
+
+        @Override
+        public void onClick(View view) {
+
+            if (mClickListener != null)
+
+                mClickListener.onItemClick(view, getAdapterPosition());
+
+                int highlightcolor = Color.YELLOW;
+                cardView.setStrokeColor(highlightcolor);
+                Log.d("CLICK", TextView.getText() + "  Clicked");
+
+        }
+
+     }
+
     // binds the data to the TextView in each cell
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.myTextView.setText(mData.get(position).teamName);
+        holder.TextView.setText(mData.get(position).teamName);
+
         String currentUrl = mData.get(position).teamLogoURl;
+
         Glide.with(context)
                 .load(currentUrl)
                 .apply(new RequestOptions().override(180, 270))
-                .into(holder.myImageView);
+                .into(holder.ImageView);
 
     }
 
@@ -57,27 +95,6 @@ public class SelectTeamsRecyclerViewAdapter extends RecyclerView.Adapter<SelectT
         return mData.size();
     }
 
-
-    // stores and recycles views as they are scrolled off screen
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView myTextView;
-        ImageView myImageView;
-
-        ViewHolder(View itemView) {
-            super(itemView);
-            myTextView = itemView.findViewById(R.id.info_text);
-            myImageView = itemView.findViewById(R.id.BtnImgTeamLogo);
-            itemView.setOnClickListener(this);
-
-        }
-
-        @Override
-        public void onClick(View view) {
-            if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
-            Log.d("CLICK", myTextView.getText() + "  Clicked");
-        }
-
-    }
 
     // convenience method for getting data at click position
     public String getItem(int id) {

@@ -28,10 +28,12 @@ import java.util.List;
 
 // Instances of this class are fragments representing a single
 // object in our collection.
+
+// For the feed inside the recycler view, inside one of the tabs. Each tabs's content is created by this
 public class Frag_iniTeamSelect_teams extends Fragment {
 
     public static final String ARG_OBJECT = "object";
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "iniTeamSelect_teams";
     FirebaseFirestore fireStoreDB = FirebaseFirestore.getInstance();
     private RecyclerView recyclerView;
     private SelectTeamsRecyclerViewAdapter selectTeamsRecyclerViewAdapter;
@@ -64,18 +66,19 @@ public class Frag_iniTeamSelect_teams extends Fragment {
 
     public void recyclerviewcontent(View view, String str){
 
-
         final Context context = view.getContext();
         // set up the RecyclerView
         recyclerView = getView().findViewById(R.id.RecyclerViewTeam);
         int numberOfColumns = 2;
+
+        //The recycler view has been created using the references as above.
         recyclerView.setLayoutManager(new GridLayoutManager(context , numberOfColumns));
 
     // Implement error handling for all cases e.g (Name/ Logo not accessible) ------>
     //// Create a new method for the code below.
     ///+++ Or possibly migrate to the SelectTeamsRecyclerViewAdapter class
 
-
+//// -----> this is where the images and text is added to the recycler's items from the db.
         Task<QuerySnapshot> docRef = fireStoreDB.collection("Isthmian_Teams")
             .get()
             .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -114,8 +117,6 @@ public class Frag_iniTeamSelect_teams extends Fragment {
                 }
 
             });
-
-
 
 }
 }

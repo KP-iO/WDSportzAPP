@@ -1,35 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="170dp"
     android:layout_height="170dp"
     android:layout_marginStart="10dp"
     android:layout_marginEnd="10dp"
     android:maxWidth="100dp"
     android:maxHeight="100dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="2dp">
 
-    <ImageButton
-        android:id="@+id/BtnImgTeamLogo"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:adjustViewBounds="true"
-        android:background="#00070000"
-        android:maxWidth="120dp"
-        android:maxHeight="120dp"
-        android:src="@android:color/black" />
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/newsCard"
+        style="@style/Theme.App"
+        android:layout_width="158dp"
+        android:layout_height="154dp"
+        android:padding="1dp"
+        android:scrollbarSize="0dp"
+        app:cardCornerRadius="5dp"
+        app:strokeWidth="5dp">
 
-    <TextView
-        android:id="@+id/info_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="#00AAAAAA"
-        android:gravity="center"
-        android:text="TextView"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="1dp">
+
+            <ImageButton
+                android:id="@+id/BtnImgTeamLogo"
+                android:layout_width="141dp"
+                android:layout_height="122dp"
+
+                android:layout_marginBottom="8dp"
+                android:adjustViewBounds="true"
+                android:background="#02FFFFFF"
+                android:maxWidth="120dp"
+                android:maxHeight="120dp"
+                android:tint="#00070101"
+                app:layout_constraintBottom_toTopOf="@+id/info_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/info_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="41dp"
+                android:layout_marginEnd="41dp"
+                android:background="#00AAAAAA"
+                android:text="TextView"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 
 </LinearLayout>

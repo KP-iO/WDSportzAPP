@@ -61,4 +61,6 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
     implementation fileTree(dir: '/Users/khrishawn/Desktop/Projects/WDSportz/External Dependencies', include: ['*.aar', '*.jar'], exclude: [])
     implementation 'com.google.android.material:material:1.2.0-alpha05'
+    implementation "androidx.cardview:cardview:1.0.0"
+
 }
