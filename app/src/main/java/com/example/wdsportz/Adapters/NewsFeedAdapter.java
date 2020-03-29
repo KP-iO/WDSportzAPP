@@ -40,18 +40,12 @@ public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.MyView
     }
 
 
-//    public WatchViewAdapter(Context context, List<VideoViewModel> newsFeedViewModels) {
-//
-//    }
-
-
     @NonNull
     @Override
 
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new  MyViewHolder(from(context).inflate(R.layout.fragment_feeditem, parent,false));
     }
-
 
 
     @Override
@@ -109,8 +103,6 @@ public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.MyView
     }
 
 
-
-
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView title;
         TextView description;
@@ -126,24 +118,7 @@ public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.MyView
             title = itemView.findViewById(R.id.newsTitle);
             newsTile = itemView.findViewById(R.id.newsCard);
             newsView = itemView.findViewById(R.id.newsImage);
-            newsTile.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-//                    Intent i= new Intent(view.getContext(),VideoPlayback.class);
-                    Log.d("CLICK", title.getText() + "  Clicked");
-
-//                    int itemPosition = getLayoutPosition();
-//                    Log.d("position", Integer.toString(itemPosition));
-//
-//                    MyViewHolder item = (MyViewHolder) WatchViewModel.getItem(itemPosition);
-//                    String url = item.getUrl();
-
-
-//                    view.getContext().startActivity(i);
-
-
-                }
-            });
+            newsTile.setOnClickListener(this);
         }
 
 
@@ -152,8 +127,9 @@ public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.MyView
 
         @Override
         public void onClick(View view) {
-            if (lClickListener != null) lClickListener.onItemClick(view, getAdapterPosition());
-            Log.d("CLICK", title.getText() + "  Clicked");
+            if (lClickListener != null)
+                lClickListener.onItemClick(view, getAdapterPosition());
+                Log.d("CLICK", title.getText() + "  Clicked");
 
 //             int itemPosition = getLayoutPosition();
 //             Log.d("position", Integer.toString(itemPosition));
@@ -162,6 +138,7 @@ public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.MyView
 //             String url = item.getUrl();
         }
     }
+
     public String getItem(int id) {
 
         return newsFeedViewModels.get(id).getTitle();

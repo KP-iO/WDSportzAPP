@@ -13,6 +13,12 @@ public class SelectTeamsRecyclerViewModel {
 
     }
 
+    public String getText1() {
+       return teamName;
+
+    }
+
+
 
 
 

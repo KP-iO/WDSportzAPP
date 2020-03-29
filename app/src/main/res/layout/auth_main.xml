@@ -14,25 +14,8 @@
         android:layout_height="wrap_content"
         android:background="#2FD30A"
         android:visibility="visible"
-        app:title="  ">
-
-
-        <TextView
-            android:id="@+id/toolbar_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:paddingRight="20dp"
-            android:text="Select Your Favourite teams"
-            android:textColor="#FAF8F8"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:titleTextColor="#F7F3F3" />
-
-        <SearchView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
+        app:title=" "
+       >
 
     </androidx.appcompat.widget.Toolbar>
 

@@ -1,13 +1,21 @@
 package com.example.wdsportz.MainActivities;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.wdsportz.Adapters.SelectTeamsRecyclerViewAdapter;
 import com.example.wdsportz.MainFragments.Frag_HomePage;
 import com.example.wdsportz.MainFragments.Frag_iniTeamSelect;
 import com.example.wdsportz.MainFragments.frag_Register;
@@ -43,21 +51,21 @@ public class Auth_Activity extends AppCompatActivity implements Frag_iniTeamSele
        /// }0);
     }
 
+/// SEARCH ->
+   @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.options_menu, menu);
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        MenuInflater inflater = getMenuInflater();
-//        inflater.inflate(R.menu.options_menu, menu);
-//
-//        // Associate searchable configuration with the SearchView
-//        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-//
-//        SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
-//
-//        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-//
-//        return true;
-//    }
+        // Associate searchable configuration with the SearchView
+        //SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+
+        //SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        //searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+
+
+        return true;
+    }
 
 
     public void goToMainFeed() {
@@ -68,7 +76,14 @@ public class Auth_Activity extends AppCompatActivity implements Frag_iniTeamSele
         startActivity(intent);
     }
 
+    private void handleIntent(Intent intent) {
 
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            String query = intent.getStringExtra(SearchManager.QUERY);
+            //process Cursor and display results
+        }
+
+    }
 
     @Override
     public void onFragmentInteraction(Uri uri){
