@@ -2,11 +2,12 @@ package com.example.wdsportz.Adapters;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.telephony.IccOpenLogicalChannelResponse;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,27 +20,37 @@ import com.example.wdsportz.R;
 import com.example.wdsportz.ViewModels.SelectTeamsRecyclerViewModel;
 import com.google.android.material.card.MaterialCardView;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class SelectTeamsRecyclerViewAdapter extends RecyclerView.Adapter<SelectTeamsRecyclerViewAdapter.ViewHolder> {
+public class SelectTeamsRecyclerViewAdapter extends RecyclerView.Adapter<SelectTeamsRecyclerViewAdapter.ViewHolder> implements Filterable {
 
     private List<SelectTeamsRecyclerViewModel> mData;
+    private List<SelectTeamsRecyclerViewModel> mDataFull;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
     private Context context;
 
     // data is passed into the constructor
+
+    public SelectTeamsRecyclerViewAdapter() {
+
+    }
+
+
     public SelectTeamsRecyclerViewAdapter(Context context, List<SelectTeamsRecyclerViewModel> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
+        mDataFull = new ArrayList<>(data);
         this.context = context;
+
     }
 
     // inflates the cell layout from xml when needed
     @Override
     @NonNull
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.ini_team_selection_item, parent, false);
+        View view = mInflater.inflate(R.layout.initeamselectionitem, parent, false);
         return new ViewHolder(view);
     }
 
@@ -51,21 +62,17 @@ public class SelectTeamsRecyclerViewAdapter extends RecyclerView.Adapter<SelectT
 
         ViewHolder(View itemView) {
             super(itemView);
-            cardView = itemView.findViewById(R.id.newsCard);
-            TextView = itemView.findViewById(R.id.info_text);
-            ImageView = itemView.findViewById(R.id.BtnImgTeamLogo);
+            this.cardView = itemView.findViewById(R.id.newsCard);
+            this.TextView = itemView.findViewById(R.id.info_text);
+            this.ImageView = itemView.findViewById(R.id.BtnImgTeamLogo);
 
-
-            itemView.setOnClickListener(this);
-           // cardView.setOnClickListener(this);
+            ImageView.setOnClickListener(this);
 
         }
 
         @Override
         public void onClick(View view) {
-
             if (mClickListener != null)
-
                 mClickListener.onItemClick(view, getAdapterPosition());
 
                 int highlightcolor = Color.YELLOW;
@@ -73,7 +80,6 @@ public class SelectTeamsRecyclerViewAdapter extends RecyclerView.Adapter<SelectT
                 Log.d("CLICK", TextView.getText() + "  Clicked");
 
         }
-
      }
 
     // binds the data to the TextView in each cell
@@ -94,6 +100,45 @@ public class SelectTeamsRecyclerViewAdapter extends RecyclerView.Adapter<SelectT
     public int getItemCount() {
         return mData.size();
     }
+
+    @Override
+    public Filter getFilter() {
+
+        return exampleFilter;
+    }
+
+    private Filter exampleFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+
+            List<SelectTeamsRecyclerViewModel> filteredList = new ArrayList<>();
+
+            if (constraint == null || constraint.length() == 0 ) {
+                filteredList.addAll(mDataFull);
+            }else{
+                String filterPattern = constraint.toString().toLowerCase().trim();
+
+                            for (SelectTeamsRecyclerViewModel item : mDataFull) {
+                                if (item.getText1().toLowerCase().contains(filterPattern)) {
+                                    filteredList.add(item);
+                                }
+                            }
+                }
+
+                FilterResults results = new FilterResults();
+                results.values = filteredList;
+
+                return results;
+            }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            mData.clear();
+            mData.addAll((List) results.values);
+            notifyDataSetChanged();
+
+        }
+    };
 
 
     // convenience method for getting data at click position

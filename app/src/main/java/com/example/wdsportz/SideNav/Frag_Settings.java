@@ -36,7 +36,7 @@ public class Frag_Settings extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+
     NavController navController;
 
 
@@ -82,33 +82,9 @@ public class Frag_Settings extends Fragment {
         return inflater.inflate(R.layout.fragment_settings, container, false);
     }
 
-    public void onViewCreated(final View view, @Nullable Bundle savedInstanceState){
+    public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
 
 
-
-
-
-       Button _signout = getView().findViewById(R.id.button2);
-
-        _signout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("Sign", "Signout pressed");
-                firebaseAuth.getInstance().signOut();
-                PreferenceUtils.saveEmail("", getContext());
-                PreferenceUtils.savePassword("", getContext());
-                goToLogIn();
-            }
-        });
-
-
-    }
-    public void goToLogIn() {
-        Intent intent = new Intent(getContext(), Auth_Activity.class);
-        //EditText editText = (EditText) findViewById(R.id.editText);
-        //String message = editText.getText().toString();
-        //intent.putExtra(EXTRA_MESSAGE, message);
-        startActivity(intent);
     }
 
 

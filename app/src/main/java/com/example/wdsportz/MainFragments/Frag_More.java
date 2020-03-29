@@ -1,5 +1,6 @@
 package com.example.wdsportz.MainFragments;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -7,12 +8,16 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.wdsportz.MainActivities.Auth_Activity;
 import com.example.wdsportz.R;
+import com.example.wdsportz.utils.PreferenceUtils;
+import com.google.firebase.auth.FirebaseAuth;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,6 +33,8 @@ public class Frag_More extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
     public Frag_More() {
         // Required empty public constructor
@@ -70,8 +77,6 @@ public class Frag_More extends Fragment {
     }
 
 
-
-
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
         final Button btnManageProfile = view.findViewById(R.id.btnManageProfile);
@@ -91,7 +96,27 @@ public class Frag_More extends Fragment {
         });
 
 
+        Button btnSignout = getView().findViewById(R.id.btnSignOut);
 
+        btnSignout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("Sign", "Signout pressed");
+                firebaseAuth.getInstance().signOut();
+                PreferenceUtils.saveEmail("", getContext());
+                PreferenceUtils.savePassword("", getContext());
+                goToLogIn();
+            }
+        });
+
+    }
+
+    public void goToLogIn() {
+        Intent intent = new Intent(getContext(), Auth_Activity.class);
+        //EditText editText = (EditText) findViewById(R.id.editText);
+        //String message = editText.getText().toString();
+        //intent.putExtra(EXTRA_MESSAGE, message);
+        startActivity(intent);
     }
 
 
