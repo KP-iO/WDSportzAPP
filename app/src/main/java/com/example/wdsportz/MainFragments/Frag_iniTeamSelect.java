@@ -3,21 +3,16 @@ package com.example.wdsportz.MainFragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
-
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.example.wdsportz.Adapters.SelectTeamsRecyclerViewAdapter;
 import com.example.wdsportz.Adapters.iniTeamSelectTabAdapter;
@@ -25,6 +20,8 @@ import com.example.wdsportz.MainActivities.Auth_Activity;
 import com.example.wdsportz.R;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+
+import java.util.ArrayList;
 
 
 /**
@@ -51,6 +48,8 @@ public class Frag_iniTeamSelect extends Fragment {
     // representing an object in the collection.
     iniTeamSelectTabAdapter iniTeamSelectTabAdapter;
     ViewPager2 viewPager;
+    SelectTeamsRecyclerViewAdapter selectTeamsRecyclerViewAdapter;
+    public ArrayList<String> list = new ArrayList<>();
 
 
     public Frag_iniTeamSelect() {
@@ -120,6 +119,9 @@ public class Frag_iniTeamSelect extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {
+
+
+
                 ((Auth_Activity)getActivity()).goToMainFeed();
             }
 

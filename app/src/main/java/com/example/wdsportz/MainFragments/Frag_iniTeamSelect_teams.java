@@ -9,7 +9,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -40,7 +39,7 @@ public class Frag_iniTeamSelect_teams extends Fragment {
     private static final String TAG = "iniTeamSelect_teams";
     FirebaseFirestore fireStoreDB = FirebaseFirestore.getInstance();
     private RecyclerView recyclerView;
-    SelectTeamsRecyclerViewAdapter selectTeamsRecyclerViewAdapter = new SelectTeamsRecyclerViewAdapter();
+    SelectTeamsRecyclerViewAdapter selectTeamsRecyclerViewAdapter;
     Menu menu1 ;
 
     @Nullable
@@ -92,7 +91,7 @@ public class Frag_iniTeamSelect_teams extends Fragment {
             @Override
             public boolean onQueryTextChange(String newText) {
 
-                selectTeamsRecyclerViewAdapter.getFilter().filter(newText);
+//                selectTeamsRecyclerViewAdapter.getFilter().filter(newText);
 
                 return false;
             }
@@ -157,4 +156,11 @@ public class Frag_iniTeamSelect_teams extends Fragment {
             });
 
 }
+
+public void getselections(View view){
+
+
+}
+
+
 }

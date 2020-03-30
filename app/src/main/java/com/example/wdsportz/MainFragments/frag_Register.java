@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -126,6 +127,7 @@ public class frag_Register extends Fragment {
         ImageButton button = view.findViewById(R.id.btnCreateAcc);
         String username = _txtfname.getText().toString();
         ImageView avatarReg = view.findViewById(R.id.avatarReg);
+        CheckBox checkBox = view.findViewById(R.id.ChkBoxTC);
 
         //progress dialog
         pd = new ProgressDialog(getActivity());
@@ -144,6 +146,7 @@ public class frag_Register extends Fragment {
                 final String password = _txtpass.getText().toString();
 
                 //   progressBar.setVisibility(View.VISIBLE);
+                if (checkBox.isChecked()){
                 firebaseAuth.createUserWithEmailAndPassword(email,password)      // code used to create user
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
@@ -203,8 +206,13 @@ public class frag_Register extends Fragment {
                                 }
                             }
                         });
-            }
+            } else{
+                    Toast.makeText(getActivity(), "Please read terms and conditions", Toast.LENGTH_SHORT).show();
+                }
+                        }
+
         });
+
 
 //avatarReg.setOnClickListener(new View.OnClickListener() {
 //    @Override
