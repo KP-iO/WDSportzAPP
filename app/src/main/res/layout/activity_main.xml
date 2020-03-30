@@ -32,6 +32,8 @@
             android:layout_marginBottom="11dp"
             android:foreground="@color/colorBlack"
             android:foregroundTint="#000E0808"
+            android:padding="20dp"
+            android:paddingLeft="20dp"
             app:defaultNavHost="true"
             app:navGraph="@navigation/main_navigation"
             tools:layout="@layout/fragment_homepage" />

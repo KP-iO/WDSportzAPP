@@ -21,7 +21,7 @@ import com.bumptech.glide.Glide;
 
 ////////// --------> The below line should get rid of the need to import each fragment.
 import com.example.wdsportz.MainFragments.*;
-import com.example.wdsportz.MainFragments.Frag_More;
+
 import com.example.wdsportz.MainFragments.Frag_Test_1;
 import com.example.wdsportz.MainFragments.Frag_iniTeamSelect;
 import com.example.wdsportz.R;
@@ -41,7 +41,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 // Note: Change name of other classes to 'ClassName'_Fragment
 
-public class Main_Activity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, Frag_Test_1.OnFragmentInteractionListener, Frag_iniTeamSelect.OnFragmentInteractionListener, Frag_HomePage.OnFragmentInteractionListener, Frag_Profile.OnFragmentInteractionListener, Frag_Notifications.OnFragmentInteractionListener, Frag_About.OnFragmentInteractionListener, Frag_Explore.OnFragmentInteractionListener, Frag_LiveGuide.OnFragmentInteractionListener, Frag_Settings.OnFragmentInteractionListener, Frag_More.OnFragmentInteractionListener {
+public class Main_Activity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, Frag_Test_1.OnFragmentInteractionListener, Frag_iniTeamSelect.OnFragmentInteractionListener, Frag_HomePage.OnFragmentInteractionListener, Frag_Profile.OnFragmentInteractionListener, Frag_Notifications.OnFragmentInteractionListener, Frag_About.OnFragmentInteractionListener, Frag_Explore.OnFragmentInteractionListener, Frag_LiveGuide.OnFragmentInteractionListener, Frag_Settings.OnFragmentInteractionListener {
     // Collect all listeners in one interface ^^^ and pass through to main activity?
 
     public Toolbar toolbar;
@@ -69,6 +69,7 @@ public class Main_Activity extends AppCompatActivity implements NavigationView.O
     }
 
     public void setupNavigation() {
+
         databaseReference = firebaseDatabase.getReference("Users");
 
 
