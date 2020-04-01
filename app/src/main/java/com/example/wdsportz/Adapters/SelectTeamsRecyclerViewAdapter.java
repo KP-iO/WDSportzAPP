@@ -27,8 +27,10 @@ public class SelectTeamsRecyclerViewAdapter extends RecyclerView.Adapter<SelectT
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
     private Context context;
-    public ArrayList<String> list = new ArrayList<>();
+    public static ArrayList<String> list = new ArrayList<>();
     String team;
+
+
 
 
 
@@ -42,6 +44,10 @@ public class SelectTeamsRecyclerViewAdapter extends RecyclerView.Adapter<SelectT
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
         this.context = context;
+    }
+
+    public SelectTeamsRecyclerViewAdapter() {
+
     }
 
     // inflates the cell layout from xml when needed
@@ -89,7 +95,7 @@ public class SelectTeamsRecyclerViewAdapter extends RecyclerView.Adapter<SelectT
                 list.add(team);
 
             }
-                Log.d("CLICK", Arrays.toString(list.toArray()) + "  Clicked");
+                Log.d("CLICK", Arrays.toString(getArrayList().toArray()) + "  Clicked");
 
 
 
@@ -109,9 +115,9 @@ public class SelectTeamsRecyclerViewAdapter extends RecyclerView.Adapter<SelectT
         return team;
     }
 
-    public ArrayList getArrayList()
+    public static ArrayList<String> getArrayList()
     {
-        return list;
+        return  list;
     }
 
     @Override

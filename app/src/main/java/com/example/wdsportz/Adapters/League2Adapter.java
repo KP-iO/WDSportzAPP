@@ -41,7 +41,6 @@ public class League2Adapter extends RecyclerView.Adapter<League2Adapter.MyViewHo
     @Override
     public void onBindViewHolder(@NonNull League2Adapter.MyViewHolder holder, int i) {
         holder.matchTitle.setText(mData.get(i).getStrEvent());
-        holder.matchDate.setText(mData.get(i).getStrEvent());
         holder.awayName.setText(mData.get(i).getStrAwayTeam());
         holder.homeName.setText(mData.get(i).getStrHomeTeam());
 
@@ -57,9 +56,9 @@ public class League2Adapter extends RecyclerView.Adapter<League2Adapter.MyViewHo
 
     @Override
     public int getItemCount(){
-        int i = 2;
-        return i;
-//        return mData.size();
+//        int i = 2;
+//        return i;
+        return mData.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
@@ -68,7 +67,7 @@ public class League2Adapter extends RecyclerView.Adapter<League2Adapter.MyViewHo
 
         public MyViewHolder(View view){
             super(view);
-            matchTitle = (TextView) view.findViewById(R.id.match_title);
+            matchTitle = (TextView) view.findViewById(R.id.eventName);
             matchDate = (TextView) view.findViewById(R.id.matchDate);
             awayName = (TextView) view.findViewById(R.id.awayName);
             homeName = (TextView) view.findViewById(R.id.homeName);

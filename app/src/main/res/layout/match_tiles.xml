@@ -83,13 +83,16 @@
                 android:id="@+id/eventName"
                 android:layout_width="147dp"
                 android:layout_height="27dp"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="32dp"
                 android:layout_marginBottom="52dp"
-                android:maxLength="50"
-                android:maxLines="1"
+                android:maxLength="70"
+                android:maxLines="3"
                 android:text="Hello World "
-                android:textSize="20sp"
+                android:textSize="10sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                tools:layout_editor_absoluteX="117dp" />
+                app:layout_constraintEnd_toStartOf="@+id/newsImage2"
+                app:layout_constraintStart_toEndOf="@+id/newsImage" />
 
             <ImageView
                 android:id="@+id/newsImage"

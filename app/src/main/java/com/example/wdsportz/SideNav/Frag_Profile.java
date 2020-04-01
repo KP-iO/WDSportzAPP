@@ -154,7 +154,7 @@ public class Frag_Profile extends Fragment {
         //progress dialog
         pd = new ProgressDialog(getActivity());
 
-        //permissions constantz
+        //permissions constants
 
 
 

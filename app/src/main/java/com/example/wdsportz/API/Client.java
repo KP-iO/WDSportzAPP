@@ -1,7 +1,5 @@
 package com.example.wdsportz.API;
 
-import com.google.api.Http;
-
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -12,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class Client {
 //https://www.thesportsdb.com/api/v1/json/1/eventspastleague.php?id=4647
-        public static final String BASE_URL = "https://www.thesportsdb.com/api/v1/json/1/";
+        public static final String BASE_URL = "https://www.thesportsdb.com/api/v1/json/1/eventspastleague.php/";
         public static Retrofit retrofit = null;
 
         public static Retrofit getClient(){

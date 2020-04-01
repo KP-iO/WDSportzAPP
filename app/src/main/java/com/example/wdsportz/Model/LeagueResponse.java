@@ -13,18 +13,45 @@ import java.util.List;
  */
 
 
-public class LeagueResponse {
-    @SerializedName("events")
-    private String string;
-    @SerializedName("page")
-    private int page;
-    @SerializedName("results")
-    private List<League> results;
-    @SerializedName("total_results")
-    private int totalResults;
-    @SerializedName("total_pages")
-    private int totalPages;
+public class LeagueResponse implements Parcelable {
 
+    @SerializedName("events")
+    private List<League> results;
+
+
+    protected LeagueResponse(Parcel in) {
+        results = in.createTypedArrayList(League.CREATOR);
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeTypedList(results);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<LeagueResponse> CREATOR = new Creator<LeagueResponse>() {
+        @Override
+        public LeagueResponse createFromParcel(Parcel in) {
+            return new LeagueResponse(in);
+        }
+
+        @Override
+        public LeagueResponse[] newArray(int size) {
+            return new LeagueResponse[size];
+        }
+    };
+
+    public List<League> getMatches() {
+        return results;
+    }
+
+    public void setResults(List<League> results) {
+        this.results = results;
+    }
 }
 
 /*
@@ -40,13 +67,7 @@ public class LeagueResponse {
         return results;
     }
 
-    public List<League> getMatches() {
-        return results;
-    }
 
-    public void setResults(List<League> results) {
-        this.results = results;
-    }
 
     public void setMatches(List<League> results) {
         this.results = results;

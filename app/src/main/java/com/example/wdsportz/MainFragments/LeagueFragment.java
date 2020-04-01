@@ -14,7 +14,6 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -136,15 +135,17 @@ public class LeagueFragment extends Fragment {
             Service apiService = Client.getClient().create(Service.class);
             Log.d("Check 2", apiService.toString());
 
-            Call<LeagueResponse> call = apiService.getEvents();
+            Call<LeagueResponse> call = apiService.getEvents(BuildConfig.SPORTS_DB_API);
             call.enqueue(new Callback<LeagueResponse>() {
 
                 @Override
                 public void onResponse(Call<LeagueResponse> call, Response<LeagueResponse> response) {
+                    List<League> movies = response.body().getMatches();
+
                     LeagueResponse leagues = response.body();
-                    Log.d("SUCCESS", leagues.toString());
-                    //recyclerView.setAdapter(new League2Adapter(getContext(), leagues));
-                    //recyclerView.smoothScrollToPosition(0);
+                    Log.d("SUCCESS", movies.toString());
+                    recyclerView.setAdapter(new League2Adapter(getContext(), movies));
+                    recyclerView.smoothScrollToPosition(0);
                 }
 
                 @Override

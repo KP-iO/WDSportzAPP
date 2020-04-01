@@ -3,6 +3,7 @@ package com.example.wdsportz.MainFragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,8 +21,15 @@ import com.example.wdsportz.MainActivities.Auth_Activity;
 import com.example.wdsportz.R;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 /**
@@ -49,7 +57,15 @@ public class Frag_iniTeamSelect extends Fragment {
     iniTeamSelectTabAdapter iniTeamSelectTabAdapter;
     ViewPager2 viewPager;
     SelectTeamsRecyclerViewAdapter selectTeamsRecyclerViewAdapter;
-    public ArrayList<String> list = new ArrayList<>();
+    public ArrayList<String> teamsSelected = new ArrayList<>();
+
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    DatabaseReference databaseReference;
+    StorageReference storageReference;
+
+
+
 
 
     public Frag_iniTeamSelect() {
@@ -78,6 +94,8 @@ public class Frag_iniTeamSelect extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        teamsSelected =SelectTeamsRecyclerViewAdapter.getArrayList();
+
 
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
@@ -98,6 +116,10 @@ public class Frag_iniTeamSelect extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        databaseReference = firebaseDatabase.getReference("Users");
+        storageReference = FirebaseStorage.getInstance().getReference();
+
+
         TabLayout tabLayout = view.findViewById(R.id.tab_layout);
 
         iniTeamSelectTabAdapter = new iniTeamSelectTabAdapter(this);
@@ -119,6 +141,11 @@ public class Frag_iniTeamSelect extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {
+//                selectTeamsRecyclerViewAdapter = new SelectTeamsRecyclerViewAdapter();
+//                teamsSelected = selectTeamsRecyclerViewAdapter.getArrayList();
+
+                Log.d("CLICK1", Arrays.toString(teamsSelected.toArray()) + "  Clicked");
+
 
 
 

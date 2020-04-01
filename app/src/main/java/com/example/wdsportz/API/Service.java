@@ -11,8 +11,8 @@ import retrofit2.http.Query;
  */
 public interface Service {
 
-    @GET("eventspastleague.php?id=4647")
-    Call<LeagueResponse> getEvents();
+    @GET("strEvent")
+    Call<LeagueResponse> getEvents(@Query("id") String apiKey);
 
     @GET("events/strEvent")
     Call<LeagueResponse> getMatchName(@Query("1") String apiKey);
