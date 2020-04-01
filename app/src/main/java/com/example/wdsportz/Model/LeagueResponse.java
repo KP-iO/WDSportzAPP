@@ -13,7 +13,9 @@ import java.util.List;
  */
 
 
-public class LeagueResponse implements Parcelable {
+public class LeagueResponse {
+    @SerializedName("events")
+    private String string;
     @SerializedName("page")
     private int page;
     @SerializedName("results")
@@ -23,6 +25,9 @@ public class LeagueResponse implements Parcelable {
     @SerializedName("total_pages")
     private int totalPages;
 
+}
+
+/*
     public int getPage() {
         return page;
     }
@@ -97,4 +102,4 @@ public class LeagueResponse implements Parcelable {
             return new LeagueResponse[size];
         }
     };
-}
+}*/
