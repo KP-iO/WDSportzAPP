@@ -67,7 +67,6 @@ public class LeagueFragment extends Fragment {
     ProgressDialog pd;
 
 
-
     public LeagueFragment() {
         // Required empty public constructor
     }
@@ -109,23 +108,13 @@ public class LeagueFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         final Context context = view.getContext();
         initViews();
+        Log.d("initViews","done");
         loadJSON();
-
-
-
-
-
-
-
-
+        Log.d("loadJSON","done");
 
         leagueList = new ArrayList<>();
         adapter = new League2Adapter(getContext(), leagueList);
 // Implement error handling for all cases e.g (Name/ Logo not accessible) ------>
-
-
-
-
 
     }
 
@@ -134,25 +123,28 @@ public class LeagueFragment extends Fragment {
 //        recyclerView = getView().findViewById(R.id.recyclerleague);
 
 
-        try {
+        /*try {
             if (BuildConfig.SPORTS_DB_API.isEmpty()) {
                 Toast.makeText(getContext(), "Please obtain API Key firstly from SPORTSDB", Toast.LENGTH_SHORT).show();
                 pd.dismiss();
                 return;
             }
-
+*/
             Client Client = new Client();
-            Service apiService =
-                    Client.getClient().create(Service.class);
-            Call<LeagueResponse> call = apiService.getEvents(BuildConfig.SPORTS_DB_API);
+            Log.d("Check", Client.toString());
+
+            Service apiService = Client.getClient().create(Service.class);
+            Log.d("Check 2", apiService.toString());
+
+            Call<LeagueResponse> call = apiService.getEvents();
             call.enqueue(new Callback<LeagueResponse>() {
 
                 @Override
                 public void onResponse(Call<LeagueResponse> call, Response<LeagueResponse> response) {
-                    List<League> leagues = response.body().getResults();
-
-                    recyclerView.setAdapter(new League2Adapter(getContext(), leagues));
-                    recyclerView.smoothScrollToPosition(0);
+                    LeagueResponse leagues = response.body();
+                    Log.d("SUCCESS", leagues.toString());
+                    //recyclerView.setAdapter(new League2Adapter(getContext(), leagues));
+                    //recyclerView.smoothScrollToPosition(0);
                 }
 
                 @Override
@@ -161,14 +153,11 @@ public class LeagueFragment extends Fragment {
                     Toast.makeText(getContext(), "Error Fetching Data!", Toast.LENGTH_SHORT).show();
                 }
 
-
-
-
             });
-        } catch (Exception e) {
+       /* } catch (Exception e) {
             Log.d("Error", e.getMessage());
             Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
-        }
+        }*/
     }
 
     private void initViews() {
@@ -178,7 +167,7 @@ public class LeagueFragment extends Fragment {
         recyclerView = getView().findViewById(R.id.recyclerleague);
 
         leagueList = new ArrayList<>();
-        adapter = new League2Adapter(getContext(), leagueList);
+        //adapter = new League2Adapter(getContext(), leagueList);
 
 
         if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
@@ -187,12 +176,9 @@ public class LeagueFragment extends Fragment {
             recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 4));
         }
 
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-
-
-
+       // recyclerView.setItemAnimator(new DefaultItemAnimator());
+        //recyclerView.setAdapter(adapter);
+        //adapter.notifyDataSetChanged();
 
     }
 

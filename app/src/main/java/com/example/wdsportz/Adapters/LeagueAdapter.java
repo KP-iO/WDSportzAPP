@@ -40,12 +40,9 @@ public class LeagueAdapter extends RecyclerView.Adapter<LeagueAdapter.MyViewHold
     }
 
 
-
-
 //    public WatchViewAdapter(Context context, List<VideoViewModel> leagueViewModels) {
 //
 //    }
-
 
     @NonNull
     @Override
@@ -90,8 +87,6 @@ public class LeagueAdapter extends RecyclerView.Adapter<LeagueAdapter.MyViewHold
     }
 
 
-
-
      public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView title;
         ImageButton btnimg;
@@ -123,9 +118,6 @@ public class LeagueAdapter extends RecyclerView.Adapter<LeagueAdapter.MyViewHold
                 }
             });
         }
-
-
-
 
 
          @Override
