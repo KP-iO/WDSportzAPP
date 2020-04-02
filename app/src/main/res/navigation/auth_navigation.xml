@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/auth_navigation"
+    app:startDestination="@id/frag_login">
+    <fragment
+        android:id="@+id/blankFragment"
+        android:name="com.example.wdsportz.SetImage"
+        android:label="fragment_setimage"
+        tools:layout="@layout/fragment_setimage" >
+        <action
+            android:id="@+id/action_blankFragment_to_frag_IniTeamSelection"
+            app:destination="@id/frag_IniTeamSelection" />
+    </fragment>
+    <include app:graph="@navigation/main_navigation" />
+    <fragment
+        android:id="@+id/frag_login"
+        android:name="com.example.wdsportz.MainFragments.frag_login"
+        android:label="fragment_loginpage"
+        tools:layout="@layout/fragment_loginpage" >
+        <action
+            android:id="@+id/action_frag_login_to_mobile_navigation1"
+            app:destination="@id/main_navigation" />
+    </fragment><action android:id="@+id/action_global_frag_IniTeamSelection" app:destination="@id/frag_IniTeamSelection"/>
+    <fragment
+        android:id="@+id/frag_Register"
+        android:name="com.example.wdsportz.MainFragments.frag_Register"
+        android:label="fragment_blank_fragment2"
+        tools:layout="@layout/registration" >
+        <action
+            android:id="@+id/action_RegisterToLogin"
+            app:destination="@id/frag_login" />
+        <action
+            android:id="@+id/action_frag_Register_to_blankFragment"
+            app:destination="@id/blankFragment" />
+    </fragment>
+    <action
+        android:id="@+id/globalAction_Register"
+        app:destination="@id/frag_Register" /><action android:id="@+id/action_global_frag_login" app:destination="@id/frag_login"/>
+
+    <fragment
+        android:id="@+id/frag_IniTeamSelection"
+        android:name="com.example.wdsportz.MainFragments.Frag_iniTeamSelect"
+        android:label="fragment_collection_demo"
+        tools:layout="@layout/fragment_initeamselection" >
+        <action
+            android:id="@+id/action_frag_IniTeamSelection_to_main_navigation"
+            app:destination="@id/main_navigation" />
+    </fragment>
+    <action
+        android:id="@+id/action_global_collectionDemoFragment"
+        app:destination="@id/frag_IniTeamSelection"
+        app:enterAnim="@anim/fade_in" />
+</navigation>

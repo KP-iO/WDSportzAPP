@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/frag_HomePage">
+
+    <fragment
+        android:id="@+id/frag_HomePage"
+        android:name="com.example.wdsportz.MainFragments.Frag_HomePage"
+        android:label="fragment_homepage"
+        tools:layout="@layout/fragment_homepage" >
+        <action
+            android:id="@+id/action_frag_HomePage_to_frag_Profile"
+            app:destination="@id/frag_Profile" />
+    </fragment>
+    <fragment
+        android:id="@+id/frag_watch"
+        android:name="com.example.wdsportz.MainFragments.Frag_Watch"
+        android:label="fragment_watchfragment"
+        tools:layout="@layout/fragment_watchfragment" />
+    <fragment
+        android:id="@+id/scores"
+        android:name="com.example.wdsportz.Scores"
+        android:label="fragment_scores"
+        tools:layout="@layout/fragment_scores" />
+    <action android:id="@+id/action_global_frag_HomePage" app:destination="@id/frag_HomePage" />
+    <action android:id="@+id/action_global_scores" app:destination="@id/scores" />
+    <fragment
+        android:id="@+id/more"
+        android:name="com.example.wdsportz.MainFragments.Frag_More"
+        android:label="fragment_more"
+        tools:layout="@layout/fragment_more" /><action android:id="@+id/action_global_more" app:destination="@id/more"/>
+    <fragment
+        android:id="@+id/frag_Profile"
+        android:name="com.example.wdsportz.SideNav.Frag_Profile"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" /><action android:id="@+id/action_global_frag_watch" app:destination="@id/frag_watch"/>
+    <fragment
+        android:id="@+id/LiveGuide"
+        android:name="com.example.wdsportz.SideNav.Frag_LiveGuide"
+        android:label="fragment_frag__live_guide"
+        tools:layout="@layout/fragment_frag__live_guide" />
+    <fragment
+        android:id="@+id/frag_About"
+        android:name="com.example.wdsportz.SideNav.Frag_About"
+        android:label="fragment_frag_about"
+        tools:layout="@layout/fragment_frag_about" />
+    <fragment
+        android:id="@+id/Explore"
+        android:name="com.example.wdsportz.SideNav.Frag_Explore"
+        android:label="fragment_frag_explore"
+        tools:layout="@layout/fragment_frag_explore" />
+    <fragment
+        android:id="@+id/Notifications"
+        android:name="com.example.wdsportz.SideNav.Frag_Notifications"
+        android:label="fragment_frag_notifications"
+        tools:layout="@layout/fragment_frag_notifications" />
+    <action android:id="@+id/action_global_frag_About" app:destination="@id/frag_About"/><action android:id="@+id/action_global_frag_Profile" app:destination="@id/frag_Profile"/><action android:id="@+id/action_global_Explore" app:destination="@id/Explore"/><action android:id="@+id/action_global_LiveGuide" app:destination="@id/LiveGuide"/>
+    <action android:id="@+id/action_global_Notifications" app:destination="@id/Notifications"/>
+    <fragment
+        android:id="@+id/frag_videoplay"
+        android:name="com.example.wdsportz.supportFeatures.Frag_videoplay"
+        android:label="fragment_frag_videoplay"
+        tools:layout="@layout/fragment_frag_videoplay" >
+        <argument
+            android:name="videolink"
+            app:argType="string" />
+    </fragment>
+    <action android:id="@+id/action_global_frag_videoplay" app:destination="@id/frag_videoplay" />
+    <fragment
+        android:id="@+id/frag_Settings"
+        android:name="com.example.wdsportz.SideNav.Frag_Settings"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_frag_Settings_to_frag_login3"
+            app:destination="@id/frag_login3" />
+    </fragment>
+    <action android:id="@+id/action_global_frag_Settings" app:destination="@id/frag_Settings" />
+    <fragment
+        android:id="@+id/frag_login3"
+        android:name="com.example.wdsportz.MainFragments.frag_login"
+        android:label="fragment_loginpage"
+        tools:layout="@layout/fragment_loginpage" /><action android:id="@+id/action_global_frag_login3" app:destination="@id/frag_login3"/>
+    <fragment
+        android:id="@+id/newsDetail"
+        android:name="com.example.wdsportz.supportFeatures.newsDetail"
+        android:label="fragment_news_detail"
+        tools:layout="@layout/fragment_news_detail" /><action android:id="@+id/action_global_newsDetail" app:destination="@id/newsDetail"/>
+    <fragment
+        android:id="@+id/livestreamFragment"
+        android:name="com.example.wdsportz.LivestreamFragment"
+        android:label="fragment_livestream"
+        tools:layout="@layout/fragment_livestream" />
+    <action android:id="@+id/action_global_livestreamFragment" app:destination="@id/livestreamFragment" />
+    <fragment
+        android:id="@+id/leagueFragment"
+        android:name="com.example.wdsportz.MainFragments.LeagueFragment"
+        android:label="fragment_league"
+        tools:layout="@layout/fragment_league" /><action android:id="@+id/action_global_leagueFragment" app:destination="@id/leagueFragment"/>
+    <fragment
+        android:id="@+id/blankFragment"
+        android:name="com.example.wdsportz.SetImage"
+        android:label="fragment_setimage"
+        tools:layout="@layout/fragment_setimage" /><action android:id="@+id/action_global_blankFragment" app:destination="@id/blankFragment"/>
+
+
+</navigation>
