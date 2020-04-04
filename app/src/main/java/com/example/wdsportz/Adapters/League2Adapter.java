@@ -40,15 +40,21 @@ public class League2Adapter extends RecyclerView.Adapter<League2Adapter.MyViewHo
 
     @Override
     public void onBindViewHolder(@NonNull League2Adapter.MyViewHolder holder, int i) {
+        String HTeam = mData.get(i).getStrHomeTeam();
+        String ATeam = mData.get(i).getStrAwayTeam();
+        String HTeamScore = Integer.toString(mData.get(i).getIntHomeScore());
+        String ATeamScore = Integer.toString(mData.get(i).getIntAwayScore());
+        String date = mData.get(i).getDateEventLocal();
+
+
         holder.matchTitle.setText(mData.get(i).getStrEvent());
         holder.awayName.setText(mData.get(i).getStrAwayTeam());
         holder.homeName.setText(mData.get(i).getStrHomeTeam());
+        holder.awayScore.setText(ATeamScore);
+        holder.homeScore.setText(HTeamScore);
+        holder.matchDate.setText(date);
 
-        String HTeam = mData.get(i).getStrHomeTeam();
-        String ATeam = mData.get(i).getStrAwayTeam();
-        String HTeamScore = Double.toString(mData.get(i).getIntHomeScore());
-        String ATeamScore = Double.toString(mData.get(i).getIntAwayScore());
-        String date = mData.get(i).getDateEventLocal();
+
 
 
     }
@@ -62,7 +68,8 @@ public class League2Adapter extends RecyclerView.Adapter<League2Adapter.MyViewHo
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
-        public TextView matchTitle, matchDate, awayName, homeName;
+        public TextView matchTitle, matchDate, awayName, homeName, awayScore, homeScore;
+
 
 
         public MyViewHolder(View view){
@@ -71,6 +78,9 @@ public class League2Adapter extends RecyclerView.Adapter<League2Adapter.MyViewHo
             matchDate = (TextView) view.findViewById(R.id.matchDate);
             awayName = (TextView) view.findViewById(R.id.awayName);
             homeName = (TextView) view.findViewById(R.id.homeName);
+            awayScore = (TextView) view.findViewById(R.id.awayScore);
+            homeScore = (TextView) view.findViewById(R.id.homeScore);
+
 
 
 

@@ -30,16 +30,49 @@
 
             <TextView
                 android:id="@+id/matchDate"
-                android:layout_width="146dp"
-                android:layout_height="25dp"
+                android:layout_width="147dp"
+                android:layout_height="27dp"
                 android:layout_marginStart="28dp"
-                android:layout_marginTop="11dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="92dp"
+                android:maxLength="70"
+                android:maxLines="3"
+                android:text="Hello World "
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/newsImage2"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/newsImage" />
+
+            <TextView
+                android:id="@+id/awayScore"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="76dp"
                 android:layout_marginEnd="33dp"
                 android:maxLength="50"
                 android:maxLines="1"
                 android:text="Hello World "
                 android:textSize="20sp"
                 app:layout_constraintEnd_toStartOf="@+id/newsImage2"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/newsImage"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/homeScore"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="76dp"
+                android:layout_marginEnd="33dp"
+                android:maxLength="50"
+                android:maxLines="1"
+                android:text="Hello World "
+                android:textSize="20sp"
+                app:layout_constraintEnd_toStartOf="@+id/newsImage2"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/newsImage"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -92,6 +125,7 @@
                 android:textSize="10sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/newsImage2"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/newsImage" />
 
             <ImageView
