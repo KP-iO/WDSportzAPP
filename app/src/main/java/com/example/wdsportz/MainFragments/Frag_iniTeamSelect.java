@@ -49,8 +49,10 @@ public class Frag_iniTeamSelect extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    String postKey;
 
     private OnFragmentInteractionListener mListener;
+    FirebaseUser firebaseUser;
 
     // When requested, this adapter returns a Frag_iniTeamSelect_teams,
     // representing an object in the collection.
@@ -94,7 +96,7 @@ public class Frag_iniTeamSelect extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        teamsSelected =SelectTeamsRecyclerViewAdapter.getArrayList();
+
 
 
         if (getArguments() != null) {
@@ -144,16 +146,31 @@ public class Frag_iniTeamSelect extends Fragment {
 //                selectTeamsRecyclerViewAdapter = new SelectTeamsRecyclerViewAdapter();
 //                teamsSelected = selectTeamsRecyclerViewAdapter.getArrayList();
 
+
+               selectTeamsRecyclerViewAdapter = new SelectTeamsRecyclerViewAdapter();
+                 teamsSelected = selectTeamsRecyclerViewAdapter.getArrayList();
                 Log.d("CLICK1", Arrays.toString(teamsSelected.toArray()) + "  Clicked");
 
 
 
+                adFavourite();
 
                 ((Auth_Activity)getActivity()).goToMainFeed();
             }
 
         });
 
+    }
+
+
+    private void adFavourite(){
+
+
+    }
+
+    public String getPostKey() {
+        postKey = getArguments().getString("title");
+        return postKey;
     }
 
 

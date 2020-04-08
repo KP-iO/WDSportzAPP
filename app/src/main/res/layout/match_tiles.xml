@@ -2,24 +2,31 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="410dp"
-    android:layout_height="150dp"
+    android:layout_width="190dp"
+    android:layout_height="175dp"
     android:layout_gravity="center_horizontal"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginBottom="5dp"
     android:clickable="true"
+    android:background="@drawable/border_scores"
     android:gravity="center"
     android:orientation="vertical"
-    android:paddingLeft="5dp"
-    android:paddingTop="20dp"
-    android:paddingRight="5dp">
+    android:paddingLeft="10dp"
+    android:paddingTop="7dp"
+    android:paddingBottom="7dp"
+    android:paddingRight="10dp"
+    android:maxWidth="230dp"
+    android:maxHeight="150dp">
 
 
     <androidx.cardview.widget.CardView
         android:id="@+id/newsCard"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="250dp"
+        android:layout_height="175dp"
         android:layout_gravity="center"
         android:paddingLeft="20dp"
-        app:cardBackgroundColor="#6C747C"
+        app:cardBackgroundColor="#FFFFFF"
         app:cardCornerRadius="6dp"
         app:cardElevation="4dp"
         app:cardMaxElevation="6dp">
@@ -34,106 +41,96 @@
                 android:layout_height="27dp"
                 android:layout_marginStart="28dp"
                 android:layout_marginEnd="32dp"
-                android:layout_marginBottom="92dp"
+                android:layout_marginBottom="72dp"
                 android:maxLength="70"
                 android:maxLines="3"
                 android:text="Hello World "
                 android:textSize="10sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/newsImage2"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="0.289"
                 app:layout_constraintStart_toEndOf="@+id/newsImage" />
 
             <TextView
                 android:id="@+id/awayScore"
-                android:layout_width="60dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="28dp"
-                android:layout_marginTop="76dp"
-                android:layout_marginEnd="33dp"
+                android:layout_width="40dp"
+                android:layout_height="29dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginBottom="16dp"
                 android:maxLength="50"
                 android:maxLines="1"
                 android:text="Hello World "
                 android:textSize="20sp"
-                app:layout_constraintEnd_toStartOf="@+id/newsImage2"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/newsImage"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/awayName" />
 
             <TextView
                 android:id="@+id/homeScore"
-                android:layout_width="60dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="28dp"
-                android:layout_marginTop="76dp"
-                android:layout_marginEnd="33dp"
+                android:layout_width="48dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="48dp"
                 android:maxLength="50"
                 android:maxLines="1"
                 android:text="Hello World "
                 android:textSize="20sp"
-                app:layout_constraintEnd_toStartOf="@+id/newsImage2"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/newsImage"
+                app:layout_constraintStart_toEndOf="@+id/homeName"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/awayName"
-                android:layout_width="103dp"
-                android:layout_height="29dp"
-                android:layout_marginEnd="1dp"
-                android:layout_marginBottom="7dp"
-                android:maxLength="50"
-                android:maxLines="1"
-                android:text="Hello World "
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
-
-            <TextView
-                android:id="@+id/homeName"
-                android:layout_width="102dp"
-                android:layout_height="29dp"
+                android:layout_width="60dp"
+                android:layout_height="24dp"
                 android:layout_marginStart="2dp"
-                android:layout_marginBottom="7dp"
+                android:layout_marginBottom="32dp"
                 android:maxLength="50"
                 android:maxLines="1"
-                android:text="Hello World "
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <ImageView
-                android:id="@+id/newsImage2"
-                android:layout_width="87dp"
-                android:layout_height="69dp"
-                android:layout_marginTop="11dp"
-                android:layout_marginEnd="17dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/_likes__flames" />
-
-            <TextView
-                android:id="@+id/eventName"
-                android:layout_width="147dp"
-                android:layout_height="27dp"
-                android:layout_marginStart="28dp"
-                android:layout_marginEnd="32dp"
-                android:layout_marginBottom="52dp"
-                android:maxLength="70"
-                android:maxLines="3"
                 android:text="Hello World "
                 android:textSize="10sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/newsImage2"
-                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/newsImage2" />
+
+            <TextView
+                android:id="@+id/homeName"
+                android:layout_width="55dp"
+                android:layout_height="22dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginBottom="128dp"
+                android:maxLength="50"
+                android:maxLines="1"
+                android:text="Hello World "
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/newsImage" />
+
+            <!--            <TextView-->
+            <!--                android:id="@+id/eventName"-->
+            <!--                android:layout_width="147dp"-->
+            <!--                android:layout_height="27dp"-->
+            <!--                android:layout_marginStart="28dp"-->
+            <!--                android:layout_marginBottom="140dp"-->
+            <!--                android:maxLength="70"-->
+            <!--                android:maxLines="3"-->
+            <!--                android:text="Hello World "-->
+            <!--                android:textSize="10sp"-->
+            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--                app:layout_constraintStart_toEndOf="@+id/newsImage" />-->
+
+            <ImageView
+                android:id="@+id/newsImage2"
+                android:layout_width="61dp"
+                android:layout_height="61dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="40dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/newsImage"
+                app:srcCompat="@drawable/_likes__flames" />
 
             <ImageView
                 android:id="@+id/newsImage"
-                android:layout_width="87dp"
-                android:layout_height="69dp"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="11dp"
+                android:layout_width="62dp"
+                android:layout_height="63dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/_likes__flames" />

@@ -28,7 +28,7 @@ public class SelectTeamsRecyclerViewAdapter extends RecyclerView.Adapter<SelectT
     private ItemClickListener mClickListener;
     private Context context;
     public static ArrayList<String> list = new ArrayList<>();
-    String team;
+    String team, team1;
 
 
 
@@ -94,7 +94,14 @@ public class SelectTeamsRecyclerViewAdapter extends RecyclerView.Adapter<SelectT
                 team = mData.get(position).teamName;
                 list.add(team);
 
-            }
+            }else {
+                    team1 = mData.get(position).teamName;
+                    list.remove(team1);
+
+
+
+
+                }
                 Log.d("CLICK", Arrays.toString(getArrayList().toArray()) + "  Clicked");
 
 
@@ -119,6 +126,9 @@ public class SelectTeamsRecyclerViewAdapter extends RecyclerView.Adapter<SelectT
     {
         return  list;
     }
+
+
+
 
     @Override
     public int getItemCount() {
