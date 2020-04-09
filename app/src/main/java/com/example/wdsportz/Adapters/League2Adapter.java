@@ -47,7 +47,7 @@ public class League2Adapter extends RecyclerView.Adapter<League2Adapter.MyViewHo
         String date = mData.get(i).getDateEventLocal();
 
 
-        holder.matchTitle.setText(mData.get(i).getStrEvent());
+//        holder.matchTitle.setText(mData.get(i).getStrEvent());
         holder.awayName.setText(mData.get(i).getStrAwayTeam());
         holder.homeName.setText(mData.get(i).getStrHomeTeam());
         holder.awayScore.setText(ATeamScore);
@@ -74,7 +74,7 @@ public class League2Adapter extends RecyclerView.Adapter<League2Adapter.MyViewHo
 
         public MyViewHolder(View view){
             super(view);
-            matchTitle = (TextView) view.findViewById(R.id.eventName);
+//            matchTitle = (TextView) view.findViewById(R.id.eventName);
             matchDate = (TextView) view.findViewById(R.id.matchDate);
             awayName = (TextView) view.findViewById(R.id.awayName);
             homeName = (TextView) view.findViewById(R.id.homeName);

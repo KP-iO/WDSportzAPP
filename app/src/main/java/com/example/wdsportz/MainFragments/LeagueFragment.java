@@ -15,7 +15,6 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wdsportz.API.Client;
@@ -106,6 +105,9 @@ public class LeagueFragment extends Fragment {
 
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         final Context context = view.getContext();
+
+
+
         initViews();
         Log.d("initViews","done");
         loadJSON();
@@ -145,7 +147,7 @@ public class LeagueFragment extends Fragment {
                     LeagueResponse leagues = response.body();
                     Log.d("SUCCESS", movies.toString());
                     recyclerView.setAdapter(new League2Adapter(getContext(), movies));
-                    recyclerView.smoothScrollToPosition(0);
+//                    recyclerView.smoothScrollToPosition(0);
                 }
 
                 @Override
@@ -162,17 +164,22 @@ public class LeagueFragment extends Fragment {
     }
 
     private void initViews() {
-
         final Context context = getContext();
-
         recyclerView = getView().findViewById(R.id.recyclerleague);
+        int numberOfColumns = 2;
+
+
+
+
+//        recyclerView = getView().findViewById(R.id.recyclerleague);
 
         leagueList = new ArrayList<>();
         //adapter = new League2Adapter(getContext(), leagueList);
 
 
         if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-            recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
+            recyclerView.setLayoutManager(new GridLayoutManager(context, numberOfColumns));
+//            recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
         } else {
             recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 4));
         }
