@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     android:background="@drawable/sign_in_screen_background">
 
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="355dp"
+        android:layout_height="119dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="7dp"
+        android:background="#FFDE17"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="@+id/password"
+        app:layout_constraintEnd_toEndOf="@+id/username"
+        app:layout_constraintTop_toTopOf="@+id/textView" />
+
     <Button
         android:id="@+id/Btn_Test"
         android:layout_width="113dp"
@@ -66,7 +79,6 @@
         android:layout_width="0dp"
         android:layout_height="35dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="57dp"
         android:layout_marginEnd="24dp"
         android:autofillHints=""
         android:background="#FFDE17"
@@ -80,7 +92,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
         android:id="@+id/textView"
@@ -106,7 +118,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="92dp"
         android:layout_marginEnd="24dp"
         android:background="#FFDE17"
         android:paddingLeft="7dp"
@@ -118,14 +129,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+        app:layout_constraintTop_toBottomOf="@+id/username" />
 
     <EditText
         android:id="@+id/password"
         android:layout_width="0dp"
         android:layout_height="35dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="121dp"
         android:layout_marginEnd="24dp"
         android:autofillHints=""
         android:background="#F7DF11"
@@ -138,7 +148,7 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <Button
         android:id="@+id/btn_signIn"

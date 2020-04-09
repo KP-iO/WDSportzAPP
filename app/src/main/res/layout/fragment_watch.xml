@@ -7,37 +7,41 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="130dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="129dp"
+        android:text="Full Matches"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RecyclerViewVM"
 
         android:layout_width="407dp"
-        android:layout_height="270dp"
-        android:layout_marginEnd="2dp"
-        android:scrollbars="vertical"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:scrollbarThumbHorizontal="@color/green_100"
+        android:scrollbarTrackHorizontal="@color/colorPrimaryDark"
+        android:scrollbars="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
-
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RecyclerViewV"
-        android:layout_width="415dp"
-        android:layout_height="418dp"
+        android:layout_width="408dp"
+        android:layout_height="420dp"
+        android:layout_marginTop="24dp"
         android:scrollbars="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/RecyclerViewVM"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/RecyclerViewVM" />
 
-    <TextView
-            android:id="@+id/textView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/video"
-            android:textSize="30sp"
-            app:layout_constraintBottom_toTopOf="@+id/RecyclerViewV"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/RecyclerViewVM"
-            app:layout_constraintVertical_bias="0.0" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -81,13 +81,26 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
+
         <activity
-            android:name=".MainFragments.Frag_IniTeamSelection"
-            android:theme="@style/AppTheme1">
+            android:name=".MainFragments.Frag_iniTeamSelect"
+            android:theme="@style/AppTheme1"
+            android:windowSoftInputMode="adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".MainFragments.Frag_iniTeamSelect_teams"
+            android:theme="@style/AppTheme1"
+            android:windowSoftInputMode="adjustNothing">
+            <intent-filter>
+                <action android:name="android.intent.action.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+
         <activity
             android:name=".MainFragments.Frag_HomePage"
             android:theme="@style/AppTheme1">

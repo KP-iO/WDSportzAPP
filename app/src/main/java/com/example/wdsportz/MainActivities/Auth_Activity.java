@@ -19,13 +19,15 @@ import com.example.wdsportz.R;
 
 public class Auth_Activity extends AppCompatActivity implements Frag_iniTeamSelect.OnFragmentInteractionListener,Frag_HomePage.OnFragmentInteractionListener, frag_login.OnFragmentInteractionListener, frag_Register.OnFragmentInteractionListener  {
 
+    //Change majority of 'px' dimensions settings to 'dp'
+    Toolbar myToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.auth_main);
 
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
         myToolbar.setVisibility(View.GONE);
 
@@ -45,6 +47,15 @@ public class Auth_Activity extends AppCompatActivity implements Frag_iniTeamSele
             //}
        /// }0);
     }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        myToolbar.setVisibility(View.GONE);
+    }
+
+
+
 
 /// SEARCH ->
    @Override

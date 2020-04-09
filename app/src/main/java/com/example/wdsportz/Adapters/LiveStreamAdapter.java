@@ -48,7 +48,7 @@ public class LiveStreamAdapter extends RecyclerView.Adapter<LiveStreamAdapter.My
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new  MyViewHolder(from(context).inflate(R.layout.video_item, parent,false));
+        return new  MyViewHolder(from(context).inflate(R.layout.watch_tile, parent,false));
     }
 
 

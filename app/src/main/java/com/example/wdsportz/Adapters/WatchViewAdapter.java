@@ -50,7 +50,7 @@ public class WatchViewAdapter extends RecyclerView.Adapter<WatchViewAdapter.MyVi
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new  MyViewHolder(from(context).inflate(R.layout.video_item, parent,false));
+        return new  MyViewHolder(from(context).inflate(R.layout.watch_tile, parent,false));
     }
 
     @Override

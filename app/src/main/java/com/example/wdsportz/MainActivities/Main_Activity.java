@@ -41,6 +41,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 // Note: Change name of other classes to 'ClassName'_Fragment
 
+//Change majority of 'px' dimensions settings to 'dp'
+
 public class Main_Activity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, Frag_Test_1.OnFragmentInteractionListener, Frag_iniTeamSelect.OnFragmentInteractionListener, Frag_HomePage.OnFragmentInteractionListener, Frag_Profile.OnFragmentInteractionListener, Frag_Notifications.OnFragmentInteractionListener, Frag_About.OnFragmentInteractionListener, Frag_Explore.OnFragmentInteractionListener, Frag_LiveGuide.OnFragmentInteractionListener, Frag_Settings.OnFragmentInteractionListener {
     // Collect all listeners in one interface ^^^ and pass through to main activity?
 
@@ -137,9 +139,6 @@ public class Main_Activity extends AppCompatActivity implements NavigationView.O
 
             }
         }
-
-
-
 
 
         drawerLayout = findViewById(R.id.main_feed_drawerlayout);

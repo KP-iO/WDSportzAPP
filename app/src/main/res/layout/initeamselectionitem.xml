@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/selectionTile"
     style="@style/Theme.App"
@@ -12,7 +11,7 @@
     android:maxWidth="100dp"
     android:maxHeight="100dp"
     android:orientation="vertical"
-    android:padding="1dp"
+    android:padding="6dp"
     android:scrollbarSize="0dp"
     app:cardCornerRadius="5dp"
     app:strokeWidth="5dp">
@@ -32,6 +31,7 @@
             android:background="#02FFFFFF"
             android:maxWidth="120dp"
             android:maxHeight="120dp"
+            android:padding="2dp"
             android:tint="#00070101"
             app:layout_constraintBottom_toTopOf="@+id/info_text"
             app:layout_constraintEnd_toEndOf="parent"

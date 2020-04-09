@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
@@ -65,9 +67,6 @@ public class Frag_iniTeamSelect extends Fragment {
     StorageReference storageReference;
 
 
-
-
-
     public Frag_iniTeamSelect() {
         // Required empty public constructor
     }
@@ -102,6 +101,7 @@ public class Frag_iniTeamSelect extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

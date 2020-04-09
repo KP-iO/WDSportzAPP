@@ -108,9 +108,7 @@ public class Frag_HomePage extends Fragment {
 
 // Implement error handling for all cases e.g (Name/ Logo not accessible) ------>
         newsFeed(context);
-
     }
-
 
     private void newsFeed(final Context context) {
         Task<QuerySnapshot> docRef = fireStoreDB.collection("news_id")
@@ -123,11 +121,9 @@ public class Frag_HomePage extends Fragment {
 
                             List<NewsFeedViewModel> list = new ArrayList<>();
 
-
 ////// Change FROM download url to stroage url in firestore?
 
                             for (QueryDocumentSnapshot document : task.getResult()) {
-
 
                                 Log.d(TAG, "DOCUMENT PRINT :" + document.getData().toString());
                                 Log.d(TAG, "Team Added to List " + document.get("Title").toString());

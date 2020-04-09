@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,34 +23,28 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class SelectTeamsRecyclerViewAdapter extends RecyclerView.Adapter<SelectTeamsRecyclerViewAdapter.ViewHolder> {
+public class SelectTeamsRecyclerViewAdapter extends RecyclerView.Adapter<SelectTeamsRecyclerViewAdapter.ViewHolder> implements Filterable {
 
     private List<SelectTeamsRecyclerViewModel> mData;
+    private List<SelectTeamsRecyclerViewModel> mDataFull;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
     private Context context;
     public static ArrayList<String> list = new ArrayList<>();
     String team;
 
+    public SelectTeamsRecyclerViewAdapter() {
 
-
-
-
-
-
-
-//    String [] T
+    }
 
     // data is passed into the constructor
     public SelectTeamsRecyclerViewAdapter(Context context, List<SelectTeamsRecyclerViewModel> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
+        mDataFull = new ArrayList<>(data);
         this.context = context;
     }
 
-    public SelectTeamsRecyclerViewAdapter() {
-
-    }
 
     // inflates the cell layout from xml when needed
     @Override
@@ -58,18 +54,35 @@ public class SelectTeamsRecyclerViewAdapter extends RecyclerView.Adapter<SelectT
         return new ViewHolder(view);
     }
 
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        MaterialCardView cardView;
+        TextView textView;
+        ImageView ImageView;
+
+        ViewHolder(View itemView) {
+            super(itemView);
+            cardView = itemView.findViewById(R.id.selectionTile);
+            textView = itemView.findViewById(R.id.info_text);
+            ImageView = itemView.findViewById(R.id.BtnImgTeamLogo);
+
+            ImageView.setOnClickListener(this);
+        }
+
+
+        @Override
+        public void onClick(View view) {
+            Log.d("CLICK", textView.getText() + "  Clicked");
+        }
+    }
+
+
     // binds the data to the TextView in each cell
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
-
-
         holder.textView.setText(mData.get(position).teamName);
 
         String currentUrl = mData.get(position).teamLogoURl;
-
-
-
 
 
         Glide.with(context)
@@ -110,14 +123,50 @@ public class SelectTeamsRecyclerViewAdapter extends RecyclerView.Adapter<SelectT
 
 
     }
+
+    @Override
+    public Filter getFilter() {
+
+        return exampleFilter;
+    }
+
+    private Filter exampleFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+
+            List<SelectTeamsRecyclerViewModel> filteredList = new ArrayList<>();
+
+            if (constraint == null || constraint.length() == 0 ) {
+                filteredList.addAll(mDataFull);
+            }else{
+                String filterPattern = constraint.toString().toLowerCase().trim();
+
+                for (SelectTeamsRecyclerViewModel item : mDataFull) {
+                    if (item.getText1().toLowerCase().contains(filterPattern)) {
+                        filteredList.add(item);
+                    }
+                }
+            }
+
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            mData.clear();
+            mData.addAll((List) results.values);
+            notifyDataSetChanged();
+
+        }
+    };
+
+
     public String getTeamN()
     {
         return team;
-    }
-
-    public static ArrayList<String> getArrayList()
-    {
-        return  list;
     }
 
     @Override
@@ -125,45 +174,18 @@ public class SelectTeamsRecyclerViewAdapter extends RecyclerView.Adapter<SelectT
         return mData.size();
     }
 
-    // stores and recycles views as they are scrolled off screen
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        MaterialCardView cardView;
-        TextView textView;
-        ImageView ImageView;
-
-        ViewHolder(View itemView) {
-            super(itemView);
-            cardView = itemView.findViewById(R.id.selectionTile);
-            textView = itemView.findViewById(R.id.info_text);
-            ImageView = itemView.findViewById(R.id.BtnImgTeamLogo);
-
-
-
-
-        }
-
-
-        @Override
-        public void onClick(View view) {
-
-            Log.d("CLICK", textView.getText() + "  Clicked");
-
-        }
-    }
-
-
-
-
-
-
     // convenience method for getting data at click position
     public String getItem(int id) {
 
         return mData.get(id).teamName;
     }
 
-    // parent activity will implement this method to respond to click events
+    public static ArrayList<String> getArrayList()
+    {
+        return  list;
+    }
 
+    // parent activity will implement this method to respond to click events
     public interface ItemClickListener {
         void onItemClick(View view, int position);
     }

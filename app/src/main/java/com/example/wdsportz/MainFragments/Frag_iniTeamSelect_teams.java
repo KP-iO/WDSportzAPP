@@ -39,7 +39,7 @@ public class Frag_iniTeamSelect_teams extends Fragment {
     private static final String TAG = "iniTeamSelect_teams";
     FirebaseFirestore fireStoreDB = FirebaseFirestore.getInstance();
     private RecyclerView recyclerView;
-    SelectTeamsRecyclerViewAdapter selectTeamsRecyclerViewAdapter;
+    SelectTeamsRecyclerViewAdapter selectTeamsRecyclerViewAdapter = new SelectTeamsRecyclerViewAdapter();
     Menu menu1 ;
 
     @Nullable
@@ -80,6 +80,7 @@ public class Frag_iniTeamSelect_teams extends Fragment {
         this.menu1 = menu;
 
         MenuItem searchItem = menu1.findItem(R.id.search);
+
         SearchView searchView = (SearchView) searchItem.getActionView();
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -91,15 +92,23 @@ public class Frag_iniTeamSelect_teams extends Fragment {
             @Override
             public boolean onQueryTextChange(String newText) {
 
-//                selectTeamsRecyclerViewAdapter.getFilter().filter(newText);
+                selectTeamsRecyclerViewAdapter.getFilter().filter(newText);
 
                 return false;
             }
         });
-
     }
 
-
+    @Override
+    public boolean onOptionsItemSelected (MenuItem searchItem){
+        // Handle item selection
+        switch (searchItem.getItemId()) {
+            case R.id.search:
+                getActivity().findViewById(R.id.lbl_selectfavteams).setVisibility(View.GONE);
+                return true;
+        }
+        return super.onOptionsItemSelected(searchItem);
+    }
 
     public void recyclerviewcontent(View view, String str){
 
@@ -157,7 +166,7 @@ public class Frag_iniTeamSelect_teams extends Fragment {
 
 }
 
-public void getselections(View view){
+    public void getselections(View view){
 
 
 }
