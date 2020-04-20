@@ -98,7 +98,6 @@ public class frag_login extends Fragment {
 
         }
 
-
         final TextView txtUsername = view.findViewById(R.id.username);
         final TextView txtPassword = view.findViewById(R.id.password);
         Button btnSignUp = view.findViewById(R.id.signUp);
@@ -116,8 +115,7 @@ public class frag_login extends Fragment {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task){
                                 if(task.isSuccessful()) {
-                                    viewModel.authenticate(email,
-                                            password);
+                                    viewModel.authenticate(email, password);
                                     PreferenceUtils.saveEmail(email, getContext());
                                     PreferenceUtils.savePassword(password, getContext());
                                     ((Auth_Activity)getActivity()).goToMainFeed();
