@@ -14,6 +14,8 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -96,8 +98,6 @@ public class Frag_iniTeamSelect extends Fragment {
         super.onCreate(savedInstanceState);
 
 
-
-
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -109,7 +109,9 @@ public class Frag_iniTeamSelect extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        ((AppCompatActivity)getActivity()).findViewById(R.id.my_toolbar).setVisibility(View.VISIBLE);
+        Toolbar toolbar = ((AppCompatActivity)getActivity()).findViewById(R.id.my_toolbar);
+        toolbar.setVisibility(View.VISIBLE);
+        toolbar.setTitle("  ");
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_initeamselection, container, false);
