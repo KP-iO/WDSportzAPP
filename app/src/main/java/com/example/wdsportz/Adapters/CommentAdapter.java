@@ -1,8 +1,6 @@
 package com.example.wdsportz.Adapters;
 
 import android.content.Context;
-import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,21 +13,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.wdsportz.R;
 import com.example.wdsportz.ViewModels.Comments;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
-
-import static com.google.android.gms.plus.PlusOneDummyView.TAG;
 
 
 /**
@@ -74,50 +64,50 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
         //        holder.tv_date.setText(timestampToString((Long)mData.get(position).getTimestamp()));
         databaseReference = firebaseDatabase.getReference("Users");
         Query query = databaseReference.orderByChild("email").equalTo(user.getEmail());
-        query.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                for(DataSnapshot ds: dataSnapshot.getChildren()){
-                    //get data
-
-                    String name = "" + ds.child("name").getValue();
-                    String email = "" + ds.child("email").getValue();
-                    String phone = "" + ds.child("phone").getValue();
-                    String image = "" + ds.child("image").getValue();
-
-
-                    // Set to user
-                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                            .setPhotoUri(Uri.parse(image))
-                            .build();
-
-                    user.updateProfile(profileUpdates)
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
-                                        Log.d(TAG, "User profile updated.");
-                                    }
-                                }
-                            });
-
-
-
-
-
-                    Glide.with(mContext)
-                            .load(image)
-                            .into(holder.img_user);
-
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
-        });
+//        query.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//
+//                for(DataSnapshot ds: dataSnapshot.getChildren()){
+//                    //get data
+//
+//                    String name = "" + ds.child("name").getValue();
+//                    String email = "" + ds.child("email").getValue();
+//                    String phone = "" + ds.child("phone").getValue();
+//                    String image = "" + ds.child("image").getValue();
+//
+//
+//                    // Set to user
+//                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+//                            .setPhotoUri(Uri.parse(image))
+//                            .build();
+//
+//                    user.updateProfile(profileUpdates)
+//                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                @Override
+//                                public void onComplete(@NonNull Task<Void> task) {
+//                                    if (task.isSuccessful()) {
+//                                        Log.d(TAG, "User profile updated.");
+//                                    }
+//                                }
+//                            });
+//
+//
+//
+//
+//
+//                    Glide.with(mContext)
+//                            .load(image)
+//                            .into(holder.img_user);
+//
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//            }
+//        });
 
 
 

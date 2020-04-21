@@ -1,7 +1,9 @@
 package com.example.wdsportz;
 
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -24,6 +26,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.wdsportz.Adapters.CommentAdapter;
 import com.example.wdsportz.ViewModels.Comments;
 import com.example.wdsportz.supportFeatures.Frag_videoplay;
+import com.example.wdsportz.utils.FullScreenHelper;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,6 +38,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerFullScreenListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.utils.YouTubePlayerUtils;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
@@ -103,10 +107,11 @@ public class LivestreamFragment extends Fragment  {
 //    }
 public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
     final Context context = view.getContext();
+    Activity activity = getActivity();
 
     RvComment = getView().findViewById(R.id.chat_box);
     textView = getView().findViewById(R.id.match_title);
-    textView2 = getView().findViewById(R.id.date);
+    textView2 = getView().findViewById(R.id.desc);
     imageView = getView().findViewById(R.id.avatar);
     editText = getView().findViewById(R.id.edit_box);
     button = getView().findViewById(R.id.add);
@@ -125,8 +130,8 @@ public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
             String comment_content = editText.getText().toString();
             String uid = firebaseUser.getUid();
             String uname = firebaseUser.getDisplayName();
-//                String uimg = firebaseUser.getPhotoUrl().toString();
-            Comments comments = new Comments(comment_content,uid,uname);
+                String uimg = firebaseUser.getPhotoUrl().toString();
+            Comments comments = new Comments(comment_content,uid,uname, uimg);
 
             commentReference.setValue(comments).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
@@ -232,7 +237,6 @@ public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
         final String video = getArguments().getString("video");
 //        Log.d(TAG, videoId );
         getLifecycle().addObserver(youTubePlayerView);
-
         youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
             @Override
             public void onReady(@NonNull YouTubePlayer youTubePlayer) {
@@ -240,6 +244,28 @@ public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
                         youTubePlayer, getLifecycle(),video
                         , 0f
                 );
+                addFullScreenListenerToPlayer();
+            }
+        });
+    }
+
+
+    private void addFullScreenListenerToPlayer() {
+        youTubePlayerView.addFullScreenListener(new YouTubePlayerFullScreenListener() {
+            @Override
+            public void onYouTubePlayerEnterFullScreen() {
+                getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                FullScreenHelper.enterFullScreen();
+
+//                addCustomActionsToPlayer();
+            }
+
+            @Override
+            public void onYouTubePlayerExitFullScreen() {
+                getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                FullScreenHelper.exitFullScreen();
+
+//                removeCustomActionsFromPlayer();
             }
         });
     }
@@ -254,6 +280,11 @@ public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
     public String getPostKey() {
         postKey = getArguments().getString("chat");
         return postKey;
+    }
+
+    public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        void onFragmentInteraction(Uri uri);
     }
 
 

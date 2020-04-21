@@ -14,19 +14,19 @@ public class Comments {
     public Comments() {
     }
 
-    public Comments(String content, String uid, String uname) {
+    public Comments(String content, String uid, String uname, String uimg) {
         this.content = content;
         this.uid = uid;
-//        this.uimg = uimg;
+        this.uimg = uimg;
         this.uname = uname;
         this.timestamp = ServerValue.TIMESTAMP ;
 
     }
 
-    public Comments(String content, String uid, String uname, Object timestamp) {
+    public Comments(String content, String uid, String uname, Object timestamp, String uimg) {
         this.content = content;
         this.uid = uid;
-//        this.uimg = uimg;
+        this.uimg = uimg;
         this.uname = uname;
         this.timestamp = ServerValue.TIMESTAMP ;
 

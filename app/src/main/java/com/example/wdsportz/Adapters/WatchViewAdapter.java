@@ -60,6 +60,7 @@ public class WatchViewAdapter extends RecyclerView.Adapter<WatchViewAdapter.MyVi
         final String Video1 = (videoViewModels.get(position).getVideoURL());
         final String chat_ID = (videoViewModels.get(position).getChatBox_ID());
         final String title = (videoViewModels.get(position).getTitle());
+        final String video_desc  = (videoViewModels.get(position).getVideo_desc());
 
         Glide.with(context)
                 .load(currentUrl)
@@ -73,6 +74,7 @@ public class WatchViewAdapter extends RecyclerView.Adapter<WatchViewAdapter.MyVi
                 bundle.putString("title01", title);
                 bundle.putString("amount", Video1);
                 bundle.putString("title", chat_ID);
+                bundle.putString("desc", video_desc);
                 Navigation.findNavController(v).navigate(R.id.action_global_frag_videoplay, bundle);
                 for (String key: bundle.keySet())
                 {

@@ -132,7 +132,7 @@ public class Frag_videoplay extends Fragment {
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         RvComment = getView().findViewById(R.id.chat_box);
         textView = getView().findViewById(R.id.match_title);
-        textView2 = getView().findViewById(R.id.date);
+        textView2 = getView().findViewById(R.id.desc);
         imageView = getView().findViewById(R.id.avatar);
         editText = getView().findViewById(R.id.edit_box);
         button = getView().findViewById(R.id.add);
@@ -143,7 +143,11 @@ public class Frag_videoplay extends Fragment {
         firebaseDatabase = firebaseDatabase.getInstance();
 
         String strTitle = getArguments().getString("title01");
+        String desc = getArguments().getString("desc");
+
         textView.setText(strTitle);
+        textView2.setText(desc);
+
 
 
 
