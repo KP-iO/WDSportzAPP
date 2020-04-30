@@ -13,12 +13,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/WD_yellow"
-        android:textAlignment="center"
-        android:visibility="visible"
-        app:contentInsetStart="0dp"
-        android:contentInsetLeft="0dp"
         android:contentInsetStart="0dp"
+        android:contentInsetLeft="0dp"
+        android:textAlignment="center"
+        android:visibility="gone"
         app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
         app:contentInsetStartWithNavigation="0dp">
 
         <TextView
