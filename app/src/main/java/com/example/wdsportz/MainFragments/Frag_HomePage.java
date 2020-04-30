@@ -101,7 +101,6 @@ public class Frag_HomePage extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         final Context context = view.getContext();
 
-
         recyclerView1 = getView().findViewById(R.id.Main_feed);
         recyclerView1.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
 
