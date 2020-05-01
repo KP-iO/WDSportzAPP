@@ -21,7 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <VideoView
+        <com.google.android.exoplayer2.ui.PlayerView
             android:id="@+id/Watch_view1"
             android:layout_width="match_parent"
             android:layout_height="187dp"
@@ -49,14 +49,14 @@
         android:id="@+id/add"
         android:layout_width="62dp"
         android:layout_height="47dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="68dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginBottom="64dp"
         android:text="Add"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/edit_box" />
+        app:layout_constraintStart_toEndOf="@+id/edit_box1" />
 
     <EditText
-        android:id="@+id/edit_box"
+        android:id="@+id/edit_box1"
         android:layout_width="190dp"
         android:layout_height="40dp"
         android:layout_marginStart="20dp"
@@ -94,8 +94,8 @@
         android:id="@+id/avatar"
         android:layout_width="77dp"
         android:layout_height="75dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginBottom="56dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginBottom="44dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:srcCompat="@tools:sample/avatars" />

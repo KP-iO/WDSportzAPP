@@ -2,8 +2,11 @@ package com.example.wdsportz.supportFeatures;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,21 +15,29 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.MediaController;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.wdsportz.Adapters.CommentAdapter;
+import com.example.wdsportz.FullscreenActivity;
 import com.example.wdsportz.R;
 import com.example.wdsportz.ViewModels.Comments;
+import com.google.android.exoplayer2.SimpleExoPlayer;
+import com.google.android.exoplayer2.source.MediaSource;
+import com.google.android.exoplayer2.source.ProgressiveMediaSource;
+import com.google.android.exoplayer2.ui.PlayerView;
+import com.google.android.exoplayer2.upstream.DataSource;
+import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
+import com.google.android.exoplayer2.util.Util;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,7 +49,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -56,28 +67,32 @@ public class Frag_videoplay extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+
 //instances
     private OnFragmentInteractionListener mListener;
-    private VideoView videoView;
     private EditText editText;
-    private TextView textView, textView2, textView3;
+    private TextView textView, textView2;
     private Button button;
     private ImageView imageView;
-    private MediaController mediaController;
+
     private Uri uri;
     String postKey;
     RecyclerView RvComment;
     CommentAdapter commentAdapter;
-    List<Comments> listComments;
+    ArrayList<Comments> listComments;
     static String COMMENT_KEY = "Comment";
+    private SimpleExoPlayer simpleExoPlayer;
+    private PlayerView playerView;
+    private ImageView fullscreenButton;
+    private static final String TAG = "Video Activity";
+    FirebaseDatabase commentsDatabase;
+    DatabaseReference reference;
 
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
-    DatabaseReference databaseReference;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
+    boolean fullscreen = false;
+    String uid = user.getUid();
 
     FirebaseDatabase firebaseDatabase;
 
@@ -103,15 +118,15 @@ public class Frag_videoplay extends Fragment {
         return fragment;
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-
-        }
-    }
+//    @Override
+//    public void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        if (getArguments() != null) {
+//            mParam1 = getArguments().getString(ARG_PARAM1);
+//            mParam2 = getArguments().getString(ARG_PARAM2);
+//
+//        }
+//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -134,9 +149,9 @@ public class Frag_videoplay extends Fragment {
         textView = getView().findViewById(R.id.match_title);
         textView2 = getView().findViewById(R.id.desc);
         imageView = getView().findViewById(R.id.avatar);
-        editText = getView().findViewById(R.id.edit_box);
+        editText = getView().findViewById(R.id.edit_box1);
         button = getView().findViewById(R.id.add);
-        videoView = getView().findViewById(R.id.Watch_view1);
+        playerView= getView().findViewById(R.id.Watch_view1);
 
         firebaseAuth = firebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
@@ -147,6 +162,7 @@ public class Frag_videoplay extends Fragment {
 
         textView.setText(strTitle);
         textView2.setText(desc);
+//        videoView.start();
 
 
 
@@ -160,11 +176,14 @@ public class Frag_videoplay extends Fragment {
 
                 button.setVisibility(View.INVISIBLE);
                 DatabaseReference commentReference =firebaseDatabase.getReference(COMMENT_KEY).child(getPostKey()).push();
+                String key = commentReference.getKey();
+                String chatID = getArguments().getString("title");
                 String comment_content = editText.getText().toString();
                 String uid = firebaseUser.getUid();
                 String uname = firebaseUser.getDisplayName();
                 String uimg = firebaseUser.getPhotoUrl().toString();
-                Comments comments = new Comments(comment_content,uid,uname,uimg);
+                String reportID = "";
+                Comments comments = new Comments(comment_content,uid,uname,uimg,key, chatID,reportID);
                 Glide.with(view)
                         .load(uimg)
                         .into(imageView);
@@ -187,7 +206,6 @@ public class Frag_videoplay extends Fragment {
 
                     }
                 });
-
 
 
 
@@ -236,11 +254,20 @@ public class Frag_videoplay extends Fragment {
         commentRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+
                 listComments = new ArrayList<>();
-                for (DataSnapshot snap:dataSnapshot.getChildren()){
+
+                for (DataSnapshot snap:dataSnapshot.getChildren()) {
 
                     Comments comments = snap.getValue(Comments.class);
-                    listComments.add(comments);
+                    if (snap.hasChild(uid)) {
+
+                            listComments.remove(comments);
+
+                        } else {
+                            listComments.add(comments);
+                        }
                 }
 
                 commentAdapter = new CommentAdapter(getContext(),listComments);
@@ -269,15 +296,76 @@ public class Frag_videoplay extends Fragment {
         String str = getArguments().getString("amount");
 
 
-        MediaController mediaController = new MediaController(getContext());
-        videoView.setMediaController(mediaController);
-        mediaController.setAnchorView(videoView);
+        playerView = getView().findViewById(R.id.Watch_view1);
+        simpleExoPlayer = new SimpleExoPlayer.Builder(context).build();
+        playerView.setPlayer(simpleExoPlayer);
 
-        Uri uri = Uri.parse(str);
-        videoView.setVideoURI(uri);
-        videoView.requestFocus();
+
+
+        fullscreenButton = playerView.findViewById(R.id.exo_fullscreen_icon);
+
+
+        fullscreenButton.setOnClickListener(new View.OnClickListener() {
+
+
+            @Override
+            public void onClick(View view) {
+
+
+                if(fullscreen) {
+                    fullscreenButton.setImageDrawable(ContextCompat.getDrawable(requireActivity(), R.drawable.exo_icon_fullscreen_enter));
+
+                    requireActivity().getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+//
+//                    if( .getSupportActionBar() != null){
+//                        getSupportActionBar().show();
+//                    }
+
+                    getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+                    RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) playerView.getLayoutParams();
+                    params.width = params.MATCH_PARENT;
+                    params.height = (int) ( 400 * getActivity().getApplicationContext().getResources().getDisplayMetrics().density);
+                    playerView.setLayoutParams(params);
+
+                    fullscreen = false;
+                }else{
+                    Log.d(TAG,"Ways" + str);
+
+                    Intent intent = new Intent(getActivity(), FullscreenActivity.class);
+//                    Bundle bundle = new Bundle();
+                    intent.putExtra("key1", str);;
+                    startActivity(intent);
+
+                }
+            }
+        });
+
+
+
+        DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(context,
+                Util.getUserAgent(context, "appname"));
+        MediaSource videoSource =
+                new ProgressiveMediaSource.Factory(dataSourceFactory)
+                        .createMediaSource(Uri.parse(str));
+        simpleExoPlayer.prepare(videoSource);
+        simpleExoPlayer.setPlayWhenReady(true);
+
+
+//        MediaController mediaController = new MediaController(getContext());
+//        videoView.setMediaController(mediaController);
+//        mediaController.setAnchorView(videoView);
+//
+//    Uri uri = Uri.parse(str);
+//        videoView.setVideoURI(uri);
+//        videoView.requestFocus();
+}
+
+    public void onDestroy() {
+        super.onDestroy();
+        simpleExoPlayer.release();
+        mListener = null;
     }
-
     public String getPostKey() {
         postKey = getArguments().getString("title");
         return postKey;

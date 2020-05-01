@@ -13,20 +13,23 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.MediaController;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wdsportz.Adapters.CommentAdapter;
 import com.example.wdsportz.ViewModels.Comments;
-import com.example.wdsportz.supportFeatures.Frag_videoplay;
 import com.example.wdsportz.utils.FullScreenHelper;
+import com.google.android.exoplayer2.SimpleExoPlayer;
+import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -57,7 +60,7 @@ import java.util.List;
 
 public class LivestreamFragment extends Fragment  {
 
-    private Frag_videoplay.OnFragmentInteractionListener mListener;
+    private OnFragmentInteractionListener mListener;
     private VideoView videoView;
     private EditText editText;
     private TextView textView, textView2, textView3;
@@ -74,11 +77,14 @@ public class LivestreamFragment extends Fragment  {
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
 
+    private SimpleExoPlayer simpleExoPlayer;
+    private PlayerView playerView;
+
 
     FirebaseDatabase firebaseDatabase;
     String videoId;
     private static final String TAG = "livstreamID" ;
-    private YouTubePlayerView youTubePlayerView;
+    private YouTubePlayerView youTubePlayerView ;
 
 
     public LivestreamFragment() {
@@ -117,9 +123,10 @@ public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
     button = getView().findViewById(R.id.add);
     videoView = getView().findViewById(R.id.Watch_view1);
 
-    firebaseAuth = firebaseAuth.getInstance();
+
+    firebaseAuth = FirebaseAuth.getInstance();
     firebaseUser = firebaseAuth.getCurrentUser();
-    firebaseDatabase = firebaseDatabase.getInstance();
+    firebaseDatabase = FirebaseDatabase.getInstance();
 
     button.setOnClickListener(new View.OnClickListener() {
         @Override
@@ -175,7 +182,7 @@ public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
 
 
 
-
+//    setVideoView(context);
     iniRvComment();
 
 
@@ -224,7 +231,6 @@ public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.fragment_live, container, false);
 
         youTubePlayerView = view.findViewById(R.id.youtube_player_view);
-
         initYouTubePlayerView();
 
 
@@ -232,6 +238,23 @@ public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
 
         return view;
     }
+
+
+
+
+
+
+
+//        MediaController mediaController = new MediaController(getContext());
+//        videoView.setMediaController(mediaController);
+//        mediaController.setAnchorView(videoView);
+//
+//    Uri uri = Uri.parse(str);
+////        videoView.setVideoURI(uri);
+////        videoView.requestFocus();
+//    }
+
+
 
     private void initYouTubePlayerView() {
         final String video = getArguments().getString("video");
@@ -255,7 +278,22 @@ public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
             @Override
             public void onYouTubePlayerEnterFullScreen() {
                 getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-                FullScreenHelper.enterFullScreen();
+
+//                fullscreenButton.setImageDrawable(ContextCompat.getDrawable(requireActivity(), R.drawable.exo_icon_fullscreen_enter));
+
+                requireActivity().getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+//
+//                    if( .getSupportActionBar() != null){
+//                        getSupportActionBar().show();
+//                    }
+
+//                getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+                RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) youTubePlayerView.getLayoutParams();
+                params.width = params.MATCH_PARENT;
+                params.height = (int) ( 200 * getActivity().getApplicationContext().getResources().getDisplayMetrics().density);
+                youTubePlayerView.setLayoutParams(params);
+//                FullScreenHelper.enterFullScreen();
 
 //                addCustomActionsToPlayer();
             }
@@ -263,7 +301,26 @@ public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
             @Override
             public void onYouTubePlayerExitFullScreen() {
                 getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-                FullScreenHelper.exitFullScreen();
+
+//                fullscreenButton.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.exo_icon_fullscreen_enter));
+
+                getActivity().getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN
+                        |View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                        |View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+
+//                    if(getSupportActionBar() != null){
+//                        getSupportActionBar().hide();
+//                    }
+
+                getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
+                RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) youTubePlayerView.getLayoutParams();
+                params.width = params.MATCH_PARENT;
+                params.height = params.MATCH_PARENT;
+                youTubePlayerView.setLayoutParams(params);
+
+
+//                FullScreenHelper.exitFullScreen();
 
 //                removeCustomActionsFromPlayer();
             }
@@ -286,6 +343,14 @@ public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-
+//    public void onAttach(Context context) {
+//        super.onAttach(context);
+//        if (context instanceof OnFragmentInteractionListener) {
+//            mListener = (OnFragmentInteractionListener) context;
+//        } else {
+//            throw new RuntimeException(context.toString()
+//                    + " must implement OnFragmentInteractionListener");
+//        }
+//    }
 
 }

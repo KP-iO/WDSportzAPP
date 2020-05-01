@@ -8,11 +8,25 @@ import com.google.firebase.database.ServerValue;
 public class Comments {
 
 
-    private String content,uid,uimg, uname;
-    private Object timestamp;
+    private String content,uid,uimg, uname, key, chatID, reportID,report1;
+    private Object timestamp, currentUsereReportID;
 
-    public Comments() {
+    public Comments(Object currentUsereReportID) {
+        this.currentUsereReportID = currentUsereReportID;
     }
+    public Comments() {
+
+    }
+
+    public Comments(String content, String uid, String uname, String uimg,String key) {
+        this.content = content;
+        this.uid = uid;
+        this.uimg = uimg;
+        this.uname = uname;
+        this.key = key;
+
+    }
+
 
     public Comments(String content, String uid, String uname, String uimg) {
         this.content = content;
@@ -23,15 +37,41 @@ public class Comments {
 
     }
 
-    public Comments(String content, String uid, String uname, Object timestamp, String uimg) {
+    public Comments(String content, String uid, String uname, String uimg, String key, String chatID) {
         this.content = content;
         this.uid = uid;
         this.uimg = uimg;
         this.uname = uname;
-        this.timestamp = ServerValue.TIMESTAMP ;
-
+        this.key = key;
+        this.chatID = chatID;
+    }
+    public Comments(String content, String uid, String uname, String uimg, String key, String chatID, Object currentUsereReportID) {
+        this.content = content;
+        this.uid = uid;
+        this.uimg = uimg;
+        this.uname = uname;
+        this.key = key;
+        this.chatID = chatID;
+        this.currentUsereReportID = currentUsereReportID;
     }
 
+
+    public String getReportID() {
+        return reportID;
+    }
+
+    public void setReportID(String reportID) {
+        this.reportID = reportID;
+    }
+
+
+    public String getReport1() {
+        return report1;
+    }
+
+    public void setReport1(String report1) {
+        this.report1 = report1;
+    }
 
 
 
@@ -42,6 +82,24 @@ public class Comments {
     public void setContent(String content) {
         this.content = content;
     }
+
+    public String getChatID() {
+        return chatID;
+    }
+
+    public void setChatID(String chatID) {
+        this.chatID = chatID;
+    }
+
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
 
     public String getUid() {
         return uid;

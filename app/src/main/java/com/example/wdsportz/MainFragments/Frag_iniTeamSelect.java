@@ -179,7 +179,7 @@ public class Frag_iniTeamSelect extends Fragment {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
 
         //path to store data named "Users"
-        DatabaseReference reference = database.getReference("Users/"+uid);
+        DatabaseReference reference = database.getReference("Users/"+ uid);
 
         //put data within hashmap in database
         reference.child(uid).setValue(hashMap);

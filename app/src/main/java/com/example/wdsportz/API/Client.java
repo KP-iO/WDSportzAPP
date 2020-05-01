@@ -27,11 +27,11 @@ public class Client {
                         .build();
 
 
-                retrofit = new Retrofit.Builder()
-                     .baseUrl(IMAGES)
-                     .addConverterFactory(GsonConverterFactory.create())
-                      .client(client)
-                      .build();
+//                retrofit = new Retrofit.Builder()
+//                     .baseUrl(IMAGES)
+//                     .addConverterFactory(GsonConverterFactory.create())
+//                      .client(client)
+//                      .build();
 
             return retrofit;
 

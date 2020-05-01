@@ -4,6 +4,7 @@ package com.example.wdsportz.utils;
  * Created by khrishawn
  */
 
+import android.app.Activity;
 import android.view.View;
 
 import androidx.fragment.app.Fragment;
@@ -13,9 +14,9 @@ import androidx.fragment.app.Fragment;
  *
  * @author Pierfrancesco Soffritti
  */
-    public class FullScreenHelper {
+    public class FullScreenHelper extends Fragment {
 
-        private static Fragment context;
+        private static Activity context;
         //    private Activity context;
         private static View[] views;
 
@@ -23,7 +24,7 @@ import androidx.fragment.app.Fragment;
          * @param context
          * @param views to hide/show
          */
-        public FullScreenHelper(Fragment context, View ... views) {
+        public FullScreenHelper(Activity context, View ... views) {
             this.context = context;
             this.views = views;
         }
@@ -32,7 +33,7 @@ import androidx.fragment.app.Fragment;
          * call this method to enter full screen
          */
         public static void enterFullScreen() {
-            View decorView = context.getActivity().getWindow().getDecorView();
+            View decorView = context.getWindow().getDecorView();
 
             hideSystemUi(decorView);
 
@@ -46,7 +47,7 @@ import androidx.fragment.app.Fragment;
          * call this method to exit full screen
          */
         public static void exitFullScreen() {
-            View decorView = context.getActivity().getWindow().getDecorView();
+            View decorView = context.getWindow().getDecorView();
 
             showSystemUi(decorView);
 
