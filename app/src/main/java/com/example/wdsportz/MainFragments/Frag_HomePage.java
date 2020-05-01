@@ -110,6 +110,7 @@ public class Frag_HomePage extends Fragment {
     }
 
     private void newsFeed(final Context context) {
+
         Task<QuerySnapshot> docRef = fireStoreDB.collection("news_id")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -120,7 +121,7 @@ public class Frag_HomePage extends Fragment {
 
                             List<NewsFeedViewModel> list = new ArrayList<>();
 
-////// Change FROM download url to stroage url in firestore?
+                ////// Change FROM download url to stroage url in firestore?
 
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
@@ -152,7 +153,6 @@ public class Frag_HomePage extends Fragment {
 
                 });
     }
-
 
 
 

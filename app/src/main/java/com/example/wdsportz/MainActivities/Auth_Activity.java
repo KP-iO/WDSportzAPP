@@ -32,6 +32,7 @@ public class Auth_Activity extends AppCompatActivity implements Frag_iniTeamSele
         setSupportActionBar(myToolbar);
         myToolbar.setVisibility(View.GONE);
 
+
     }
 
     @Override

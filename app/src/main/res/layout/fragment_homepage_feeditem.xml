@@ -16,6 +16,36 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/newsImage"
+            android:layout_width="152dp"
+            android:layout_height="142dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@color/place_autocomplete_search_text" />
+
+        <TextView
+            android:id="@+id/newsTitle"
+            style="@style/TextAppearance.MaterialComponents.Headline6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="16dp"
+            android:ellipsize="none"
+            android:maxLength="100"
+            android:maxLines="100"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:scrollHorizontally="false"
+            android:text="Title goes here"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/newsImage"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/newsDescription"
             style="@style/TextAppearance.MaterialComponents.Caption"
@@ -51,35 +81,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <ImageView
-            android:id="@+id/newsImage"
-            android:layout_width="152dp"
-            android:layout_height="142dp"
-            android:adjustViewBounds="true"
-            android:scaleType="fitXY"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@color/place_autocomplete_search_text" />
-
-        <TextView
-            android:id="@+id/newsTitle"
-            style="@style/TextAppearance.MaterialComponents.Headline6"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
-            android:layout_marginTop="16dp"
-            android:ellipsize="none"
-            android:maxLength="100"
-            android:maxLines="100"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:scrollHorizontally="false"
-            android:text="Title goes here"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/newsImage"
-            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>
