@@ -14,7 +14,8 @@
         android:layout_height="match_parent">
 
         <include
-            layout="@layout/toolbar"
+            android:id="@+id/main_feed_toolbar"
+            layout="@layout/main_feed_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -24,16 +25,15 @@
             android:id="@+id/NavHostFragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
-            android:layout_height="663dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/bottom_nav"
+            android:layout_below="@id/main_feed_toolbar"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginTop="58dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="0dp"
-            android:layout_marginBottom="11dp"
+            android:layout_marginBottom="14dp"
             android:foreground="@color/colorBlack"
             android:foregroundTint="#000E0808"
-            android:padding="20dp"
-            android:paddingLeft="20dp"
             app:defaultNavHost="true"
             app:navGraph="@navigation/main_navigation"
             tools:layout="@layout/fragment_homepage" />

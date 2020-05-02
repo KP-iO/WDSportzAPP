@@ -49,7 +49,7 @@ public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.MyView
     @Override
 
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new  MyViewHolder(from(context).inflate(R.layout.fragment_feeditem, parent,false));
+        return new  MyViewHolder(from(context).inflate(R.layout.fragment_homepage_feeditem, parent,false));
     }
 
 

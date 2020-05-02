@@ -12,9 +12,14 @@
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#2FD30A"
-        android:visibility="visible"
-        app:title=" ">
+        android:background="@color/WD_yellow"
+        android:contentInsetStart="0dp"
+        android:contentInsetLeft="0dp"
+        android:textAlignment="center"
+        android:visibility="gone"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        app:contentInsetStartWithNavigation="0dp">
 
         <TextView
             android:id="@+id/lbl_selectfavteams"
@@ -24,12 +29,11 @@
             android:text="Select Your Favourite Teams"
             android:textColor="#FFFFFF"
             android:textSize="24sp"
-            android:textStyle="bold" />
-       >
+            android:textStyle="bold"
+            android:visibility="invisible" />
+        >
 
     </androidx.appcompat.widget.Toolbar>
-
-
 
     <fragment
         android:id="@+id/auth_main"

@@ -63,7 +63,7 @@ public class SelectTeamsRecyclerViewAdapter extends RecyclerView.Adapter<SelectT
         ViewHolder(View itemView) {
             super(itemView);
             cardView = itemView.findViewById(R.id.selectionTile);
-            textView = itemView.findViewById(R.id.info_text);
+            textView = itemView.findViewById(R.id.Txt_teamName);
             ImageView = itemView.findViewById(R.id.BtnImgTeamLogo);
 
             ImageView.setOnClickListener(this);
@@ -87,7 +87,7 @@ public class SelectTeamsRecyclerViewAdapter extends RecyclerView.Adapter<SelectT
 
         Glide.with(context)
                 .load(currentUrl)
-                .apply(new RequestOptions().override(180, 270))
+                .apply(new RequestOptions().override(150, 250))
                 .into(holder.ImageView);
 
         // Mark as selected
