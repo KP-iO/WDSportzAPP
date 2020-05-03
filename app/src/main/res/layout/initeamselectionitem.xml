@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/selectionTile"
+<com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/selectionTile"
     style="@style/Theme.App"
     android:layout_width="wrap_content"
     android:layout_height="154dp"
@@ -35,19 +34,19 @@
             android:maxHeight="120dp"
             android:padding="2dp"
             android:tint="#00070101"
-            app:layout_constraintBottom_toTopOf="@+id/info_text"
+            app:layout_constraintBottom_toTopOf="@+id/TxtTeamName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/info_text"
+            android:id="@+id/TxtTeamName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="41dp"
             android:layout_marginEnd="41dp"
             android:background="#00AAAAAA"
-            android:text="TextView"
+            android:text="Team Name"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"

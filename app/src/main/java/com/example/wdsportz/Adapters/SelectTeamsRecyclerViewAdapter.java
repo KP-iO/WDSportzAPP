@@ -63,7 +63,7 @@ public class SelectTeamsRecyclerViewAdapter extends RecyclerView.Adapter<SelectT
         ViewHolder(View itemView) {
             super(itemView);
             cardView = itemView.findViewById(R.id.selectionTile);
-            textView = itemView.findViewById(R.id.Txt_teamName);
+            textView = itemView.findViewById(R.id.TxtTeamName);
             ImageView = itemView.findViewById(R.id.BtnImgTeamLogo);
 
             ImageView.setOnClickListener(this);

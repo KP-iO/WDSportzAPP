@@ -12,9 +12,10 @@
     <!--  Base application theme. -->
     <style name="AppTheme1" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/WD_yellow</item>
+        <item name="colorPrimaryDark">@color/WD_Green</item>
+        <item name="colorAccent">@color/colorWhite</item>
+        <item name="android:statusBarColor">@color/WD_yellow</item>
     </style>
 
 
