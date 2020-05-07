@@ -19,7 +19,7 @@
         tools:layout="@layout/fragment_watch" />
     <fragment
         android:id="@+id/scores"
-        android:name="com.example.wdsportz.Scores"
+        android:name="com.example.wdsportz.MainFragments.Frag_Scores"
         tools:layout="@layout/fragment_scores" />
     <action android:id="@+id/action_global_frag_HomePage" app:destination="@id/frag_HomePage" />
     <action android:id="@+id/action_global_scores" app:destination="@id/scores" />
@@ -82,8 +82,8 @@
     <action android:id="@+id/action_global_livestreamFragment" app:destination="@id/livestreamFragment" />
     <fragment
         android:id="@+id/leagueFragment"
-        android:name="com.example.wdsportz.MainFragments.LeagueFragment"
-        tools:layout="@layout/fragment_league" /><action android:id="@+id/action_global_leagueFragment" app:destination="@id/leagueFragment"/>
+        android:name="com.example.wdsportz.MainFragments.Frag_Score"
+        tools:layout="@layout/fragment_score" /><action android:id="@+id/action_global_leagueFragment" app:destination="@id/leagueFragment"/>
     <fragment
         android:id="@+id/blankFragment"
         android:name="com.example.wdsportz.SetImage"

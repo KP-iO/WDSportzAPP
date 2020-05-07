@@ -17,7 +17,7 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/newsImage"
+            android:id="@+id/homeImg"
             android:layout_width="152dp"
             android:layout_height="142dp"
             android:adjustViewBounds="true"
@@ -43,7 +43,7 @@
             android:text="Title goes here"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/newsImage"
+            app:layout_constraintStart_toEndOf="@+id/homeImg"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView

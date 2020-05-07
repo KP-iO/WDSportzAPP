@@ -3,12 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainFragments.LeagueFragment">
+    tools:context=".MainFragments.Frag_Score">
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerleague"
+        android:id="@+id/scores_feed"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FAF7F7" />
+        android:layout_gravity="center"
+        android:background="#FAF7F7"
+        android:foregroundGravity="center" />
 </FrameLayout>
