@@ -19,12 +19,12 @@ import static android.view.LayoutInflater.from;
  * Created by khrishawn
  */
 
-public class ScoreFeedAdpater extends RecyclerView.Adapter<ScoreFeedAdpater.MyViewHolder> {
+public class League2Adapter extends RecyclerView.Adapter<League2Adapter.MyViewHolder> {
 
     private Context mContext;
     private List<League> mData;
 
-    public ScoreFeedAdpater(Context mContext, List<League> mData){
+    public League2Adapter(Context mContext, List<League> mData){
         this.mContext = mContext;
         this.mData = mData;
     }
@@ -33,13 +33,13 @@ public class ScoreFeedAdpater extends RecyclerView.Adapter<ScoreFeedAdpater.MyVi
     @NonNull
     @Override
 
-    public ScoreFeedAdpater.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ScoreFeedAdpater.MyViewHolder(from(mContext).inflate(R.layout.match_tiles, parent,false));
+    public League2Adapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new League2Adapter.MyViewHolder(from(mContext).inflate(R.layout.match_tiles, parent,false));
     }
 
 
     @Override
-    public void onBindViewHolder(@NonNull ScoreFeedAdpater.MyViewHolder holder, int i) {
+    public void onBindViewHolder(@NonNull League2Adapter.MyViewHolder holder, int i) {
         String HTeam = mData.get(i).getStrHomeTeam();
         String ATeam = mData.get(i).getStrAwayTeam();
         String HTeamScore = Integer.toString(mData.get(i).getIntHomeScore());

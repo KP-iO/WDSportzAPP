@@ -9,7 +9,6 @@ import android.view.MenuInflater;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.wdsportz.MainFragments.Frag_HomePage;
@@ -32,7 +31,21 @@ public class Auth_Activity extends AppCompatActivity implements Frag_iniTeamSele
         setSupportActionBar(myToolbar);
         myToolbar.setVisibility(View.GONE);
 
+        //getSupportActionBar().setTitle("Select Your Favourite teams");
 
+        //  navController = Navigation.findNavController(this, R.id.);
+
+        //Toolbar toolbar = findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
+
+       // FloatingActionButton fab = findViewById(R.id.fab);
+        //fab.setOnClickListener(new View.OnClickListener() {
+            //@Override
+            //public void onClick(View view) {
+          //      Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+            //            .setAction("Action", null).show();
+            //}
+       /// }0);
     }
 
     @Override
@@ -42,14 +55,13 @@ public class Auth_Activity extends AppCompatActivity implements Frag_iniTeamSele
     }
 
 
+
+
 /// SEARCH ->
    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.options_menu, menu);
-
-       SearchView searchView = (SearchView)menu.findItem(R.id.search).getActionView();
-       searchView.setMaxWidth(Integer.MAX_VALUE);
 
         // Associate searchable configuration with the SearchView
         //SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);

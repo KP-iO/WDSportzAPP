@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/newsCard"
+    android:layout_width="wrap_content"
+    android:layout_height="140dp"
+    android:layout_marginBottom="9dp"
+    android:backgroundTint="#FFFFFF"
+    app:cardCornerRadius="5dp"
+    app:strokeColor="#000000"
+    app:strokeWidth="2dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/newsDescription"
+            style="@style/TextAppearance.MaterialComponents.Caption"
+            android:layout_width="208dp"
+            android:layout_height="61dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="78dp"
+            android:maxLength="50"
+            android:paddingLeft="10dp"
+            android:text="Subtitle goes here"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/newsImage"
+            app:layout_constraintTop_toBottomOf="@+id/newsTitle"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/action_button_1"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="53dp"
+            android:layout_height="55dp"
+            android:background="#FFFFFF"
+            android:textAppearance="
+            @style/TextAppearance.MaterialComponents.Headline6"
+            android:textSize="15sp"
+            app:icon="@drawable/_likes__flames"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageView
+            android:id="@+id/newsImage"
+            android:layout_width="152dp"
+            android:layout_height="142dp"
+            android:adjustViewBounds="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/_likes__flames" />
+
+        <TextView
+            android:id="@+id/newsTitle"
+            style="@style/TextAppearance.MaterialComponents.Headline6"
+            android:layout_width="0dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="15dp"
+            android:maxLength="50"
+            android:maxLines="1"
+            android:paddingLeft="8dp"
+            android:text="Title goes here"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/newsImage"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

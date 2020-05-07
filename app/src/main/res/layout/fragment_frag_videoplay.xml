@@ -13,7 +13,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
+    <FrameLayout
         android:id="@+id/relativeLayout3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -23,10 +23,10 @@
 
         <com.google.android.exoplayer2.ui.PlayerView
             android:id="@+id/Watch_view1"
-            android:layout_width="match_parent"
-            android:layout_height="187dp"
+            android:layout_width="397dp"
+            android:layout_height="214dp"
             android:padding="0dp" />
-    </RelativeLayout>
+    </FrameLayout>
 
 
     <TextView

@@ -64,21 +64,57 @@ public class Main_Activity extends AppCompatActivity implements NavigationView.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        setupNavigation();
+
+
+       setupNavigation();
+
     }
 
     public void setupNavigation() {
 
         databaseReference = firebaseDatabase.getReference("Users");
 
-            toolbar = findViewById(R.id.main_feed_toolbar);
-            setSupportActionBar(toolbar);
-            getSupportActionBar().setTitle(null);
-            getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+        toolbar = findViewById(R.id.main_feed_toolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         navigationView = findViewById(R.id.main_feed_nv_View);
         userName = (TextView)navigationView.getHeaderView(0).findViewById(R.id.usernameText1);
         userImg = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.usernameImg1);
+
+//        Query query = databaseReference.orderByChild("email").equalTo(user.getEmail());
+//        query.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//
+//                for(DataSnapshot ds: dataSnapshot.getChildren()){
+//                    //get data
+//
+//
+//                    String image = "" + ds.child("image").getValue();
+//                    String name = "" + ds.child("name").getValue();
+//
+//
+//
+//                    Glide.with(getBaseContext())
+//                            .load(image)
+//                            .into(userImg);
+//
+//                    userName.setText(name);
+//
+//
+//
+//
+//
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//            }
+//        });
 
 
         if (user != null) {
@@ -113,7 +149,6 @@ public class Main_Activity extends AppCompatActivity implements NavigationView.O
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(R.id.frag_HomePage,R.id.frag_watch,R.id.scores,R.id.more).setDrawerLayout(drawerLayout).build();
         //AppBarConfiguration.Builder(navController.getGraph()).build(); <--- Drawer only on homepage (replace above)
         NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration);
-
 
 
         bottomNav = findViewById(R.id.bottom_nav);
