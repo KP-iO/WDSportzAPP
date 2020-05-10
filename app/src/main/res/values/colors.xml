@@ -8,6 +8,7 @@
     <color name="colorWhite">#F7F4F5</color>
     <color name="colorBlack">#0E0C0C</color>
 
+    <color name="WD_Green">#0DB14B</color>
     <color name="WD_yellow">#FFDE17</color>
 
     <color name="red_100">#F44336</color>
@@ -22,6 +23,7 @@
     <color name="green_300">#57BB8A</color>
     <color name="green_500">#673AB7</color>
     <color name="green_700">#0B8043</color>
+
 
     <color name="black_overlay">#66000000</color>
 

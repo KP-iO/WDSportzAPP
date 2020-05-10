@@ -23,7 +23,7 @@
         android:maxHeight="120dp"
         android:padding="1dp" >
     <ImageView
-        android:id="@+id/newsImage"
+        android:id="@+id/homeImg"
         android:layout_width="108dp"
         android:layout_height="138dp"
         tools:srcCompat="@tools:sample/avatars" />

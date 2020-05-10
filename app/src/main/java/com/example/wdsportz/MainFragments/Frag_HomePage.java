@@ -101,7 +101,6 @@ public class Frag_HomePage extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         final Context context = view.getContext();
 
-
         recyclerView1 = getView().findViewById(R.id.Main_feed);
         recyclerView1.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
 
@@ -111,6 +110,7 @@ public class Frag_HomePage extends Fragment {
     }
 
     private void newsFeed(final Context context) {
+
         Task<QuerySnapshot> docRef = fireStoreDB.collection("news_id")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -121,7 +121,7 @@ public class Frag_HomePage extends Fragment {
 
                             List<NewsFeedViewModel> list = new ArrayList<>();
 
-////// Change FROM download url to stroage url in firestore?
+                ////// Change FROM download url to stroage url in firestore?
 
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
@@ -153,7 +153,6 @@ public class Frag_HomePage extends Fragment {
 
                 });
     }
-
 
 
 

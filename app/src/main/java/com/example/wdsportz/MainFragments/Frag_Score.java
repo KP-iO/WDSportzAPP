@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wdsportz.API.Client;
 import com.example.wdsportz.API.Service;
-import com.example.wdsportz.Adapters.League2Adapter;
+import com.example.wdsportz.Adapters.ScoreFeedAdpater;
 import com.example.wdsportz.BuildConfig;
 import com.example.wdsportz.Model.League;
 import com.example.wdsportz.Model.LeagueResponse;
@@ -42,7 +42,7 @@ import retrofit2.Response;
  * Use the {@link Watchfragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class LeagueFragment extends Fragment {
+public class Frag_Score extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -59,13 +59,13 @@ public class LeagueFragment extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerView recyclerView1;
     private List<League> leagueList;
-    private League2Adapter adapter;
+    private ScoreFeedAdpater adapter;
 
 
     ProgressDialog pd;
 
 
-    public LeagueFragment() {
+    public Frag_Score() {
         // Required empty public constructor
     }
 
@@ -93,7 +93,7 @@ public class LeagueFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_league, container, false);
+        return inflater.inflate(R.layout.fragment_score, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -114,7 +114,7 @@ public class LeagueFragment extends Fragment {
         Log.d("loadJSON","done");
 
         leagueList = new ArrayList<>();
-        adapter = new League2Adapter(getContext(), leagueList);
+        adapter = new ScoreFeedAdpater(getContext(), leagueList);
 // Implement error handling for all cases e.g (Name/ Logo not accessible) ------>
 
     }
@@ -146,7 +146,7 @@ public class LeagueFragment extends Fragment {
 
                     LeagueResponse leagues = response.body();
                     Log.d("SUCCESS", movies.toString());
-                    recyclerView.setAdapter(new League2Adapter(getContext(), movies));
+                    recyclerView.setAdapter(new ScoreFeedAdpater(getContext(), movies));
 //                    recyclerView.smoothScrollToPosition(0);
                 }
 
@@ -165,7 +165,7 @@ public class LeagueFragment extends Fragment {
 
     private void initViews() {
         final Context context = getContext();
-        recyclerView = getView().findViewById(R.id.recyclerleague);
+        recyclerView = getView().findViewById(R.id.scores_feed);
         int numberOfColumns = 2;
 
 

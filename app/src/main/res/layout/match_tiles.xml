@@ -1,141 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="190dp"
-    android:layout_height="175dp"
-    android:layout_gravity="center_horizontal"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp"
-    android:layout_marginBottom="5dp"
-    android:clickable="true"
-    android:background="@drawable/border_scores"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:paddingLeft="10dp"
-    android:paddingTop="7dp"
-    android:paddingBottom="7dp"
-    android:paddingRight="10dp"
-    android:maxWidth="230dp"
-    android:maxHeight="150dp">
+    android:id="@+id/newsCard"
+    android:layout_width="200dp"
+    android:layout_height="200dp"
+    android:layout_gravity="fill"
+    android:layout_margin="5dp"
+    app:cardBackgroundColor="#00271616"
+    app:cardElevation="2dp"
+    app:layout_anchorGravity="fill"
+    app:layout_gravity="fill">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/newsCard"
-        android:layout_width="250dp"
-        android:layout_height="175dp"
-        android:layout_gravity="center"
-        android:paddingLeft="20dp"
-        app:cardBackgroundColor="#FFFFFF"
-        app:cardCornerRadius="6dp"
-        app:cardElevation="4dp"
-        app:cardMaxElevation="6dp">
+        <ImageView
+            android:id="@+id/homeImg"
+            android:layout_width="76dp"
+            android:layout_height="77dp"
+            android:layout_marginStart="7dp"
+            android:layout_marginTop="9dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/blank_team_profile" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/homeName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:ellipsize="none"
+            android:maxLength="100"
+            android:maxLines="100"
+            android:scrollHorizontally="false"
+            android:text="Hello World "
+            android:textSize="17sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/homeImg"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/matchDate"
-                android:layout_width="147dp"
-                android:layout_height="27dp"
-                android:layout_marginStart="28dp"
-                android:layout_marginEnd="32dp"
-                android:layout_marginBottom="72dp"
-                android:maxLength="70"
-                android:maxLines="3"
-                android:text="Hello World "
-                android:textSize="10sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/newsImage2"
-                app:layout_constraintHorizontal_bias="0.289"
-                app:layout_constraintStart_toEndOf="@+id/newsImage" />
+        <TextView
+            android:id="@+id/homeScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="74dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="8dp"
+            android:maxLength="50"
+            android:maxLines="1"
+            android:text="1"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/homeImg"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/awayScore"
-                android:layout_width="40dp"
-                android:layout_height="29dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginBottom="16dp"
-                android:maxLength="50"
-                android:maxLines="1"
-                android:text="Hello World "
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/awayName" />
+        <ImageView
+            android:id="@+id/awayImg"
+            android:layout_width="76dp"
+            android:layout_height="77dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="11dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/homeImg"
+            app:srcCompat="@drawable/blank_team_profile" />
 
-            <TextView
-                android:id="@+id/homeScore"
-                android:layout_width="48dp"
-                android:layout_height="24dp"
-                android:layout_marginTop="48dp"
-                android:maxLength="50"
-                android:maxLines="1"
-                android:text="Hello World "
-                android:textSize="20sp"
-                app:layout_constraintStart_toEndOf="@+id/homeName"
-                app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/awayScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="74dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="8dp"
+            android:maxLength="50"
+            android:maxLines="1"
+            android:text="1"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/awayImg"
+            app:layout_constraintTop_toBottomOf="@+id/homeImg" />
 
-            <TextView
-                android:id="@+id/awayName"
-                android:layout_width="60dp"
-                android:layout_height="24dp"
-                android:layout_marginStart="2dp"
-                android:layout_marginBottom="32dp"
-                android:maxLength="50"
-                android:maxLines="1"
-                android:text="Hello World "
-                android:textSize="10sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/newsImage2" />
+        <TextView
+            android:id="@+id/awayName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="10dp"
+            android:ellipsize="none"
+            android:maxLength="100"
+            android:maxLines="100"
+            android:scrollHorizontally="false"
+            android:text="Hello World "
+            android:textSize="17sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/awayImg"
+            app:layout_constraintTop_toBottomOf="@+id/homeImg" />
 
-            <TextView
-                android:id="@+id/homeName"
-                android:layout_width="55dp"
-                android:layout_height="22dp"
-                android:layout_marginStart="2dp"
-                android:layout_marginBottom="128dp"
-                android:maxLength="50"
-                android:maxLines="1"
-                android:text="Hello World "
-                android:textSize="10sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/newsImage" />
+        <TextView
+            android:id="@+id/matchDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:maxLength="70"
+            android:maxLines="3"
+            android:text="Hello World "
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-            <!--            <TextView-->
-            <!--                android:id="@+id/eventName"-->
-            <!--                android:layout_width="147dp"-->
-            <!--                android:layout_height="27dp"-->
-            <!--                android:layout_marginStart="28dp"-->
-            <!--                android:layout_marginBottom="140dp"-->
-            <!--                android:maxLength="70"-->
-            <!--                android:maxLines="3"-->
-            <!--                android:text="Hello World "-->
-            <!--                android:textSize="10sp"-->
-            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--                app:layout_constraintStart_toEndOf="@+id/newsImage" />-->
-
-            <ImageView
-                android:id="@+id/newsImage2"
-                android:layout_width="61dp"
-                android:layout_height="61dp"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="40dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/newsImage"
-                app:srcCompat="@drawable/_likes__flames" />
-
-            <ImageView
-                android:id="@+id/newsImage"
-                android:layout_width="62dp"
-                android:layout_height="63dp"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/_likes__flames" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-
-</LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

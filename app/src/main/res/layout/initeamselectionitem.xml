@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/selectionTile"
     style="@style/Theme.App"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_height="154dp"
     android:layout_marginStart="10dp"
     android:layout_marginEnd="10dp"
     android:checkable="true"
@@ -24,33 +24,34 @@
 
         <ImageView
             android:id="@+id/BtnImgTeamLogo"
-            android:layout_width="148dp"
-            android:layout_height="128dp"
+            android:layout_width="141dp"
+            android:layout_height="122dp"
 
+            android:layout_marginBottom="8dp"
             android:adjustViewBounds="true"
             android:background="#02FFFFFF"
             android:maxWidth="120dp"
             android:maxHeight="120dp"
-            android:padding="20dp"
+            android:padding="2dp"
             android:tint="#00070101"
+            app:layout_constraintBottom_toTopOf="@+id/TxtTeamName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/Txt_teamName"
+            android:id="@+id/TxtTeamName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:autoText="false"
+            android:layout_marginStart="41dp"
+            android:layout_marginEnd="41dp"
             android:background="#00AAAAAA"
-            android:gravity="center"
-            android:text="TextView"
-            android:textSize="16sp"
+            android:text="Team Name"
+            android:textSize="18sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/BtnImgTeamLogo" />
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>

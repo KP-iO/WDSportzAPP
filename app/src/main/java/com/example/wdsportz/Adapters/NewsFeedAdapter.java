@@ -49,7 +49,7 @@ public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.MyView
     @Override
 
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new  MyViewHolder(from(context).inflate(R.layout.fragment_feeditem, parent,false));
+        return new  MyViewHolder(from(context).inflate(R.layout.fragment_homepage_feeditem, parent,false));
     }
 
 
@@ -126,7 +126,7 @@ public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.MyView
             description = itemView.findViewById(R.id.newsDescription);
             title = itemView.findViewById(R.id.newsTitle);
             newsTile = itemView.findViewById(R.id.newsCard);
-            newsView = itemView.findViewById(R.id.newsImage);
+            newsView = itemView.findViewById(R.id.homeImg);
             newsTile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
