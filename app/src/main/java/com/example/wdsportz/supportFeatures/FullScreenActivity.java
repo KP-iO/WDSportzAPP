@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.wdsportz.R;
-import com.example.wdsportz.utils.FullScreenHelper;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.utils.YouTubePlayerUtils;
@@ -40,7 +39,7 @@ public class FullScreenActivity extends AppCompatActivity {
 
             }
         });
-        FullScreenHelper.enterFullScreen();
+
 
 
 

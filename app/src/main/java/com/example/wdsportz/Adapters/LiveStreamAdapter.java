@@ -1,6 +1,7 @@
 package com.example.wdsportz.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,10 +11,10 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.wdsportz.LivestreamFragment;
 import com.example.wdsportz.R;
 import com.example.wdsportz.ViewModels.WatchViewModel;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -67,10 +68,14 @@ public class LiveStreamAdapter extends RecyclerView.Adapter<LiveStreamAdapter.My
         holder.btnimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(context, LivestreamFragment.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("chat",chat_ID);
                 bundle.putString("video", Video1);
-                Navigation.findNavController(v).navigate(R.id.action_global_livestreamFragment, bundle);
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+
+//                Navigation.findNavController(v).navigate(R.id.action_global_livestreamFragment, bundle);
                 for (String key: bundle.keySet())
                 {
                     Log.d ("myApplication", key + " is a key in the bundle");

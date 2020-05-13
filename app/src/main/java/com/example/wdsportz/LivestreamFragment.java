@@ -20,13 +20,14 @@ import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wdsportz.Adapters.CommentAdapter;
 import com.example.wdsportz.ViewModels.Comments;
+import com.example.wdsportz.supportFeatures.FullScreenActivity;
 import com.example.wdsportz.utils.FullScreenHelper;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.ui.PlayerView;
@@ -58,7 +59,7 @@ import java.util.List;
 
 
 
-public class LivestreamFragment extends Fragment  {
+public class LivestreamFragment extends AppCompatActivity {
 
     private OnFragmentInteractionListener mListener;
     private VideoView videoView;
@@ -86,6 +87,7 @@ public class LivestreamFragment extends Fragment  {
     private static final String TAG = "livstreamID" ;
     private YouTubePlayerView youTubePlayerView ;
 
+    private FullScreenHelper fullScreenHelper = new FullScreenHelper(this);
 
     public LivestreamFragment() {
     }
@@ -111,17 +113,20 @@ public class LivestreamFragment extends Fragment  {
 //            return Ids[random.nextInt(liveIds)];
 //        }
 //    }
-public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
-    final Context context = view.getContext();
-    Activity activity = getActivity();
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.fragment_live);
 
-    RvComment = getView().findViewById(R.id.chat_box);
-    textView = getView().findViewById(R.id.match_title);
-    textView2 = getView().findViewById(R.id.desc);
-    imageView = getView().findViewById(R.id.avatar);
-    editText = getView().findViewById(R.id.edit_box);
-    button = getView().findViewById(R.id.add);
-    videoView = getView().findViewById(R.id.Watch_view1);
+
+    RvComment = findViewById(R.id.chat_box);
+    textView = findViewById(R.id.match_title);
+    textView2 = findViewById(R.id.desc);
+    imageView = findViewById(R.id.avatar);
+    editText = findViewById(R.id.edit_box);
+    button = findViewById(R.id.add);
+    videoView =findViewById(R.id.Watch_view1);
+    youTubePlayerView = findViewById(R.id.youtube_player_view);
 
 
     firebaseAuth = FirebaseAuth.getInstance();
@@ -184,6 +189,7 @@ public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
 
 //    setVideoView(context);
     iniRvComment();
+    initYouTubePlayerView();
 
 
 
@@ -195,9 +201,10 @@ public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
 
     private void iniRvComment() {
 
-        RvComment.setLayoutManager(new LinearLayoutManager(getContext()));
+        RvComment.setLayoutManager(new LinearLayoutManager(this));
 
-        String postKey1 = getArguments().getString("chat");
+        String postKey1 = getIntent().getExtras().getString("chat");
+
         DatabaseReference commentRef = firebaseDatabase.getReference(COMMENT_KEY).child(postKey1);
 
 
@@ -211,7 +218,7 @@ public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
                     listComments.add(comments);
                 }
 
-                commentAdapter = new CommentAdapter(getContext(),listComments);
+                commentAdapter = new CommentAdapter(LivestreamFragment.this,listComments);
                 RvComment.setAdapter(commentAdapter);
 
             }
@@ -226,18 +233,18 @@ public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
 
     }
 
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_live, container, false);
-
-        youTubePlayerView = view.findViewById(R.id.youtube_player_view);
-        initYouTubePlayerView();
-
-
-
-
-        return view;
-    }
+//    @Override
+//    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+//        View view = inflater.inflate(R.layout.fragment_live, container, false);
+//
+//        youTubePlayerView = view.findViewById(R.id.youtube_player_view);
+//        initYouTubePlayerView();
+//
+//
+//
+//
+//        return view;
+//    }
 
 
 
@@ -257,7 +264,8 @@ public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
 
 
     private void initYouTubePlayerView() {
-        final String video = getArguments().getString("video");
+        String video = getIntent().getExtras().getString("video");
+
 //        Log.d(TAG, videoId );
         getLifecycle().addObserver(youTubePlayerView);
         youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
@@ -277,50 +285,15 @@ public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
         youTubePlayerView.addFullScreenListener(new YouTubePlayerFullScreenListener() {
             @Override
             public void onYouTubePlayerEnterFullScreen() {
-                getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-
-//                fullscreenButton.setImageDrawable(ContextCompat.getDrawable(requireActivity(), R.drawable.exo_icon_fullscreen_enter));
-
-                requireActivity().getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
-//
-//                    if( .getSupportActionBar() != null){
-//                        getSupportActionBar().show();
-//                    }
-
-//                getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
-                RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) youTubePlayerView.getLayoutParams();
-                params.width = params.MATCH_PARENT;
-                params.height = (int) ( 200 * getActivity().getApplicationContext().getResources().getDisplayMetrics().density);
-                youTubePlayerView.setLayoutParams(params);
-//                FullScreenHelper.enterFullScreen();
-
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                fullScreenHelper.enterFullScreen();
 //                addCustomActionsToPlayer();
             }
 
             @Override
             public void onYouTubePlayerExitFullScreen() {
-                getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
-//                fullscreenButton.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.exo_icon_fullscreen_enter));
-
-                getActivity().getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN
-                        |View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                        |View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
-
-//                    if(getSupportActionBar() != null){
-//                        getSupportActionBar().hide();
-//                    }
-
-                getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-
-                RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) youTubePlayerView.getLayoutParams();
-                params.width = params.MATCH_PARENT;
-                params.height = params.MATCH_PARENT;
-                youTubePlayerView.setLayoutParams(params);
-
-
-//                FullScreenHelper.exitFullScreen();
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                fullScreenHelper.exitFullScreen();
 
 //                removeCustomActionsFromPlayer();
             }
@@ -329,13 +302,14 @@ public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
 
 
     private void   showMessage(String message) {
-        Toast.makeText(getContext(), message,Toast.LENGTH_LONG).show();
+        Toast.makeText(LivestreamFragment.this, message,Toast.LENGTH_LONG).show();
     }
 
 
 
     public String getPostKey() {
-        postKey = getArguments().getString("chat");
+        postKey = getIntent().getExtras().getString("chat");
+
         return postKey;
     }
 

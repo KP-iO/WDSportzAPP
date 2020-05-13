@@ -1,6 +1,7 @@
 package com.example.wdsportz.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,17 +12,19 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.wdsportz.R;
 import com.example.wdsportz.ViewModels.WatchViewModel;
+import com.example.wdsportz.video_Activity;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
 
 import static android.view.LayoutInflater.from;
+
+//import com.example.wdsportz.supportFeatures.Frag_videoplay;
 
 /**
  * Created by khrishawn
@@ -69,13 +72,18 @@ public class WatchViewAdapter extends RecyclerView.Adapter<WatchViewAdapter.MyVi
         holder.btnimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(context, video_Activity.class);
                 // used to bundle strings and enable it to be collected
                 Bundle bundle = new Bundle();
                 bundle.putString("title01", title);
                 bundle.putString("amount", Video1);
-                bundle.putString("title", chat_ID);
+                bundle.putString("chatID", chat_ID);
                 bundle.putString("desc", video_desc);
-                Navigation.findNavController(v).navigate(R.id.action_global_frag_videoplay, bundle);
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+
+
+
                 for (String key: bundle.keySet())
                 {
                     Log.d ("myApplication", key + " is a key in the bundle");

@@ -1,6 +1,7 @@
 package com.example.wdsportz.supportFeatures;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -14,6 +15,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -28,12 +30,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.wdsportz.Adapters.CommentAdapter;
-import com.example.wdsportz.FullscreenActivity;
+import com.example.wdsportz.Adapters.WatchViewAdapter;
+import com.example.wdsportz.FullScree;
 import com.example.wdsportz.R;
 import com.example.wdsportz.ViewModels.Comments;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.source.ProgressiveMediaSource;
+import com.google.android.exoplayer2.ui.PlaybackControlView;
 import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
@@ -49,7 +53,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 
 /**
@@ -82,19 +85,25 @@ public class Frag_videoplay extends Fragment {
     ArrayList<Comments> listComments;
     static String COMMENT_KEY = "Comment";
     private SimpleExoPlayer simpleExoPlayer;
-    private PlayerView playerView;
-    private ImageView fullscreenButton;
+    private PlayerView mExoPlayerView;
     private static final String TAG = "Video Activity";
     FirebaseDatabase commentsDatabase;
     DatabaseReference reference;
+    private ImageView mFullScreenIcon;
+    private FrameLayout mFullScreenButton;
 
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    boolean fullscreen = false;
+    boolean mExoPlayerFullscreen = false;
     String uid = user.getUid();
+    WatchViewAdapter watchViewAdapter;
 
     FirebaseDatabase firebaseDatabase;
+    private Dialog mFullScreenDialog;
+    boolean MUTE = false;
+
+
 
     public Frag_videoplay() {
         // Required empty public constructor
@@ -133,7 +142,8 @@ public class Frag_videoplay extends Fragment {
                              Bundle savedInstanceState) {
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_frag_videoplay, container, false);
+        View v = inflater.inflate(R.layout.fragment_frag_videoplay, container, false);
+        return  v;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -151,7 +161,7 @@ public class Frag_videoplay extends Fragment {
         imageView = getView().findViewById(R.id.avatar);
         editText = getView().findViewById(R.id.edit_box1);
         button = getView().findViewById(R.id.add);
-        playerView= getView().findViewById(R.id.Watch_view1);
+        mExoPlayerView= getView().findViewById(R.id.Watch_view1);
 
         firebaseAuth = firebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
@@ -240,6 +250,58 @@ public class Frag_videoplay extends Fragment {
 
 
     }
+    private void initFullscreenDialog() {
+
+        mFullScreenDialog = new Dialog(getContext(), android.R.style.Theme_Black_NoTitleBar_Fullscreen) {
+            public void onBackPressed() {
+                if (mExoPlayerFullscreen)
+                    closeFullscreenDialog();
+                super.onBackPressed();
+            }
+        };
+    }
+
+    private void openFullscreenDialog(View v) {
+
+
+//        mVideoDialog = new Dialog(this);
+//        mVideoDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        mVideoDialog.setContentView(R.layout.fullscreen_video);
+//        mVideoDialog.setOnKeyListener(this);
+//        mVideoFullScreen = (VideoView) mVideoDialog.findViewById(R.id.fullscreen_videoview)
+
+        mExoPlayerView = getView().findViewById(R.id.Watch_view1);
+        ((ViewGroup) mExoPlayerView.getParent()).removeView(mExoPlayerView);
+        mFullScreenDialog.setContentView(v);
+        mFullScreenIcon.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.exo_controls_fullscreen_exit));
+        mExoPlayerFullscreen = true;
+        mFullScreenDialog.show();
+    }
+
+    private void closeFullscreenDialog() {
+
+        ((ViewGroup) mExoPlayerView.getParent()).removeView(mExoPlayerView);
+        ((FrameLayout) getView().findViewById(R.id.relativeLayout3)).addView(mExoPlayerView);
+        mExoPlayerFullscreen = false;
+        mFullScreenDialog.dismiss();
+        mFullScreenIcon.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_fullscreen_expand));
+    }
+
+    private void initFullscreenButton() {
+
+        PlaybackControlView controlView = mExoPlayerView.findViewById(R.id.exo_controller);
+        mFullScreenIcon = controlView.findViewById(R.id.exo_fullscreen_icon);
+        mFullScreenButton = controlView.findViewById(R.id.exo_fullscreen_button);
+        mFullScreenButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!mExoPlayerFullscreen)
+                    openFullscreenDialog(v);
+                else
+                    closeFullscreenDialog();
+            }
+        });
+    }
 
 
 
@@ -296,24 +358,26 @@ public class Frag_videoplay extends Fragment {
         String str = getArguments().getString("amount");
 
 
-        playerView = getView().findViewById(R.id.Watch_view1);
+        mExoPlayerView = getView().findViewById(R.id.Watch_view1);
         simpleExoPlayer = new SimpleExoPlayer.Builder(context).build();
-        playerView.setPlayer(simpleExoPlayer);
+        mExoPlayerView.setPlayer(simpleExoPlayer);
+        float currentvolume = simpleExoPlayer.getVolume();
+        simpleExoPlayer.setVolume(currentvolume);
 
 
+        mFullScreenIcon = mExoPlayerView.findViewById(R.id.exo_fullscreen_icon);
 
-        fullscreenButton = playerView.findViewById(R.id.exo_fullscreen_icon);
 
-
-        fullscreenButton.setOnClickListener(new View.OnClickListener() {
+        mFullScreenIcon.setOnClickListener(new View.OnClickListener() {
 
 
             @Override
             public void onClick(View view) {
 
 
-                if(fullscreen) {
-                    fullscreenButton.setImageDrawable(ContextCompat.getDrawable(requireActivity(), R.drawable.exo_icon_fullscreen_enter));
+                if(mExoPlayerFullscreen) {
+
+                    mFullScreenIcon.setImageDrawable(ContextCompat.getDrawable(requireActivity(), R.drawable.exo_icon_fullscreen_enter));
 
                     requireActivity().getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
 //
@@ -323,18 +387,27 @@ public class Frag_videoplay extends Fragment {
 
                     getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-                    RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) playerView.getLayoutParams();
+                    RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) mExoPlayerView.getLayoutParams();
                     params.width = params.MATCH_PARENT;
                     params.height = (int) ( 400 * getActivity().getApplicationContext().getResources().getDisplayMetrics().density);
-                    playerView.setLayoutParams(params);
+                    mExoPlayerView.setLayoutParams(params);
 
-                    fullscreen = false;
+                    mExoPlayerFullscreen = false;
                 }else{
-                    Log.d(TAG,"Ways" + str);
+//                    Navigation.findNavController(view).navigate(R.id.action_global_fullscreenFragment);
+                    MUTE = true;
+                    if (MUTE) {
+                        simpleExoPlayer.setVolume(0f);
+                    }
 
-                    Intent intent = new Intent(getActivity(), FullscreenActivity.class);
+
+                    Log.d(TAG,"Ways" + str);
+                      long timeInterval =  simpleExoPlayer.getCurrentPosition();
+                    Intent intent = new Intent(context, FullScree.class);
 //                    Bundle bundle = new Bundle();
-                    intent.putExtra("key1", str);;
+//                    bundle.putString("key1", "https://firebasestorage.googleapis.com/v0/b/wdsportz-3e91f.appspot.com/o/Videos%2FMatches%2FEngland%201-1%20Italy%20%20%20England%20Denied%20Win%20by%20Controversial%20VAR%20in%2087th%20Minute%20%20%20Official%20Highlights.mp4?alt=media&token=64d29a23-48e8-470f-aca8-da0edcf7c35b");
+                    intent.putExtra("key", str);
+                    intent.putExtra("time", timeInterval);
                     startActivity(intent);
 
                 }
@@ -366,6 +439,7 @@ public class Frag_videoplay extends Fragment {
         simpleExoPlayer.release();
         mListener = null;
     }
+
     public String getPostKey() {
         postKey = getArguments().getString("title");
         return postKey;
@@ -391,6 +465,23 @@ public class Frag_videoplay extends Fragment {
         super.onDetach();
         mListener = null;
     }
+//    @Override
+//    public void onResume() {
+//        float currentvolume = simpleExoPlayer.getVolume();
+//        simpleExoPlayer.setVolume(currentvolume);
+//        super.onResume();
+//
+//    }
+//
+//    @Override
+//    public void onPause() {
+//        float currentvolume = simpleExoPlayer.getVolume();
+//        simpleExoPlayer.setVolume(currentvolume);
+//        super.onPause();
+//
+//    }
+
+
 
     /**
      * This interface must be implemented by activities that contain this
