@@ -36,10 +36,10 @@
     <Button
         android:id="@+id/signUp"
         style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="37dp"
-        android:layout_marginEnd="92dp"
+        android:layout_width="144dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="64dp"
         android:backgroundTint="#00FFFFFF"
         android:text="Register Here"
         android:textColor="#E6E11F"
@@ -50,8 +50,8 @@
         android:id="@+id/textView8"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="96dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="68dp"
         android:text="Not A Member?"
         android:textColor="#070404"
         app:layout_constraintStart_toStartOf="parent"
@@ -178,29 +178,6 @@
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_signIn" />
-
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:text="Not A Member?"
-        android:textColor="#070404"
-        app:layout_constraintEnd_toStartOf="@+id/signUp"
-        app:layout_constraintTop_toBottomOf="@+id/btn_signIn" />
-
-    <Button
-        android:id="@+id/signUp"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="79dp"
-        android:backgroundTint="#00FFFFFF"
-        android:text="Register Here"
-        android:textColor="#E6E11F"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_signIn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,11 +9,7 @@
         android:id="@+id/blankFragment"
         android:name="com.example.wdsportz.SetImage"
         android:label="fragment_setimage"
-        tools:layout="@layout/fragment_setimage" >
-        <action
-            android:id="@+id/action_blankFragment_to_frag_IniTeamSelection"
-            app:destination="@id/frag_IniTeamSelection" />
-    </fragment>
+        tools:layout="@layout/fragment_setimage" />
     <include app:graph="@navigation/main_navigation" />
     <fragment
         android:id="@+id/frag_login"
@@ -33,8 +29,8 @@
             android:id="@+id/action_RegisterToLogin"
             app:destination="@id/frag_login" />
         <action
-            android:id="@+id/action_frag_Register_to_blankFragment"
-            app:destination="@id/blankFragment" />
+            android:id="@+id/action_frag_Register_to_frag_IniTeamSelection2"
+            app:destination="@id/frag_IniTeamSelection" />
     </fragment>
     <action
         android:id="@+id/globalAction_Register"

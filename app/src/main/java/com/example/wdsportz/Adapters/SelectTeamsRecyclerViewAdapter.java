@@ -98,7 +98,7 @@ public class SelectTeamsRecyclerViewAdapter extends RecyclerView.Adapter<SelectT
 
 
 
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 MaterialCardView cardView = v.findViewById(R.id.selectionTile);
