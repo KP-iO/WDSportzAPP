@@ -2,6 +2,7 @@ package com.example.wdsportz;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
@@ -37,6 +38,7 @@ import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -69,6 +71,7 @@ public class video_Activity extends AppCompatActivity {
     DatabaseReference reference;
     private ImageView mFullScreenIcon;
     private FrameLayout mFullScreenButton;
+    MaterialButton shareAction;
 
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
@@ -99,7 +102,7 @@ private int mResumeWindow;
             editText = findViewById(R.id.edit_box1);
             button = findViewById(R.id.add);
             mExoPlayerView= findViewById(R.id.Watch_view1);
-
+        shareAction = findViewById(R.id.action_button_share);
 
             firebaseAuth = firebaseAuth.getInstance();
             firebaseUser = firebaseAuth.getCurrentUser();
@@ -116,7 +119,13 @@ private int mResumeWindow;
 //        videoView.start();
 
 
+        shareAction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                shareAction();
 
+            }
+        });
 
 
             button.setOnClickListener(new View.OnClickListener() {
@@ -391,6 +400,14 @@ private int mResumeWindow;
 
         if (mFullScreenDialog != null)
             mFullScreenDialog.dismiss();
+    }
+
+    public void shareAction(){
+        Intent intent1 = new Intent(Intent.ACTION_SEND);
+        intent1.setType("text/plain");
+        String shareBody = "VIDEO CONTENT";
+        intent1.putExtra(Intent.EXTRA_TEXT, shareBody);
+        startActivity(Intent.createChooser(intent1, "Share Using"));
     }
 
 }

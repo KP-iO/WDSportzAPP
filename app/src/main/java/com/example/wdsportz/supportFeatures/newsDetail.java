@@ -310,7 +310,7 @@ public String getPostKey() {
     public void shareAction(){
         Intent intent1 = new Intent(Intent.ACTION_SEND);
         intent1.setType("text/plain");
-        String shareBody = "https......";
+        String shareBody = "NEWS CONTENT";
         intent1.putExtra(Intent.EXTRA_TEXT, shareBody);
         startActivity(Intent.createChooser(intent1, "Share Using"));
     }

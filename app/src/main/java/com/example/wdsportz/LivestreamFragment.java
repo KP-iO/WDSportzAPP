@@ -1,25 +1,20 @@
 package com.example.wdsportz;
 
 
-import android.app.Activity;
-import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.MediaController;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -27,12 +22,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wdsportz.Adapters.CommentAdapter;
 import com.example.wdsportz.ViewModels.Comments;
-import com.example.wdsportz.supportFeatures.FullScreenActivity;
 import com.example.wdsportz.utils.FullScreenHelper;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -74,6 +69,7 @@ public class LivestreamFragment extends AppCompatActivity {
     CommentAdapter commentAdapter;
     List<Comments> listComments;
     static String COMMENT_KEY = "Comment";
+    MaterialButton shareAction;
 
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
@@ -127,11 +123,22 @@ protected void onCreate(Bundle savedInstanceState) {
     button = findViewById(R.id.add);
     videoView =findViewById(R.id.Watch_view1);
     youTubePlayerView = findViewById(R.id.youtube_player_view);
+    shareAction =findViewById(R.id.action_button_share);
 
 
     firebaseAuth = FirebaseAuth.getInstance();
     firebaseUser = firebaseAuth.getCurrentUser();
     firebaseDatabase = FirebaseDatabase.getInstance();
+
+
+    shareAction.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            shareAction();
+
+        }
+    });
+
 
     button.setOnClickListener(new View.OnClickListener() {
         @Override
@@ -311,6 +318,15 @@ protected void onCreate(Bundle savedInstanceState) {
         postKey = getIntent().getExtras().getString("chat");
 
         return postKey;
+    }
+
+//Setting shareaction details
+    public void shareAction(){
+        Intent intent1 = new Intent(Intent.ACTION_SEND);
+        intent1.setType("text/plain");
+        String shareBody = "LIGVESTREAM CONTENT";
+        intent1.putExtra(Intent.EXTRA_TEXT, shareBody);
+        startActivity(Intent.createChooser(intent1, "Share Using"));
     }
 
     public interface OnFragmentInteractionListener {
