@@ -3,13 +3,15 @@ package com.example.wdsportz.Adapters;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.wdsportz.Model.League;
+import com.bumptech.glide.Glide;
 import com.example.wdsportz.R;
+import com.example.wdsportz.ViewModels.ScoreViewModel;
 
 import java.util.List;
 
@@ -22,9 +24,9 @@ import static android.view.LayoutInflater.from;
 public class ScoreFeedAdpater extends RecyclerView.Adapter<ScoreFeedAdpater.MyViewHolder> {
 
     private Context mContext;
-    private List<League> mData;
+    private List<ScoreViewModel> mData;
 
-    public ScoreFeedAdpater(Context mContext, List<League> mData){
+    public ScoreFeedAdpater(Context mContext, List<ScoreViewModel> mData){
         this.mContext = mContext;
         this.mData = mData;
     }
@@ -40,19 +42,29 @@ public class ScoreFeedAdpater extends RecyclerView.Adapter<ScoreFeedAdpater.MyVi
 
     @Override
     public void onBindViewHolder(@NonNull ScoreFeedAdpater.MyViewHolder holder, int i) {
-        String HTeam = mData.get(i).getStrHomeTeam();
-        String ATeam = mData.get(i).getStrAwayTeam();
-        String HTeamScore = Integer.toString(mData.get(i).getIntHomeScore());
-        String ATeamScore = Integer.toString(mData.get(i).getIntAwayScore());
-        String date = mData.get(i).getDateEventLocal();
+        String HTeam = mData.get(i).getHomeTeam();
+        String ATeam = mData.get(i).getAwayTeam();
+        String HTeamScore = mData.get(i).getHomeScore();
+        String ATeamScore = mData.get(i).getAwayScore();
+        String date = mData.get(i).getEventDate();
+        String homeImage = mData.get(i).getHomeIcon();
+        String awayImage = mData.get(i).getAwayIcon();
 
 
-//        holder.matchTitle.setText(mData.get(i).getStrEvent());
-        holder.awayName.setText(mData.get(i).getStrAwayTeam());
-        holder.homeName.setText(mData.get(i).getStrHomeTeam());
+        holder.matchDate.setText(date);
+        holder.awayName.setText(HTeam);
+        holder.homeName.setText(ATeam);
         holder.awayScore.setText(ATeamScore);
         holder.homeScore.setText(HTeamScore);
-        holder.matchDate.setText(date);
+
+        Glide.with(mContext)
+                .load(homeImage)
+                .into(holder.homeImage);
+
+        Glide.with(mContext)
+                .load(awayImage)
+                .into(holder.awayImage);
+
 
 
 
@@ -68,13 +80,15 @@ public class ScoreFeedAdpater extends RecyclerView.Adapter<ScoreFeedAdpater.MyVi
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
-        public TextView matchTitle, matchDate, awayName, homeName, awayScore, homeScore;
+        public TextView  matchDate, awayName, homeName, awayScore, homeScore;
+        ImageView homeImage, awayImage;
 
 
 
         public MyViewHolder(View view){
             super(view);
-//            matchTitle = (TextView) view.findViewById(R.id.eventName);
+            homeImage = view.findViewById(R.id.homeImg);
+            awayImage = view.findViewById(R.id.awayImg);
             matchDate = (TextView) view.findViewById(R.id.matchDate);
             awayName = (TextView) view.findViewById(R.id.awayName);
             homeName = (TextView) view.findViewById(R.id.homeName);

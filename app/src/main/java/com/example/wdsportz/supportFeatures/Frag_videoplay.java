@@ -91,7 +91,6 @@ public class Frag_videoplay extends Fragment {
     DatabaseReference reference;
     private ImageView mFullScreenIcon;
     private FrameLayout mFullScreenButton;
-
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -176,7 +175,9 @@ public class Frag_videoplay extends Fragment {
 
 
 
-
+        Glide.with(view)
+                .load(user.getPhotoUrl())
+                .into(imageView);
 
         button.setOnClickListener(new View.OnClickListener() {
 
@@ -194,9 +195,9 @@ public class Frag_videoplay extends Fragment {
                 String uimg = firebaseUser.getPhotoUrl().toString();
                 String reportID = "";
                 Comments comments = new Comments(comment_content,uid,uname,uimg,key, chatID,reportID);
-                Glide.with(view)
-                        .load(uimg)
-                        .into(imageView);
+//                Glide.with(view)
+//                        .load(uimg)
+//                        .into(imageView);
 
                 commentReference.setValue(comments).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override

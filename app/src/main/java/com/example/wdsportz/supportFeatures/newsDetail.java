@@ -2,6 +2,7 @@ package com.example.wdsportz.supportFeatures;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
@@ -29,6 +30,7 @@ import com.example.wdsportz.R;
 import com.example.wdsportz.ViewModels.Comments;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -77,6 +79,7 @@ public class newsDetail extends Fragment {
     FirebaseUser firebaseUser;
     DatabaseReference databaseReference;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    MaterialButton shareAction;
 
 
     FirebaseDatabase firebaseDatabase;
@@ -138,6 +141,7 @@ public class newsDetail extends Fragment {
         //imageView1 = getView().findViewById(R.id.avatar2);
         editText = getView().findViewById(R.id.edit_box3);
         button = getView().findViewById(R.id.add2);
+        shareAction = getView().findViewById(R.id.action_button_share);
 
 
         firebaseAuth = firebaseAuth.getInstance();
@@ -225,6 +229,14 @@ public class newsDetail extends Fragment {
 //        scrollBottom();
         iniRvComment();
 
+        shareAction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                shareAction();
+
+            }
+        });
+
     }
 
 //    private void scrollBottom()
@@ -292,6 +304,15 @@ public String getPostKey() {
 
 
 
+    }
+
+
+    public void shareAction(){
+        Intent intent1 = new Intent(Intent.ACTION_SEND);
+        intent1.setType("text/plain");
+        String shareBody = "https......";
+        intent1.putExtra(Intent.EXTRA_TEXT, shareBody);
+        startActivity(Intent.createChooser(intent1, "Share Using"));
     }
     @Override
     public void onDetach() {
