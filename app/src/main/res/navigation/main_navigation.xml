@@ -52,7 +52,7 @@
     <fragment
         android:id="@+id/frag_videoplay"
         android:name="com.example.wdsportz.supportFeatures.Frag_videoplay"
-        tools:layout="@layout/fragment_frag_videoplay" >
+        tools:layout="@layout/activity_videoplayback" >
         <argument
             android:name="videolink"
             app:argType="string" />

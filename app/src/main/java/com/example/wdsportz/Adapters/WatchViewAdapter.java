@@ -82,8 +82,6 @@ public class WatchViewAdapter extends RecyclerView.Adapter<WatchViewAdapter.MyVi
                 intent.putExtras(bundle);
                 context.startActivity(intent);
 
-
-
                 for (String key: bundle.keySet())
                 {
                     Log.d ("myApplication", key + " is a key in the bundle");

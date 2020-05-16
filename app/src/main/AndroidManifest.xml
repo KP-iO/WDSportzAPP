@@ -13,11 +13,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme1">
         <activity
-            android:name=".FullscreenActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_fullscreen"
-            android:theme="@style/FullscreenTheme"></activity>
-        <activity
             android:name=".MainActivities.Auth_Activity"
             android:label="@string/title_activity_auth__main"
             android:theme="@style/AppTheme1.NoActionBar">
@@ -53,16 +48,7 @@
                 <action android:name="android.intent.action.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".FullScree"
-            android:theme="@style/AppTheme1"
-            android:screenOrientation="fullSensor"
-            android:configChanges="orientation|keyboardHidden" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-        </activity>
-<!--        <activity-->
+        <!--        <activity-->
 <!--            android:name=".NewsDetail1"-->
 <!--            android:theme="@style/AppTheme1">-->
 <!--            <intent-filter>-->

@@ -144,12 +144,12 @@ public class Frag_Profile extends Fragment {
         storagePermissions = new String[]{ Manifest.permission.WRITE_EXTERNAL_STORAGE};
         storageReference = FirebaseStorage.getInstance().getReference();
 
-        avatarIv = view.findViewById(R.id.avatarIv);
+        avatarIv = view.findViewById(R.id.UserImg);
         nameTv = view.findViewById(R.id.nameTv);
         emailTv = view.findViewById(R.id.emailTv);
         phoneTv = view.findViewById(R.id.phoneTv);
-        fab = view.findViewById(R.id.fab);
-        coverIv = view.findViewById(R.id.coverIv);
+       // fab = view.findViewById(R.id.fab);
+       // coverIv = view.findViewById(R.id.coverIv);
 
         //progress dialog
         pd = new ProgressDialog(getActivity());
@@ -171,7 +171,7 @@ public class Frag_Profile extends Fragment {
                     String email = "" + ds.child("email").getValue();
                     String phone = "" + ds.child("phone").getValue();
                     String image = "" + ds.child("image").getValue();
-                    String cover = "" + ds.child("cover").getValue();
+                   // String cover = "" + ds.child("cover").getValue();
 
                     // Set to user
                     UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
@@ -197,9 +197,9 @@ public class Frag_Profile extends Fragment {
                         Glide.with(view)
                                 .load(image)
                                 .into(avatarIv);
-                        Glide.with(view)
-                                .load(cover)
-                                .into(coverIv);
+                        //Glide.with(view)
+                               // .load(cover)
+                             //   .into(coverIv);
                     }
                     catch (Exception e){
                         Glide.with(view)

@@ -48,7 +48,7 @@ public class Frag_HomePage extends Fragment {
 
     private OnFragmentInteractionListener mListener;
     private Frag_HomePage frag_homePage;
-    private static final String TAG = "Video Activity";
+    private static final String TAG = "Home Fragment";
     FirebaseFirestore fireStoreDB = FirebaseFirestore.getInstance();
     private RecyclerView recyclerView;
     private RecyclerView recyclerView1;
@@ -125,8 +125,8 @@ public class Frag_HomePage extends Fragment {
 
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
-                                Log.d(TAG, "DOCUMENT PRINT :" + document.getData().toString());
-                                Log.d(TAG, "Team Added to List " + document.get("Title").toString());
+//                                Log.d("DOCUMENT PRINT :", document.getData().toString());
+//                                Log.d("Team Added to List ", document.get("Title").toString());
 
                                 list.add(new NewsFeedViewModel(document.get("Title").toString(), document.get("Image").toString(), document.get("Description").toString(),document.get("Date").toString()));
 
