@@ -9,8 +9,8 @@
     <FrameLayout
         android:id="@+id/main_media_frame"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.5"
+        android:layout_height="300dp"
+        android:layout_weight="0"
         android:background="#000000">
 
         <com.google.android.exoplayer2.ui.PlayerView
@@ -23,31 +23,79 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp">
+        android:layout_height="wrap_content">
 
-        <ScrollView
-            android:id="@+id/watch_scroll"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:isScrollContainer="true"
-            android:nestedScrollingEnabled="true"
+        <LinearLayout
+            android:layout_width="282dp"
+            android:layout_height="119dp"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="16dp"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/linearLayout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/match_title"
-                android:layout_width="141dp"
+                android:id="@+id/match_Title"
+                android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:layout_marginStart="122dp"
-                android:layout_marginTop="78dp"
-                android:layout_marginEnd="148dp"
-                android:layout_marginBottom="436dp"
-                android:background="@color/blue_100"
-                android:text="Match Title" />
-        </ScrollView>
+                android:layout_margin="8dp"
+                android:layout_marginTop="16dp"
+                android:text="Match Title"
+                android:textAlignment="center"
+                android:textSize="28sp" />
+
+            <TextView
+                android:id="@+id/match_Desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="Match Desc"
+                android:textSize="21sp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="8dp"
+                android:text="Button"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/button5"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:text="Button"
+                app:layout_constraintTop_toTopOf="parent" />
+        </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
+        android:id="@+id/watch_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#61000000"
+        android:isScrollContainer="true"
+        android:nestedScrollingEnabled="true"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="102dp">
+
+    </ScrollView>
 
 </LinearLayout>

@@ -57,7 +57,7 @@ public class LiveStreamAdapter extends RecyclerView.Adapter<LiveStreamAdapter.My
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, int position) {
         holder.title.setText(videoViewModels.get(position).getTitle());
-        final String currentUrl = videoViewModels.get(position).getVideoimageURL();
+        final String currentUrl = videoViewModels.get(position).getVideoImageURL();
         final String Video1 = (videoViewModels.get(position).getVideoURL());
         final String chat_ID = (videoViewModels.get(position).getChatBox_ID());
 

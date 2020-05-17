@@ -39,7 +39,7 @@ public class WatchViewModel {
 
 
 
-    public String getVideoimageURL() {
+    public String getVideoImageURL() {
         return videoimageURL;
     }
 

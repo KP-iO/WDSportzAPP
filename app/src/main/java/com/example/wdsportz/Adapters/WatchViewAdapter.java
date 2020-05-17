@@ -42,14 +42,6 @@ public class WatchViewAdapter extends RecyclerView.Adapter<WatchViewAdapter.MyVi
         this.context = context;
     }
 
-
-
-
-//    public WatchViewAdapter(Context context, List<VideoViewModel> videoViewModels) {
-//
-//    }
-
-
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -58,15 +50,16 @@ public class WatchViewAdapter extends RecyclerView.Adapter<WatchViewAdapter.MyVi
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, int position) {
-        holder.title.setText(videoViewModels.get(position).getTitle());
-        String currentUrl = videoViewModels.get(position).getVideoimageURL();
-        final String Video1 = (videoViewModels.get(position).getVideoURL());
-        final String chat_ID = (videoViewModels.get(position).getChatBox_ID());
-        final String title = (videoViewModels.get(position).getTitle());
-        final String video_desc  = (videoViewModels.get(position).getVideo_desc());
 
+        final String videoTitle = (videoViewModels.get(position).getTitle());
+        final String videoImage = videoViewModels.get(position).getVideoImageURL();
+        final String videoUrl = (videoViewModels.get(position).getVideoURL());
+        final String chatID = (videoViewModels.get(position).getChatBox_ID());
+        final String videoDesc  = (videoViewModels.get(position).getVideo_desc());
+
+        holder.title.setText(videoViewModels.get(position).getTitle());
         Glide.with(context)
-                .load(currentUrl)
+                .load(videoImage)
                 .into(holder.btnimg);
 
         holder.btnimg.setOnClickListener(new View.OnClickListener() {
@@ -75,17 +68,17 @@ public class WatchViewAdapter extends RecyclerView.Adapter<WatchViewAdapter.MyVi
                 Intent intent = new Intent(context, video_Activity.class);
                 // used to bundle strings and enable it to be collected
                 Bundle bundle = new Bundle();
-                bundle.putString("title01", title);
-                bundle.putString("amount", Video1);
-                bundle.putString("chatID", chat_ID);
-                bundle.putString("desc", video_desc);
+                bundle.putString("videoTitle", videoTitle);
+                bundle.putString("videoUrl", videoUrl);
+                bundle.putString("chatID", chatID);
+                bundle.putString("videoDesc", videoDesc);
                 intent.putExtras(bundle);
                 context.startActivity(intent);
 
-                for (String key: bundle.keySet())
-                {
-                    Log.d ("myApplication", key + " is a key in the bundle");
-                }
+//                for (String key: bundle.keySet())
+//                {
+//                    Log.d ("myApplication", key + " is a key in the bundle");
+//                }
             }
         });
 

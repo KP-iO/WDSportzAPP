@@ -108,41 +108,6 @@ public class video_Activity extends AppCompatActivity {
     private int mResumeWindow;
     private long mResumePosition;
 
-//    private EditText editText;
-//    private TextView textView, textView2;
-//    private Button addComment;
-//    private ImageView imageView;
-//    MediaSource videoSource;
-//    private Uri uri;
-//    String postKey;
-//    RecyclerView RvComment;
-//    CommentAdapter commentAdapter;
-//    ArrayList<Comments> listComments;
-//    static String COMMENT_KEY = "Comment";
-//    private SimpleExoPlayer simpleExoPlayer;
-//    private PlayerView mExoPlayerView;
-//    private static final String TAG = "Video Activity";
-//    FirebaseDatabase commentsDatabase;
-//    DatabaseReference reference;
-//    private ImageView mFullScreenIcon;
-//    private FrameLayout mFullScreenButton;
-//
-//    FirebaseAuth firebaseAuth;
-//    FirebaseUser firebaseUser;
-//    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//    boolean mExoPlayerFullscreen = false;
-//    String uid = user.getUid();
-//    WatchViewAdapter watchViewAdapter;
-////    Bundle extras = getIntent().getExtras();
-//private int mResumeWindow;
-//    private long mResumePosition;
-//    FirebaseDatabase firebaseDatabase;
-//    private Dialog mFullScreenDialog;
-//    boolean MUTE = false;
-//    private final String STATE_RESUME_WINDOW = "resumeWindow";
-//    private final String STATE_RESUME_POSITION = "resumePosition";
-//    private final String STATE_PLAYER_FULLSCREEN = "playerFullscreen";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("DEBUGGGGGGGGGGGGGGGGGG", "Oncreate Launched");
@@ -156,79 +121,11 @@ public class video_Activity extends AppCompatActivity {
             mResumePosition = savedInstanceState.getLong(STATE_RESUME_POSITION);
             mExoPlayerFullscreen = savedInstanceState.getBoolean(STATE_PLAYER_FULLSCREEN);
         }
+
+        initVideoInfo();
+
     }
 
-
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_videoplayback);
-//            this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-//            RvComment =findViewById(R.id.chat_box);
-//            textView = findViewById(R.id.match_title);
-//            textView2 = findViewById(R.id.desc);
-//            imageView = findViewById(R.id.avatar);
-//            editText = findViewById(R.id.edit_box1);
-//            addComment = findViewById(R.id.add);
-//            mExoPlayerView= findViewById(R.id.Watch_view1);
-//
-//            firebaseAuth = firebaseAuth.getInstance();
-//            firebaseUser = firebaseAuth.getCurrentUser();
-//            firebaseDatabase = firebaseDatabase.getInstance();
-//
-//            String strTitle = getIntent().getExtras().getString("title01");
-//            String desc = getIntent().getExtras().getString("desc");
-//
-//            textView.setText(strTitle);
-//            textView2.setText(desc);
-//
-//            addComment.setOnClickListener(new View.OnClickListener() {
-//
-//                @Override
-//                public void onClick(final View view) {
-//
-//                    addComment.setVisibility(View.INVISIBLE);
-//                    DatabaseReference commentReference =firebaseDatabase.getReference(COMMENT_KEY).child(getPostKey()).push();
-//                    String key = commentReference.getKey();
-//                    String chatID = getIntent().getExtras().getString("chatID");
-//                    String comment_content = editText.getText().toString();
-//                    String uid = firebaseUser.getUid();
-//                    String uname = firebaseUser.getDisplayName();
-//                    String uimg = firebaseUser.getPhotoUrl().toString();
-//                    String reportID = "";
-//                    Comments comments = new Comments(comment_content,uid,uname,uimg,key, chatID,reportID);
-//                    Glide.with(view)
-//                            .load(uimg)
-//                            .into(imageView);
-//
-//                    commentReference.setValue(comments).addOnSuccessListener(new OnSuccessListener<Void>() {
-//                        @Override
-//                        public void onSuccess(Void aVoid) {
-//                            showMessage("comment added");
-//                            editText.setText("");
-//                            addComment.setVisibility(View.VISIBLE);
-//                            InputMethodManager imm = (InputMethodManager) getApplicationContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
-//                            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-//
-//
-//                        }
-//                    }).addOnFailureListener(new OnFailureListener() {
-//                        @Override
-//                        public void onFailure(@NonNull Exception e) {
-//                            showMessage("fail to add comment: "+e.getMessage());
-//
-//                        }
-//                    });
-//
-//                }
-//
-//            });
-//
-//            iniRvComment();
-//
-//            initExoPlayer();
-//
-//    }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -261,21 +158,37 @@ public class video_Activity extends AppCompatActivity {
         }
     }
 
+    public void initVideoInfo(){
+
+        TextView videoTitle;
+        TextView videoDesc;
+
+        videoTitle = findViewById(R.id.match_Title);
+        videoDesc = findViewById(R.id.match_Desc);
+
+        videoTitle.setText(getIntent().getExtras().getString("videoTitle"));
+        videoDesc.setText(getIntent().getExtras().getString("videoDesc"));
+
+        Log.d("Match Desc", String.valueOf(videoDesc));
+
+
+    }
 
 
     private void initExoPlayer() {
 
         Log.d("DEBUGGGGGGGGGGGGGGGGGG"," initExoplayer launched ");
 
-
-        //player = ExoPlayerFactory.newSimpleInstance(this);
         player = new SimpleExoPlayer.Builder(this).build();
         playerView.setPlayer(player);
 
         boolean haveResumePosition = mResumeWindow != C.INDEX_UNSET;
 
-        String str = "https://firebasestorage.googleapis.com/v0/b/wdsportz-3e91f.appspot.com/o/Videos%2FMatches%2FArsenal%20vs%20Manchester%20United%20(1-3)%20%20%20Emirates%20FA%20Cup%20Highlights.mp4?alt=media&token=f4edecd4-ce6d-46a2-83be-80ff9b1171bc";
-        MediaSource mVideoSource = new ProgressiveMediaSource.Factory(dataSourceFactory).createMediaSource(Uri.parse(str));
+        String videoUrl;
+
+        videoUrl = getIntent().getExtras().getString("videoUrl");
+
+        MediaSource mVideoSource = new ProgressiveMediaSource.Factory(dataSourceFactory).createMediaSource(Uri.parse(videoUrl));
         // mVideoSource = new ProgressiveMediaSource.Factory(dataSourceFactory).createMediaSource(Uri.parse(str));
         Log.i("DEBUG"," mVideoSource "+mVideoSource);
         player.prepare(mVideoSource);
@@ -364,40 +277,6 @@ public class video_Activity extends AppCompatActivity {
     }
 
 
-//    private MediaSource buildMediaSource(Uri uri) {
-//        @C.ContentType int type = Util.inferContentType(uri);
-//        switch (type) {
-//            case C.TYPE_DASH:
-//                return new DashMediaSource.Factory(dataSourceFactory).createMediaSource(uri);
-//            case C.TYPE_SS:
-//                return new SsMediaSource.Factory(dataSourceFactory).createMediaSource(uri);
-//            case C.TYPE_HLS:
-//                return new HlsMediaSource.Factory(dataSourceFactory).createMediaSource(uri);
-//            case C.TYPE_OTHER:
-//                return new ProgressiveMediaSource.Factory(dataSourceFactory).createMediaSource(uri);
-//            default:
-//                throw new IllegalStateException("Unsupported type: " + type);
-//        }
-//    }
-
-
-
-//    @Override
-//    protected void onPause() {
-//        Log.d("DEBUGGGGGGGGGGGGGGGGGG", "onPause launched");
-//        super.onPause();
-//
-//        if (playerView != null && player != null) {
-//            mResumeWindow = player.getCurrentWindowIndex();
-//            mResumePosition = Math.max(0, player.getCurrentPosition());
-//            Log.d("DEBUGGGGGGGGGGGGGGGGGG", String.valueOf(mResumePosition));
-//
-//            player.release();
-//        }
-//
-//        if (mFullScreenDialog != null)
-//            mFullScreenDialog.dismiss();
-//    }
 
 
     @Override

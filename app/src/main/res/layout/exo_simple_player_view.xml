@@ -24,9 +24,10 @@
 
     </com.google.android.exoplayer2.ui.AspectRatioFrameLayout>
 
-    <View android:id="@id/exo_controller_placeholder"
+    <View
+        android:id="@id/exo_controller_placeholder"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
     <com.google.android.exoplayer2.ui.PlaybackControlView
         android:id="@id/exo_controller"

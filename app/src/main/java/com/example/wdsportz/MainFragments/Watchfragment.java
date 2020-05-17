@@ -148,7 +148,7 @@ public class Watchfragment extends Fragment {
                             for (int i = 0; i < list.size() - 1; i++) {
 
                                 Log.d(TAG, (" Team Name = " + list.get(i).getTitle()));
-                                Log.d(TAG, "List Url test   " + list.get(i).getVideoimageURL());
+                                Log.d(TAG, "List Url test   " + list.get(i).getVideoImageURL());
                                 Log.d(TAG, "Video Url test   " + list.get(i).getVideoURL());
                             }
 
@@ -195,7 +195,7 @@ public class Watchfragment extends Fragment {
                             for (int i = 0; i < list.size() - 1; i++) {
 
                                 Log.d(TAG, (" Team Name = " + list.get(i).getTitle()));
-                                Log.d(TAG, "List Url test   " + list.get(i).getVideoimageURL());
+                                Log.d(TAG, "List Url test   " + list.get(i).getVideoImageURL());
                                 Log.d(TAG, "Video Url test   " + list.get(i).getVideoURL());
                             }
 
