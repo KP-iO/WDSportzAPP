@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
 
             android:layout_height="wrap_content"
-            app:enableLiveVideoUi="true"
+            app:enableLiveVideoUi="false"
             app:showFullScreenButton="true"
 
             app:showYouTubeButton="false" />
@@ -90,6 +90,20 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/action_button_share"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="37dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="236dp"
+        android:layout_marginEnd="4dp"
+        android:textSize="15sp"
+        app:icon="?attr/actionModeShareDrawable"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/articleImages"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

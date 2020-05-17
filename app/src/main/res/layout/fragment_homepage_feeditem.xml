@@ -70,16 +70,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/action_button_share" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/action_button_share"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="37dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:textSize="15sp"
-            app:icon="?attr/actionModeShareDrawable"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

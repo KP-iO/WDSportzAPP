@@ -88,14 +88,7 @@ public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.MyView
                                                    
                                                });
 
-//        holder.newsTile.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent i = new Intent(v.getContext(), YouTube_playback.class);
-//                i.putExtra("Video", Video1);
-//                v.getContext().startActivity(i);
-//            }
-//        });
+
 
 
     }
@@ -130,17 +123,9 @@ public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.MyView
             newsTile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-//                    Intent i= new Intent(view.getContext(),VideoPlayback.class);
                     Log.d("CLICK", title.getText() + "  Clicked");
 
-//                    int itemPosition = getLayoutPosition();
-//                    Log.d("position", Integer.toString(itemPosition));
-//
-//                    MyViewHolder item = (MyViewHolder) WatchViewModel.getItem(itemPosition);
-//                    String url = item.getUrl();
 
-
-//                    view.getContext().startActivity(i);
 
 
                 }
@@ -156,11 +141,7 @@ public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.MyView
             if (lClickListener != null) lClickListener.onItemClick(view, getAdapterPosition());
             Log.d("CLICK", title.getText() + "  Clicked");
 
-//             int itemPosition = getLayoutPosition();
-//             Log.d("position", Integer.toString(itemPosition));
-//
-//             YourItemClass item = (YourItemClass)adapter.getItem(itemPosition);
-//             String url = item.getUrl();
+
         }
     }
     public String getItem(int id) {

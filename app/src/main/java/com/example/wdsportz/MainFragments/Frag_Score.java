@@ -10,28 +10,25 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.wdsportz.API.Client;
-import com.example.wdsportz.API.Service;
 import com.example.wdsportz.Adapters.ScoreFeedAdpater;
-import com.example.wdsportz.BuildConfig;
 import com.example.wdsportz.Model.League;
-import com.example.wdsportz.Model.LeagueResponse;
 import com.example.wdsportz.R;
+import com.example.wdsportz.ViewModels.ScoreViewModel;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 /**
@@ -57,9 +54,10 @@ public class Frag_Score extends Fragment {
     private static final String TAG = "Video Activity";
     FirebaseFirestore fireStoreDB = FirebaseFirestore.getInstance();
     private RecyclerView recyclerView;
-    private RecyclerView recyclerView1;
+
     private List<League> leagueList;
-    private ScoreFeedAdpater adapter;
+    private ScoreFeedAdpater scoreFeedAdpater;
+    private ScoreViewModel scoreViewModel;
 
 
     ProgressDialog pd;
@@ -103,200 +101,89 @@ public class Frag_Score extends Fragment {
         }
     }
 
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        final Context context = view.getContext();
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState ) {
+    final Context context = view.getContext();
+
+
+        initViews(context);
+        enterData(context);
 
 
 
-        initViews();
-        Log.d("initViews","done");
-        loadJSON();
-        Log.d("loadJSON","done");
-
-        leagueList = new ArrayList<>();
-        adapter = new ScoreFeedAdpater(getContext(), leagueList);
-// Implement error handling for all cases e.g (Name/ Logo not accessible) ------>
 
     }
 
-    private void loadJSON() {
-
-//        recyclerView = getView().findViewById(R.id.recyclerleague);
 
 
-        /*try {
-            if (BuildConfig.SPORTS_DB_API.isEmpty()) {
-                Toast.makeText(getContext(), "Please obtain API Key firstly from SPORTSDB", Toast.LENGTH_SHORT).show();
-                pd.dismiss();
-                return;
-            }
-*/
-            Client Client = new Client();
-            Log.d("Check", Client.toString());
+    private void initViews(Context context) {
 
-            Service apiService = Client.getClient().create(Service.class);
-            Log.d("Check 2", apiService.toString());
-
-            Call<LeagueResponse> call = apiService.getEvents(BuildConfig.SPORTS_DB_API);
-            call.enqueue(new Callback<LeagueResponse>() {
-
-                @Override
-                public void onResponse(Call<LeagueResponse> call, Response<LeagueResponse> response) {
-                    List<League> movies = response.body().getMatches();
-
-                    LeagueResponse leagues = response.body();
-                    Log.d("SUCCESS", movies.toString());
-                    recyclerView.setAdapter(new ScoreFeedAdpater(getContext(), movies));
-//                    recyclerView.smoothScrollToPosition(0);
-                }
-
-                @Override
-                public void onFailure(Call<LeagueResponse> call, Throwable t) {
-                    Log.d("Error", t.getMessage());
-                    Toast.makeText(getContext(), "Error Fetching Data!", Toast.LENGTH_SHORT).show();
-                }
-
-            });
-       /* } catch (Exception e) {
-            Log.d("Error", e.getMessage());
-            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
-        }*/
-    }
-
-    private void initViews() {
-        final Context context = getContext();
         recyclerView = getView().findViewById(R.id.scores_feed);
         int numberOfColumns = 2;
 
 
 
 
-//        recyclerView = getView().findViewById(R.id.recyclerleague);
-
-        leagueList = new ArrayList<>();
-        //adapter = new League2Adapter(getContext(), leagueList);
-
-
         if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             recyclerView.setLayoutManager(new GridLayoutManager(context, numberOfColumns));
-//            recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
         } else {
-            recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 4));
+            recyclerView.setLayoutManager(new GridLayoutManager(context, 4));
         }
 
-       // recyclerView.setItemAnimator(new DefaultItemAnimator());
-        //recyclerView.setAdapter(adapter);
-        //adapter.notifyDataSetChanged();
 
     }
 
+private void enterData(final Context context){
+    Task<QuerySnapshot> docRef = fireStoreDB.collection("Scores")
+            .get()
+            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
 
-//    private void BottomRecycler(final Context context) {
-//        Task<QuerySnapshot> docRef = fireStoreDB.collection("leaguedetails")
-//                .get()
-//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//
-//                    @Override
-//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                        if (task.isSuccessful()) {
-//
-//                            List<LeagueViewModel> list = new ArrayList<>();
-//
-//
-//////// Change FROM download url to stroage url in firestore?
-//
-//                            for (QueryDocumentSnapshot document : task.getResult()) {
-//
-//
-//                                Log.d(TAG, "DOCUMENT PRINT :" + document.getData().toString());
-//                                Log.d(TAG, "Team Added to List " + document.get("League_Name").toString());
-//
-//                                list.add(new LeagueViewModel(document.get("League_Name").toString(), document.get("League_Image").toString(), document.get("League_URL").toString()));
-//
-//                                //Log.d(TAG, ("LOGO URL: " + list.));
-//
-//                                leagueAdapter = new LeagueAdapter(context, list);
-//                                recyclerView.setAdapter(leagueAdapter);
-////                                recyclerView1.setAdapter(watchViewAdapter);
-//
-//                            }
-//
-//                            // List check (in Log)
-//                            for (int i = 0; i < list.size() - 1; i++) {
-//
-//                                Log.d(TAG, (" Team Name = " + list.get(i).getLeagueTitle()));
-//                                Log.d(TAG, "List Url test   " + list.get(i).getLeagueImageURL());
-//                                Log.d(TAG, "Video Url test   " + list.get(i).getLeagueURL());
-//
-//                            }
-//
-//                        } else {
-//                            Log.d(TAG, "No such document");
-//                        }
-//
-//                    }
-//
-//                });
-//    }
-//    private void BottomRecycler(final Context context) {
-//        Task<QuerySnapshot> docRef = fireStoreDB.collection("leaguedetails")
-//                .get()
-//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//
-//                    @Override
-//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                        if (task.isSuccessful()) {
-//
-//                            List<LeagueViewModel> list = new ArrayList<>();
-//
-//
-//////// Change FROM download url to stroage url in firestore?
-//
-//                            for (QueryDocumentSnapshot document : task.getResult()) {
-//
-//
-//                                Log.d(TAG, "DOCUMENT PRINT :" + document.getData().toString());
-//                                Log.d(TAG, "Team Added to List " + document.get("League_Name").toString());
-//
-//                                list.add(new LeagueViewModel(document.get("League_Name").toString(), document.get("League_Image").toString(), document.get("League_URL").toString()));
-//
-//                                //Log.d(TAG, ("LOGO URL: " + list.));
-//
-//                                leagueAdapter = new LeagueAdapter(context, list);
-//                                recyclerView.setAdapter(leagueAdapter);
-////                                recyclerView1.setAdapter(watchViewAdapter);
-//
-//                            }
-//
-//                            // List check (in Log)
-//                            for (int i = 0; i < list.size() - 1; i++) {
-//
-//                                Log.d(TAG, (" Team Name = " + list.get(i).getLeagueTitle()));
-//                                Log.d(TAG, "List Url test   " + list.get(i).getLeagueImageURL());
-//                                Log.d(TAG, "Video Url test   " + list.get(i).getLeagueURL());;
-//                            }
-//
-//                        } else {
-//                            Log.d(TAG, "No such document");
-//                        }
-//
-//                    }
-//
-//                });
-//    }
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+
+                        List<ScoreViewModel> list = new ArrayList<>();
 
 
-//
-//    @Override
-////    public void onAttach(Context context) {
-////        super.onAttach(context);
-////        if (context instanceof OnFragmentInteractionListener) {
-////            mListener = (OnFragmentInteractionListener) context;
-////        } else {
-////            throw new RuntimeException(context.toString()
-////                    + " must implement OnFragmentInteractionListener");
-////        }
-////    }
+////// Change FROM download url to stroage url in firestore?
+
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+
+
+                            Log.d(TAG, "DOCUMENT PRINT :" + document.getData().toString());
+                            Log.d(TAG, "Team Added to List " + document.get("event_id").toString());
+
+                            list.add(new ScoreViewModel(document.get("homeName").toString(),document.get("awayName").toString(),document.get("homeScore").toString(),document.get("awayScore").toString(),document.get("homeLogo").toString(), document.get("awayLogo").toString(), document.get("eventDate").toString(),document.get("event_id").toString() ));
+
+                            //Log.d(TAG, ("LOGO URL: " + list.));
+
+                            scoreFeedAdpater = new ScoreFeedAdpater(context, list);
+                            recyclerView.setAdapter(scoreFeedAdpater);
+
+                        }
+
+                        // List check (in Log)
+                        for (int i = 0; i < list.size() - 1; i++) {
+
+                            Log.d(TAG, ("ID = " + list.get(i).getEventId()));
+                            Log.d(TAG, "Home Team   " + list.get(i).getHomeTeam());
+                            Log.d(TAG, "Away Team   " + list.get(i).getAwayTeam());
+                            Log.d(TAG, "Home Score   " + list.get(i).getHomeScore());
+                            Log.d(TAG, "Away Score   " + list.get(i).getAwayScore());
+
+                        }
+
+                    } else {
+                        Log.d(TAG, "No such document");
+                    }
+
+                }
+
+            });
+}
+
+
+
+
 
     @Override
     public void onDetach() {
