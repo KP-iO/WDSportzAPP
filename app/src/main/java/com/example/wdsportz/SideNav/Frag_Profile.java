@@ -146,8 +146,8 @@ public class Frag_Profile extends Fragment {
 
         avatarIv = view.findViewById(R.id.UserImg);
         nameTv = view.findViewById(R.id.nameTv);
-        emailTv = view.findViewById(R.id.emailTv);
-        phoneTv = view.findViewById(R.id.phoneTv);
+//        emailTv = view.findViewById(R.id.emailTv);
+//        phoneTv = view.findViewById(R.id.phoneTv);
        // fab = view.findViewById(R.id.fab);
        // coverIv = view.findViewById(R.id.coverIv);
 
@@ -218,13 +218,13 @@ public class Frag_Profile extends Fragment {
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
-// First thing
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showEditProfileDialog();
-            }
-        });
+            //Edit Profile
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                showEditProfileDialog();
+//            }
+//        });
 
         return view;
     }
