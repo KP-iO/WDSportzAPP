@@ -138,9 +138,9 @@ public class newsDetail extends Fragment {
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         RvComment = getView().findViewById(R.id.chat_box);
         textView2 = getView().findViewById(R.id.desc);
-        //imageView1 = getView().findViewById(R.id.avatar2);
-        editText = getView().findViewById(R.id.edit_box3);
-        button = getView().findViewById(R.id.add2);
+//        imageView1 = getView().findViewById(R.id.avatar);
+        editText = getView().findViewById(R.id.edit_box);
+        button = getView().findViewById(R.id.add);
         shareAction = getView().findViewById(R.id.action_button_share);
 
 

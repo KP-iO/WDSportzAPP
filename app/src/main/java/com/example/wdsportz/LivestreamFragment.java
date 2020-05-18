@@ -90,22 +90,7 @@ public class LivestreamFragment extends AppCompatActivity {
         return videoId;
     }
 
-//    class VideoIds {private String[] videoIds = {"6JYIGclVQdw", "LvetJ9U_tVY", "S0Q4gqBUs7c", "zOa-rSM4nms"};
-//
-//
-//        int liveIds = liveVideoIds.length();
-//
-//        private String[] Ids = new String[liveIds];
-//        private Random random = new Random();
-//
-//        public String getNextVideoId() {
-//            return videoIds[random.nextInt(videoIds.length)];
-//        }
-//
-//        public  String getNextLiveVideoId() {
-//            return Ids[random.nextInt(liveIds)];
-//        }
-//    }
+
 @Override
 protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -226,33 +211,7 @@ protected void onCreate(Bundle savedInstanceState) {
 
     }
 
-//    @Override
-//    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-//        View view = inflater.inflate(R.layout.fragment_live, container, false);
-//
-//        youTubePlayerView = view.findViewById(R.id.youtube_player_view);
-//        initYouTubePlayerView();
-//
-//
-//
-//
-//        return view;
-//    }
 
-
-
-
-
-
-
-//        MediaController mediaController = new MediaController(getContext());
-//        videoView.setMediaController(mediaController);
-//        mediaController.setAnchorView(videoView);
-//
-//    Uri uri = Uri.parse(str);
-////        videoView.setVideoURI(uri);
-////        videoView.requestFocus();
-//    }
 
 
 

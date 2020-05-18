@@ -80,7 +80,7 @@ public class frag_Register extends Fragment {
     //for checking profile or cover photo
     String profileOrCoverPhoto;
     ProgressDialog pd;
-    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    FirebaseUser user = firebaseAuth.getCurrentUser();
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     DatabaseReference databaseReference;
     ImageView avatarREG;
@@ -171,7 +171,7 @@ public class frag_Register extends Fragment {
 
             @Override
             public void onClick(final View view) {
-pd.show();
+
                 final String userName = _txtfname.getText().toString();
                 final String email = _txtemail.getText().toString();
                 final String password = _txtpass.getText().toString();
@@ -216,7 +216,7 @@ pd.show();
                                         // Used to make FirebaseProfile for user
                                         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                                                 .setDisplayName(userName)
-                                                .setPhotoUri(Uri.parse(image.toString()))
+                                                .setPhotoUri(Uri.parse(String.valueOf(image)))
                                                 .build();
 
                                         user1.updateProfile(profileUpdates)
@@ -233,17 +233,27 @@ pd.show();
                                         Toast.makeText(getActivity(), "Registered successfully", Toast.LENGTH_SHORT).show();
                                         _txtemail.setText("");
                                         _txtpass.setText("");
-                                        Navigation.findNavController(view).navigate(R.id.action_frag_Register_to_frag_IniTeamSelection2);
+                                        Bundle bundle = new Bundle();
+                                        bundle.putString("image", String.valueOf(image));
+
+
+                                        Navigation.findNavController(view).navigate(R.id.action_frag_Register_to_frag_IniTeamSelection2,bundle);
+
                                     } else {
+
                                         Toast.makeText(getActivity(), task.getException().getMessage(),
                                                 Toast.LENGTH_LONG).show();
                                     }
                                 }
+
+
                             });
+
+
                 } else {
 
                 }
-                pd.show();
+
             }
 
             private void checkCheckBox() {
@@ -517,6 +527,8 @@ pd.show();
 
 
     }
+
+
 
 
         private void pickFromGallery() {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <ScrollView
-    android:id="@+id/comments"
+    android:id="@+id/watch_scroll"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -56,8 +56,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chat_box"
-        android:layout_width="405dp"
-        android:layout_height="142dp"
+        android:layout_width="723dp"
+        android:layout_height="129dp"
         android:layout_marginTop="28dp"
         android:text="Chat"
         app:layout_constraintStart_toStartOf="parent"
@@ -78,8 +78,8 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="403dp"
-        android:layout_height="149dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginTop="52dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -90,8 +90,8 @@
             android:id="@+id/avatar"
             android:layout_width="77dp"
             android:layout_height="75dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="36dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginBottom="56dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:srcCompat="@tools:sample/avatars" />
@@ -100,8 +100,8 @@
             android:id="@+id/edit_box"
             android:layout_width="190dp"
             android:layout_height="40dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginBottom="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="64dp"
             android:text="TextView"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/avatar" />
@@ -110,8 +110,8 @@
             android:id="@+id/add"
             android:layout_width="62dp"
             android:layout_height="47dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginBottom="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="68dp"
             android:text="Add"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/edit_box" />

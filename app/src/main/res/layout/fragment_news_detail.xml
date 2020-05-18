@@ -62,26 +62,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title1" />
 
-        <EditText
-            android:id="@+id/edit_box3"
-            android:layout_width="275dp"
-            android:layout_height="71dp"
-            android:layout_marginTop="8dp"
-            android:onClick="click_text"
-            android:text="TextView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/chat_box" />
-
-        <Button
-            android:id="@+id/add2"
-            android:layout_width="85dp"
-            android:layout_height="62dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="1dp"
-            android:text="Add"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/edit_box3"
-            app:layout_constraintTop_toTopOf="@+id/edit_box3" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/chat_box"
@@ -110,6 +90,49 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/articleImages"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="403dp"
+            android:layout_height="149dp"
+            android:layout_marginTop="52dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chat_box">
+
+            <ImageView
+                android:id="@+id/avatar"
+                android:layout_width="77dp"
+                android:layout_height="75dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="36dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <EditText
+                android:id="@+id/edit_box"
+                android:layout_width="190dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginBottom="40dp"
+                android:text="TextView"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/avatar" />
+
+            <Button
+                android:id="@+id/add"
+                android:layout_width="62dp"
+                android:layout_height="47dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginBottom="40dp"
+                android:text="Add"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/edit_box" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
