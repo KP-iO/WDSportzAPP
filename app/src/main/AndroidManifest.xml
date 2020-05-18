@@ -35,7 +35,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".video_Activity"
+            android:name=".videoPlayback_Activity"
             android:theme="@style/AppTheme1">
             <intent-filter>
                 <action android:name="android.intent.action.DEFAULT" />

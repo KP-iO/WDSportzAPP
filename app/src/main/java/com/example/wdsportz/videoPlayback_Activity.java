@@ -16,18 +16,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.exoplayer2.C;
-import com.google.android.exoplayer2.C.ContentType;
-
-import com.google.android.exoplayer2.ExoPlayer;
-import com.google.android.exoplayer2.ExoPlayerFactory;
 
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.source.ProgressiveMediaSource;
-import com.google.android.exoplayer2.source.ads.AdsMediaSource;
-import com.google.android.exoplayer2.source.dash.DashMediaSource;
-import com.google.android.exoplayer2.source.hls.HlsMediaSource;
-import com.google.android.exoplayer2.source.smoothstreaming.SsMediaSource;
 import com.google.android.exoplayer2.ui.PlayerControlView;
 import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DataSource;
@@ -37,59 +29,9 @@ import com.google.android.exoplayer2.util.Util;
 
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.app.Dialog;
-import android.content.pm.ActivityInfo;
-import android.net.Uri;
-import android.os.Bundle;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.bumptech.glide.Glide;
-import com.example.wdsportz.Adapters.CommentAdapter;
-import com.example.wdsportz.Adapters.WatchViewAdapter;
-import com.example.wdsportz.ViewModels.Comments;
-import com.google.android.exoplayer2.C;
-import com.google.android.exoplayer2.ExoPlayerFactory;
-import com.google.android.exoplayer2.SimpleExoPlayer;
-import com.google.android.exoplayer2.source.MediaSource;
-import com.google.android.exoplayer2.source.ProgressiveMediaSource;
-import com.google.android.exoplayer2.source.ads.AdsMediaSource;
-import com.google.android.exoplayer2.source.dash.DashMediaSource;
-import com.google.android.exoplayer2.source.hls.HlsMediaSource;
-import com.google.android.exoplayer2.source.smoothstreaming.SsMediaSource;
-import com.google.android.exoplayer2.ui.PlayerControlView;
-import com.google.android.exoplayer2.ui.PlayerView;
-import com.google.android.exoplayer2.upstream.DataSource;
-import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
-import com.google.android.exoplayer2.util.Util;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-
-public class video_Activity extends AppCompatActivity {
+public class videoPlayback_Activity extends AppCompatActivity {
 
     private final String STATE_RESUME_WINDOW = "resumeWindow";
     private final String STATE_RESUME_POSITION = "resumePosition";
@@ -153,7 +95,7 @@ public class video_Activity extends AppCompatActivity {
         if (mExoPlayerFullscreen) {
             ((ViewGroup) playerView.getParent()).removeView(playerView);
             mFullScreenDialog.addContentView(playerView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-            mFullScreenIcon.setImageDrawable(ContextCompat.getDrawable(video_Activity.this, R.drawable.ic_fullscreen_skrink));
+            mFullScreenIcon.setImageDrawable(ContextCompat.getDrawable(videoPlayback_Activity.this, R.drawable.ic_fullscreen_skrink));
             mFullScreenDialog.show();
         }
     }
@@ -237,7 +179,7 @@ public class video_Activity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         ((ViewGroup) playerView.getParent()).removeView(playerView);
         mFullScreenDialog.addContentView(playerView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        mFullScreenIcon.setImageDrawable(ContextCompat.getDrawable(video_Activity.this, R.drawable.ic_fullscreen_skrink));
+        mFullScreenIcon.setImageDrawable(ContextCompat.getDrawable(videoPlayback_Activity.this, R.drawable.ic_fullscreen_skrink));
         mExoPlayerFullscreen = true;
 
         Log.d("DEBUGGG resumePosition=", String.valueOf(mResumePosition));
@@ -272,7 +214,7 @@ public class video_Activity extends AppCompatActivity {
         player.seekTo(mResumeWindow,mResumePosition);
         mExoPlayerFullscreen = false;
         mFullScreenDialog.dismiss();
-        mFullScreenIcon.setImageDrawable(ContextCompat.getDrawable(video_Activity.this, R.drawable.ic_fullscreen_expand));
+        mFullScreenIcon.setImageDrawable(ContextCompat.getDrawable(videoPlayback_Activity.this, R.drawable.ic_fullscreen_expand));
 
     }
 

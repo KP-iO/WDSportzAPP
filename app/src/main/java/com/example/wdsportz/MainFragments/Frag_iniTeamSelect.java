@@ -143,12 +143,7 @@ public class Frag_iniTeamSelect extends Fragment {
 //                selectTeamsRecyclerViewAdapter = new SelectTeamsRecyclerViewAdapter();
 //                teamsSelected = selectTeamsRecyclerViewAdapter.getArrayList();
 
-
-
-
-
-
-                adFavourite();
+                //adFavourite();
 
                 ((Auth_Activity)getActivity()).goToMainFeed();
             }
@@ -158,36 +153,36 @@ public class Frag_iniTeamSelect extends Fragment {
     }
 
 
-    private void adFavourite(){
-        FirebaseUser user1 = FirebaseAuth.getInstance().getCurrentUser();
-        String uid = user1.getUid();
-        selectTeamsRecyclerViewAdapter = new SelectTeamsRecyclerViewAdapter();
-//        teamsSelected = selectTeamsRecyclerViewAdapter.getArrayList();
-        teamsPrefs = SelectTeamsRecyclerViewAdapter.getArrayList();
-//        Log.d("CLICK1", Arrays.toString(teamsSelected.toArray() + "  Clicked");
-
-
-
-
-
-        HashMap<String, ArrayList<String>> hashMap = new HashMap<>();
-
-
-        hashMap.put("Teams supported",teamsPrefs );
-
-        // firebase datatabase instance
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-
-        //path to store data named "Users"
-        DatabaseReference reference = database.getReference("Users/"+ uid);
-
-        //put data within hashmap in database
-        reference.child(uid).setValue(hashMap);
-
-        // Used to make FirebaseProfile for user
-
-
-    }
+//    private void adFavourite(){
+//        FirebaseUser user1 = FirebaseAuth.getInstance().getCurrentUser();
+//        String uid = user1.getUid();
+//        selectTeamsRecyclerViewAdapter = new SelectTeamsRecyclerViewAdapter();
+////        teamsSelected = selectTeamsRecyclerViewAdapter.getArrayList();
+//        teamsPrefs = SelectTeamsRecyclerViewAdapter.getArrayList();
+////        Log.d("CLICK1", Arrays.toString(teamsSelected.toArray() + "  Clicked");
+//
+//
+//
+//
+//
+//        HashMap<String, ArrayList<String>> hashMap = new HashMap<>();
+//
+//
+//        hashMap.put("Teams supported",teamsPrefs );
+//
+//        // firebase datatabase instance
+//        FirebaseDatabase database = FirebaseDatabase.getInstance();
+//
+//        //path to store data named "Users"
+//        DatabaseReference reference = database.getReference("Users/"+ uid);
+//
+//        //put data within hashmap in database
+//        reference.child(uid).setValue(hashMap);
+//
+//        // Used to make FirebaseProfile for user
+//
+//
+//    }
 
 
 

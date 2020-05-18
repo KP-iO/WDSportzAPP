@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.wdsportz.R;
 import com.example.wdsportz.ViewModels.WatchViewModel;
-import com.example.wdsportz.video_Activity;
+import com.example.wdsportz.videoPlayback_Activity;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
@@ -65,7 +65,7 @@ public class WatchViewAdapter extends RecyclerView.Adapter<WatchViewAdapter.MyVi
         holder.btnimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, video_Activity.class);
+                Intent intent = new Intent(context, videoPlayback_Activity.class);
                 // used to bundle strings and enable it to be collected
                 Bundle bundle = new Bundle();
                 bundle.putString("videoTitle", videoTitle);

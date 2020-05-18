@@ -34,9 +34,9 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link Watchfragment.OnFragmentInteractionListener} interface
+ * {@link Frag_Watch.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link Watchfragment#newInstance} factory method to
+ * Use the {@link Frag_Watch#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class Frag_Score extends Fragment {
@@ -50,7 +50,7 @@ public class Frag_Score extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
-    private Watchfragment watchfragment;
+    private Frag_Watch fragwatch;
     private static final String TAG = "Video Activity";
     FirebaseFirestore fireStoreDB = FirebaseFirestore.getInstance();
     private RecyclerView recyclerView;
@@ -69,8 +69,8 @@ public class Frag_Score extends Fragment {
 
 
     // TODO: Rename and change types and number of parameters
-    public static Watchfragment newInstance(String param1, String param2) {
-        Watchfragment fragment = new Watchfragment();
+    public static Frag_Watch newInstance(String param1, String param2) {
+        Frag_Watch fragment = new Frag_Watch();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.wdsportz.Adapters.LiveStreamAdapter;
 import com.example.wdsportz.Adapters.WatchViewAdapter;
 import com.example.wdsportz.R;
 import com.example.wdsportz.ViewModels.WatchViewModel;
@@ -32,9 +31,9 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link Watchfragment.OnFragmentInteractionListener} interface
+ * {@link Frag_Watch.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link Watchfragment#newInstance} factory method to
+ * Use the {@link Frag_Watch#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class Frag_Watch extends Fragment {
@@ -48,7 +47,7 @@ public class Frag_Watch extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
-    private Watchfragment watchfragment;
+    private Frag_Watch fragwatch;
     private static final String TAG = "Video Activity";
     FirebaseFirestore fireStoreDB = FirebaseFirestore.getInstance();
     private RecyclerView recyclerView;
@@ -56,7 +55,6 @@ public class Frag_Watch extends Fragment {
 
 
     private WatchViewAdapter watchViewAdapter;
-    private LiveStreamAdapter liveStreamAdapter;
 
     String VidUri;
 
@@ -66,8 +64,8 @@ public class Frag_Watch extends Fragment {
 
 
     // TODO: Rename and change types and number of parameters
-    public static Watchfragment newInstance(String param1, String param2) {
-        Watchfragment fragment = new Watchfragment();
+    public static Frag_Watch newInstance(String param1, String param2) {
+        Frag_Watch fragment = new Frag_Watch();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -137,12 +135,12 @@ public class Frag_Watch extends Fragment {
                                 Log.d(TAG, "DOCUMENT PRINT :" + document.getData().toString());
                                 Log.d(TAG, "Team Added to List " + document.get("Match_Name").toString());
 
-                                list.add(new WatchViewModel(document.get("Match_Name").toString(), document.get("Match_Image").toString(), document.get("Match_Video").toString(),document.get("Chatbox_ID").toString(), document.get("Video_desc").toString()));
+                                list.add(new WatchViewModel(document.get("Match_Name").toString(), document.get("Match_Image").toString(), document.get("Match_Video").toString(), document.get("Chatbox_ID").toString(), document.get("Video_desc").toString()));
 
                                 //Log.d(TAG, ("LOGO URL: " + list.));
 
-                                liveStreamAdapter = new LiveStreamAdapter(context, list);
-                                recyclerView1.setAdapter(liveStreamAdapter);
+                                watchViewAdapter = new WatchViewAdapter(context, list);
+                                recyclerView1.setAdapter(watchViewAdapter);
 
                             }
 
@@ -152,8 +150,6 @@ public class Frag_Watch extends Fragment {
                                 Log.d(TAG, (" Team Name = " + list.get(i).getTitle()));
                                 Log.d(TAG, "List Url test   " + list.get(i).getVideoImageURL());
                                 Log.d(TAG, "Video Url test   " + list.get(i).getVideoURL());
-                                Log.d(TAG, "Video Url test   " + list.get(i).getChatBox_ID());
-
                             }
 
                         } else {
@@ -191,7 +187,7 @@ public class Frag_Watch extends Fragment {
 
                                 watchViewAdapter = new WatchViewAdapter(context, list);
                                 recyclerView.setAdapter(watchViewAdapter);
-//                                recyclerView1.setAdapter(watchViewAdapter);
+                                //recyclerView1.setAdapter(watchViewAdapter);
 
                             }
 
@@ -201,7 +197,6 @@ public class Frag_Watch extends Fragment {
                                 Log.d(TAG, (" Team Name = " + list.get(i).getTitle()));
                                 Log.d(TAG, "List Url test   " + list.get(i).getVideoImageURL());
                                 Log.d(TAG, "Video Url test   " + list.get(i).getVideoURL());
-                                Log.d(TAG, "Video Url test   " + list.get(i).getChatBox_ID());
                             }
 
                         } else {
