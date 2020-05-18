@@ -9,18 +9,6 @@
     app:layoutDescription="@xml/motion_scene"
     android:layout_height="match_parent">
 
-<!--    <View-->
-<!--        android:id="@+id/background"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="0dp"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        android:background="@color/colorPrimary"-->
-<!--        app:layout_constraintBottom_toBottomOf="@id/space"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        android:alpha="0"-->
-<!--        />-->
-
 
     <TextView
         android:id="@+id/txtFullMatches"
@@ -45,7 +33,8 @@
         app:layout_constraintDimensionRatio="w,1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtFullMatches"></androidx.recyclerview.widget.RecyclerView>
+        app:layout_constraintTop_toBottomOf="@+id/txtFullMatches">
+    </androidx.recyclerview.widget.RecyclerView>
 
     <TextView
         android:id="@+id/textView11"
