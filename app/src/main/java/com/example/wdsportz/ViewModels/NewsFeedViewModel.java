@@ -5,16 +5,21 @@ public class NewsFeedViewModel {
     String newsImageURL;
     String newsDesc;
     String date;
+    String chatbox_id;
+
+
 
     public NewsFeedViewModel() {
 
     }
 
-    public NewsFeedViewModel(String title, String newsImageURL, String newsDesc, String date) {
+    public NewsFeedViewModel(String title, String newsImageURL, String newsDesc, String date, String chatbox_id) {
         this.title = title;
         this.newsImageURL = newsImageURL;
         this.newsDesc = newsDesc;
         this.date = date;
+        this.chatbox_id =chatbox_id;
+
     }
 
     public  String getNewsDesc() {
@@ -41,6 +46,14 @@ public class NewsFeedViewModel {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getChatbox_id() {
+        return chatbox_id;
+    }
+
+    public void setChatbox_id(String chatbox_id) {
+        this.chatbox_id = chatbox_id;
     }
 }
 

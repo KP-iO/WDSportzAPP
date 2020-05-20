@@ -19,6 +19,7 @@ import com.example.wdsportz.R;
 import com.example.wdsportz.ViewModels.Comments;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
@@ -48,6 +49,9 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
     DatabaseReference reference;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     String currentUID = user.getUid();
+   UserInfo userInfo;
+    String user1 = FirebaseAuth.getInstance().getUid();
+
 
 //    String chat_ID = (videoViewModels.getChatBox_ID());
 
@@ -69,17 +73,18 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
 
     @Override
     public void onBindViewHolder(@NonNull final CommentViewHolder holder, int position) {
-// Get current UIMG
-        //print UID in report document
-        // if UID exists do not show to user
 
 
-        Glide.with(mContext).load(mData.get(position).getUimg()).into(holder.img_user);
+
+                Glide.with(mContext).load(mData.get(position).getUimg()).into(holder.img_user);
+
+
+
         holder.tv_name.setText(mData.get(position).getUname());
         holder.tv_content.setText(mData.get(position).getContent());
         //        holder.tv_date.setText(timestampToString((Long)mData.get(position).getTimestamp()));
         databaseReference = firebaseDatabase.getReference("Users");
-        Query query = databaseReference.orderByChild("email").equalTo(user.getEmail());
+        Query query1 = databaseReference.orderByChild("email").equalTo(user.getEmail());
         holder.card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -179,7 +184,9 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
 
          */
 
-        String options [] = {"Report Comment", "Delete Comment"};
+        String options [] = {"Report Comment",
+//                "Delete Comment"
+        };
         //alert dialog
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -200,10 +207,10 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
                         reportComment(which);
                         break;
                     case 1:
-                        pd.setMessage("Deleting Comment");
-                        deleteCommment = "cover";
-                        deleteCommment();
-                        break;
+//                        pd.setMessage("Deleting Comment");
+//                        deleteCommment = "cover";
+//                        deleteCommment();
+//                        break;
 
                 }
 
@@ -219,10 +226,9 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
         String uid = mData.get(position).getUid();
         String userName =mData.get(position).getUname();
         String chatID = mData.get(position).getChatID();
-        String key =mData.get(position).getKey();
         String options [] = {"Yes", "No"};
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-        builder.setTitle("Pick Image From");
+        builder.setTitle("Are you sure?");
 
         builder.setItems(options, new DialogInterface.OnClickListener() {
             @Override
@@ -250,8 +256,8 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
 
                     DatabaseReference commentRef = firebaseDatabase.getReference("Comment");
 
-                    DatabaseReference report = commentRef.child(chatID).child(key).child(currentUID);
-                    report.setValue("Reported!");
+//                    DatabaseReference report = commentRef.child(chatID).child(key).child(currentUID);
+//                    report.setValue("Reported!");
 
 
 

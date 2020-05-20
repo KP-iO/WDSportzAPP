@@ -60,6 +60,7 @@ public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.MyView
         holder.description.setText(newsFeedViewModels.get(position).getNewsDesc());
         final String currentUrl = newsFeedViewModels.get(position).getNewsImageURL();
         String date1 = newsFeedViewModels.get(position).getDate();
+        String chatId = newsFeedViewModels.get(position).getChatbox_id();
 
 
         final String description1 = newsFeedViewModels.get(position).getNewsDesc();
@@ -79,6 +80,7 @@ public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.MyView
                                                    bundle.putString("image",currentUrl);
                                                    bundle.putString("desc", description1);
                                                    bundle.putString("title", title1);
+                                                   bundle.putString("chatID", chatId);
                                                    Navigation.findNavController(v).navigate(R.id.action_global_newsDetail, bundle);
                                                    for (String key: bundle.keySet())
                                                    {

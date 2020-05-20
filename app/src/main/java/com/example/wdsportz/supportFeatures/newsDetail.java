@@ -138,7 +138,7 @@ public class newsDetail extends Fragment {
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         RvComment = getView().findViewById(R.id.chat_box);
         textView2 = getView().findViewById(R.id.desc);
-//        imageView1 = getView().findViewById(R.id.avatar);
+        imageView1 = getView().findViewById(R.id.avatar);
         editText = getView().findViewById(R.id.edit_box);
         button = getView().findViewById(R.id.add);
         shareAction = getView().findViewById(R.id.action_button_share);
@@ -160,6 +160,7 @@ public class newsDetail extends Fragment {
         String title = getArguments().getString("title");
         String image = getArguments().getString("image");
         String desc = getArguments().getString("desc");
+        String currentUseImg = firebaseUser.getPhotoUrl().toString();
 
         descBox.setMovementMethod(new ScrollingMovementMethod());
 
@@ -169,7 +170,11 @@ public class newsDetail extends Fragment {
         titleBox.setText(title);
         descBox.setText(desc);
 
-        Glide.with(context)
+        Glide.with(view)
+                .load(currentUseImg)
+                .into(imageView1);
+
+        Glide.with(view)
                 .load(image)
                 .into(imageView);
 
@@ -185,6 +190,7 @@ public class newsDetail extends Fragment {
                 String uid = firebaseUser.getUid();
                 String uname = firebaseUser.getDisplayName();
                 String uimg = firebaseUser.getPhotoUrl().toString();
+
                 Comments comments = new Comments(comment_content,uid,uname,uimg);
                 Glide.with(view)
                         .load(uimg)
@@ -268,7 +274,7 @@ public class newsDetail extends Fragment {
         Toast.makeText(getContext(), message,Toast.LENGTH_LONG).show();
     }
 public String getPostKey() {
-    postKey = getArguments().getString("title");
+    postKey = getArguments().getString("chatID");
     return postKey;
 }
 
@@ -276,7 +282,7 @@ public String getPostKey() {
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         RvComment.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        String postKey1 = getArguments().getString("title");
+        String postKey1 = getArguments().getString("chatID");
         DatabaseReference commentRef = firebaseDatabase.getReference(COMMENT_KEY).child(postKey1);
 
 

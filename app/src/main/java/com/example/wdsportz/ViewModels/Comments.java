@@ -1,7 +1,5 @@
 package com.example.wdsportz.ViewModels;
 
-import com.google.firebase.database.ServerValue;
-
 /**
  * Created by khrishawn
  */
@@ -33,7 +31,6 @@ public class Comments {
         this.uid = uid;
         this.uimg = uimg;
         this.uname = uname;
-        this.timestamp = ServerValue.TIMESTAMP ;
 
     }
 

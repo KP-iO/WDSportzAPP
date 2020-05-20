@@ -1,5 +1,6 @@
 package com.example.wdsportz.MainFragments;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -27,7 +28,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 
 /**
@@ -59,12 +59,14 @@ public class Frag_iniTeamSelect extends Fragment {
     ViewPager2 viewPager;
     SelectTeamsRecyclerViewAdapter selectTeamsRecyclerViewAdapter;
     public ArrayList<String> teamsSelected = new ArrayList<>();
+    ProgressDialog pd;
+    String storagePath = "Users_Profile_Cover_Imgs/";
 
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     DatabaseReference databaseReference;
     StorageReference storageReference;
-
+    String profileOrCoverPhoto;
 
     public Frag_iniTeamSelect() {
         // Required empty public constructor
@@ -144,13 +146,16 @@ public class Frag_iniTeamSelect extends Fragment {
 //                teamsSelected = selectTeamsRecyclerViewAdapter.getArrayList();
 
                 //adFavourite();
-
+//                sendPicToDatabase();
                 ((Auth_Activity)getActivity()).goToMainFeed();
+
             }
 
         });
 
     }
+
+
 
 
 //    private void adFavourite(){

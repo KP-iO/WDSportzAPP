@@ -66,7 +66,6 @@ public class SelectTeamsRecyclerViewAdapter extends RecyclerView.Adapter<SelectT
             textView = itemView.findViewById(R.id.TxtTeamName);
             ImageView = itemView.findViewById(R.id.BtnImgTeamLogo);
 
-            ImageView.setOnClickListener(this);
         }
 
 

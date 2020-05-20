@@ -128,7 +128,7 @@ public class Frag_HomePage extends Fragment {
 //                                Log.d("DOCUMENT PRINT :", document.getData().toString());
 //                                Log.d("Team Added to List ", document.get("Title").toString());
 
-                                list.add(new NewsFeedViewModel(document.get("Title").toString(), document.get("Image").toString(), document.get("Description").toString(),document.get("Date").toString()));
+                                list.add(new NewsFeedViewModel(document.get("Title").toString(), document.get("Image").toString(), document.get("Description").toString(),document.get("Date").toString(),document.get("Chatbox_ID").toString()));
 
                                 //Log.d(TAG, ("LOGO URL: " + list.));
 

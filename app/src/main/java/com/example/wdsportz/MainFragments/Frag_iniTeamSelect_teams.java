@@ -12,7 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,8 +24,6 @@ import com.example.wdsportz.Adapters.SelectTeamsRecyclerViewAdapter;
 import com.example.wdsportz.R;
 import com.example.wdsportz.ViewModels.SelectTeamsRecyclerViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -36,10 +33,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 // Instances of this class are fragments representing a single
@@ -209,76 +204,7 @@ public class Frag_iniTeamSelect_teams extends Fragment {
 
 }
 
-    public void sendPicToDatabase(){
-        {
-            String image = getArguments().getString("image");
-            pd.show();
-            //path and name of image to be stored in firebase storage
 
-            String filePathAndName = storagePath+ ""+ profileOrCoverPhoto +"_"+ user.getUid();
-
-
-            StorageReference storageReference2nd = storageReference.child(filePathAndName);
-            storageReference2nd.putFile(Uri.parse(image))
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                            while (!uriTask.isSuccessful());
-                            Uri downloadUri = uriTask.getResult();
-
-                            //check if image is uploaded or not and url is received
-                            if ((uriTask.isSuccessful())){
-
-                                HashMap<String, Object> results = new HashMap<>();
-                                results.put(profileOrCoverPhoto, downloadUri.toString());
-
-
-                                databaseReference.child(user.getUid()).updateChildren(results)
-                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void aVoid) {
-                                                //url in database of user is added successfully
-                                                //dismiss progress bar
-                                                pd.dismiss();
-                                                Toast.makeText(getActivity(), "Image Updated. . .", Toast.LENGTH_SHORT).show();
-
-                                            }
-                                        })
-                                        .addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                //url in database of user is added successfully
-                                                //dismiss progress bar
-                                                pd.dismiss();
-                                                Toast.makeText(getActivity(), "Error Updating Image ...", Toast.LENGTH_SHORT).show();
-
-
-                                            }
-                                        });
-
-                            }
-                            else {
-                                //error
-                                pd.dismiss();
-                                Toast.makeText(getActivity(), "Some error occured", Toast.LENGTH_SHORT).show();
-                            }
-
-
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            pd.dismiss();
-                            Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
-
-                        }
-                    });
-
-
-        }
-    }
 
 
 }

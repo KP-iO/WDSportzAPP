@@ -1,5 +1,6 @@
 package com.example.wdsportz.MainFragments;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -49,6 +50,7 @@ public class frag_login extends Fragment {
     private OnFragmentInteractionListener mListener;
     public FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private LoginViewModel viewModel;
+    ProgressDialog pd;
 
     public frag_login() {
         // Required empty public constructor
@@ -105,6 +107,9 @@ public class frag_login extends Fragment {
         viewModel = ViewModelProviders.of(requireActivity()).get(LoginViewModel.class);
         signIn.setOnClickListener(new OnClickListener(){
             public void onClick(final View view) {
+                pd = new ProgressDialog(getContext());
+                pd.setTitle("Authenticating");
+                pd.show();
 
 
                 final String email = txtUsername.getText().toString();
@@ -119,8 +124,10 @@ public class frag_login extends Fragment {
                                     PreferenceUtils.saveEmail(email, getContext());
                                     PreferenceUtils.savePassword(password, getContext());
                                     ((Auth_Activity)getActivity()).goToMainFeed();
+                                    pd.dismiss();
 
                                 }else{
+                                    pd.dismiss();
                                     Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
                                     Toast.makeText(getActivity(), "Unsuccessful", Toast.LENGTH_SHORT).show();
                                 }

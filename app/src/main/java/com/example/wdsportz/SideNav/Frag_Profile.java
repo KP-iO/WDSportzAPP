@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -33,7 +34,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
@@ -50,7 +50,8 @@ import com.google.firebase.storage.UploadTask;
 import java.util.HashMap;
 
 import static android.app.Activity.RESULT_OK;
-import static com.google.android.gms.plus.PlusOneDummyView.TAG;
+import static androidx.constraintlayout.motion.widget.MotionScene.TAG;
+//import static com.google.android.gms.plus.PlusOneDummyView.TAG;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -79,7 +80,7 @@ public class Frag_Profile extends Fragment {
     String storagePath = "Users_Profile_Cover_Imgs/";
 
     //views
-    FloatingActionButton fab;
+    Button fab;
     ImageView avatarIv, coverIv;
     TextView nameTv, emailTv, phoneTv;
     ProgressDialog pd;
@@ -146,10 +147,9 @@ public class Frag_Profile extends Fragment {
 
         avatarIv = view.findViewById(R.id.UserImg);
         nameTv = view.findViewById(R.id.nameTv);
-//        emailTv = view.findViewById(R.id.emailTv);
-//        phoneTv = view.findViewById(R.id.phoneTv);
-       // fab = view.findViewById(R.id.fab);
-       // coverIv = view.findViewById(R.id.coverIv);
+        emailTv = view.findViewById(R.id.emailTv);
+        fab = view.findViewById(R.id.Edit_Profile);
+        coverIv = view.findViewById(R.id.coverIv);
 
         //progress dialog
         pd = new ProgressDialog(getActivity());
@@ -169,9 +169,8 @@ public class Frag_Profile extends Fragment {
 
                     String name = "" + ds.child("name").getValue();
                     String email = "" + ds.child("email").getValue();
-                    String phone = "" + ds.child("phone").getValue();
                     String image = "" + ds.child("image").getValue();
-                   // String cover = "" + ds.child("cover").getValue();
+                    String cover = "" + ds.child("cover").getValue();
 
                     // Set to user
                     UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
@@ -191,15 +190,15 @@ public class Frag_Profile extends Fragment {
                     //set data
                     nameTv.setText(name);
                     emailTv.setText(email);
-                    phoneTv.setText(phone);
+
                     try {
 
                         Glide.with(view)
                                 .load(image)
                                 .into(avatarIv);
-                        //Glide.with(view)
-                               // .load(cover)
-                             //   .into(coverIv);
+                        Glide.with(view)
+                                .load(cover)
+                                .into(coverIv);
                     }
                     catch (Exception e){
                         Glide.with(view)
@@ -218,13 +217,13 @@ public class Frag_Profile extends Fragment {
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
-            //Edit Profile
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                showEditProfileDialog();
-//            }
-//        });
+//            Edit Profile
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showEditProfileDialog();
+            }
+        });
 
         return view;
     }

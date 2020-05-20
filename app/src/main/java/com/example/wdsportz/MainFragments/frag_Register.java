@@ -8,6 +8,7 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -32,6 +33,8 @@ import androidx.navigation.Navigation;
 
 import com.example.wdsportz.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -41,11 +44,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.HashMap;
 
 import static android.app.Activity.RESULT_OK;
-import static com.google.android.gms.plus.PlusOneDummyView.TAG;
+import static androidx.constraintlayout.motion.widget.MotionScene.TAG;
+//import static com.google.android.gms.plus.PlusOneDummyView.TAG;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -80,15 +85,18 @@ public class frag_Register extends Fragment {
     //for checking profile or cover photo
     String profileOrCoverPhoto;
     ProgressDialog pd;
-    FirebaseUser user = firebaseAuth.getCurrentUser();
+    FirebaseUser user;
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     DatabaseReference databaseReference;
     ImageView avatarREG;
+
 
     //storage
     StorageReference storageReference;
     //path where images of user profile will be stored
     String storagePath = "Users_Profile_Cover_Imgs/";
+    String uid;
+
 
     public frag_Register() {
         // Required empty public constructor
@@ -171,6 +179,10 @@ public class frag_Register extends Fragment {
 
             @Override
             public void onClick(final View view) {
+                Context context;
+                pd = new ProgressDialog(getContext());
+                pd.setTitle("Authenticating");
+                pd.show();
 
                 final String userName = _txtfname.getText().toString();
                 final String email = _txtemail.getText().toString();
@@ -190,9 +202,10 @@ public class frag_Register extends Fragment {
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     //progressBar.setVisibility(View.GONE);
                                     if (task.isSuccessful()) {
-                                        FirebaseUser user1 = FirebaseAuth.getInstance().getCurrentUser();
-                                        String email = user1.getEmail();
-                                        String uid = user1.getUid();
+                                       user = FirebaseAuth.getInstance().getCurrentUser();
+                                        String email = user.getEmail();
+                                         uid = user.getUid();
+                                        sendPicToDatabase();
 //                                        String uri =
 
 
@@ -202,7 +215,7 @@ public class frag_Register extends Fragment {
                                         hashMap.put("uid", uid);
                                         hashMap.put("name", userName);
                                         hashMap.put("phone", "");
-                                        hashMap.put("image", image.toString());
+
 
                                         // firebase datatabase instance
                                         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -219,7 +232,7 @@ public class frag_Register extends Fragment {
                                                 .setPhotoUri(Uri.parse(String.valueOf(image)))
                                                 .build();
 
-                                        user1.updateProfile(profileUpdates)
+                                        user.updateProfile(profileUpdates)
                                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                     @Override
                                                     public void onComplete(@NonNull Task<Void> task) {
@@ -236,11 +249,12 @@ public class frag_Register extends Fragment {
                                         Bundle bundle = new Bundle();
                                         bundle.putString("image", String.valueOf(image));
 
-
+                                        pd.dismiss();
                                         Navigation.findNavController(view).navigate(R.id.action_frag_Register_to_frag_IniTeamSelection2,bundle);
 
-                                    } else {
 
+                                    } else {
+                                        pd.dismiss();
                                         Toast.makeText(getActivity(), task.getException().getMessage(),
                                                 Toast.LENGTH_LONG).show();
                                     }
@@ -278,58 +292,6 @@ public class frag_Register extends Fragment {
         });
 
 
-//        Query query = databaseReference.orderByChild("email").equalTo(user.getEmail());
-//        query.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//
-//                for(DataSnapshot ds: dataSnapshot.getChildren()){
-//                    //get data
-//
-//
-//                    String image = "" + ds.child("image").getValue();
-//
-//
-//                    // Set to user
-//                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-//                            .setPhotoUri(Uri.parse(image))
-//                            .build();
-//
-//                    user.updateProfile(profileUpdates)
-//                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                @Override
-//                                public void onComplete(@NonNull Task<Void> task) {
-//                                    if (task.isSuccessful()) {
-//                                        Log.d(TAG, "User profile updated.");
-//                                    }
-//                                }
-//                            });
-//
-//
-//                    try {
-//
-//                        Glide.with(view)
-//                                .load(image)
-//                                .into(avatarREG);
-//
-//                    }
-//                    catch (Exception e){
-//                        Glide.with(view)
-//                                .load(R.drawable.ic_add_image)
-//                                .into(avatarREG);
-//
-//                    }
-//
-//
-//
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//            }
-//        });
 
 
 
@@ -552,6 +514,79 @@ public class frag_Register extends Fragment {
             startActivityForResult(cameraIntent, IMAGE_PICK_CAMERA_CODE);
 
     }
+
+    public void sendPicToDatabase(){
+        {
+
+
+            //path and name of image to be stored in firebase storage
+
+            String filePathAndName = storagePath+ ""+ profileOrCoverPhoto +"_"+ user.getUid();
+
+
+            StorageReference storageReference2nd = storageReference.child(filePathAndName);
+            storageReference2nd.putFile(Uri.parse(String.valueOf(image)))
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
+                            while (!uriTask.isSuccessful());
+                            Uri downloadUri = uriTask.getResult();
+
+                            //check if image is uploaded or not and url is received
+                            if ((uriTask.isSuccessful())){
+
+                                HashMap<String, Object> results = new HashMap<>();
+                                results.put(profileOrCoverPhoto, downloadUri.toString());
+
+
+                                databaseReference.child(user.getUid()).updateChildren(results)
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                //url in database of user is added successfully
+                                                //dismiss progress bar
+                                                pd.dismiss();
+                                                Toast.makeText(getActivity(), "Image Updated. . .", Toast.LENGTH_SHORT).show();
+
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                //url in database of user is added successfully
+                                                //dismiss progress bar
+                                                pd.dismiss();
+                                                Toast.makeText(getActivity(), "Error Updating Image ...", Toast.LENGTH_SHORT).show();
+
+
+                                            }
+                                        });
+
+                            }
+                            else {
+                                //error
+
+                                Toast.makeText(getActivity(), "Some error occured", Toast.LENGTH_SHORT).show();
+                            }
+
+
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+
+                            Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+
+
+        }
+    }
+
+
 
 
     @Override
