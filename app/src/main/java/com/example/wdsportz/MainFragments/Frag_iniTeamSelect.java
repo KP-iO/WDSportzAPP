@@ -167,9 +167,6 @@ public class Frag_iniTeamSelect extends Fragment {
 ////        Log.d("CLICK1", Arrays.toString(teamsSelected.toArray() + "  Clicked");
 //
 //
-//
-//
-//
 //        HashMap<String, ArrayList<String>> hashMap = new HashMap<>();
 //
 //

@@ -25,6 +25,8 @@ public class Auth_Activity extends AppCompatActivity implements Frag_iniTeamSele
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+       setTheme(R.style.AppTheme1_NoActionBar);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.auth_main);
 

@@ -165,9 +165,6 @@ public class frag_Register extends Fragment {
             public void onClick(View view) {
                 showEditProfileDialog();
 
-
-
-
             }
 
         });
