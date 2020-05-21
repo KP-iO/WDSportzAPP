@@ -80,6 +80,7 @@ public class newsDetail extends Fragment {
     DatabaseReference databaseReference;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     MaterialButton shareAction;
+    String uid = user.getUid();
 
 
     FirebaseDatabase firebaseDatabase;
@@ -187,11 +188,14 @@ public class newsDetail extends Fragment {
                 button.setVisibility(View.INVISIBLE);
                 DatabaseReference commentReference =firebaseDatabase.getReference(COMMENT_KEY).child(getPostKey()).push();
                 String comment_content = editText.getText().toString();
+                String key = commentReference.getKey();
+                String chatID = getArguments().getString("chatID");
                 String uid = firebaseUser.getUid();
                 String uname = firebaseUser.getDisplayName();
                 String uimg = firebaseUser.getPhotoUrl().toString();
+                String reportID = "";
 
-                Comments comments = new Comments(comment_content,uid,uname,uimg);
+                Comments comments = new Comments(comment_content,uid,uname,uimg,key, chatID,reportID);
                 Glide.with(view)
                         .load(uimg)
                         .into(imageView1);
@@ -290,10 +294,17 @@ public String getPostKey() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 listComments = new ArrayList<>();
-                for (DataSnapshot snap:dataSnapshot.getChildren()){
+
+                for (DataSnapshot snap:dataSnapshot.getChildren()) {
 
                     Comments comments = snap.getValue(Comments.class);
-                    listComments.add(comments);
+                    if (snap.hasChild(uid)) {
+
+                        listComments.remove(comments);
+
+                    } else {
+                        listComments.add(comments);
+                    }
                 }
 
                 commentAdapter = new CommentAdapter(getContext(),listComments);

@@ -226,6 +226,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
         String uid = mData.get(position).getUid();
         String userName =mData.get(position).getUname();
         String chatID = mData.get(position).getChatID();
+        String key = mData.get(position).getKey();
         String options [] = {"Yes", "No"};
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         builder.setTitle("Are you sure?");
@@ -256,8 +257,8 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
 
                     DatabaseReference commentRef = firebaseDatabase.getReference("Comment");
 
-//                    DatabaseReference report = commentRef.child(chatID).child(key).child(currentUID);
-//                    report.setValue("Reported!");
+                    DatabaseReference report = commentRef.child(chatID).child(key).child(currentUID);
+                    report.setValue("Reported!");
 
 
 

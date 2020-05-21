@@ -70,7 +70,7 @@ public class LiveStreamAdapter extends RecyclerView.Adapter<LiveStreamAdapter.My
             public void onClick(View v) {
                 Intent intent = new Intent(context, LivestreamFragment.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("chat",chat_ID);
+                bundle.putString("chatID",chat_ID);
                 bundle.putString("video", Video1);
                 intent.putExtras(bundle);
                 context.startActivity(intent);

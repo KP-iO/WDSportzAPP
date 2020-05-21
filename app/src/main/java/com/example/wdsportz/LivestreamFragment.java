@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.wdsportz.Adapters.CommentAdapter;
 import com.example.wdsportz.ViewModels.Comments;
 import com.example.wdsportz.utils.FullScreenHelper;
@@ -79,8 +80,10 @@ public class LivestreamFragment extends AppCompatActivity {
     String videoId;
     private static final String TAG = "livstreamID" ;
     private YouTubePlayerView youTubePlayerView ;
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     private FullScreenHelper fullScreenHelper = new FullScreenHelper(this);
+    String uid = user.getUid();
 
     public LivestreamFragment() {
     }
@@ -105,6 +108,7 @@ protected void onCreate(Bundle savedInstanceState) {
     button = findViewById(R.id.add);
     videoView =findViewById(R.id.Watch_view1);
     youTubePlayerView = findViewById(R.id.youtube_player_view);
+    String currentUseImg = user.getPhotoUrl().toString();
 
 
     firebaseAuth = FirebaseAuth.getInstance();
@@ -121,7 +125,10 @@ protected void onCreate(Bundle savedInstanceState) {
             String uid = firebaseUser.getUid();
             String uname = firebaseUser.getDisplayName();
                 String uimg = firebaseUser.getPhotoUrl().toString();
-            Comments comments = new Comments(comment_content,uid,uname, uimg);
+            String key = commentReference.getKey();
+            String chatID = getIntent().getExtras().getString("chatID");
+            String reportID = "";
+            Comments comments = new Comments(comment_content,uid,uname,uimg,key, chatID,reportID);
 
             commentReference.setValue(comments).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
@@ -168,7 +175,9 @@ protected void onCreate(Bundle savedInstanceState) {
 //    setVideoView(context);
     iniRvComment();
     initYouTubePlayerView();
-
+    Glide.with(this)
+            .load(currentUseImg)
+            .into(imageView);
 
 
 
@@ -181,7 +190,7 @@ protected void onCreate(Bundle savedInstanceState) {
 
         RvComment.setLayoutManager(new LinearLayoutManager(this));
 
-        String postKey1 = getIntent().getExtras().getString("chat");
+        String postKey1 = getIntent().getExtras().getString("chatID");
 
         DatabaseReference commentRef = firebaseDatabase.getReference(COMMENT_KEY).child(postKey1);
 
@@ -190,15 +199,21 @@ protected void onCreate(Bundle savedInstanceState) {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 listComments = new ArrayList<>();
-                for (DataSnapshot snap:dataSnapshot.getChildren()){
+
+                for (DataSnapshot snap:dataSnapshot.getChildren()) {
 
                     Comments comments = snap.getValue(Comments.class);
-                    listComments.add(comments);
+                    if (snap.hasChild(uid)) {
+
+                        listComments.remove(comments);
+
+                    } else {
+                        listComments.add(comments);
+                    }
                 }
 
                 commentAdapter = new CommentAdapter(LivestreamFragment.this,listComments);
                 RvComment.setAdapter(commentAdapter);
-
             }
 
             @Override
@@ -260,7 +275,7 @@ protected void onCreate(Bundle savedInstanceState) {
 
 
     public String getPostKey() {
-        postKey = getIntent().getExtras().getString("chat");
+        postKey = getIntent().getExtras().getString("chatID");
 
         return postKey;
     }

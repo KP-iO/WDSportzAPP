@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.wdsportz.Adapters.LiveStreamAdapter;
 import com.example.wdsportz.Adapters.WatchViewAdapter;
 import com.example.wdsportz.R;
 import com.example.wdsportz.ViewModels.WatchViewModel;
@@ -55,6 +56,7 @@ public class Frag_Watch extends Fragment {
 
 
     private WatchViewAdapter watchViewAdapter;
+    private LiveStreamAdapter liveStreamAdapter;
 
     String VidUri;
 
@@ -139,8 +141,8 @@ public class Frag_Watch extends Fragment {
 
                                 //Log.d(TAG, ("LOGO URL: " + list.));
 
-                                watchViewAdapter = new WatchViewAdapter(context, list);
-                                recyclerView1.setAdapter(watchViewAdapter);
+                                liveStreamAdapter = new LiveStreamAdapter(context, list);
+                                recyclerView1.setAdapter(liveStreamAdapter);
 
                             }
 
