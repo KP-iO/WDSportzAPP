@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +21,12 @@ import com.example.wdsportz.ViewModels.Comments;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 import java.util.List;
@@ -49,8 +53,9 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
     DatabaseReference reference;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     String currentUID = user.getUid();
-   UserInfo userInfo;
+    UserInfo userInfo;
     String user1 = FirebaseAuth.getInstance().getUid();
+    static String USERS = "Users";
 
 
 //    String chat_ID = (videoViewModels.getChatBox_ID());
@@ -74,9 +79,30 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
     @Override
     public void onBindViewHolder(@NonNull final CommentViewHolder holder, int position) {
 
+        String UID = mData.get(position).getUid();
+        databaseReference = firebaseDatabase.getReference("Users");
+        Query query = databaseReference.orderByChild(UID);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for(DataSnapshot ds: dataSnapshot.getChildren()) {
+                    //get data
+
+                    String photoURL = "" + ds.child("image").getValue();
+                    Log.d("ImageURL:", photoURL);
+                    Glide.with(mContext.getApplicationContext())
+                            .load(photoURL)
+                            .into(holder.img_user);
+                }}
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
 
-                Glide.with(mContext).load(mData.get(position).getUimg()).into(holder.img_user);
 
 
 

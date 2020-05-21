@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 
 
 /**
@@ -142,10 +145,10 @@ public class Frag_iniTeamSelect extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {
-//                selectTeamsRecyclerViewAdapter = new SelectTeamsRecyclerViewAdapter();
-//                teamsSelected = selectTeamsRecyclerViewAdapter.getArrayList();
+                selectTeamsRecyclerViewAdapter = new SelectTeamsRecyclerViewAdapter();
+                teamsSelected = selectTeamsRecyclerViewAdapter.getArrayList();
 
-                //adFavourite();
+                adFavourite();
 //                sendPicToDatabase();
                 ((Auth_Activity)getActivity()).goToMainFeed();
 
@@ -158,33 +161,33 @@ public class Frag_iniTeamSelect extends Fragment {
 
 
 
-//    private void adFavourite(){
-//        FirebaseUser user1 = FirebaseAuth.getInstance().getCurrentUser();
-//        String uid = user1.getUid();
-//        selectTeamsRecyclerViewAdapter = new SelectTeamsRecyclerViewAdapter();
-////        teamsSelected = selectTeamsRecyclerViewAdapter.getArrayList();
-//        teamsPrefs = SelectTeamsRecyclerViewAdapter.getArrayList();
-////        Log.d("CLICK1", Arrays.toString(teamsSelected.toArray() + "  Clicked");
-//
-//
-//        HashMap<String, ArrayList<String>> hashMap = new HashMap<>();
-//
-//
-//        hashMap.put("Teams supported",teamsPrefs );
-//
-//        // firebase datatabase instance
-//        FirebaseDatabase database = FirebaseDatabase.getInstance();
-//
-//        //path to store data named "Users"
-//        DatabaseReference reference = database.getReference("Users/"+ uid);
-//
-//        //put data within hashmap in database
-//        reference.child(uid).setValue(hashMap);
-//
-//        // Used to make FirebaseProfile for user
-//
-//
-//    }
+    private void adFavourite(){
+        FirebaseUser user1 = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = user1.getUid();
+        selectTeamsRecyclerViewAdapter = new SelectTeamsRecyclerViewAdapter();
+        teamsSelected = selectTeamsRecyclerViewAdapter.getArrayList();
+        teamsPrefs = SelectTeamsRecyclerViewAdapter.getArrayList();
+        Log.d("CLICK1", Arrays.toString(teamsSelected.toArray())+ "  Clicked");
+
+
+        HashMap<String, ArrayList<String>> hashMap = new HashMap<>();
+
+
+        hashMap.put("Teams supported",teamsPrefs );
+
+        // firebase datatabase instance
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+        //path to store data named "Users"
+        DatabaseReference reference = database.getReference("Users/"+ uid);
+
+        //put data within hashmap in database
+        reference.child(uid).setValue(hashMap);
+
+        // Used to make FirebaseProfile for user
+
+
+    }
 
 
 
