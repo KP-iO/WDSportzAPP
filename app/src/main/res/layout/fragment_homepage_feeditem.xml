@@ -18,13 +18,13 @@
 
         <ImageView
             android:id="@+id/homeImg"
-            android:layout_width="152dp"
-            android:layout_height="142dp"
+            android:layout_width="178dp"
+            android:layout_height="141dp"
             android:adjustViewBounds="true"
-            android:scaleType="fitXY"
+            android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 <!--            app:srcCompat="@color/place_autocomplete_search_text" -->
 
 
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
             android:layout_marginTop="16dp"
-            android:ellipsize="none"
+            android:ellipsize="end"
             android:maxLength="100"
             android:maxLines="100"
             android:paddingLeft="8dp"
@@ -67,6 +67,7 @@
             android:layout_width="31dp"
             android:layout_height="wrap_content"
             android:textSize="15sp"
+            android:visibility="gone"
             app:icon="@drawable/_likes__flames"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/action_button_share" />

@@ -57,6 +57,8 @@ public class Main_Activity extends AppCompatActivity implements Frag_Test_1.OnFr
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme1);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 

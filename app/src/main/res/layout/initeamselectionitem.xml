@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/selectionTile"
     style="@style/Theme.App"
     android:layout_width="wrap_content"
-    android:layout_height="154dp"
+    android:layout_height="wrap_content"
     android:layout_marginStart="10dp"
     android:layout_marginEnd="10dp"
     android:checkable="true"
-    android:maxWidth="100dp"
-    android:maxHeight="100dp"
+    android:maxWidth="120dp"
+    android:maxHeight="120dp"
     android:orientation="vertical"
     android:padding="6dp"
     android:scrollbarSize="0dp"
@@ -19,20 +18,21 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/BtnImgTeamLogo"
-            android:layout_width="141dp"
-            android:layout_height="122dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
 
-            android:layout_marginBottom="8dp"
-            android:adjustViewBounds="true"
+            android:layout_marginBottom="5dp"
+            android:adjustViewBounds="false"
             android:background="#02FFFFFF"
-            android:maxWidth="120dp"
-            android:maxHeight="120dp"
-            android:padding="2dp"
+            android:maxWidth="150dp"
+            android:maxHeight="150dp"
+            android:padding="1dp"
+            android:scaleType="centerInside"
             android:tint="#00070101"
             app:layout_constraintBottom_toTopOf="@+id/TxtTeamName"
             app:layout_constraintEnd_toEndOf="parent"
@@ -41,13 +41,12 @@
 
         <TextView
             android:id="@+id/TxtTeamName"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="41dp"
-            android:layout_marginEnd="41dp"
             android:background="#00AAAAAA"
             android:text="Team Name"
-            android:textSize="18sp"
+            android:textAlignment="center"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
