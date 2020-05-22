@@ -151,7 +151,6 @@ public class frag_Register extends Fragment {
         EditText confirm = view.findViewById(R.id.confirmText);
         avatarREG = view.findViewById(R.id.avatarReg);
 
-
         //progress dialog
         pd = new ProgressDialog(getActivity());
 

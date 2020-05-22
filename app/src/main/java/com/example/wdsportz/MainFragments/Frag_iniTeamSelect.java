@@ -97,9 +97,6 @@ public class Frag_iniTeamSelect extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
-
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -120,9 +117,11 @@ public class Frag_iniTeamSelect extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
+        getActivity().findViewById(R.id.my_toolbar).setVisibility(View.VISIBLE);
+
         databaseReference = firebaseDatabase.getReference("Users");
         storageReference = FirebaseStorage.getInstance().getReference();
-
 
         TabLayout tabLayout = view.findViewById(R.id.tab_layout);
 

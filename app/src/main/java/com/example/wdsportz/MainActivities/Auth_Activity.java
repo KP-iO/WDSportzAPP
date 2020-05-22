@@ -25,7 +25,7 @@ public class Auth_Activity extends AppCompatActivity implements Frag_iniTeamSele
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-       setTheme(R.style.AppTheme1_NoActionBar);
+        setTheme(R.style.AppTheme1_NoActionBar);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.auth_main);
@@ -33,7 +33,6 @@ public class Auth_Activity extends AppCompatActivity implements Frag_iniTeamSele
         myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
         myToolbar.setVisibility(View.GONE);
-
 
     }
 

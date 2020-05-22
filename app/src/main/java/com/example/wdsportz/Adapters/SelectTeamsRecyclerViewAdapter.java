@@ -86,7 +86,7 @@ public class SelectTeamsRecyclerViewAdapter extends RecyclerView.Adapter<SelectT
 
         Glide.with(context)
                 .load(currentUrl)
-                .apply(new RequestOptions().override(150, 250))
+//                .apply(new RequestOptions().override(150, 250))
                 .into(holder.ImageView);
 
         // Mark as selected
@@ -110,19 +110,10 @@ public class SelectTeamsRecyclerViewAdapter extends RecyclerView.Adapter<SelectT
                     team1 = mData.get(position).teamName;
                     list.remove(team1);
 
-
-
-
                 }
                 Log.d("CLICK", Arrays.toString(getArrayList().toArray()) + "  Clicked");
 
-
-
-
         }
-
-
-
 
         });
 
