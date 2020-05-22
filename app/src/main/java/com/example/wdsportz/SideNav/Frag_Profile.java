@@ -27,9 +27,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.wdsportz.Adapters.FavouriteTeamsAdapter;
 import com.example.wdsportz.R;
+import com.example.wdsportz.ViewModels.FavouriteTeamsViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -47,6 +51,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import static android.app.Activity.RESULT_OK;
@@ -74,11 +79,14 @@ public class Frag_Profile extends Fragment {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     DatabaseReference databaseReference;
+    RecyclerView RvTeams;
     //storage
     StorageReference storageReference;
     //path where images of user profile will be stored
     String storagePath = "Users_Profile_Cover_Imgs/";
-
+    String USERS = "Users";
+    FavouriteTeamsViewModel favouriteTeamsViewModel;
+    ArrayList<FavouriteTeamsViewModel> listFavourite;
     //views
     Button fab;
     ImageView avatarIv, coverIv;
@@ -96,6 +104,7 @@ public class Frag_Profile extends Fragment {
     Uri image_uri;
     //for checking profile or cover photo
     String profileOrCoverPhoto;
+    FavouriteTeamsAdapter favouriteTeamsAdapter;
 
 
 
@@ -150,6 +159,7 @@ public class Frag_Profile extends Fragment {
         emailTv = view.findViewById(R.id.emailTv);
         fab = view.findViewById(R.id.Edit_Profile);
         coverIv = view.findViewById(R.id.coverIv);
+        RvTeams = view.findViewById(R.id.favouriteTeamRV);
 
         //progress dialog
         pd = new ProgressDialog(getActivity());
@@ -224,6 +234,8 @@ public class Frag_Profile extends Fragment {
                 showEditProfileDialog();
             }
         });
+        favouriteLoader();
+        Log.d ("myTeams", String.valueOf(listFavourite));
 
         return view;
     }
@@ -232,6 +244,7 @@ public class Frag_Profile extends Fragment {
         //check
         boolean result = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) ==(PackageManager.PERMISSION_DENIED);
         return result;
+
 
     }
 
@@ -567,6 +580,75 @@ public class Frag_Profile extends Fragment {
         cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, image_uri);
         startActivityForResult(cameraIntent, IMAGE_PICK_CAMERA_CODE);
     }
+
+
+    private void favouriteLoader() {
+//        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        RvTeams.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        String userID = user.getUid();
+        DatabaseReference teamLocation = firebaseDatabase.getReference(USERS).child(userID).child(userID);
+
+
+
+//myAdapter=new MyAdapter(this,firebaseHelper.retrieve());
+//rvOrder.setAdapter(myAdapter);
+
+        teamLocation.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+
+
+                listFavourite = new ArrayList<>();
+
+
+                for (DataSnapshot snap :  dataSnapshot.child("Favourite Teams").getChildren()) {
+                    Log.d("Snap TEST", String.valueOf(snap));
+
+//                    FavouriteTeamsViewModel favouriteTeamsViewModel = new FavouriteTeamsViewModel snap.getValue(FavouriteTeamsViewModel.class);
+//                    Log.d("Favourite ViewModel", String.valueOf(favouriteTeamsViewModel));
+
+                    String teamname = snap.getValue().toString();
+                    String teamlogo = snap.getValue().toString();
+                    Log.d("teamname TEST",teamname);
+                   //listFavourite.add(teamname);
+
+                    FavouriteTeamsViewModel results = new FavouriteTeamsViewModel (teamname,teamlogo);
+                    listFavourite.add(results);
+
+                }
+                favouriteTeamsAdapter = new FavouriteTeamsAdapter(getContext(), listFavourite);
+                RvTeams.setAdapter(favouriteTeamsAdapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+
+
+        });
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState){
 

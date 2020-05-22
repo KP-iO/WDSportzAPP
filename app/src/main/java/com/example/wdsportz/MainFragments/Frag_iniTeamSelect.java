@@ -61,7 +61,7 @@ public class Frag_iniTeamSelect extends Fragment {
     iniTeamSelectTabAdapter iniTeamSelectTabAdapter;
     ViewPager2 viewPager;
     SelectTeamsRecyclerViewAdapter selectTeamsRecyclerViewAdapter;
-    public ArrayList<String> teamsSelected = new ArrayList<>();
+    public ArrayList<String> teamsSelected = new ArrayList<String>();
     ProgressDialog pd;
     String storagePath = "Users_Profile_Cover_Imgs/";
 
@@ -173,7 +173,7 @@ public class Frag_iniTeamSelect extends Fragment {
         HashMap<String, ArrayList<String>> hashMap = new HashMap<>();
 
 
-        hashMap.put("Teams supported",teamsPrefs );
+        hashMap.put("Favourite Teams",teamsPrefs );
 
         // firebase datatabase instance
         FirebaseDatabase database = FirebaseDatabase.getInstance();

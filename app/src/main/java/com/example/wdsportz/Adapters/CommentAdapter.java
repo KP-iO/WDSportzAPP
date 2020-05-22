@@ -122,50 +122,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
 
 
 
-//        query.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//
-//                for(DataSnapshot ds: dataSnapshot.getChildren()){
-//                    //get data
-//
-//                    String name = "" + ds.child("name").getValue();
-//                    String email = "" + ds.child("email").getValue();
-//                    String phone = "" + ds.child("phone").getValue();
-//                    String image = "" + ds.child("image").getValue();
-//
-//
-//                    // Set to user
-//                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-//                            .setPhotoUri(Uri.parse(image))
-//                            .build();
-//
-//                    user.updateProfile(profileUpdates)
-//                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                @Override
-//                                public void onComplete(@NonNull Task<Void> task) {
-//                                    if (task.isSuccessful()) {
-//                                        Log.d(TAG, "User profile updated.");
-//                                    }
-//                                }
-//                            });
-//
-//
-//
-//
-//
-//                    Glide.with(mContext)
-//                            .load(image)
-//                            .into(holder.img_user);
-//
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//            }
-//        });
+
 
 
 
@@ -305,8 +262,6 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
 
     }
 
-    private void deleteCommment() {
-    }
 
 
 

@@ -30,8 +30,11 @@ public class SelectTeamsRecyclerViewAdapter extends RecyclerView.Adapter<SelectT
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
     private Context context;
-    public static ArrayList<String> list = new ArrayList<>();
-    String team, team1;
+    public static ArrayList<String> list = new ArrayList<String>();
+    public static ArrayList<String> UrlList = new ArrayList<String>();
+    String selectedTeam;
+    String selectedUrl;
+    String team1;
 
     public SelectTeamsRecyclerViewAdapter() {
 
@@ -103,15 +106,17 @@ public class SelectTeamsRecyclerViewAdapter extends RecyclerView.Adapter<SelectT
                 MaterialCardView cardView = v.findViewById(R.id.selectionTile);
                 cardView.toggle();
                 if (cardView.isChecked()){
-                team = mData.get(position).teamName;
-                list.add(team);
+                    selectedTeam = mData.get(position).teamName;
+                    selectedUrl = mData.get(position).teamLogoURl;
+
+                list.add(selectedTeam);
+                UrlList.add(selectedUrl);
 
             }else {
-                    team1 = mData.get(position).teamName;
-                    list.remove(team1);
-
-
-
+                    selectedTeam = mData.get(position).teamName;
+                    selectedUrl = mData.get(position).teamLogoURl;
+                    list.remove(selectedTeam);
+                    UrlList.remove(selectedUrl);
 
                 }
                 Log.d("CLICK", Arrays.toString(getArrayList().toArray()) + "  Clicked");
@@ -175,7 +180,7 @@ public class SelectTeamsRecyclerViewAdapter extends RecyclerView.Adapter<SelectT
 
     public String getTeamN()
     {
-        return team;
+        return selectedTeam;
     }
 
     @Override
@@ -192,6 +197,11 @@ public class SelectTeamsRecyclerViewAdapter extends RecyclerView.Adapter<SelectT
     public static ArrayList<String> getArrayList()
     {
         return  list;
+    }
+
+    public static ArrayList<String> getArrayUrlList()
+    {
+        return  UrlList;
     }
 
     // parent activity will implement this method to respond to click events
