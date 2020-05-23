@@ -10,7 +10,7 @@
     android:backgroundTint="#FFFFFF"
     app:cardCornerRadius="5dp"
     app:strokeColor="#000000"
-    app:strokeWidth="2dp">
+    app:strokeWidth="1dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -25,7 +25,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-<!--            app:srcCompat="@color/place_autocomplete_search_text" -->
+        <!--            app:srcCompat="@color/place_autocomplete_search_text" -->
 
 
         <TextView
@@ -42,7 +42,7 @@
             android:paddingRight="8dp"
             android:scrollHorizontally="false"
             android:text="Title goes here"
-            android:textSize="20sp"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/homeImg"
             app:layout_constraintTop_toTopOf="parent" />
@@ -51,7 +51,7 @@
             android:id="@+id/newsDescription"
             style="@style/TextAppearance.MaterialComponents.Caption"
             android:layout_width="0dp"
-            android:layout_height="95dp"
+            android:layout_height="0dp"
             android:maxLength="50"
             android:paddingLeft="10dp"
             android:text="Subtitle goes here"
@@ -71,7 +71,6 @@
             app:icon="@drawable/_likes__flames"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/action_button_share" />
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
