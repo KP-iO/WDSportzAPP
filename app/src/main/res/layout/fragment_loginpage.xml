@@ -6,12 +6,13 @@
     android:layout_height="match_parent"
     android:background="@drawable/sign_in_screen_background">
 
+
     <Button
         android:id="@+id/Btn_Test"
         style="@style/Widget.AppCompat.Button"
         android:layout_width="113dp"
         android:layout_height="31dp"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="650dp"
         android:text="TEST_btn"
@@ -19,8 +20,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:strokeColor="#000000" />
-
+        app:strokeColor="#000000"
+        android:visibility="invisible"/>
 
     <ImageView
         android:id="@+id/imageView6"
@@ -59,7 +60,7 @@
             android:paddingLeft="10dp"
             android:paddingTop="10dp"
             android:text="USERNAME"
-            android:textColor="#EDF3F1F1"
+            android:textColor="#ED0E0E0E"
             android:textSize="14sp"
             android:textStyle="bold" />
 
@@ -83,7 +84,7 @@
             android:paddingLeft="10dp"
             android:paddingTop="10dp"
             android:text="PASSWORD"
-            android:textColor="#EDF3F1F1"
+            android:textColor="#ED0C0C0C"
             android:textSize="14sp"
             android:textStyle="bold" />
 
@@ -110,7 +111,7 @@
         android:paddingLeft="30dp"
         android:paddingRight="30dp"
         android:text="@string/sign_in"
-        android:textColor="#FFFFFF"
+        android:textColor="#050505"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

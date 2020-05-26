@@ -7,14 +7,14 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/wd_logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/wd_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme1">
         <activity
             android:name=".MainActivities.Auth_Activity"
-            android:label="@string/title_activity_auth__main"
+            android:label="@string/wdsportz"
             android:theme="@style/AppTheme1.Launcher">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

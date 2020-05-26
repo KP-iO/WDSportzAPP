@@ -56,6 +56,10 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
     UserInfo userInfo;
     String user1 = FirebaseAuth.getInstance().getUid();
     static String USERS = "Users";
+    private static final int SECOND_MILLIS = 1000;
+    private static final int MINUTE_MILLIS = 60 * SECOND_MILLIS;
+    private static final int HOUR_MILLIS = 60 * MINUTE_MILLIS;
+    private static final int DAY_MILLIS = 24 * HOUR_MILLIS;
 
 
 //    String chat_ID = (videoViewModels.getChatBox_ID());
@@ -267,8 +271,8 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
 
 
 //    public static final String DATE_FORMAT_1 = "hh:mm a";
-
-//        private String timestampToString(long time){
+//
+//        private String timeAgo(long time){
 //
 //        Calendar calendar = Calendar.getInstance(Locale.ENGLISH);
 //        calendar.setTimeInMillis(time);
