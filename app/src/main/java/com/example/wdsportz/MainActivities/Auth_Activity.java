@@ -9,6 +9,7 @@ import android.view.MenuInflater;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 
@@ -26,6 +27,7 @@ public class Auth_Activity extends AppCompatActivity implements Frag_iniTeamSele
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme1_NoActionBar);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.auth_main);

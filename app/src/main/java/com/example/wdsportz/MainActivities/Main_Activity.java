@@ -4,24 +4,17 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.bumptech.glide.Glide;
-
-////////// --------> The below line should get rid of the need to import each fragment.
-import com.example.wdsportz.MainFragments.*;
-
+import com.example.wdsportz.MainFragments.Frag_HomePage;
 import com.example.wdsportz.MainFragments.Frag_Test_1;
 import com.example.wdsportz.MainFragments.Frag_iniTeamSelect;
 import com.example.wdsportz.R;
@@ -32,12 +25,13 @@ import com.example.wdsportz.SideNav.Frag_Notifications;
 import com.example.wdsportz.SideNav.Frag_Profile;
 import com.example.wdsportz.SideNav.Frag_Settings;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+////////// --------> The below line should get rid of the need to import each fragment.
 
 // Note: Change name of other classes to 'ClassName'_Fragment
 
@@ -58,6 +52,7 @@ public class Main_Activity extends AppCompatActivity implements Frag_Test_1.OnFr
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme1);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
