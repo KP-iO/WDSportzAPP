@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.example.wdsportz.MainActivities.Auth_Activity;
 import com.example.wdsportz.R;
@@ -24,7 +25,7 @@ import com.google.firebase.auth.FirebaseAuth;
  * Use the {@link Frag_More#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Frag_More extends Fragment {
+public class Frag_More extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -109,7 +110,69 @@ public class Frag_More extends Fragment {
             }
         });
 
+
+        ImageButton btnFb = view.findViewById(R.id.imgBtn_fb);
+        btnFb.setOnClickListener(this);
+
+        ImageButton btnInsta = view.findViewById(R.id.imgBtn_insta);
+        btnInsta.setOnClickListener(this);
+
+        ImageButton btnSnapchat = view.findViewById(R.id.imgBtn_snapchat);
+        btnSnapchat.setOnClickListener(this);
+
+        ImageButton btnTiktok = view.findViewById(R.id.imgBtn_tiktok);
+        btnTiktok.setOnClickListener(this);
+
+        ImageButton btnTwitter = view.findViewById(R.id.imgBtn_twitter);
+        btnTwitter.setOnClickListener(this);
+
+        ImageButton btnYt = view.findViewById(R.id.imgBtn_yt);
+        btnYt.setOnClickListener(this);
+
     }
+
+    @Override
+    public void onClick(View view) {
+
+        Bundle bundle = new Bundle();
+        //fragment.setArguments(bundle);
+
+        switch(view.getId())
+        {
+            case R.id.imgBtn_fb:
+                bundle.putString("url", "https://www.facebook.com/WDSportz/");
+                Navigation.findNavController(view).navigate(R.id.action_global_frag_socialWebOpen, bundle);
+                break;
+
+            case R.id.imgBtn_insta:
+                bundle.putString("url", "https://www.instagram.com/wdsportz/?hl=en");
+                Navigation.findNavController(view).navigate(R.id.action_global_frag_socialWebOpen, bundle);
+                break;
+
+            case R.id.imgBtn_twitter:
+                bundle.putString("url", "https://twitter.com/WDSprtz?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor");
+                Navigation.findNavController(view).navigate(R.id.action_global_frag_socialWebOpen, bundle);
+                break;
+
+            case R.id.imgBtn_yt:
+                bundle.putString("url", "https://www.youtube.com/channel/UCdGTpvqXAQB1dbvlZC8Qk2g");
+                Navigation.findNavController(view).navigate(R.id.action_global_frag_socialWebOpen, bundle);
+                break;
+
+            case R.id.imgBtn_tiktok:
+                bundle.putString("url", "https://www.google.com");
+                Navigation.findNavController(view).navigate(R.id.action_global_frag_socialWebOpen, bundle);
+                break;
+
+            case R.id.imgBtn_snapchat:
+                bundle.putString("url", "https://www.google.com");
+                Navigation.findNavController(view).navigate(R.id.action_global_frag_socialWebOpen, bundle);
+                break;
+
+
+        }
+    }
+
 
     public void goToLogIn() {
         Intent intent = new Intent(getContext(), Auth_Activity.class);

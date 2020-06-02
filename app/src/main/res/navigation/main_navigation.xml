@@ -80,7 +80,15 @@
         android:name="com.example.wdsportz.LivestreamFragment"
         tools:layout="@layout/fragment_liveplayback" />
     <action android:id="@+id/action_global_livestreamFragment" app:destination="@id/livestreamFragment" />
-<!--    <fragment-->
+    <fragment
+        android:id="@+id/frag_socialWebOpen"
+        android:name="com.example.wdsportz.MainFragments.Frag_socialWebOpen"
+        tools:layout="@layout/fragment_socialwebopen" />
+    <action
+        android:id="@+id/action_global_frag_socialWebOpen"
+        app:destination="@id/frag_socialWebOpen"
+        app:enterAnim="@anim/slide_in_right" />
+    <!--    <fragment-->
 <!--        android:id="@+id/leagueFragment"-->
 <!--        android:name="com.example.wdsportz.MainFragments.Frag_Score"-->
 <!--        tools:layout="@layout/fragment_score" /><action android:id="@+id/action_global_leagueFragment" app:destination="@id/leagueFragment"/>-->

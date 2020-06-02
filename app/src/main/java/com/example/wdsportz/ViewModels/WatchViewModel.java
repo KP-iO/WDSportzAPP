@@ -8,11 +8,13 @@ public class WatchViewModel {
     String chatBox_ID;
     String video_desc;
 
+//    public WatchViewModel() {
+//
+//    }
 
-
-    public WatchViewModel(String league_name, String league_image, String league_url, String chatbox_id) {
-
-    }
+//    public WatchViewModel(String league_name, String league_image, String league_url, String chatbox_id, String video_desc) {
+//
+//    }
 
     public WatchViewModel(String title, String videoimageURL, String videoURL, String chatBox_ID, String video_desc) {
         this.title = title;
