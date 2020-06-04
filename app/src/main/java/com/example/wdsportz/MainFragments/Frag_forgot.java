@@ -97,9 +97,10 @@ public class Frag_forgot extends Fragment {
         pd = new ProgressDialog(getContext());
         pd.setTitle("Authenticating");
         pd.show();
-        final String emailAddress = String.valueOf(email.getText());
-        if (emailAddress == null) {
+        final String emailAddress = email.getText().toString();
+        if (isNullOrEmpty(emailAddress)) {
             Toast.makeText(getActivity(), "Check if email correctly entered?", Toast.LENGTH_SHORT).show();
+            pd.dismiss();
         } else{
             auth.sendPasswordResetEmail(emailAddress)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -122,5 +123,12 @@ public class Frag_forgot extends Fragment {
 
 
 
+    }
+
+
+    public static boolean isNullOrEmpty(String str) {
+        if(str != null && !str.trim().isEmpty())
+            return false;
+        return true;
     }
 }

@@ -193,7 +193,7 @@ public class Frag_Score extends Fragment {
 
                 Date highlightAvailableDate = null;
 
-                //parse requires try catch for some reason :/
+                //parse requires try git catch for some reason :/
                 try {
                     highlightAvailableDate = sdformat.parse(ogScoresList.get(i).getEventDate());
                 } catch (ParseException e) {
