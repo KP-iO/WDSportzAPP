@@ -38,6 +38,10 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthInvalidUserException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
@@ -257,7 +261,27 @@ public class frag_Register extends Fragment {
                                 }
 
 
-                            });
+                            }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            if (e instanceof FirebaseAuthWeakPasswordException) {
+                                notifyUser(((FirebaseAuthWeakPasswordException) e).getReason());
+                            } else if (e instanceof FirebaseAuthUserCollisionException) {
+
+                                String errorCode =
+                                        ((FirebaseAuthUserCollisionException) e).getErrorCode();
+                                if (errorCode.equals("ERROR_EMAIL_ALREADY_IN_USE")) {
+                                    notifyUser("Email already in use");
+                                }else {
+                                    notifyUser(e.getLocalizedMessage());
+                                }}
+                        }
+
+                        private void notifyUser(String toast) {
+                            Toast.makeText(getActivity(), toast, Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
 
 
                 } else {

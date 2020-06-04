@@ -44,4 +44,9 @@
         android:id="@+id/action_global_collectionDemoFragment"
         app:destination="@id/frag_IniTeamSelection"
         app:enterAnim="@anim/fade_in" />
+    <fragment
+        android:id="@+id/frag_forgot"
+        android:name="com.example.wdsportz.MainFragments.Frag_forgot"
+        android:label="fragment_frag_forgot"
+        tools:layout="@layout/fragment_frag_forgot" /><action android:id="@+id/action_global_frag_forgot" app:destination="@id/frag_forgot"/>
 </navigation>

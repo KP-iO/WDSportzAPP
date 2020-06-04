@@ -59,7 +59,7 @@
             android:background="#FFDE17"
             android:paddingLeft="10dp"
             android:paddingTop="10dp"
-            android:text="USERNAME"
+            android:text="EMAIL"
             android:textColor="#ED0E0E0E"
             android:textSize="14sp"
             android:textStyle="bold" />
@@ -119,7 +119,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/txtForgot"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"

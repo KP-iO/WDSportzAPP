@@ -23,9 +23,12 @@ import com.example.wdsportz.R;
 import com.example.wdsportz.ViewModels.LoginViewModel;
 import com.example.wdsportz.utils.PreferenceUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 
 
 /**
@@ -51,6 +54,8 @@ public class frag_login extends Fragment {
     public FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private LoginViewModel viewModel;
     ProgressDialog pd;
+//    Button forgot;
+    TextView forgot;
 
     public frag_login() {
         // Required empty public constructor
@@ -100,6 +105,8 @@ public class frag_login extends Fragment {
 
         }
 
+        forgot = view.findViewById(R.id.txtForgot);
+
         final TextView txtUsername = view.findViewById(R.id.username);
         final TextView txtPassword = view.findViewById(R.id.password);
         Button btnSignUp = view.findViewById(R.id.signUp);
@@ -126,15 +133,35 @@ public class frag_login extends Fragment {
                                     ((Auth_Activity)getActivity()).goToMainFeed();
                                     pd.dismiss();
 
-                                }else{
-                                    pd.dismiss();
-                                    Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                                    Toast.makeText(getActivity(), "Unsuccessful", Toast.LENGTH_SHORT).show();
                                 }
 
                             }
 
-                        });
+                        }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                        if (e instanceof FirebaseAuthInvalidCredentialsException) {
+                            notifyUser("Invalid password");
+                        } else if (e instanceof FirebaseAuthInvalidUserException) {
+                            String errorCode =
+                                    ((FirebaseAuthInvalidUserException) e).getErrorCode();
+                            if (errorCode.equals("ERROR_USER_NOT_FOUND")) {
+                                notifyUser("No matching account found with email");
+                            } else if (errorCode.equals("ERROR_USER_DISABLED")) {
+                                notifyUser("User account has been disabled");
+                            } else {
+                                notifyUser(e.getLocalizedMessage());
+                            }
+                        }
+                }
+
+                    private void notifyUser(String toast) {
+                        pd.dismiss();
+                        Toast.makeText(getActivity(), toast, Toast.LENGTH_SHORT).show();
+
+                    }
+                    });
 
             }
         });
@@ -143,6 +170,14 @@ public class frag_login extends Fragment {
                 Navigation.findNavController(view).navigate(R.id.globalAction_Register);
 
                                          }
+        });
+
+
+        forgot.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_global_frag_forgot);
+            }
         });
 
 
