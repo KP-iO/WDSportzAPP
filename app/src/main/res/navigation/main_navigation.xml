@@ -88,6 +88,10 @@
         android:id="@+id/action_global_frag_socialWebOpen"
         app:destination="@id/frag_socialWebOpen"
         app:enterAnim="@anim/slide_in_right" />
+    <fragment
+        android:id="@+id/editFavouriteTeams_PAGE"
+        android:name="com.example.wdsportz.MainFragments.editFavouriteTeams_PAGE"
+        android:label="editFavouriteTeams_PAGE" /><action android:id="@+id/action_global_editFavouriteTeams_PAGE" app:destination="@id/editFavouriteTeams_PAGE"/>
     <!--    <fragment-->
 <!--        android:id="@+id/leagueFragment"-->
 <!--        android:name="com.example.wdsportz.MainFragments.Frag_Score"-->

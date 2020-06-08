@@ -41,7 +41,7 @@ import java.util.List;
 // object in our collection.
 
 // For the feed inside the recycler view, inside one of the tabs. Each tabs's content is created by this
-public class Frag_iniTeamSelect_teams extends Fragment {
+public class editFavoutiteTeams extends Fragment {
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private frag_Register.OnFragmentInteractionListener mListener;
     private static final int CAMERA_REQUEST_CODE =100;
@@ -79,8 +79,8 @@ public class Frag_iniTeamSelect_teams extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);
-        return inflater.inflate(R.layout.initeamselectrecycler, container, false);
-}
+        return inflater.inflate(R.layout.fragment_edit_favourite_teams, container, false);
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -96,41 +96,41 @@ public class Frag_iniTeamSelect_teams extends Fragment {
                 recyclerviewcontent(view,"Suggested");
                 break;
             //case y:
-                // code block
-              //  break;
+            // code block
+            //  break;
             //default:
-                // code block
+            // code block
         }
 
 
     }
 
-//    @Override
-//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//        // Do something that differs the Activity's menu here
-//        super.onCreateOptionsMenu(menu, inflater);
-//
-//        this.menu1 = menu;
-//
-//        MenuItem searchItem = menu1.findItem(R.id.search);
-//
-//        SearchView searchView = (SearchView) searchItem.getActionView();
-//
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//
-//                selectTeamsRecyclerViewAdapter.getFilter().filter(newText);
-//
-//                return false;
-//            }
-//        });
-//    }
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        // Do something that differs the Activity's menu here
+        super.onCreateOptionsMenu(menu, inflater);
+
+        this.menu1 = menu;
+
+        MenuItem searchItem = menu1.findItem(R.id.search);
+
+        SearchView searchView = (SearchView) searchItem.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                selectTeamsRecyclerViewAdapter.getFilter().filter(newText);
+
+                return false;
+            }
+        });
+    }
 
 //    @Override
 //    public boolean onOptionsItemSelected (MenuItem searchItem){
@@ -153,56 +153,56 @@ public class Frag_iniTeamSelect_teams extends Fragment {
         //The recycler view has been created using the references as above.
         recyclerView.setLayoutManager(new GridLayoutManager(context , numberOfColumns));
 
-    // Implement error handling for all cases e.g (Name/ Logo not accessible) ------>
-    //// Create a new method for the code below.
-    ///+++ Or possibly migrate to the SelectTeamsRecyclerViewAdapter class
+        // Implement error handling for all cases e.g (Name/ Logo not accessible) ------>
+        //// Create a new method for the code below.
+        ///+++ Or possibly migrate to the SelectTeamsRecyclerViewAdapter class
 
 //// -----> this is where the images and text is added to the recycler's items from the db.
         Task<QuerySnapshot> docRef = fireStoreDB.collection("Isthmian_Teams")
-            .get()
-            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
 
-                @Override
-                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                    if (task.isSuccessful()) {
-                        List<SelectTeamsRecyclerViewModel> list = new ArrayList<>();
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            List<SelectTeamsRecyclerViewModel> list = new ArrayList<>();
 
-    ////// Change FROM download url to stroage url in firestore?
+                            ////// Change FROM download url to stroage url in firestore?
 
-                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
 
-                            Log.d(TAG, "DOCUMENT PRINT :" + document.getData().toString());
-                            Log.d(TAG, "Team Added to List " + document.get("Team_Name").toString());
+                                Log.d(TAG, "DOCUMENT PRINT :" + document.getData().toString());
+                                Log.d(TAG, "Team Added to List " + document.get("Team_Name").toString());
 
-                            list.add(new SelectTeamsRecyclerViewModel(document.get("Team_Name").toString(),document.get("Team_Logo_Location").toString()));
+                                list.add(new SelectTeamsRecyclerViewModel(document.get("Team_Name").toString(),document.get("Team_Logo_Location").toString()));
 
-                            //Log.d(TAG, ("LOGO URL: " + list.));
+                                //Log.d(TAG, ("LOGO URL: " + list.));
 
-                            selectTeamsRecyclerViewAdapter = new SelectTeamsRecyclerViewAdapter(context, list);
-                            recyclerView.setAdapter(selectTeamsRecyclerViewAdapter);
+                                selectTeamsRecyclerViewAdapter = new SelectTeamsRecyclerViewAdapter(context, list);
+                                recyclerView.setAdapter(selectTeamsRecyclerViewAdapter);
+                            }
+
+                            // List check (in Log)
+                            for(int i = 0; i < list.size() -1 ; i++ ){
+
+                                Log.d(TAG, (" Team Name = " + list.get(i).teamName));
+                                Log.d(TAG, "List Url test   " +  list.get(i).teamLogoURl);
+                            }
+
+                        } else {
+                            Log.d(TAG, "No such document");
                         }
 
-                        // List check (in Log)
-                        for(int i = 0; i < list.size() -1 ; i++ ){
-
-                            Log.d(TAG, (" Team Name = " + list.get(i).teamName));
-                            Log.d(TAG, "List Url test   " +  list.get(i).teamLogoURl);
-                        }
-
-                    } else {
-                        Log.d(TAG, "No such document");
                     }
 
-                }
+                });
 
-            });
-
-}
+    }
 
     public void getselections(View view){
 
 
-}
+    }
 
 
 

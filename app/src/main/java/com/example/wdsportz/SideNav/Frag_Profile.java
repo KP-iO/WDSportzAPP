@@ -32,8 +32,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.wdsportz.Adapters.FavouriteTeamsAdapter;
+import com.example.wdsportz.Adapters.WatchViewAdapter;
 import com.example.wdsportz.R;
 import com.example.wdsportz.ViewModels.FavouriteTeamsViewModel;
+import com.example.wdsportz.ViewModels.WatchViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -47,12 +49,18 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
 import static androidx.constraintlayout.motion.widget.MotionScene.TAG;
@@ -105,6 +113,7 @@ public class Frag_Profile extends Fragment {
     //for checking profile or cover photo
     String profileOrCoverPhoto;
     FavouriteTeamsAdapter favouriteTeamsAdapter;
+    String uid;
 
 
 
@@ -160,29 +169,28 @@ public class Frag_Profile extends Fragment {
         fab = view.findViewById(R.id.Edit_Profile);
         coverIv = view.findViewById(R.id.coverIv);
         RvTeams = view.findViewById(R.id.favouriteTeamRV);
+        uid = user.getUid();
 
         //progress dialog
         pd = new ProgressDialog(getActivity());
 
         //permissions constants
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-
-
-
-        Query query = databaseReference.orderByChild("email").equalTo(user.getEmail());
-        query.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                for(DataSnapshot ds: dataSnapshot.getChildren()){
-                    //get data
-
-                    String name = "" + ds.child("name").getValue();
-                    String email = "" + ds.child("email").getValue();
-                    String image = "" + ds.child("image").getValue();
-                    String cover = "" + ds.child("cover").getValue();
-
-                    // Set to user
+        db.collection("Users")
+                .whereEqualTo("uid", uid)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                String name = document.get("name").toString();
+                                String email = document.get("email").toString();
+                                String image = document.get("image").toString();
+//                                String cover = document.get("cover").toString();
+                                Log.d(TAG, image);
+                                                    // Set to user
                     UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                             .setPhotoUri(Uri.parse(image))
                             .build();
@@ -206,27 +214,90 @@ public class Frag_Profile extends Fragment {
                         Glide.with(view)
                                 .load(image)
                                 .into(avatarIv);
-                        Glide.with(view)
-                                .load(cover)
-                                .into(coverIv);
+//                        Glide.with(view)
+//                                .load(cover)
+//                                .into(coverIv);
                     }
-                    catch (Exception e){
+                    catch (Exception e) {
                         Glide.with(view)
                                 .load(R.drawable.ic_add_image)
                                 .into(avatarIv);
 
                     }
+                            }
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+//                                String name = document.get("Match_Name").toString();
+//                                String email = document.get("Match_Name").toString();
+//                                String image = document.get("Match_Name").toString();
+//                    String cover = document.get("Match_Name").toString();
 
 
 
-                }
 
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
-        });
+
+//        Query query = databaseReference.orderByChild("email").equalTo(user.getEmail());
+//        query.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//
+//                for(DataSnapshot ds: dataSnapshot.getChildren()){
+//                    //get data
+//
+//                    String name = "" + ds.child("name").getValue();
+//                    String email = "" + ds.child("email").getValue();
+//                    String image = "" + ds.child("image").getValue();
+//                    String cover = "" + ds.child("cover").getValue();
+//
+//                    // Set to user
+//                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+//                            .setPhotoUri(Uri.parse(image))
+//                            .build();
+//
+//                    user.updateProfile(profileUpdates)
+//                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                @Override
+//                                public void onComplete(@NonNull Task<Void> task) {
+//                                    if (task.isSuccessful()) {
+//                                        Log.d(TAG, "User profile updated.");
+//                                    }
+//                                }
+//                            });
+//
+//                    //set data
+//                    nameTv.setText(name);
+//                    emailTv.setText(email);
+//
+//                    try {
+//
+//                        Glide.with(view)
+//                                .load(image)
+//                                .into(avatarIv);
+//                        Glide.with(view)
+//                                .load(cover)
+//                                .into(coverIv);
+//                    }
+//                    catch (Exception e){
+//                        Glide.with(view)
+//                                .load(R.drawable.ic_add_image)
+//                                .into(avatarIv);
+//
+//                    }
+//
+//
+//
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//            }
+//        });
 //            Edit Profile
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -96,6 +96,14 @@ public class Frag_More extends Fragment implements View.OnClickListener {
             }
         });
 
+        final Button btnSub = view.findViewById(R.id.btnSelectTeams);
+        btnSub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_global_editFavouriteTeams_PAGE);
+            }
+        });
+
 
         Button btnSignout = getView().findViewById(R.id.btnSignOut);
 

@@ -46,6 +46,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -218,13 +220,24 @@ public class frag_Register extends Fragment {
 
 
                                         // firebase datatabase instance
-                                        FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                        FirebaseFirestore database = FirebaseFirestore.getInstance();
 
-                                        //path to store data named "Users"
-                                        DatabaseReference reference = database.getReference("Users");
+                                        database.collection("Users").document(uid)
+                                          .set(hashMap)
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
+                                                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+                                                        Log.w(TAG, "Error writing document", e);
+                                                    }
+                                                });
 
-                                        //put data within hashmap in database
-                                        reference.child(uid).setValue(hashMap);
+
 
                                         // Used to make FirebaseProfile for user
                                         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
@@ -560,28 +573,48 @@ public class frag_Register extends Fragment {
                                 results.put(profileOrCoverPhoto, downloadUri.toString());
 
 
-                                databaseReference.child(user.getUid()).updateChildren(results)
+                                FirebaseFirestore database = FirebaseFirestore.getInstance();
+
+                                database.collection("Users").document(uid)
+                                        .set(results, SetOptions.merge())
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void aVoid) {
-                                                //url in database of user is added successfully
-                                                //dismiss progress bar
+                                                Log.d(TAG, "DocumentSnapshot successfully written!");
                                                 pd.dismiss();
-                                                Toast.makeText(getActivity(), "Image Updated. . .", Toast.LENGTH_SHORT).show();
-
                                             }
                                         })
                                         .addOnFailureListener(new OnFailureListener() {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
-                                                //url in database of user is added successfully
-                                                //dismiss progress bar
+                                                Log.w(TAG, "Error writing document", e);
                                                 pd.dismiss();
-                                                Toast.makeText(getActivity(), "Error Updating Image ...", Toast.LENGTH_SHORT).show();
-
-
                                             }
                                         });
+
+
+//                                databaseReference.child(user.getUid()).updateChildren(results)
+//                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                                            @Override
+//                                            public void onSuccess(Void aVoid) {
+//                                                //url in database of user is added successfully
+//                                                //dismiss progress bar
+//                                                pd.dismiss();
+//                                                Toast.makeText(getActivity(), "Image Updated. . .", Toast.LENGTH_SHORT).show();
+//
+//                                            }
+//                                        })
+//                                        .addOnFailureListener(new OnFailureListener() {
+//                                            @Override
+//                                            public void onFailure(@NonNull Exception e) {
+//                                                //url in database of user is added successfully
+//                                                //dismiss progress bar
+//                                                pd.dismiss();
+//                                                Toast.makeText(getActivity(), "Error Updating Image ...", Toast.LENGTH_SHORT).show();
+//
+//
+//                                            }
+//                                        });
 
                             }
                             else {
