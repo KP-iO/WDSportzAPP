@@ -16,12 +16,12 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="650dp"
         android:text="TEST_btn"
+        android:visibility="visible"
         app:iconTint="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:strokeColor="#000000"
-        android:visibility="invisible"/>
+        app:strokeColor="#000000" />
 
     <ImageView
         android:id="@+id/imageView6"

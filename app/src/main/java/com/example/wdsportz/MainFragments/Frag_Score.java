@@ -166,7 +166,6 @@ public class Frag_Score extends Fragment {
                 datePickerButton.setText(dateFormat.format(dateClicked));
                 sortbydate(dateClicked);
 
-
                 isExpanded = !isExpanded;
                 appBarLayout.setExpanded(isExpanded, true);
 

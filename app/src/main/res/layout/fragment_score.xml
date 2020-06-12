@@ -44,7 +44,7 @@
                     app:compactCalendarCurrentDayBackgroundColor="#FFC107"
                     app:compactCalendarCurrentSelectedDayBackgroundColor="#FFFFFF"
                     app:compactCalendarDisplayOtherMonthDays="false"
-                    app:compactCalendarEventIndicatorStyle="no_fill_large_indicator"
+                    app:compactCalendarEventIndicatorStyle="fill_large_indicator"
                     app:compactCalendarTextColor="@color/colorBlack"
                     app:compactCalendarTextSize="12sp" />
 

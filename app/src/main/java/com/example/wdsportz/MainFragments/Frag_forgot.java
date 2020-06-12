@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -88,8 +87,6 @@ public class Frag_forgot extends Fragment {
 
         button = view.findViewById(R.id.btnForgotPass);
         email = view.findViewById(R.id.forgotEmail);
-
-
 
         button.setOnClickListener(new View.OnClickListener() {
     @Override

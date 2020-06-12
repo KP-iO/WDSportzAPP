@@ -19,18 +19,19 @@ import com.example.wdsportz.Adapters.SelectTeamsRecyclerViewAdapter;
 import com.example.wdsportz.Adapters.iniTeamSelectTabAdapter;
 import com.example.wdsportz.MainActivities.Auth_Activity;
 import com.example.wdsportz.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 
 
 /**
@@ -58,6 +59,7 @@ public class Frag_iniTeamSelect extends Fragment {
 
     // When requested, this adapter returns a Frag_iniTeamSelect_teams,
     // representing an object in the collection.
+    FirebaseFirestore fireStoreDB = FirebaseFirestore.getInstance();
     iniTeamSelectTabAdapter iniTeamSelectTabAdapter;
     ViewPager2 viewPager;
     SelectTeamsRecyclerViewAdapter selectTeamsRecyclerViewAdapter;
@@ -120,8 +122,8 @@ public class Frag_iniTeamSelect extends Fragment {
 
         getActivity().findViewById(R.id.my_toolbar).setVisibility(View.VISIBLE);
 
-        databaseReference = firebaseDatabase.getReference("Users");
-        storageReference = FirebaseStorage.getInstance().getReference();
+//        databaseReference = firebaseDatabase.getReference("Users");
+//        storageReference = FirebaseStorage.getInstance().getReference();
 
         TabLayout tabLayout = view.findViewById(R.id.tab_layout);
 
@@ -132,9 +134,8 @@ public class Frag_iniTeamSelect extends Fragment {
         new TabLayoutMediator(tabLayout, viewPager, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-
-                tab.setText("Tab" + (position + 1));
-
+                //I use nameTabs to set the tab names dynamically.
+                tab.setText("1");
             }
         }).attach();
 
@@ -147,7 +148,7 @@ public class Frag_iniTeamSelect extends Fragment {
                 selectTeamsRecyclerViewAdapter = new SelectTeamsRecyclerViewAdapter();
                 teamsSelected = selectTeamsRecyclerViewAdapter.getArrayList();
 
-                adFavourite();
+//                adFavourite();
 //                sendPicToDatabase();
                 ((Auth_Activity)getActivity()).goToMainFeed();
 
@@ -157,40 +158,58 @@ public class Frag_iniTeamSelect extends Fragment {
 
     }
 
+    public void NameTabs (@NonNull View view){
+
+        Task<QuerySnapshot> docRef = fireStoreDB.collection("Leagues")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
 
 
 
-    private void adFavourite(){
-        FirebaseUser user1 = FirebaseAuth.getInstance().getCurrentUser();
-        String uid = user1.getUid();
-        selectTeamsRecyclerViewAdapter = new SelectTeamsRecyclerViewAdapter();
-        teamsSelected = selectTeamsRecyclerViewAdapter.getArrayList();
-        teamsPrefs = SelectTeamsRecyclerViewAdapter.getArrayList();
-        Log.d("CLICK1", Arrays.toString(teamsSelected.toArray())+ "  Clicked");
 
+                            Log.d("TESTTT", "onComplete: " + task.getResult());
 
-        HashMap<String, ArrayList<String>> hashMap = new HashMap<>();
+                            TabLayout tabLayout = view.findViewById(R.id.tab_layout);
 
+                            tabLayout.getTabAt(0).setText("1");
+                            tabLayout.getTabAt(1).setText("2");
+                            tabLayout.getTabAt(2).setText("3");
+                            tabLayout.getTabAt(3).setText("4");
 
-        hashMap.put("Favourite Teams",teamsPrefs );
-
-        // firebase datatabase instance
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-
-        //path to store data named "Users"
-        DatabaseReference reference = database.getReference("Users/"+ uid);
-
-        //put data within hashmap in database
-        reference.child(uid).setValue(hashMap);
-
-        // Used to make FirebaseProfile for user
-
-
+                        }
+                    }
+                    });
     }
 
 
-
-
+//    private void adFavourite(){
+//        FirebaseUser user1 = FirebaseAuth.getInstance().getCurrentUser();
+//        String uid = user1.getUid();
+//        selectTeamsRecyclerViewAdapter = new SelectTeamsRecyclerViewAdapter();
+//        teamsSelected = selectTeamsRecyclerViewAdapter.getArrayList();
+//        teamsPrefs = SelectTeamsRecyclerViewAdapter.getArrayList();
+//        Log.d("CLICK1", Arrays.toString(teamsSelected.toArray())+ "  Clicked");
+//
+//
+//        HashMap<String, ArrayList<String>> hashMap = new HashMap<>();
+//
+//
+//        hashMap.put("Favourite Teams",teamsPrefs );
+//
+//        // firebase datatabase instance
+//        FirebaseDatabase database = FirebaseDatabase.getInstance();
+//
+//        //path to store data named "Users"
+//        DatabaseReference reference = database.getReference("Users/"+ uid);
+//
+//        //put data within hashmap in database
+//        reference.child(uid).setValue(hashMap);
+//
+//        // Used to make FirebaseProfile for user
+//    }
 
 
     public String getPostKey() {
@@ -198,18 +217,6 @@ public class Frag_iniTeamSelect extends Fragment {
         return postKey;
     }
 
-
-
-    public void NameTabs (@NonNull View view){
-
-        TabLayout tabLayout = view.findViewById(R.id.tab_layout);
-
-        tabLayout.getTabAt(0).setText("Suggested");
-        tabLayout.getTabAt(1).setText("Bostik League");
-        tabLayout.getTabAt(2).setText("Essex Senior League");
-        tabLayout.getTabAt(3).setText("Universities (BUCS) ");
-
-    }
 
 
     //private iniTeamSelectAdapter createCardAdapter() {
