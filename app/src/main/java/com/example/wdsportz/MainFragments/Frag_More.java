@@ -14,10 +14,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.example.wdsportz.MainActivities.Auth_Activity;
 import com.example.wdsportz.R;
 import com.example.wdsportz.utils.PreferenceUtils;
+import com.example.wdsportz.videoPlayback_Activity;
 import com.google.firebase.auth.FirebaseAuth;
 
 /**
@@ -100,7 +102,25 @@ public class Frag_More extends Fragment implements View.OnClickListener {
         btnSub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+//                Intent intent = new Intent(getActivity(), Frag_iniTeamSelect.class);
+//                // used to bundle strings and enable it to be collected
+////                Bundle bundle = new Bundle();
+////                bundle.putString("videoTitle", videoTitle);
+////                bundle.putString("videoUrl", videoUrl);
+////                bundle.putString("chatID", chatID);
+////                bundle.putString("videoDesc", videoDesc);
+////                intent.putExtras(bundle);
+//                startActivity(intent);
                 Navigation.findNavController(view).navigate(R.id.action_global_editFavouriteTeams_PAGE);
+            }
+        });
+
+        final Button btnContact = view.findViewById(R.id.btnContactUs);
+        btnContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendEmail();
             }
         });
 
@@ -178,6 +198,19 @@ public class Frag_More extends Fragment implements View.OnClickListener {
                 break;
 
 
+        }
+    }
+
+    public void sendEmail(){
+        Intent i = new Intent(Intent.ACTION_SEND);
+        i.setType("message/rfc822");
+        i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"recipient@example.com"});
+        i.putExtra(Intent.EXTRA_SUBJECT, "subject of email");
+        i.putExtra(Intent.EXTRA_TEXT   , "body of email");
+        try {
+            startActivity(Intent.createChooser(i, "Send mail..."));
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(getActivity(), "There are no email clients installed.", Toast.LENGTH_SHORT).show();
         }
     }
 
