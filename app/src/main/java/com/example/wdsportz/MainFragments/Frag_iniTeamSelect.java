@@ -13,7 +13,7 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.viewpager2.widget.ViewPager2;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.wdsportz.Adapters.SelectTeamsRecyclerViewAdapter;
 import com.example.wdsportz.Adapters.iniTeamSelectTabAdapter;
@@ -22,16 +22,21 @@ import com.example.wdsportz.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
-import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import static android.content.ContentValues.TAG;
 
 
 /**
@@ -43,32 +48,32 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 public class Frag_iniTeamSelect extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
     String postKey;
     ArrayList<String> teamsPrefs;
-
     private OnFragmentInteractionListener mListener;
     FirebaseUser firebaseUser;
-
-    // When requested, this adapter returns a Frag_iniTeamSelect_teams,
-    // representing an object in the collection.
     FirebaseFirestore fireStoreDB = FirebaseFirestore.getInstance();
     iniTeamSelectTabAdapter iniTeamSelectTabAdapter;
-    ViewPager2 viewPager;
+    ViewPager viewPager;
     SelectTeamsRecyclerViewAdapter selectTeamsRecyclerViewAdapter;
     public ArrayList<String> teamsSelected = new ArrayList<String>();
     ProgressDialog pd;
     String storagePath = "Users_Profile_Cover_Imgs/";
+    TabLayout tabLayout;
+    View view1;
+    Map<String, String> leagues = new LinkedHashMap<>();
+    private ViewPager pager;
+    private iniTeamSelectTabAdapter pagerAdapter;
 
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+
     DatabaseReference databaseReference;
     StorageReference storageReference;
     String profileOrCoverPhoto;
@@ -121,36 +126,29 @@ public class Frag_iniTeamSelect extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
         getActivity().findViewById(R.id.my_toolbar).setVisibility(View.VISIBLE);
+        this.view1 = view;
+
+        Integer testID;
+
+        viewPager = view.findViewById(R.id.view_pager);
+        tabLayout = view.findViewById(R.id.tab_layout);
+
+        //Here the pager and tablayout are assigned adapters in 'nameTabs function' Called in getLeaguesID
+        getLeaguesID();
 
 //        databaseReference = firebaseDatabase.getReference("Users");
 //        storageReference = FirebaseStorage.getInstance().getReference();
 
-        TabLayout tabLayout = view.findViewById(R.id.tab_layout);
-
-        iniTeamSelectTabAdapter = new iniTeamSelectTabAdapter(this);
-        viewPager = view.findViewById(R.id.view_pager);
-        viewPager.setAdapter(iniTeamSelectTabAdapter);
-
-        new TabLayoutMediator(tabLayout, viewPager, new TabLayoutMediator.TabConfigurationStrategy() {
-            @Override
-            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                //I use nameTabs to set the tab names dynamically.
-                tab.setText("1");
-            }
-        }).attach();
-
-        NameTabs(view);
-
         Button button = view.findViewById(R.id.btn_finish);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick (View v) {
+            public void onClick(View v) {
                 selectTeamsRecyclerViewAdapter = new SelectTeamsRecyclerViewAdapter();
                 teamsSelected = selectTeamsRecyclerViewAdapter.getArrayList();
 
 //                adFavourite();
 //                sendPicToDatabase();
-                ((Auth_Activity)getActivity()).goToMainFeed();
+                ((Auth_Activity) getActivity()).goToMainFeed();
 
             }
 
@@ -158,31 +156,63 @@ public class Frag_iniTeamSelect extends Fragment {
 
     }
 
-    public void NameTabs (@NonNull View view){
+    public void getLeaguesID() {
 
-        Task<QuerySnapshot> docRef = fireStoreDB.collection("Leagues")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
+        try {
+            Log.d(TAG, "LEAGUES TO HASHMAP");
+            fireStoreDB.collection("Leagues")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
 
+                                    leagues.put(String.valueOf(document.get("leagueId")), document.getId());
 
+                                }
 
+                                NameTabs(view1);
 
-                            Log.d("TESTTT", "onComplete: " + task.getResult());
-
-                            TabLayout tabLayout = view.findViewById(R.id.tab_layout);
-
-                            tabLayout.getTabAt(0).setText("1");
-                            tabLayout.getTabAt(1).setText("2");
-                            tabLayout.getTabAt(2).setText("3");
-                            tabLayout.getTabAt(3).setText("4");
-
+                            } else {
+                                Log.d(TAG, "Error getting documents: ", task.getException());
+                            }
                         }
-                    }
                     });
+        } catch (Exception error) {
+            Log.d(TAG, "getLeaguesID: FIREBASE FAILURE ==  " + error);
+
+        }
+
     }
+
+
+    public void NameTabs(@NonNull View view) {
+        Log.d(TAG, "NameTabs: CALLED");
+        Log.d(TAG, String.valueOf(leagues.size()));
+
+        //SORT LEAGUES
+        LinkedHashMap<String, String> sortedMap = new LinkedHashMap<>();
+
+        leagues.entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByKey(Comparator.reverseOrder()))
+                .forEachOrdered(x -> sortedMap.put(x.getKey(), x.getValue()));
+
+        ////
+
+        iniTeamSelectTabAdapter = new iniTeamSelectTabAdapter(
+                getActivity(),                    // pass the context,
+                getChildFragmentManager(),        // the fragment manager
+                Auth_Activity.getFilterManager(),
+                (LinkedHashMap<String, String>) sortedMap// and the filter manager
+        );
+        //iniTeamSelectTabAdapter = new iniTeamSelectTabAdapter(getChildFragmentManager(), (LinkedHashMap<String, String>) sortedMap);
+        viewPager.setAdapter(iniTeamSelectTabAdapter);
+        tabLayout.setupWithViewPager(viewPager);
+
+    }
+
 
 
 //    private void adFavourite(){
@@ -216,13 +246,6 @@ public class Frag_iniTeamSelect extends Fragment {
         postKey = getArguments().getString("title");
         return postKey;
     }
-
-
-
-    //private iniTeamSelectAdapter createCardAdapter() {
-      //  iniTeamSelectAdapter adapter = new iniTeamSelectAdapter(this);
-       // return adapter;
-    //}
 
 
     // TODO: Rename method, update argument and hook method into UI event

@@ -12,17 +12,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager.widget.ViewPager;
 
+import com.example.wdsportz.Adapters.iniTeamSelectTabAdapter;
+import com.example.wdsportz.FilterManager;
 import com.example.wdsportz.MainFragments.Frag_HomePage;
 import com.example.wdsportz.MainFragments.Frag_iniTeamSelect;
 import com.example.wdsportz.MainFragments.frag_Register;
 import com.example.wdsportz.MainFragments.frag_login;
 import com.example.wdsportz.R;
 
-public class Auth_Activity extends AppCompatActivity implements Frag_iniTeamSelect.OnFragmentInteractionListener,Frag_HomePage.OnFragmentInteractionListener, frag_login.OnFragmentInteractionListener, frag_Register.OnFragmentInteractionListener  {
+public class Auth_Activity extends AppCompatActivity implements SearchView.OnQueryTextListener,Frag_iniTeamSelect.OnFragmentInteractionListener,Frag_HomePage.OnFragmentInteractionListener, frag_login.OnFragmentInteractionListener, frag_Register.OnFragmentInteractionListener  {
 
     //Change majority of 'px' dimensions settings to 'dp'
     Toolbar myToolbar;
+    private static Auth_Activity instance;
+    private FilterManager filterManager;
+    private ViewPager pager;
+    private iniTeamSelectTabAdapter pagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +43,19 @@ public class Auth_Activity extends AppCompatActivity implements Frag_iniTeamSele
         setSupportActionBar(myToolbar);
         myToolbar.setVisibility(View.GONE);
 
+        instance = this;
+        filterManager = new FilterManager();
+
+    }
+
+    public static FilterManager getFilterManager() {
+        return instance.filterManager; // return the observable class
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        filterManager.setQuery(newText); // update the observable value
+        return true;
     }
 
     @Override
@@ -43,6 +63,7 @@ public class Auth_Activity extends AppCompatActivity implements Frag_iniTeamSele
         super.onResume();
         myToolbar.setVisibility(View.GONE);
     }
+
 
 
 /// SEARCH ->
@@ -54,6 +75,9 @@ public class Auth_Activity extends AppCompatActivity implements Frag_iniTeamSele
        SearchView searchView = (SearchView)menu.findItem(R.id.search).getActionView();
        searchView.setMaxWidth(Integer.MAX_VALUE);
 
+       SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
+       searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+
         // Associate searchable configuration with the SearchView
         //SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
 
@@ -61,8 +85,14 @@ public class Auth_Activity extends AppCompatActivity implements Frag_iniTeamSele
         //searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
 
 
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
+
+    private void changeSearchViewTextColor(View view) {  }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) { return false; }
+
 
 
     public void goToMainFeed() {
@@ -81,6 +111,8 @@ public class Auth_Activity extends AppCompatActivity implements Frag_iniTeamSele
         }
 
     }
+
+
 
     @Override
     public void onFragmentInteraction(Uri uri){

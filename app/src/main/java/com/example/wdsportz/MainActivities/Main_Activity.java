@@ -18,7 +18,6 @@ import com.example.wdsportz.MainFragments.Frag_HomePage;
 import com.example.wdsportz.MainFragments.Frag_Test_1;
 import com.example.wdsportz.MainFragments.Frag_iniTeamSelect;
 import com.example.wdsportz.MainFragments.Frag_socialWebOpen;
-import com.example.wdsportz.MainFragments.editFavouriteTeams_PAGE;
 import com.example.wdsportz.R;
 import com.example.wdsportz.SideNav.Frag_About;
 import com.example.wdsportz.SideNav.Frag_Explore;
@@ -39,7 +38,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 //Change majority of 'px' dimensions settings to 'dp'
 
-public class Main_Activity extends AppCompatActivity implements Frag_Test_1.OnFragmentInteractionListener, Frag_iniTeamSelect.OnFragmentInteractionListener, Frag_HomePage.OnFragmentInteractionListener, Frag_Profile.OnFragmentInteractionListener, Frag_Notifications.OnFragmentInteractionListener, Frag_About.OnFragmentInteractionListener, Frag_Explore.OnFragmentInteractionListener, Frag_LiveGuide.OnFragmentInteractionListener, Frag_Settings.OnFragmentInteractionListener, Frag_socialWebOpen.OnFragmentInteractionListener, editFavouriteTeams_PAGE.OnFragmentInteractionListener {
+public class Main_Activity extends AppCompatActivity implements Frag_Test_1.OnFragmentInteractionListener, Frag_iniTeamSelect.OnFragmentInteractionListener, Frag_HomePage.OnFragmentInteractionListener, Frag_Profile.OnFragmentInteractionListener, Frag_Notifications.OnFragmentInteractionListener, Frag_About.OnFragmentInteractionListener, Frag_Explore.OnFragmentInteractionListener, Frag_LiveGuide.OnFragmentInteractionListener, Frag_Settings.OnFragmentInteractionListener, Frag_socialWebOpen.OnFragmentInteractionListener {
     // Collect all listeners in one interface ^^^ and pass through to main activity?
 
     public Toolbar toolbar;

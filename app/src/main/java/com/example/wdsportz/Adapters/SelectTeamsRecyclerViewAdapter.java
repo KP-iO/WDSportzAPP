@@ -86,7 +86,6 @@ public class SelectTeamsRecyclerViewAdapter extends RecyclerView.Adapter<SelectT
 
         String currentUrl = mData.get(position).teamLogoURl;
 
-
         Glide.with(context)
                 .load(currentUrl)
                 .apply(new RequestOptions().override(150, 250))
@@ -97,7 +96,6 @@ public class SelectTeamsRecyclerViewAdapter extends RecyclerView.Adapter<SelectT
         // Get the names
         // Add to array
         // Send array to database
-
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -121,20 +119,11 @@ public class SelectTeamsRecyclerViewAdapter extends RecyclerView.Adapter<SelectT
                 }
                 Log.d("CLICK", Arrays.toString(getArrayList().toArray()) + "  Clicked");
 
-
-
-
         }
-
-
-
 
         });
 
-
-
     }
-
 
 
 
