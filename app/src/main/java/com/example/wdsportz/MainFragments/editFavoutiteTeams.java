@@ -132,16 +132,16 @@ public class editFavoutiteTeams extends Fragment {
         });
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected (MenuItem searchItem){
-//        // Handle item selection
-//        switch (searchItem.getItemId()) {
-//            case R.id.search:
-//                getActivity().findViewById(R.id.lbl_selectfavteams).setVisibility(View.GONE);
-//                return true;
-//        }
-//        return super.onOptionsItemSelected(searchItem);
-//    }
+    @Override
+    public boolean onOptionsItemSelected (MenuItem searchItem){
+        // Handle item selection
+        switch (searchItem.getItemId()) {
+            case R.id.search:
+                getActivity().findViewById(R.id.lbl_selectfavteams).setVisibility(View.GONE);
+                return true;
+        }
+        return super.onOptionsItemSelected(searchItem);
+    }
 
     public void recyclerviewcontent(View view, String str){
 
