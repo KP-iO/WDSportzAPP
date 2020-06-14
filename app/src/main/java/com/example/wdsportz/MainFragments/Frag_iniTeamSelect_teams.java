@@ -74,6 +74,7 @@ public class Frag_iniTeamSelect_teams extends Fragment {
     private RecyclerView recyclerView;
     SelectTeamsRecyclerViewAdapter selectTeamsRecyclerViewAdapter = new SelectTeamsRecyclerViewAdapter();
     Menu menu1 ;
+    String leagueName;
 
     @Nullable
     @Override
@@ -84,66 +85,55 @@ public class Frag_iniTeamSelect_teams extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
         Bundle args = getArguments();
 
-        String TabArgs =  String.valueOf(args.getInt(ARG_OBJECT));
-        Log.d("LOADED TAB: ", TabArgs);
+        leagueName =  String.valueOf(args.getString(ARG_OBJECT));
+        Log.d("LOADED TAB: ", leagueName);
 
-        int tab = args.getInt(ARG_OBJECT);
-
-        switch(tab) {
-            case 1:
-                recyclerviewcontent(view,"Suggested");
-                break;
-            //case y:
-                // code block
-              //  break;
-            //default:
-                // code block
-        }
-
+        recyclerviewcontent(view, leagueName);
 
     }
 
-//    @Override
-//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//        // Do something that differs the Activity's menu here
-//        super.onCreateOptionsMenu(menu, inflater);
-//
-//        this.menu1 = menu;
-//
-//        MenuItem searchItem = menu1.findItem(R.id.search);
-//
-//        SearchView searchView = (SearchView) searchItem.getActionView();
-//
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//
-//                selectTeamsRecyclerViewAdapter.getFilter().filter(newText);
-//
-//                return false;
-//            }
-//        });
-//    }
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        // Do something that differs the Activity's menu here
+        super.onCreateOptionsMenu(menu, inflater);
 
-//    @Override
-//    public boolean onOptionsItemSelected (MenuItem searchItem){
-//        // Handle item selection
-//        switch (searchItem.getItemId()) {
-//            case R.id.search:
-//                getActivity().findViewById(R.id.lbl_selectfavteams).setVisibility(View.GONE);
-//                return true;
-//        }
-//        return super.onOptionsItemSelected(searchItem);
-//    }
+        this.menu1 = menu;
 
-    public void recyclerviewcontent(View view, String str){
+        MenuItem searchItem = menu1.findItem(R.id.search);
+
+        SearchView searchView = (SearchView) searchItem.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                selectTeamsRecyclerViewAdapter.getFilter().filter(newText);
+
+                return false;
+            }
+        });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected (MenuItem searchItem){
+        // Handle item selection
+        switch (searchItem.getItemId()) {
+            case R.id.search:
+                getActivity().findViewById(R.id.lbl_selectfavteams).setVisibility(View.GONE);
+                return true;
+        }
+        return super.onOptionsItemSelected(searchItem);
+    }
+
+    public void recyclerviewcontent(View view, String leagueName){
 
         final Context context = view.getContext();
         // set up the RecyclerView
@@ -158,36 +148,34 @@ public class Frag_iniTeamSelect_teams extends Fragment {
     ///+++ Or possibly migrate to the SelectTeamsRecyclerViewAdapter class
 
 //// -----> this is where the images and text is added to the recycler's items from the db.
-        Task<QuerySnapshot> docRef = fireStoreDB.collection("Isthmian_Teams")
+        fireStoreDB.collection("Leagues").document(leagueName).collection("Teams")
             .get()
             .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                     if (task.isSuccessful()) {
-                        List<SelectTeamsRecyclerViewModel> list = new ArrayList<>();
 
-    ////// Change FROM download url to stroage url in firestore?
+                        List<SelectTeamsRecyclerViewModel> listOfTeams = new ArrayList<>();
 
                         for (QueryDocumentSnapshot document : task.getResult()) {
 
-                            Log.d(TAG, "DOCUMENT PRINT :" + document.getData().toString());
-                            Log.d(TAG, "Team Added to List " + document.get("Team_Name").toString());
+                            //Log.d(TAG, "DOCUMENT PRINT :" + document.getData().toString());
+                            Log.d(TAG, "Team Added to List " + document.get("teamName").toString());
 
-                            list.add(new SelectTeamsRecyclerViewModel(document.get("Team_Name").toString(),document.get("Team_Logo_Location").toString()));
+                            listOfTeams.add(new SelectTeamsRecyclerViewModel(document.get("teamName").toString(),document.get("teamLogo").toString()));
 
                             //Log.d(TAG, ("LOGO URL: " + list.));
 
-                            selectTeamsRecyclerViewAdapter = new SelectTeamsRecyclerViewAdapter(context, list);
+                            selectTeamsRecyclerViewAdapter = new SelectTeamsRecyclerViewAdapter(context, listOfTeams);
                             recyclerView.setAdapter(selectTeamsRecyclerViewAdapter);
                         }
 
                         // List check (in Log)
-                        for(int i = 0; i < list.size() -1 ; i++ ){
-
-                            Log.d(TAG, (" Team Name = " + list.get(i).teamName));
-                            Log.d(TAG, "List Url test   " +  list.get(i).teamLogoURl);
-                        }
+//                        for(int i = 0; i < list.size() -1 ; i++ ){
+//
+//                            Log.d(TAG, (" Team Name = " + list.get(i).teamName));
+//                            Log.d(TAG, "List Url test   " +  list.get(i).teamLogoURl);
+//                        }
 
                     } else {
                         Log.d(TAG, "No such document");

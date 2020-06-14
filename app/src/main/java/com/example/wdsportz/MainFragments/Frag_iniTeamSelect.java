@@ -68,8 +68,8 @@ public class Frag_iniTeamSelect extends Fragment {
     TabLayout tabLayout;
     View view1;
     Map<String, String> leagues = new LinkedHashMap<>();
-    private ViewPager pager;
-    private iniTeamSelectTabAdapter pagerAdapter;
+//    private ViewPager pager;
+//    private iniTeamSelectTabAdapter pagerAdapter;
 
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
@@ -126,9 +126,10 @@ public class Frag_iniTeamSelect extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
         getActivity().findViewById(R.id.my_toolbar).setVisibility(View.VISIBLE);
-        this.view1 = view;
 
-        Integer testID;
+
+//        databaseReference = firebaseDatabase.getReference("Users");
+//        storageReference = FirebaseStorage.getInstance().getReference();
 
         viewPager = view.findViewById(R.id.view_pager);
         tabLayout = view.findViewById(R.id.tab_layout);
@@ -136,8 +137,6 @@ public class Frag_iniTeamSelect extends Fragment {
         //Here the pager and tablayout are assigned adapters in 'nameTabs function' Called in getLeaguesID
         getLeaguesID();
 
-//        databaseReference = firebaseDatabase.getReference("Users");
-//        storageReference = FirebaseStorage.getInstance().getReference();
 
         Button button = view.findViewById(R.id.btn_finish);
         button.setOnClickListener(new View.OnClickListener() {
@@ -201,13 +200,8 @@ public class Frag_iniTeamSelect extends Fragment {
 
         ////
 
-        iniTeamSelectTabAdapter = new iniTeamSelectTabAdapter(
-                getActivity(),                    // pass the context,
-                getChildFragmentManager(),        // the fragment manager
-                Auth_Activity.getFilterManager(),
-                (LinkedHashMap<String, String>) sortedMap// and the filter manager
-        );
-        //iniTeamSelectTabAdapter = new iniTeamSelectTabAdapter(getChildFragmentManager(), (LinkedHashMap<String, String>) sortedMap);
+
+        iniTeamSelectTabAdapter = new iniTeamSelectTabAdapter(getChildFragmentManager(), (LinkedHashMap<String, String>) sortedMap);
         viewPager.setAdapter(iniTeamSelectTabAdapter);
         tabLayout.setupWithViewPager(viewPager);
 
