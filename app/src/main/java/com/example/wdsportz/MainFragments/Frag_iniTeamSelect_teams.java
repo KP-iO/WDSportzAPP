@@ -74,7 +74,7 @@ public class Frag_iniTeamSelect_teams extends Fragment {
     private RecyclerView recyclerView;
     SelectTeamsRecyclerViewAdapter selectTeamsRecyclerViewAdapter = new SelectTeamsRecyclerViewAdapter();
     Menu menu1 ;
-    String leagueName;
+    ArrayList<String> leagueNames;
 
     @Nullable
     @Override
@@ -88,10 +88,11 @@ public class Frag_iniTeamSelect_teams extends Fragment {
 
         Bundle args = getArguments();
 
-        leagueName =  String.valueOf(args.getString(ARG_OBJECT));
-        Log.d("LOADED TAB: ", leagueName);
+        leagueNames =  args.getStringArrayList(ARG_OBJECT);
 
-        recyclerviewcontent(view, leagueName);
+        Log.d("LOADED TAB: ", String.valueOf(leagueNames));
+
+        recyclerviewcontent(view, leagueNames);
 
     }
 
@@ -133,7 +134,7 @@ public class Frag_iniTeamSelect_teams extends Fragment {
         return super.onOptionsItemSelected(searchItem);
     }
 
-    public void recyclerviewcontent(View view, String leagueName){
+    public void recyclerviewcontent(View view,  ArrayList<String> currentleagueNames){
 
         final Context context = view.getContext();
         // set up the RecyclerView
@@ -148,44 +149,40 @@ public class Frag_iniTeamSelect_teams extends Fragment {
     ///+++ Or possibly migrate to the SelectTeamsRecyclerViewAdapter class
 
 //// -----> this is where the images and text is added to the recycler's items from the db.
-        fireStoreDB.collection("Leagues").document(leagueName).collection("Teams")
-            .get()
-            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                    if (task.isSuccessful()) {
 
-                        List<SelectTeamsRecyclerViewModel> listOfTeams = new ArrayList<>();
+        List<SelectTeamsRecyclerViewModel> listOfTeams = new ArrayList<>();
 
-                        for (QueryDocumentSnapshot document : task.getResult()) {
+            for (String currentLeague : currentleagueNames) {
 
-                            //Log.d(TAG, "DOCUMENT PRINT :" + document.getData().toString());
-                            Log.d(TAG, "Team Added to List " + document.get("teamName").toString());
+                fireStoreDB.collection("Leagues").document(currentLeague).collection("Teams")
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()) {
 
-                            listOfTeams.add(new SelectTeamsRecyclerViewModel(document.get("teamName").toString(),document.get("teamLogo").toString()));
+                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                        Log.d(TAG, document.get("teamName").toString() + document.get("teamLogo").toString());
+                                        listOfTeams.add(new SelectTeamsRecyclerViewModel(document.get("teamName").toString(), document.get("teamLogo").toString()));
 
-                            //Log.d(TAG, ("LOGO URL: " + list.));
+                                    }
 
-                            selectTeamsRecyclerViewAdapter = new SelectTeamsRecyclerViewAdapter(context, listOfTeams);
-                            recyclerView.setAdapter(selectTeamsRecyclerViewAdapter);
-                        }
+                                    selectTeamsRecyclerViewAdapter = new SelectTeamsRecyclerViewAdapter(context, listOfTeams);
+                                    recyclerView.setAdapter(selectTeamsRecyclerViewAdapter);
 
-                        // List check (in Log)
-//                        for(int i = 0; i < list.size() -1 ; i++ ){
-//
-//                            Log.d(TAG, (" Team Name = " + list.get(i).teamName));
-//                            Log.d(TAG, "List Url test   " +  list.get(i).teamLogoURl);
-//                        }
+                                } else {
+                                    Log.d(TAG, "Document Get Error");
+                                }
 
-                    } else {
-                        Log.d(TAG, "No such document");
-                    }
+                            }
 
-                }
+                        });
 
-            });
+            }
 
-}
+            Log.d(TAG, String.valueOf(listOfTeams));
+
+    }
 
     public void getselections(View view){
 
