@@ -5,7 +5,8 @@ package com.example.wdsportz.ViewModels;
  */
 public class FavouriteTeamsViewModel {
     private String team;
-            private String teamImg;
+    private String teamImg;
+    private String teamId;
 
 
 
@@ -18,7 +19,17 @@ public class FavouriteTeamsViewModel {
         this.teamImg = teamImg;
 
     }
+    public FavouriteTeamsViewModel(String teamId){
+        this.teamId = teamId;
+    }
 
+    public String getTeamId() {
+        return teamId;
+    }
+
+    public void setTeamId(String teamId) {
+        this.teamId = teamId;
+    }
 
     public String getTeam() {
         return team;

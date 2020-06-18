@@ -104,14 +104,14 @@ public class SelectTeamsRecyclerViewAdapter extends RecyclerView.Adapter<SelectT
                 MaterialCardView cardView = v.findViewById(R.id.selectionTile);
                 cardView.toggle();
                 if (cardView.isChecked()){
-                    selectedTeam = mData.get(position).teamName;
+                    selectedTeam = mData.get(position).teamId;
                     selectedUrl = mData.get(position).teamLogoURl;
 
                 list.add(selectedTeam);
                 UrlList.add(selectedUrl);
 
             }else {
-                    selectedTeam = mData.get(position).teamName;
+                    selectedTeam = mData.get(position).teamId;
                     selectedUrl = mData.get(position).teamLogoURl;
                     list.remove(selectedTeam);
                     UrlList.remove(selectedUrl);
@@ -167,10 +167,10 @@ public class SelectTeamsRecyclerViewAdapter extends RecyclerView.Adapter<SelectT
     };
 
 
-    public String getTeamN()
-    {
-        return selectedTeam;
-    }
+//    public String getTeamN()
+//    {
+//        return selectedTeam;
+//    }
 
     @Override
     public int getItemCount() {

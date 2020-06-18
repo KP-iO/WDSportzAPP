@@ -174,7 +174,7 @@ public class editFavoutiteTeams extends Fragment {
                                 Log.d(TAG, "DOCUMENT PRINT :" + document.getData().toString());
                                 Log.d(TAG, "Team Added to List " + document.get("Team_Name").toString());
 
-                                list.add(new SelectTeamsRecyclerViewModel(document.get("Team_Name").toString(),document.get("Team_Logo_Location").toString()));
+                                list.add(new SelectTeamsRecyclerViewModel(document.get("Team_Name").toString(),document.get("Team_Logo_Location").toString(), document.get("teamId").toString()));
 
                                 //Log.d(TAG, ("LOGO URL: " + list.));
 

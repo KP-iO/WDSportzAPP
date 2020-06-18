@@ -12,6 +12,7 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.motion.widget.MotionScene;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
@@ -20,6 +21,8 @@ import com.example.wdsportz.Adapters.iniTeamSelectTabAdapter;
 import com.example.wdsportz.MainActivities.Auth_Activity;
 import com.example.wdsportz.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,10 +32,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -145,8 +151,7 @@ public class Frag_iniTeamSelect extends Fragment {
                 selectTeamsRecyclerViewAdapter = new SelectTeamsRecyclerViewAdapter();
                 teamsSelected = selectTeamsRecyclerViewAdapter.getArrayList();
 
-//                adFavourite();
-//                sendPicToDatabase();
+                adFavourite();
                 ((Auth_Activity) getActivity()).goToMainFeed();
 
             }
@@ -209,31 +214,45 @@ public class Frag_iniTeamSelect extends Fragment {
 
 
 
-//    private void adFavourite(){
-//        FirebaseUser user1 = FirebaseAuth.getInstance().getCurrentUser();
-//        String uid = user1.getUid();
-//        selectTeamsRecyclerViewAdapter = new SelectTeamsRecyclerViewAdapter();
-//        teamsSelected = selectTeamsRecyclerViewAdapter.getArrayList();
-//        teamsPrefs = SelectTeamsRecyclerViewAdapter.getArrayList();
-//        Log.d("CLICK1", Arrays.toString(teamsSelected.toArray())+ "  Clicked");
-//
-//
-//        HashMap<String, ArrayList<String>> hashMap = new HashMap<>();
-//
-//
-//        hashMap.put("Favourite Teams",teamsPrefs );
-//
-//        // firebase datatabase instance
-//        FirebaseDatabase database = FirebaseDatabase.getInstance();
-//
-//        //path to store data named "Users"
-//        DatabaseReference reference = database.getReference("Users/"+ uid);
-//
-//        //put data within hashmap in database
-//        reference.child(uid).setValue(hashMap);
-//
-//        // Used to make FirebaseProfile for user
-//    }
+    private void adFavourite(){
+        FirebaseUser user1 = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = user1.getUid();
+        selectTeamsRecyclerViewAdapter = new SelectTeamsRecyclerViewAdapter();
+        teamsSelected = selectTeamsRecyclerViewAdapter.getArrayList();
+        teamsPrefs = SelectTeamsRecyclerViewAdapter.getArrayList();
+        Log.d("CLICK1", Arrays.toString(teamsSelected.toArray())+ "  Clicked");
+
+
+        HashMap<String, ArrayList<String>> teams = new HashMap<>();
+
+
+        teams.put("Favourite Teams",teamsPrefs );
+
+        // firebase datatabase instance
+        FirebaseFirestore database = FirebaseFirestore.getInstance();
+
+        //path to store data named "Users"
+
+
+        database.collection("Users").document(uid)
+                .set(teams, SetOptions.merge())
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(MotionScene.TAG, "DocumentSnapshot successfully written!");
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(MotionScene.TAG, "Error writing document", e);
+
+                    }
+                });
+
+        // Used to make FirebaseProfile for user
+    }
 
 
     public String getPostKey() {

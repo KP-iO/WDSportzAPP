@@ -163,7 +163,7 @@ public class Frag_iniTeamSelect_teams extends Fragment {
 
                                     for (QueryDocumentSnapshot document : task.getResult()) {
                                         Log.d(TAG, document.get("teamName").toString() + document.get("teamLogo").toString());
-                                        listOfTeams.add(new SelectTeamsRecyclerViewModel(document.get("teamName").toString(), document.get("teamLogo").toString()));
+                                        listOfTeams.add(new SelectTeamsRecyclerViewModel(document.get("teamName").toString(), document.get("teamLogo").toString(), document.get("teamId").toString()));
 
                                     }
 

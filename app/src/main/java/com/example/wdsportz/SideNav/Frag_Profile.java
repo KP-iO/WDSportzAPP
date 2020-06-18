@@ -32,10 +32,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.wdsportz.Adapters.FavouriteTeamsAdapter;
-import com.example.wdsportz.Adapters.WatchViewAdapter;
 import com.example.wdsportz.R;
 import com.example.wdsportz.ViewModels.FavouriteTeamsViewModel;
-import com.example.wdsportz.ViewModels.WatchViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -43,12 +41,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -94,7 +88,9 @@ public class Frag_Profile extends Fragment {
     String storagePath = "Users_Profile_Cover_Imgs/";
     String USERS = "Users";
     FavouriteTeamsViewModel favouriteTeamsViewModel;
-    ArrayList<FavouriteTeamsViewModel> listFavourite;
+    ArrayList<String> listFavourite;
+    ArrayList<String> listIds;
+    ArrayList<String> teamIds;
     //views
     Button fab;
     ImageView avatarIv, coverIv;
@@ -114,11 +110,12 @@ public class Frag_Profile extends Fragment {
     String profileOrCoverPhoto;
     FavouriteTeamsAdapter favouriteTeamsAdapter;
     String uid;
+    FirebaseFirestore database = FirebaseFirestore.getInstance();
 
 
 
 
-    private OnFragmentInteractionListener mListener;
+ private OnFragmentInteractionListener mListener;
 
     public Frag_Profile() {
         // Required empty public constructor
@@ -190,7 +187,8 @@ public class Frag_Profile extends Fragment {
                                 String image = document.get("image").toString();
 //                                String cover = document.get("cover").toString();
                                 Log.d(TAG, image);
-                                                    // Set to user
+
+                                // Set to user
                     UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                             .setPhotoUri(Uri.parse(image))
                             .build();
@@ -306,6 +304,7 @@ public class Frag_Profile extends Fragment {
             }
         });
         favouriteLoader();
+//        league1();
         Log.d ("myTeams", String.valueOf(listFavourite));
 
         return view;
@@ -631,6 +630,8 @@ public class Frag_Profile extends Fragment {
 
     }
 
+
+
     private void pickFromGallery() {
         //pick from gallery
         Intent galleryIntent = new Intent(Intent.ACTION_PICK );
@@ -658,49 +659,114 @@ public class Frag_Profile extends Fragment {
         RvTeams.setLayoutManager(new LinearLayoutManager(getContext()));
 
         String userID = user.getUid();
-        DatabaseReference teamLocation = firebaseDatabase.getReference(USERS).child(userID).child(userID);
+
+
+
+        DocumentReference docRef = database.collection("Users").document(uid);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+//                    List<String> list = new ArrayList<>();
+                    if (document.exists()) {
+
+                        teamIds = (ArrayList<String>)document.get("Favourite Teams");
+                        Log.d(TAG, String.valueOf(teamIds));
+//
+
+                        for (int i = 0; i < teamIds.size() - 1; i++) {
+                            listFavourite.add(teamIds.get(i));
+                        }
+
+
+
+
+
+
+
+//                        Log.d(TAG, "DocumentSnapshot data: " + document.get("Favourite Teams"));
+                    } else {
+                        Log.d(TAG, "No such document");
+                    }
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                }
+            }
+        });
+
+
+    }
+
+//    public void league1(){
+//            Task<QuerySnapshot> docRef  = database.collection("Leagues").document("Non League Div One - Isthmian North").collection("Teams")
+//                    .whereEqualTo("teamId", i)
+//                    .get()
+//                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                        @Override
+//                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                            if (task.isSuccessful()) {
+//                                for (QueryDocumentSnapshot document : task.getResult()) {
+//                                    listFavourite.add(new FavouriteTeamsViewModel(document.get("teamLogo").toString(), document.get("teamName").toString()));
+//
+//                                    favouriteTeamsAdapter = new FavouriteTeamsAdapter(getContext(), listFavourite);
+//                                    RvTeams.setAdapter(favouriteTeamsAdapter);
+//
+//
+//                                }
+//                            } else {
+//                                Log.d(TAG, "No such document");
+//
+//
+//                            }
+//                        }
+//                    });
+//
+//    }
+
+
 
 
 
 //myAdapter=new MyAdapter(this,firebaseHelper.retrieve());
 //rvOrder.setAdapter(myAdapter);
 
-        teamLocation.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-
-
-                listFavourite = new ArrayList<>();
-
-
-                for (DataSnapshot snap :  dataSnapshot.child("Favourite Teams").getChildren()) {
-                    Log.d("Snap TEST", String.valueOf(snap));
-
-//                    FavouriteTeamsViewModel favouriteTeamsViewModel = new FavouriteTeamsViewModel snap.getValue(FavouriteTeamsViewModel.class);
-//                    Log.d("Favourite ViewModel", String.valueOf(favouriteTeamsViewModel));
-
-                    String teamname = snap.getValue().toString();
-                    String teamlogo = snap.getValue().toString();
-                    Log.d("teamname TEST",teamname);
-                   //listFavourite.add(teamname);
-
-                    FavouriteTeamsViewModel results = new FavouriteTeamsViewModel (teamname,teamlogo);
-                    listFavourite.add(results);
-
-                }
-                favouriteTeamsAdapter = new FavouriteTeamsAdapter(getContext(), listFavourite);
-                RvTeams.setAdapter(favouriteTeamsAdapter);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-
-
-        });
-    }
+//        teamLocation.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//
+//
+//
+//                listFavourite = new ArrayList<>();
+//
+//
+//                for (DataSnapshot snap :  dataSnapshot.child("Favourite Teams").getChildren()) {
+//                    Log.d("Snap TEST", String.valueOf(snap));
+//
+////                    FavouriteTeamsViewModel favouriteTeamsViewModel = new FavouriteTeamsViewModel snap.getValue(FavouriteTeamsViewModel.class);
+////                    Log.d("Favourite ViewModel", String.valueOf(favouriteTeamsViewModel));
+//
+//                    String teamname = snap.getValue().toString();
+//                    String teamlogo = snap.getValue().toString();
+//                    Log.d("teamname TEST",teamname);
+//                   //listFavourite.add(teamname);
+//
+//                    FavouriteTeamsViewModel results = new FavouriteTeamsViewModel (teamname,teamlogo);
+//                    listFavourite.add(results);
+//
+//                }
+//                favouriteTeamsAdapter = new FavouriteTeamsAdapter(getContext(), listFavourite);
+//                RvTeams.setAdapter(favouriteTeamsAdapter);
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//
+//
+//        });
+//    }
 
 
 
