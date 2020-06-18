@@ -54,7 +54,6 @@ import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
 import static androidx.constraintlayout.motion.widget.MotionScene.TAG;
@@ -73,6 +72,7 @@ public class Frag_Profile extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static ArrayList<String> teamIds =  new ArrayList<String>();
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -88,9 +88,10 @@ public class Frag_Profile extends Fragment {
     String storagePath = "Users_Profile_Cover_Imgs/";
     String USERS = "Users";
     FavouriteTeamsViewModel favouriteTeamsViewModel;
-    ArrayList<String> listFavourite;
-    ArrayList<String> listIds;
-    ArrayList<String> teamIds;
+    public static ArrayList<String> listFavourite = new ArrayList<String>();
+    public static ArrayList<String> listFavourite1 = new ArrayList<String>();
+    ArrayList<FavouriteTeamsViewModel> listTeams = new ArrayList<FavouriteTeamsViewModel>();
+
     //views
     Button fab;
     ImageView avatarIv, coverIv;
@@ -153,6 +154,8 @@ public class Frag_Profile extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View view =  inflater.inflate(R.layout.fragment_profile, container, false);
+        listFavourite = new ArrayList<>();
+        listFavourite1 = new ArrayList<>();
 
         databaseReference = firebaseDatabase.getReference("Users");
         //init arrays of permissions
@@ -305,7 +308,7 @@ public class Frag_Profile extends Fragment {
         });
         favouriteLoader();
 //        league1();
-        Log.d ("myTeams", String.valueOf(listFavourite));
+//        Log.d ("myTeams", String.valueOf(listFavourite));
 
         return view;
     }
@@ -654,6 +657,7 @@ public class Frag_Profile extends Fragment {
     }
 
 
+
     private void favouriteLoader() {
 //        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         RvTeams.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -673,10 +677,148 @@ public class Frag_Profile extends Fragment {
 
                         teamIds = (ArrayList<String>)document.get("Favourite Teams");
                         Log.d(TAG, String.valueOf(teamIds));
-//
+                        Log.d(TAG, String.valueOf(teamIds.size()));
 
-                        for (int i = 0; i < teamIds.size() - 1; i++) {
-                            listFavourite.add(teamIds.get(i));
+
+                        listFavourite.addAll(teamIds);
+                        Log.d("listFavourite array", String.valueOf(listFavourite));
+                        for (int i = 0; i <listFavourite.size()-1; i++ ){
+                            Log.d("TEAM ID", listFavourite.get(i));
+                            int finalI = i;
+                           database.collection("Leagues").document("Non League Div One - Isthmian North").collection("Teams")
+                                    .whereEqualTo("teamName", listFavourite.get(i))
+                                    .get()
+                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                            if (task.isSuccessful()) {
+
+//                                                Log.d(TAG, "DOCUMENT PRINT :" + document.getData().toString());
+
+                                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                                    Log.d(TAG, "DOCUMENT PRINT :" + document.getData().toString());
+                                                    Log.d("Looking for data", "looking for data league 1");
+                                                    listTeams.add(new FavouriteTeamsViewModel(document.get("teamName").toString(), document.get("teamLogo").toString()));
+
+                                                    favouriteTeamsAdapter = new FavouriteTeamsAdapter(getContext(), listTeams);
+                                                    RvTeams.setAdapter(favouriteTeamsAdapter);
+
+                                                    for (int j = 0; j < listTeams.size() - 1; j++) {
+
+                                                        Log.d(TAG, (" Team Name = " + listTeams.get(j).getTeam()));
+
+                                                    }
+
+                                                }
+                                            } else {
+                                                Log.d(TAG, "No such document");
+
+
+                                            }
+                                        }
+                                    });
+
+                            database.collection("Leagues").document("Non League Div One - Isthmian South").collection("Teams")
+                                    .whereEqualTo("teamName", listFavourite.get(i))
+                                    .get()
+                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                            if (task.isSuccessful()) {
+
+//                                                Log.d(TAG, "DOCUMENT PRINT :" + document.getData().toString());
+
+                                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                                    Log.d(TAG, "DOCUMENT PRINT :" + document.getData().toString());
+                                                    Log.d("Looking for data", "looking for data league 2");
+                                                    listTeams.add(new FavouriteTeamsViewModel(document.get("teamName").toString(), document.get("teamLogo").toString()));
+
+                                                    favouriteTeamsAdapter = new FavouriteTeamsAdapter(getContext(), listTeams);
+                                                    RvTeams.setAdapter(favouriteTeamsAdapter);
+
+                                                    for (int j = 0; j < listTeams.size() - 1; j++) {
+
+                                                        Log.d(TAG, (" Team Name = " + listTeams.get(j).getTeam()));
+
+                                                    }
+
+                                                }
+                                            } else {
+                                                Log.d(TAG, "No such document");
+
+
+                                            }
+                                        }
+                                    });
+
+                            database.collection("Leagues").document("Non League Div One - Northern North").collection("Teams")
+                                    .whereEqualTo("teamName", listFavourite.get(i))
+                                    .get()
+                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                            if (task.isSuccessful()) {
+
+//                                                Log.d(TAG, "DOCUMENT PRINT :" + document.getData().toString());
+
+                                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                                    Log.d(TAG, "DOCUMENT PRINT :" + document.getData().toString());
+                                                    Log.d("Looking for data", "looking for data league 3");
+                                                    listTeams.add(new FavouriteTeamsViewModel(document.get("teamName").toString(), document.get("teamLogo").toString()));
+
+                                                    favouriteTeamsAdapter = new FavouriteTeamsAdapter(getContext(), listTeams);
+                                                    RvTeams.setAdapter(favouriteTeamsAdapter);
+
+                                                    for (int j = 0; j < listTeams.size() - 1; j++) {
+
+                                                        Log.d(TAG, (" Team Name = " + listTeams.get(j).getTeam()));
+
+                                                    }
+
+                                                }
+                                            } else {
+                                                Log.d(TAG, "No such document");
+
+
+                                            }
+                                        }
+                                    });
+
+                            database.collection("Leagues").document("Non League Premier - Isthmian").collection("Teams")
+                                    .whereEqualTo("teamName", listFavourite.get(i))
+                                    .get()
+                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                            if (task.isSuccessful()) {
+
+//                                                Log.d(TAG, "DOCUMENT PRINT :" + document.getData().toString());
+
+                                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                                    Log.d(TAG, "DOCUMENT PRINT :" + document.getData().toString());
+                                                    Log.d("Looking for data", "looking for data league 4");
+                                                    listTeams.add(new FavouriteTeamsViewModel(document.get("teamName").toString(), document.get("teamLogo").toString()));
+
+                                                    favouriteTeamsAdapter = new FavouriteTeamsAdapter(getContext(), listTeams);
+                                                    RvTeams.setAdapter(favouriteTeamsAdapter);
+
+                                                    for (int j = 0; j < listTeams.size() - 1; j++) {
+
+                                                        Log.d(TAG, (" Team Name = " + listTeams.get(j).getTeam()));
+
+                                                    }
+
+                                                }
+                                            } else {
+                                                Log.d(TAG, "No such document");
+
+
+                                            }
+                                        }
+                                    });
+
+
+
                         }
 
 
@@ -698,33 +840,47 @@ public class Frag_Profile extends Fragment {
 
     }
 
-//    public void league1(){
-//            Task<QuerySnapshot> docRef  = database.collection("Leagues").document("Non League Div One - Isthmian North").collection("Teams")
-//                    .whereEqualTo("teamId", i)
-//                    .get()
-//                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                        @Override
-//                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                            if (task.isSuccessful()) {
-//                                for (QueryDocumentSnapshot document : task.getResult()) {
-//                                    listFavourite.add(new FavouriteTeamsViewModel(document.get("teamLogo").toString(), document.get("teamName").toString()));
-//
-//                                    favouriteTeamsAdapter = new FavouriteTeamsAdapter(getContext(), listFavourite);
-//                                    RvTeams.setAdapter(favouriteTeamsAdapter);
-//
-//
-//                                }
-//                            } else {
-//                                Log.d(TAG, "No such document");
-//
-//
-//                            }
-//                        }
-//                    });
-//
-//    }
+    public static ArrayList<String> getArrayList()
+    {
+        return listFavourite;
+    }
 
 
+    public void league1() {
+        Log.d("METHOD ENTERED", "league 1");
+//        Log.d("Access Id's", String.valueOf(listFavourite));
+//
+//        listFavourite1 = getArrayList();
+        Log.d("Access Id's", String.valueOf(listFavourite));
+
+        for (int i = 0; i <listFavourite.size(); i++ ){
+            Task<QuerySnapshot> docRef = database.collection("Leagues").document("Non League Div One - Isthmian North").collection("Teams")
+                    .whereEqualTo("teamId", listFavourite.get(i))
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                Log.d("Looking for data", "looking for data league 1");
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    listTeams.add(new FavouriteTeamsViewModel(document.get("teamLogo").toString(), document.get("teamName").toString()));
+
+                                    favouriteTeamsAdapter = new FavouriteTeamsAdapter(getContext(), listTeams);
+                                    RvTeams.setAdapter(favouriteTeamsAdapter);
+
+
+                                }
+                            } else {
+                                Log.d(TAG, "No such document");
+
+
+                            }
+                        }
+                    });
+
+        }
+
+    }
 
 
 

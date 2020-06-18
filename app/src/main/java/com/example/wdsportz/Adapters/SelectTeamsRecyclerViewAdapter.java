@@ -104,11 +104,12 @@ public class SelectTeamsRecyclerViewAdapter extends RecyclerView.Adapter<SelectT
                 MaterialCardView cardView = v.findViewById(R.id.selectionTile);
                 cardView.toggle();
                 if (cardView.isChecked()){
-                    selectedTeam = mData.get(position).teamId;
-                    selectedUrl = mData.get(position).teamLogoURl;
+                    Log.d("CLICK", mData.get(position).teamName + "  Clicked");
 
-                list.add(selectedTeam);
-                UrlList.add(selectedUrl);
+                    selectedTeam = mData.get(position).teamName;
+                    selectedUrl = mData.get(position).teamLogoURl;
+                    list.add(selectedTeam);
+                    UrlList.add(selectedUrl);
 
             }else {
                     selectedTeam = mData.get(position).teamId;
