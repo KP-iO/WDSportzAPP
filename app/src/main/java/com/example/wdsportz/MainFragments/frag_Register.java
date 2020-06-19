@@ -38,8 +38,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
-import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
@@ -96,7 +94,7 @@ public class frag_Register extends Fragment {
     DatabaseReference databaseReference;
     ImageView avatarREG;
 
-
+//check
     //storage
     StorageReference storageReference;
     //path where images of user profile will be stored

@@ -86,6 +86,7 @@ public class frag_login extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        firebaseAuth = FirebaseAuth.getInstance();
     }
 
     @Override
@@ -95,9 +96,9 @@ public class frag_login extends Fragment {
         return inflater.inflate(R.layout.fragment_loginpage, container, false);
     }
 
+
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
 
         if (PreferenceUtils.getEmail(getContext()) != null && !PreferenceUtils.getEmail(getContext()).equals("")) {
             ((Auth_Activity)getActivity()).goToMainFeed();
