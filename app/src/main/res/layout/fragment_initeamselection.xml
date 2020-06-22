@@ -12,7 +12,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/WD_yellow"
-        app:layout_constraintBottom_toTopOf="@+id/view_pager"
+        app:layout_constraintBottom_toTopOf="@+id/iniSelectview_pager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -21,8 +21,8 @@
         app:tabSelectedTextColor="#F3F0F0"
         app:tabTextColor="#000107" />
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/view_pager"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/iniSelectview_pager"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:paddingTop="7dp"
@@ -32,8 +32,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tab_layout">
 
-
-    </androidx.viewpager.widget.ViewPager>
+    </androidx.viewpager2.widget.ViewPager2>
 
     <Button
         android:id="@+id/btn_finish"

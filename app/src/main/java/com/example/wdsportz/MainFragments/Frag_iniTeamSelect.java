@@ -14,7 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.motion.widget.MotionScene;
 import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.wdsportz.Adapters.SelectTeamsRecyclerViewAdapter;
 import com.example.wdsportz.Adapters.iniTeamSelectTabAdapter;
@@ -25,6 +25,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -66,7 +67,7 @@ public class Frag_iniTeamSelect extends Fragment {
     FirebaseUser firebaseUser;
     FirebaseFirestore fireStoreDB = FirebaseFirestore.getInstance();
     iniTeamSelectTabAdapter iniTeamSelectTabAdapter;
-    ViewPager viewPager;
+    ViewPager2 viewPager;
     SelectTeamsRecyclerViewAdapter selectTeamsRecyclerViewAdapter;
     public ArrayList<String> teamsSelected = new ArrayList<String>();
     ProgressDialog pd;
@@ -127,6 +128,11 @@ public class Frag_iniTeamSelect extends Fragment {
         return inflater.inflate(R.layout.fragment_initeamselection, container, false);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().findViewById(R.id.my_toolbar).setVisibility(View.VISIBLE);
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -137,8 +143,10 @@ public class Frag_iniTeamSelect extends Fragment {
 //        databaseReference = firebaseDatabase.getReference("Users");
 //        storageReference = FirebaseStorage.getInstance().getReference();
 
-        viewPager = view.findViewById(R.id.view_pager);
+        viewPager = view.findViewById(R.id.iniSelectview_pager);
         tabLayout = view.findViewById(R.id.tab_layout);
+
+        TabLayout tabLayout = view.findViewById(R.id.tab_layout);
 
         //Here the pager and tablayout are assigned adapters in 'nameTabs function' Called in getLeaguesID
         getLeaguesID();
@@ -205,16 +213,47 @@ public class Frag_iniTeamSelect extends Fragment {
 
         ////
 
-
-        iniTeamSelectTabAdapter = new iniTeamSelectTabAdapter(getChildFragmentManager(), (LinkedHashMap<String, String>) sortedMap);
+        iniTeamSelectTabAdapter = new iniTeamSelectTabAdapter(getChildFragmentManager(), getLifecycle(),(LinkedHashMap<String, String>) sortedMap);
         viewPager.setAdapter(iniTeamSelectTabAdapter);
-        tabLayout.setupWithViewPager(viewPager);
+        setPageTitle(sortedMap);
 
     }
 
 
+    public void setPageTitle(LinkedHashMap<String, String> sortedMap) {
+
+        new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
+            switch (position) {
+                case 0:
+                    tab.setText("All Teams");
+                    break;
+
+                default:
+                    String value = (new ArrayList<String>(sortedMap.values())).get(position -1);
+                    String leagueNameSplit = value.split("-")[1];
+                    tab.setText(leagueNameSplit);
+
+            }
+        }).attach();
+
+//        if (position == 0) {
+//
+//            String PageTitleAllTeams = "All Teams";
+//            return PageTitleAllTeams;
+//
+//        } else {
+//
+//            String value = (new ArrayList<String>(Leagues.values())).get(position -1);
+//            String leagueNameSplit = value.split("-")[1];
+//            return leagueNameSplit;
+//
+//        }
+
+    }
+
 
     private void adFavourite(){
+
         FirebaseUser user1 = FirebaseAuth.getInstance().getCurrentUser();
         String uid = user1.getUid();
         selectTeamsRecyclerViewAdapter = new SelectTeamsRecyclerViewAdapter();
@@ -222,17 +261,14 @@ public class Frag_iniTeamSelect extends Fragment {
         teamsPrefs = SelectTeamsRecyclerViewAdapter.getArrayList();
         Log.d("CLICK1", Arrays.toString(teamsSelected.toArray())+ "  Clicked");
 
-
         HashMap<String, ArrayList<String>> teams = new HashMap<>();
 
-
-        teams.put("Favourite Teams",teamsPrefs );
+        teams.put("Favourite Teams", teamsPrefs);
 
         // firebase datatabase instance
         FirebaseFirestore database = FirebaseFirestore.getInstance();
 
         //path to store data named "Users"
-
 
         database.collection("Users").document(uid)
                 .set(teams, SetOptions.merge())

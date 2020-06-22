@@ -14,7 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.example.wdsportz.R;
 import com.example.wdsportz.ViewModels.SelectTeamsRecyclerViewModel;
 import com.google.android.material.card.MaterialCardView;
@@ -88,9 +87,9 @@ public class SelectTeamsRecyclerViewAdapter extends RecyclerView.Adapter<SelectT
 
         Glide.with(context)
                 .load(currentUrl)
-                .apply(new RequestOptions().override(150, 250))
+                .fitCenter()
                 .into(holder.ImageView);
-
+  
         // Mark as selected
         // Get the selected
         // Get the names
@@ -119,7 +118,6 @@ public class SelectTeamsRecyclerViewAdapter extends RecyclerView.Adapter<SelectT
 
                 }
                 Log.d("CLICK", Arrays.toString(getArrayList().toArray()) + "  Clicked");
-
         }
 
         });

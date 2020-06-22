@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/selectionTile"
     style="@style/Theme.App"
     android:layout_width="wrap_content"
@@ -26,23 +27,27 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
 
+            android:layout_margin="10dp"
             android:layout_marginBottom="5dp"
             android:adjustViewBounds="false"
             android:background="#02FFFFFF"
+            android:cropToPadding="false"
             android:maxWidth="150dp"
             android:maxHeight="150dp"
-            android:padding="1dp"
-            android:scaleType="centerInside"
+            android:scaleType="fitCenter"
             android:tint="#00070101"
-            app:layout_constraintBottom_toTopOf="@+id/TxtTeamName"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/blank_team_profile" />
 
         <TextView
             android:id="@+id/TxtTeamName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:background="#00AAAAAA"
             android:text="Team Name"
             android:textAlignment="center"
@@ -50,7 +55,8 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/BtnImgTeamLogo" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>
