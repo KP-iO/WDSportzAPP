@@ -22,6 +22,7 @@ import com.example.wdsportz.R;
 public class Auth_Activity extends AppCompatActivity implements Frag_iniTeamSelect.OnFragmentInteractionListener,Frag_HomePage.OnFragmentInteractionListener, frag_login.OnFragmentInteractionListener, frag_Register.OnFragmentInteractionListener  {
 
     Toolbar myToolbar;
+    private static Auth_Activity instance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +30,7 @@ public class Auth_Activity extends AppCompatActivity implements Frag_iniTeamSele
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_auth);
+        setContentView(R.layout.auth_main);
 
         myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
@@ -68,6 +69,8 @@ public class Auth_Activity extends AppCompatActivity implements Frag_iniTeamSele
         return super.onCreateOptionsMenu(menu);
     }
 
+    private void changeSearchViewTextColor(View view) {  }
+
 
     public void goToMainFeed() {
         Intent intent = new Intent(this, Main_Activity.class);
@@ -77,14 +80,15 @@ public class Auth_Activity extends AppCompatActivity implements Frag_iniTeamSele
         startActivity(intent);
     }
 
-//    private void handleIntent(Intent intent) {
-//
-//        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-//            String query = intent.getStringExtra(SearchManager.QUERY);
-//            //process Cursor and display results
-//        }
-//
-//    }
+    private void handleIntent(Intent intent) {
+
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            String query = intent.getStringExtra(SearchManager.QUERY);
+            //process Cursor and display results
+        }
+
+    }
+
 
 
     @Override

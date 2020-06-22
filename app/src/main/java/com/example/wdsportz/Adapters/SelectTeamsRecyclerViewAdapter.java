@@ -112,7 +112,7 @@ public class SelectTeamsRecyclerViewAdapter extends RecyclerView.Adapter<SelectT
                     UrlList.add(selectedUrl);
 
             }else {
-                    selectedTeam = mData.get(position).teamId;
+                    selectedTeam = mData.get(position).teamName;
                     selectedUrl = mData.get(position).teamLogoURl;
                     list.remove(selectedTeam);
                     UrlList.remove(selectedUrl);
@@ -168,10 +168,10 @@ public class SelectTeamsRecyclerViewAdapter extends RecyclerView.Adapter<SelectT
     };
 
 
-//    public String getTeamN()
-//    {
-//        return selectedTeam;
-//    }
+    public String getTeamN()
+    {
+        return selectedTeam;
+    }
 
     @Override
     public int getItemCount() {

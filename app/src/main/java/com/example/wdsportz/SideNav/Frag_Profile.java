@@ -32,8 +32,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.wdsportz.Adapters.FavouriteTeamsAdapter;
+import com.example.wdsportz.MainActivities.Auth_Activity;
 import com.example.wdsportz.R;
 import com.example.wdsportz.ViewModels.FavouriteTeamsViewModel;
+import com.example.wdsportz.utils.PreferenceUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -93,7 +95,7 @@ public class Frag_Profile extends Fragment {
     ArrayList<FavouriteTeamsViewModel> listTeams = new ArrayList<FavouriteTeamsViewModel>();
 
     //views
-    Button fab;
+    Button fab, delete;
     ImageView avatarIv, coverIv;
     TextView nameTv, emailTv, phoneTv;
     ProgressDialog pd;
@@ -164,6 +166,7 @@ public class Frag_Profile extends Fragment {
         storageReference = FirebaseStorage.getInstance().getReference();
 
         avatarIv = view.findViewById(R.id.UserImg);
+        delete = view.findViewById(R.id.deleteAcc);
         nameTv = view.findViewById(R.id.nameTv);
         emailTv = view.findViewById(R.id.emailTv);
         fab = view.findViewById(R.id.Edit_Profile);
@@ -306,12 +309,35 @@ public class Frag_Profile extends Fragment {
                 showEditProfileDialog();
             }
         });
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                user.delete()
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    goToLogIn();
+                                    PreferenceUtils.saveEmail("", getContext());
+                                    PreferenceUtils.savePassword("", getContext());
+                                    Toast.makeText(getActivity(), "Account Deleted", Toast.LENGTH_SHORT).show();
+                                    Log.d(TAG, "User account deleted.");
+                                }
+                            }
+                        });
+            }
+        });
         favouriteLoader();
 //        league1();
 //        Log.d ("myTeams", String.valueOf(listFavourite));
 
         return view;
     }
+
+
 
     private boolean checkStoragePermission(){
         //check
@@ -566,6 +592,16 @@ public class Frag_Profile extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+
+
+    public void goToLogIn() {
+        Intent intent = new Intent(getContext(), Auth_Activity.class);
+        //EditText editText = (EditText) findViewById(R.id.editText);
+        //String message = editText.getText().toString();
+        //intent.putExtra(EXTRA_MESSAGE, message);
+        startActivity(intent);
+    }
+
     private void uploadProfileCoverPhoto(Uri uri) {
         pd.show();
         //path and name of image to be stored in firebase storage
@@ -682,7 +718,7 @@ public class Frag_Profile extends Fragment {
 
                         listFavourite.addAll(teamIds);
                         Log.d("listFavourite array", String.valueOf(listFavourite));
-                        for (int i = 0; i <listFavourite.size()-1; i++ ){
+                        for (int i = 0; i <listFavourite.size(); i++ ){
                             Log.d("TEAM ID", listFavourite.get(i));
                             int finalI = i;
                            database.collection("Leagues").document("Non League Div One - Isthmian North").collection("Teams")
