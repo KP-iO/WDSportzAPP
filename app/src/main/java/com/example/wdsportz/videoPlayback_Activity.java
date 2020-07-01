@@ -39,6 +39,9 @@ import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
@@ -48,9 +51,11 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class videoPlayback_Activity extends AppCompatActivity {
 
@@ -67,12 +72,14 @@ public class videoPlayback_Activity extends AppCompatActivity {
     static String COMMENT_KEY = "Comment";
     private SimpleExoPlayer simpleExoPlayer;
     private PlayerView mExoPlayerView;
+
     private static final String TAG = "Video Activity";
     FirebaseDatabase commentsDatabase;
     DatabaseReference reference;
     private ImageView mFullScreenIcon;
     private FrameLayout mFullScreenButton;
     MaterialButton shareAction1;
+
 
     FirebaseAuth firebaseAuth;
 
@@ -90,6 +97,7 @@ public class videoPlayback_Activity extends AppCompatActivity {
     private final String STATE_RESUME_WINDOW = "resumeWindow";
     private final String STATE_RESUME_POSITION = "resumePosition";
     private final String STATE_PLAYER_FULLSCREEN = "playerFullscreen";
+    AdView mAdView;
 
     private PlayerView playerView;
     private MediaSource mVideoSource;
@@ -136,6 +144,46 @@ public class videoPlayback_Activity extends AppCompatActivity {
         });
 
 
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+
+        mAdView.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                // Code to be executed when an ad finishes loading.
+            }
+
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+                // Code to be executed when an ad request fails.
+            }
+
+            @Override
+            public void onAdOpened() {
+                // Code to be executed when an ad opens an overlay that
+                // covers the screen.
+            }
+
+            @Override
+            public void onAdClicked() {
+                // Code to be executed when the user clicks on an ad.
+            }
+
+            @Override
+            public void onAdLeftApplication() {
+                // Code to be executed when the user has left the app.
+            }
+
+            @Override
+            public void onAdClosed() {
+                // Code to be executed when the user is about to return
+                // to the app after tapping on an ad.
+            }
+        });
+
+
         button.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -151,7 +199,8 @@ public class videoPlayback_Activity extends AppCompatActivity {
                 String uname = user.getDisplayName();
                 String uimg = user.getPhotoUrl().toString();
                 String reportID = "";
-                Comments comments = new Comments(comment_content,uid,uname,uimg,key, chatID,reportID);
+
+                Comments comments = new Comments(comment_content,uid,uname,uimg,key, chatID,reportID,ServerValue.TIMESTAMP);
 
 
                 commentReference.setValue(comments).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -421,7 +470,7 @@ public class videoPlayback_Activity extends AppCompatActivity {
                         listComments.add(comments);
                     }
                 }
-
+                Log.d("Array size", String.valueOf(listComments.size()));
                 commentAdapter = new CommentAdapter(videoPlayback_Activity.this,listComments);
                 RvComment.setAdapter(commentAdapter);
 

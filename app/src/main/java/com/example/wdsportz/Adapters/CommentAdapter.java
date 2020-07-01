@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,19 +19,30 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.wdsportz.R;
 import com.example.wdsportz.ViewModels.Comments;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static androidx.constraintlayout.motion.widget.MotionScene.TAG;
 
 
 /**
@@ -44,6 +56,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
     private Context mContext;
     private List<Comments> mData;
 
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
 
     DatabaseReference databaseReference;
@@ -60,6 +73,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
     private static final int MINUTE_MILLIS = 60 * SECOND_MILLIS;
     private static final int HOUR_MILLIS = 60 * MINUTE_MILLIS;
     private static final int DAY_MILLIS = 24 * HOUR_MILLIS;
+    long time;
 
 
 //    String chat_ID = (videoViewModels.getChatBox_ID());
@@ -84,44 +98,89 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
     public void onBindViewHolder(@NonNull final CommentViewHolder holder, int position) {
 
         String UID = mData.get(position).getUid();
-        databaseReference = firebaseDatabase.getReference("Users");
-        Query query = databaseReference.orderByChild(UID);
-        query.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                for(DataSnapshot ds: dataSnapshot.getChildren()) {
-                    //get data
+        db.collection("Users")
+                .whereEqualTo("uid", UID)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                String name = document.get("name").toString();
+                                String email = document.get("email").toString();
+                                String image = document.get("image").toString();
+//                                String cover = document.get("cover").toString();
+                                Log.d(TAG, image);
 
-                    String photoURL = "" + ds.child("image").getValue();
-                    Log.d("ImageURL:", photoURL);
-                    Glide.with(mContext.getApplicationContext())
-                            .load(photoURL)
-                            .into(holder.img_user);
-                }}
+                                Glide.with(mContext.getApplicationContext())
+                                        .load(image)
+                                        .into(holder.img_user);
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                //set data
+                                holder.tv_name.setText(name);
 
-            }
-        });
+                            }
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+
+
+
+
 
 
 
 
 
         holder.tv_name.setText(mData.get(position).getUname());
+        long time =  Long.parseLong(String.valueOf(mData.get(position).getTimestamp()));
+
+        long now = System.currentTimeMillis();
+        Log.d("Time ", String.valueOf(now));
+        Log.d("Time ", String.valueOf(time));
+
+        if(time > now || time <= 0 ){
+            Log.d("Time ", "Time Error");
+
+        }
+        final long diff = now - time;
+        Log.d("Time ", String.valueOf(time));
+        if (diff < MINUTE_MILLIS) {
+            holder.tv_date.setText("just now") ;
+        } else if (diff < 2 * MINUTE_MILLIS) {
+            holder.tv_date.setText("a minute ago") ;
+        } else if (diff < 50 * MINUTE_MILLIS) {
+            holder.tv_date.setText(diff / MINUTE_MILLIS + " minutes ago") ;
+            return ;
+        } else if (diff < 90 * MINUTE_MILLIS) {
+            holder.tv_date.setText("an hour ago") ;
+        } else if (diff < 24 * HOUR_MILLIS) {
+            holder.tv_date.setText(diff / HOUR_MILLIS + " hours ago") ;
+            return ;
+        } else if (diff < 48 * HOUR_MILLIS) {
+            holder.tv_date.setText("yesterday");
+            return ;
+        } else {
+            holder.tv_date.setText(diff / DAY_MILLIS + " days ago");
+        }
+
+
         holder.tv_content.setText(mData.get(position).getContent());
-        //        holder.tv_date.setText(timestampToString((Long)mData.get(position).getTimestamp()));
-        databaseReference = firebaseDatabase.getReference("Users");
-        Query query1 = databaseReference.orderByChild("email").equalTo(user.getEmail());
+
+
         holder.card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showEditProfileDialog(mContext);
+                showEditProfileDialog(mContext,position);
+
 
 
             }
+
+
         });
 
 
@@ -160,7 +219,15 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
             }
         }
 
-    private void showEditProfileDialog(Context context) {
+    private void showEditProfileDialog(Context context, int position) {
+
+        String message = mData.get(position).getContent();
+        String uid = mData.get(position).getUid();
+        String userName =mData.get(position).getUname();
+        String chatID = mData.get(position).getChatID();
+        String key = mData.get(position).getKey();
+
+
 
         pd = new ProgressDialog(context);
         /* Show dialog containing options
@@ -171,18 +238,65 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
 
          */
 
-        String options [] = {"Report Comment",
+      String options1 [] = {"Report Comment", "Delete Comment",
+//                "Delete Comment"
+    };
+
+        String options2 [] = {"Report Comment",
 //                "Delete Comment"
         };
-        //alert dialog
 
+
+
+
+
+
+        Log.d(TAG, uid);
+        Log.d(TAG,currentUID);
+
+        if (uid.equals(currentUID)){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         // set title
         builder.setTitle("Choose Action");
         // set items to dialog
-        builder.setItems(options, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
+        builder.setItems(options1, (DialogInterface.OnClickListener) (dialog, which) -> {
+            switch (which){
+                case 0:
+                    pd.setMessage("Reporting Comment");
+                    reportComment = "image";
+
+
+
+
+                    reportComment(which);
+                    break;
+                case 1:
+                    pd.setMessage("Deleting Comment");
+                    deleteCommment = "cover";
+
+
+                    deleteCommment(which);
+                    notifyDataSetChanged();
+                    break;
+
+            }
+
+
+        });
+        builder.create().show();
+
+
+
+
+
+
+        }else {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            // set title
+            builder.setTitle("Choose Action");
+            // set items to dialog
+            builder.setItems(options2, (DialogInterface.OnClickListener) (dialog, which) -> {
                 switch (which){
                     case 0:
                         pd.setMessage("Reporting Comment");
@@ -193,18 +307,61 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
 
                         reportComment(which);
                         break;
-                    case 1:
-//                        pd.setMessage("Deleting Comment");
-//                        deleteCommment = "cover";
-//                        deleteCommment();
-//                        break;
 
                 }
 
 
+            });
+            builder.create().show();
+
+
+
+        }
+
+
+
+
+
+
+
+    }
+
+    private void deleteCommment(int position ) {
+
+        String message = mData.get(position).getContent();
+        String uid = mData.get(position).getUid();
+        String userName =mData.get(position).getUname();
+        String chatID = mData.get(position).getChatID();
+        String key = mData.get(position).getKey();
+
+
+        DatabaseReference commentRef = firebaseDatabase.getReference();
+
+
+        Query applesQuery = commentRef.child("Comment").child(chatID).child(key);
+
+
+
+
+        applesQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot appleSnapshot: dataSnapshot.getChildren()) {
+                    notifyDataSetChanged();
+                    appleSnapshot.getRef().removeValue();
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e(TAG, "onCancelled", databaseError.toException());
             }
         });
-        builder.create().show();
+
+
+
+
 
     }
 

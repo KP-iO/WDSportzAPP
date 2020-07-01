@@ -7,7 +7,7 @@ public class Comments {
 
 
     private String content,uid,uimg, uname, key, chatID, reportID,report1;
-    private Object timestamp, currentUsereReportID;
+    private Object currentUsereReportID, timestamp;
 
     public Comments(Object currentUsereReportID) {
         this.currentUsereReportID = currentUsereReportID;
@@ -51,6 +51,30 @@ public class Comments {
         this.chatID = chatID;
         this.currentUsereReportID = currentUsereReportID;
     }
+
+    public Comments(String content, String uid, String uname, String uimg, String key, String chatID, String reportID) {
+        this.content = content;
+        this.uid = uid;
+        this.uimg = uimg;
+        this.uname = uname;
+        this.key = key;
+        this.chatID = chatID;
+        this.reportID = reportID;
+    }
+
+    public Comments(String content, String uid, String uname, String uimg, String key, String chatID, String reportID, Object timestamp) {
+        this.content = content;
+        this.uid = uid;
+        this.uimg = uimg;
+        this.uname = uname;
+        this.key = key;
+        this.chatID = chatID;
+        this.reportID = reportID;
+        this.timestamp = timestamp;
+
+    }
+
+
 
 
     public String getReportID() {

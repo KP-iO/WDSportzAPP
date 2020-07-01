@@ -50,6 +50,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -109,6 +110,7 @@ public class Frag_Profile extends Fragment {
     String storagePermissions[];
     //uri of picked image
     Uri image_uri;
+    Uri image;
     //for checking profile or cover photo
     String profileOrCoverPhoto;
     FavouriteTeamsAdapter favouriteTeamsAdapter;
@@ -234,6 +236,9 @@ public class Frag_Profile extends Fragment {
                         }
                     }
                 });
+
+
+
 //                                String name = document.get("Match_Name").toString();
 //                                String email = document.get("Match_Name").toString();
 //                                String image = document.get("Match_Name").toString();
@@ -576,12 +581,12 @@ public class Frag_Profile extends Fragment {
             if (requestCode == IMAGE_PICK_GALLERY_CODE){
                 //image is picked from gallery, get uri of image
                 image_uri = data.getData();
-                uploadProfileCoverPhoto(image_uri);
+                sendPicToDatabase(image_uri);
 
             }
             if (requestCode == IMAGE_PICK_CAMERA_CODE){
                 //image is picked from camera, get uri of image
-                uploadProfileCoverPhoto(image_uri);
+                sendPicToDatabase(image_uri);
 
 
             }
@@ -667,6 +672,102 @@ public class Frag_Profile extends Fragment {
                 });
 
 
+    }
+
+
+    public void sendPicToDatabase(Uri uri){
+        {
+
+
+            //path and name of image to be stored in firebase storage
+
+            String filePathAndName = storagePath+ ""+ profileOrCoverPhoto +"_"+ user.getUid();
+
+
+
+
+            StorageReference storageReference2nd = storageReference.child(filePathAndName);
+            storageReference2nd.putFile(Uri.parse(String.valueOf(uri)))
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
+                            while (!uriTask.isSuccessful());
+                            Uri downloadUri = uriTask.getResult();
+
+                            //check if image is uploaded or not and url is received
+                            if ((uriTask.isSuccessful())){
+
+                                HashMap<String, Object> results = new HashMap<>();
+                                results.put(profileOrCoverPhoto, downloadUri.toString());
+
+
+
+                                FirebaseFirestore database = FirebaseFirestore.getInstance();
+
+                                database.collection("Users").document(uid)
+                                        .set(results, SetOptions.merge())
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                showImageInView(uri);
+                                                Log.d(TAG, "DocumentSnapshot successfully written!");
+                                                pd.dismiss();
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Log.w(TAG, "Error writing document", e);
+                                                pd.dismiss();
+                                            }
+                                        });
+
+
+//                                databaseReference.child(user.getUid()).updateChildren(results)
+//                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                                            @Override
+//                                            public void onSuccess(Void aVoid) {
+//                                                //url in database of user is added successfully
+//                                                //dismiss progress bar
+//                                                pd.dismiss();
+//                                                Toast.makeText(getActivity(), "Image Updated. . .", Toast.LENGTH_SHORT).show();
+//
+//                                            }
+//                                        })
+//                                        .addOnFailureListener(new OnFailureListener() {
+//                                            @Override
+//                                            public void onFailure(@NonNull Exception e) {
+//                                                //url in database of user is added successfully
+//                                                //dismiss progress bar
+//                                                pd.dismiss();
+//                                                Toast.makeText(getActivity(), "Error Updating Image ...", Toast.LENGTH_SHORT).show();
+//
+//
+//                                            }
+//                                        });
+
+                            }
+                            else {
+                                //error
+
+                                Toast.makeText(getActivity(), "Some error occured", Toast.LENGTH_SHORT).show();
+                            }
+
+
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+
+                            Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+
+
+        }
     }
 
 
@@ -882,41 +983,19 @@ public class Frag_Profile extends Fragment {
     }
 
 
-    public void league1() {
-        Log.d("METHOD ENTERED", "league 1");
-//        Log.d("Access Id's", String.valueOf(listFavourite));
-//
-//        listFavourite1 = getArrayList();
-        Log.d("Access Id's", String.valueOf(listFavourite));
-
-        for (int i = 0; i <listFavourite.size(); i++ ){
-            Task<QuerySnapshot> docRef = database.collection("Leagues").document("Non League Div One - Isthmian North").collection("Teams")
-                    .whereEqualTo("teamId", listFavourite.get(i))
-                    .get()
-                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            if (task.isSuccessful()) {
-                                Log.d("Looking for data", "looking for data league 1");
-                                for (QueryDocumentSnapshot document : task.getResult()) {
-                                    listTeams.add(new FavouriteTeamsViewModel(document.get("teamLogo").toString(), document.get("teamName").toString()));
-
-                                    favouriteTeamsAdapter = new FavouriteTeamsAdapter(getContext(), listTeams);
-                                    RvTeams.setAdapter(favouriteTeamsAdapter);
+    public void showImageInView(Uri uri) {
 
 
-                                }
-                            } else {
-                                Log.d(TAG, "No such document");
+        image = uri;
+        avatarIv.setImageURI(image);
 
 
-                            }
-                        }
-                    });
 
-        }
 
     }
+
+
+
 
 
 

@@ -28,6 +28,12 @@ import com.bumptech.glide.Glide;
 import com.example.wdsportz.Adapters.CommentAdapter;
 import com.example.wdsportz.R;
 import com.example.wdsportz.ViewModels.Comments;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
@@ -66,6 +72,7 @@ public class newsDetail extends Fragment {
     EditText editText;
     TextView titleBox, descBox, textView, textView2;
     Button button;
+    private AdView mAdView;
 
     ScrollView scrollView;
 
@@ -116,6 +123,9 @@ public class newsDetail extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
+
     }
 
     @Override
@@ -157,6 +167,50 @@ public class newsDetail extends Fragment {
         descBox = getView().findViewById(R.id.desc1);
 //        scrollView = getView().findViewById(R.id.sV);
 
+
+        MobileAds.initialize(getContext(),new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        mAdView = getView().findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+
+        mAdView.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                // Code to be executed when an ad finishes loading.
+            }
+
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+                // Code to be executed when an ad request fails.
+            }
+
+            @Override
+            public void onAdOpened() {
+                // Code to be executed when an ad opens an overlay that
+                // covers the screen.
+            }
+
+            @Override
+            public void onAdClicked() {
+                // Code to be executed when the user clicks on an ad.
+            }
+
+            @Override
+            public void onAdLeftApplication() {
+                // Code to be executed when the user has left the app.
+            }
+
+            @Override
+            public void onAdClosed() {
+                // Code to be executed when the user is about to return
+                // to the app after tapping on an ad.
+            }
+        });
 
         String title = getArguments().getString("title");
         String image = getArguments().getString("image");
