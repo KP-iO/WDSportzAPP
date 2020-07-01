@@ -6,6 +6,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -25,7 +28,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -52,10 +54,12 @@ public class Frag_HomePage extends Fragment {
     FirebaseFirestore fireStoreDB = FirebaseFirestore.getInstance();
     private RecyclerView recyclerView;
     private RecyclerView recyclerView1;
-
-
-
     private NewsFeedAdapter newsFeedAdapter;
+    Context context;
+
+    //Never change this in the code below (used for filter)
+    ArrayList<NewsFeedViewModel> AllNewsList = new ArrayList<>();
+    Menu menu;
 
     String VidUri;
 
@@ -85,21 +89,15 @@ public class Frag_HomePage extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        setHasOptionsMenu(true);
+
         return inflater.inflate(R.layout.fragment_homepage, container, false);
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        final Context context = view.getContext();
+        context = view.getContext();
 
         recyclerView1 = getView().findViewById(R.id.Main_feed);
         recyclerView1.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
@@ -108,6 +106,65 @@ public class Frag_HomePage extends Fragment {
 // Implement error handling for all cases e.g (Name/ Logo not accessible) ------>
         newsFeed(context);
     }
+
+    //This initializes homepage filter menu in the activity's toolbar
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.homepage_filter, menu);
+
+        this.menu = menu;
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+
+            case R.id.AllNews:
+                Log.d("ORE","LOOOOOK HERE1");
+                showAll(context,AllNewsList);
+                return true;
+            case R.id.Following:
+                Log.d("ORE","LOOOOOK HERE2");
+                showFollowingTeams();
+                return true;
+            case R.id.WDRecommended:
+                Log.d("ORE","LOOOOOK HERE3");
+                showWDRecommended();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void showAll(final Context context, ArrayList allNewsList) {
+
+        newsFeedAdapter = new NewsFeedAdapter(context, allNewsList);
+        recyclerView1.setAdapter(newsFeedAdapter);
+
+    }
+
+    private void showFollowingTeams() {
+        //test list
+        ArrayList<NewsFeedViewModel> emptyArray = new ArrayList<>();
+
+        newsFeedAdapter = new NewsFeedAdapter(context, emptyArray);
+        recyclerView1.setAdapter(newsFeedAdapter);
+
+    }
+
+    private void showWDRecommended() {
+        //test list
+        ArrayList<NewsFeedViewModel> emptyArray = new ArrayList<>();
+
+        newsFeedAdapter = new NewsFeedAdapter(context, emptyArray);
+        recyclerView1.setAdapter(newsFeedAdapter);
+
+    }
+
+
+
 
     private void newsFeed(final Context context) {
 
@@ -119,8 +176,6 @@ public class Frag_HomePage extends Fragment {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
 
-                            List<NewsFeedViewModel> list = new ArrayList<>();
-
                 ////// Change FROM download url to stroage url in firestore?
 
                             for (QueryDocumentSnapshot document : task.getResult()) {
@@ -128,21 +183,21 @@ public class Frag_HomePage extends Fragment {
 //                                Log.d("DOCUMENT PRINT :", document.getData().toString());
 //                                Log.d("Team Added to List ", document.get("Title").toString());
 
-                                list.add(new NewsFeedViewModel(document.get("Title").toString(), document.get("Image").toString(), document.get("Description").toString(),document.get("Date").toString(),document.get("Chatbox_ID").toString()));
+                                AllNewsList.add(new NewsFeedViewModel(document.get("Title").toString(), document.get("Image").toString(), document.get("Description").toString(),document.get("Date").toString(),document.get("Chatbox_ID").toString()));
 
                                 //Log.d(TAG, ("LOGO URL: " + list.));
 
-                                newsFeedAdapter = new NewsFeedAdapter(context, list);
+                                newsFeedAdapter = new NewsFeedAdapter(context, AllNewsList);
                                 recyclerView1.setAdapter(newsFeedAdapter);
 
                             }
 
                             // List check (in Log)
-                            for (int i = 0; i < list.size() - 1; i++) {
+                            for (int i = 0; i < AllNewsList.size() - 1; i++) {
 
-                                Log.d(TAG, (" News Title = " + list.get(i).getTitle()));
-                                Log.d(TAG, " News Description =   " + list.get(i).getNewsDesc());
-                                Log.d(TAG, "Image URL =   " + list.get(i).getNewsImageURL());
+                                Log.d(TAG, (" News Title = " + AllNewsList.get(i).getTitle()));
+                                Log.d(TAG, " News Description =   " + AllNewsList.get(i).getNewsDesc());
+                                Log.d(TAG, "Image URL =   " + AllNewsList.get(i).getNewsImageURL());
                             }
 
                         } else {
@@ -153,6 +208,8 @@ public class Frag_HomePage extends Fragment {
 
                 });
     }
+
+
 
 
 
@@ -184,6 +241,14 @@ public class Frag_HomePage extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
+
+    // TODO: Rename method, update argument and hook method into UI event
+    public void onButtonPressed(Uri uri) {
+        if (mListener != null) {
+            mListener.onFragmentInteraction(uri);
+        }
+    }
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);

@@ -50,6 +50,7 @@ public class Main_Activity extends AppCompatActivity implements Frag_Test_1.OnFr
     DatabaseReference databaseReference;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme1);
@@ -60,6 +61,7 @@ public class Main_Activity extends AppCompatActivity implements Frag_Test_1.OnFr
 
         setupNavigation();
     }
+
 
     public void setupNavigation() {
 

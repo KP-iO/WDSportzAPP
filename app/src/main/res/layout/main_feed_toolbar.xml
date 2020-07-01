@@ -19,4 +19,3 @@
         android:src="@drawable/wd_half_logo" />
 
 </androidx.appcompat.widget.Toolbar>
-
