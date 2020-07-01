@@ -13,13 +13,15 @@
 
         <item
             android:id="@+id/AllNews"
+            android:icon="@drawable/all_news_icon"
             android:title="All News" />
         <item
             android:id="@+id/Following"
+            android:icon="@drawable/following_icon"
             android:title="Following" />
         <item
             android:id="@+id/WDRecommended"
-            android:icon="@drawable/filter_icon"
+            android:icon="@drawable/filter_icon48"
             android:title="WD Recommended" />
 
 
