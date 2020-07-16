@@ -35,9 +35,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Date;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -130,7 +128,18 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
 
 
 
+        holder.card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("CardClicked", "Yes");
+                showEditProfileDialog(mContext,position);
 
+
+
+            }
+
+
+        });
 
 
 
@@ -171,17 +180,8 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
         holder.tv_content.setText(mData.get(position).getContent());
 
 
-        holder.card.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showEditProfileDialog(mContext,position);
 
 
-
-            }
-
-
-        });
 
 
 

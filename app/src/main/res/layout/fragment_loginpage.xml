@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/sign_in_screen_background">
+
 
 
     <Button
@@ -16,7 +19,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="650dp"
         android:text="TEST_btn"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:iconTint="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -120,13 +123,13 @@
 
     <TextView
         android:id="@+id/txtForgot"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_width="147dp"
+        android:layout_height="27dp"
         android:layout_marginTop="10dp"
         android:clickable="true"
-        android:text="Forgot Password? "
+        android:text="@string/forgot_password"
         android:textColor="#FAF3F3"
-        android:textSize="12sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_signIn" />
@@ -136,12 +139,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintTop_toBottomOf="@+id/textView2">
 
         <TextView
             android:id="@+id/textView8"
@@ -158,7 +159,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="#00FFFFFF"
-            android:text="Register Here"
+            android:text="@string/register_here"
             android:textAlignment="textStart"
             android:textColor="#E6E11F" />
 

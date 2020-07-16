@@ -55,14 +55,14 @@ dependencies {
     implementation "androidx.viewpager2:viewpager2:1.0.0"
     implementation 'com.google.android.exoplayer:exoplayer:2.11.4'
     implementation 'com.google.android.material:material:1.2.0-alpha06'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta3'
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'com.google.firebase:firebase-database:19.3.1'
-    implementation 'com.google.firebase:firebase-auth:19.3.1'
+    implementation 'com.google.firebase:firebase-auth:19.3.2'
     implementation 'androidx.annotation:annotation:1.1.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'com.google.firebase:firebase-firestore:21.4.3'
+    implementation 'com.google.firebase:firebase-firestore:21.5.0'
     implementation 'com.google.firebase:firebase-storage:19.1.1'
     implementation 'com.firebaseui:firebase-ui-storage:4.3.1'
     testImplementation 'junit:junit:4.13'
@@ -79,8 +79,8 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
     implementation fileTree(dir: '/Users/khrishawn/Desktop/Projects/WDSportz/External Dependencies', include: ['*.aar', '*.jar'], exclude: [])
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
-    implementation 'com.google.firebase:firebase-analytics:17.4.3'
-    implementation 'com.google.firebase:firebase-messaging:20.2.1'
+    implementation 'com.google.firebase:firebase-analytics:17.4.4'
+    implementation 'com.google.firebase:firebase-messaging:20.2.3'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation("com.squareup.okhttp3:okhttp:4.4.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.4.0")

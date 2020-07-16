@@ -24,6 +24,8 @@
             android:name=".MainActivities.Auth_Activity"
             android:label="@string/wdsportz"
             android:theme="@style/AppTheme1.Launcher">
+<!--            android:windowSoftInputMode="stateVisible|adjustResize"-->
+
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivities.Auth_Activity" />
@@ -36,7 +38,8 @@
         </activity>
         <activity
             android:name=".MainActivities.Main_Activity"
-            android:theme="@style/AppTheme1">
+            android:theme="@style/AppTheme1"
+            android:windowSoftInputMode="stateVisible|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.DEFAULT" />
             </intent-filter>

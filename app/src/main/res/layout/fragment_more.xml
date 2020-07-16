@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/constraintLayout"
@@ -16,7 +20,7 @@
         android:layout_marginTop="8dp"
         android:text="More"
         android:textAlignment="center"
-        android:textSize="36sp"
+        android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,14 +37,17 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <Button
+
+
         android:id="@+id/btnSelectTeams"
         android:layout_width="280dp"
         android:layout_height="55dp"
-        android:layout_marginTop="6dp"
         android:text="Subscribe to more teams"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnManageProfile" />
+        tools:layout_editor_absoluteY="109dp" />
 
     <TextView
         android:id="@+id/textView3"
@@ -149,9 +156,10 @@
         android:id="@+id/btnContactUs"
         android:layout_width="280dp"
         android:layout_height="55dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="16dp"
         android:text="Contact Us"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout10" />
 
@@ -172,9 +180,7 @@
         android:layout_width="398dp"
         android:layout_height="53dp"
         android:layout_marginEnd="13dp"
-        android:layout_marginBottom="75dp"
         android:text="Terms and Conditions"
-        app:layout_constraintBottom_toTopOf="@+id/btnSignOut"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnOfficialWeb" />
@@ -184,13 +190,13 @@
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="65dp"
+        android:layout_marginTop="7dp"
         android:layout_marginEnd="65dp"
-        android:layout_marginBottom="16dp"
         android:text="Sign Out"
         android:textColor="#FF0000"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnTnC" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

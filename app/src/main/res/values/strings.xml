@@ -54,6 +54,8 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="default_notification_channel_id">WDSportz</string>
     <string name="fcm_message">0001</string>
+    <string name="forgot_password"><u>Forgot Password?</u></string>
+    <string name="register_here"><u>Register Here</u></string>
 
 
 </resources>

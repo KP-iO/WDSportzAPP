@@ -41,7 +41,7 @@ public class iniTeamSelectTabAdapter extends FragmentStateAdapter {
 
             Log.d("all leagues: ", String.valueOf(allLeagues));
             fragment.setArguments(args);
-            //for first tab
+//            for first tab
 
             return fragment;
 

@@ -43,6 +43,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -249,7 +250,7 @@ public class newsDetail extends Fragment {
                 String uimg = firebaseUser.getPhotoUrl().toString();
                 String reportID = "";
 
-                Comments comments = new Comments(comment_content,uid,uname,uimg,key, chatID,reportID);
+                Comments comments = new Comments(comment_content,uid,uname,uimg,key, chatID,reportID, ServerValue.TIMESTAMP);
                 Glide.with(view)
                         .load(uimg)
                         .into(imageView1);
