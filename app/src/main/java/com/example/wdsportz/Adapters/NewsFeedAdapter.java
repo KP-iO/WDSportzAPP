@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.wdsportz.R;
 import com.example.wdsportz.ViewModels.NewsFeedViewModel;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
 
@@ -40,10 +39,6 @@ public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.MyView
     }
 
 
-//    public WatchViewAdapter(Context context, List<VideoViewModel> newsFeedViewModels) {
-//
-//    }
-
 
     @NonNull
     @Override
@@ -51,6 +46,28 @@ public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.MyView
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new  MyViewHolder(from(context).inflate(R.layout.fragment_homepage_feeditem, parent,false));
     }
+
+
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
+        TextView title;
+        TextView description;
+        CardView newsTile;
+        ImageView newsView;
+        ImageView imgWDReccommended;
+        ItemClickListener itemClickListener;
+
+        MyViewHolder(View itemView) {
+            super(itemView);
+            description = itemView.findViewById(R.id.newsDescription);
+            title = itemView.findViewById(R.id.newsTitle);
+            newsTile = itemView.findViewById(R.id.newsCard);
+            newsView = itemView.findViewById(R.id.homeImg);
+            imgWDReccommended = itemView.findViewById(R.id.img_WdRecommended);
+
+        }
+
+    }
+
 
 
 
@@ -65,12 +82,23 @@ public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.MyView
 
         final String description1 = newsFeedViewModels.get(position).getNewsDesc();
         final String title1 = newsFeedViewModels.get(position).getTitle();
-
-
+        final Boolean isWDRecommded = newsFeedViewModels.get(position).getIsWDRecommended();
+        holder.imgWDReccommended.setVisibility(View.GONE);
 
         Glide.with(context)
                 .load(currentUrl)
                 .into(holder.newsView);
+
+        try{
+            if (isWDRecommded) {
+                holder.imgWDReccommended.setVisibility(View.VISIBLE);
+            } else {
+                holder.imgWDReccommended.setVisibility(View.GONE);
+            }
+        }catch(Exception e) {
+
+
+         }
 
 
         holder.newsTile.setOnClickListener(new View.OnClickListener() {
@@ -91,8 +119,6 @@ public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.MyView
                                                });
 
 
-
-
     }
 
 
@@ -104,48 +130,6 @@ public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.MyView
     }
 
 
-
-
-    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView title;
-        TextView description;
-        CardView newsTile;
-        ImageView newsView;
-        ItemClickListener itemClickListener;
-        FirebaseFirestore fireStoreDB = FirebaseFirestore.getInstance();
-        private ItemClickListener lClickListener;
-
-
-        MyViewHolder(View itemView) {
-            super(itemView);
-            description = itemView.findViewById(R.id.newsDescription);
-            title = itemView.findViewById(R.id.newsTitle);
-            newsTile = itemView.findViewById(R.id.newsCard);
-            newsView = itemView.findViewById(R.id.homeImg);
-            newsTile.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Log.d("CLICK", title.getText() + "  Clicked");
-
-
-
-
-                }
-            });
-        }
-
-
-
-
-
-        @Override
-        public void onClick(View view) {
-            if (lClickListener != null) lClickListener.onItemClick(view, getAdapterPosition());
-            Log.d("CLICK", title.getText() + "  Clicked");
-
-
-        }
-    }
     public String getItem(int id) {
 
         return newsFeedViewModels.get(id).getTitle();

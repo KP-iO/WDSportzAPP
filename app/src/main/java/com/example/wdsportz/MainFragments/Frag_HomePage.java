@@ -110,6 +110,8 @@ public class Frag_HomePage extends Fragment {
     //This initializes homepage filter menu in the activity's toolbar
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+
+        //Filter initizaled here!
         inflater.inflate(R.menu.homepage_filter, menu);
 
         this.menu = menu;
@@ -155,12 +157,25 @@ public class Frag_HomePage extends Fragment {
     }
 
     private void showWDRecommended() {
-        //test list
-        ArrayList<NewsFeedViewModel> emptyArray = new ArrayList<>();
+        //new WDRecommnended List
+        ArrayList<NewsFeedViewModel> wdRecommnendedList = new ArrayList<>();
 
-        newsFeedAdapter = new NewsFeedAdapter(context, emptyArray);
+        for(int i = 0; i < AllNewsList.size(); i++) {
+
+            try {
+
+                if (AllNewsList.get(i).getIsWDRecommended()) {
+
+                    wdRecommnendedList.add(AllNewsList.get(i));
+                }
+
+            }catch(Exception e){
+                /// if not wdrecoomeneded or null
+            }
+        }
+
+        newsFeedAdapter = new NewsFeedAdapter(context, wdRecommnendedList);
         recyclerView1.setAdapter(newsFeedAdapter);
-
     }
 
 
@@ -183,7 +198,20 @@ public class Frag_HomePage extends Fragment {
 //                                Log.d("DOCUMENT PRINT :", document.getData().toString());
 //                                Log.d("Team Added to List ", document.get("Title").toString());
 
-                                AllNewsList.add(new NewsFeedViewModel(document.get("Title").toString(), document.get("Image").toString(), document.get("Description").toString(),document.get("Date").toString(),document.get("Chatbox_ID").toString()));
+//                                     * @param title
+//                                        * @param newsImageURL
+//                                        * @param newsDesc
+//                                        * @param date
+//                                        * @param chatbox_id
+//                                        * @param isWDRecommended
+
+                                AllNewsList.add(new NewsFeedViewModel(
+                                        document.get("Title").toString(),
+                                        document.get("Image").toString(),
+                                        document.get("Description").toString(),
+                                        document.get("Date").toString(),
+                                        document.get("Chatbox_ID").toString(),
+                                        ((Boolean) document.get("WDReccomended"))));
 
                                 //Log.d(TAG, ("LOGO URL: " + list.));
 

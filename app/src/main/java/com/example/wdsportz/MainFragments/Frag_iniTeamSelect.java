@@ -230,8 +230,8 @@ public class Frag_iniTeamSelect extends Fragment {
 
                 default:
                     String value = (new ArrayList<String>(sortedMap.values())).get(position -1);
-                    String leagueNameSplit = value.split("-")[1];
-                    tab.setText(leagueNameSplit);
+//                    String leagueNameSplit = value.split("-")[1];
+                    tab.setText(value);
 
             }
         }).attach();

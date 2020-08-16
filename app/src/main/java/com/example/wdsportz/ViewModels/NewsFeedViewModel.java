@@ -6,6 +6,7 @@ public class NewsFeedViewModel {
     String newsDesc;
     String date;
     String chatbox_id;
+    Boolean isWDRecommended;
 
 
 
@@ -13,14 +14,30 @@ public class NewsFeedViewModel {
 
     }
 
-    public NewsFeedViewModel(String title, String newsImageURL, String newsDesc, String date, String chatbox_id) {
+
+    /**
+     *
+     * @param title
+     * @param newsImageURL
+     * @param newsDesc
+     * @param date
+     * @param chatbox_id
+     * @param isWDRecommended
+     */
+
+    public NewsFeedViewModel(String title, String newsImageURL, String newsDesc, String date, String chatbox_id, Boolean isWDRecommended) {
         this.title = title;
         this.newsImageURL = newsImageURL;
         this.newsDesc = newsDesc;
         this.date = date;
-        this.chatbox_id =chatbox_id;
-
+        this.chatbox_id = chatbox_id;
+        this.isWDRecommended = isWDRecommended;
     }
+
+    public Boolean getIsWDRecommended() {
+        return isWDRecommended;
+    }
+
 
     public  String getNewsDesc() {
         return newsDesc;
