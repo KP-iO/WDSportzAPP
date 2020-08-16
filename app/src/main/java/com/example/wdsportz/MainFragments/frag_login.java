@@ -188,7 +188,11 @@ public class frag_login extends Fragment {
         button.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_global_frag_IniTeamSelection);
+
+                txtUsername.setText("Ore.yusuf@hotmail.co.uk");
+                txtPassword.setText("Password1");
+                signIn.performClick();
+
             }
 
 
