@@ -273,6 +273,8 @@ public class Frag_Score extends Fragment {
         } else {
 
             initNoDateUI(false);
+            scoreFeedAdpater = new ScoreFeedAdpater(getContext(),dateSortedlist);
+            recyclerViewScores.setAdapter(scoreFeedAdpater);
 
         }
     }
@@ -309,8 +311,7 @@ public class Frag_Score extends Fragment {
             getView().findViewById(R.id.ConstrLayoutNoScore).setVisibility(View.GONE);
             getView().findViewById(R.id.ConstrLayoutSeeAllBtn).setVisibility(View.GONE);
 
-            scoreFeedAdpater = new ScoreFeedAdpater(getContext(),dateSortedlist);
-            recyclerViewScores.setAdapter(scoreFeedAdpater);
+
         }
     }
 
