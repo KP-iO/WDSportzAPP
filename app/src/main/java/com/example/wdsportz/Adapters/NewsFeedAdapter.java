@@ -39,7 +39,6 @@ public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.MyView
     }
 
 
-
     @NonNull
     @Override
 
@@ -69,20 +68,18 @@ public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.MyView
     }
 
 
-
-
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, int position) {
-        holder.title.setText(newsFeedViewModels.get(position).getTitle());
-        holder.description.setText(newsFeedViewModels.get(position).getNewsDesc());
-        final String currentUrl = newsFeedViewModels.get(position).getNewsImageURL();
-        String date1 = newsFeedViewModels.get(position).getDate();
-        String chatId = newsFeedViewModels.get(position).getChatbox_id();
+        holder.title.setText(getItem(position).getTitle());
+        holder.description.setText(getItem(position).getNewsDesc());
+        final String currentUrl = getItem(position).getNewsImageURL();
+        String date1 = getItem(position).getDate();
+        String chatId = getItem(position).getChatbox_id();
 
 
-        final String description1 = newsFeedViewModels.get(position).getNewsDesc();
-        final String title1 = newsFeedViewModels.get(position).getTitle();
-        final Boolean isWDRecommded = newsFeedViewModels.get(position).getIsWDRecommended();
+        final String description1 = getItem(position).getNewsDesc();
+        final String title1 = getItem(position).getTitle();
+        final Boolean isWDRecommded = getItem(position).getIsWDRecommended();
         holder.imgWDReccommended.setVisibility(View.GONE);
 
         Glide.with(context)
@@ -130,9 +127,9 @@ public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.MyView
     }
 
 
-    public String getItem(int id) {
+    public NewsFeedViewModel getItem(int position) {
 
-        return newsFeedViewModels.get(id).getTitle();
+        return newsFeedViewModels.get(position);
     }
 
     public interface ItemClickListener {

@@ -59,24 +59,12 @@ public class Auth_Activity extends AppCompatActivity implements Frag_iniTeamSele
        SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
 
-//       Associate searchable configuration with the SearchView
-//        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-//
-//        SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
-//        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-
-
         return super.onCreateOptionsMenu(menu);
     }
-
-    private void changeSearchViewTextColor(View view) {  }
 
 
     public void goToMainFeed() {
         Intent intent = new Intent(this, Main_Activity.class);
-        //EditText editText = (EditText) findViewById(R.id.editText);
-        //String message = editText.getText().toString();
-        //intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
     }
 

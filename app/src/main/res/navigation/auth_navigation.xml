@@ -9,16 +9,14 @@
     <fragment
         android:id="@+id/frag_login"
         android:name="com.example.wdsportz.MainFragments.frag_login"
-        android:label="fragment_loginpage"
         tools:layout="@layout/fragment_loginpage" >
         <action
             android:id="@+id/action_frag_login_to_mobile_navigation1"
             app:destination="@id/main_navigation" />
-    </fragment><action android:id="@+id/action_global_frag_IniTeamSelection" app:destination="@id/frag_IniTeamSelection"/>
+    </fragment>
     <fragment
         android:id="@+id/frag_Register"
         android:name="com.example.wdsportz.MainFragments.frag_Register"
-        android:label="fragment_blank_fragment2"
         tools:layout="@layout/fragment_register" >
         <action
             android:id="@+id/action_RegisterToLogin"
@@ -34,19 +32,13 @@
     <fragment
         android:id="@+id/frag_IniTeamSelection"
         android:name="com.example.wdsportz.MainFragments.Frag_iniTeamSelect"
-        android:label="fragment_collection_demo"
         tools:layout="@layout/fragment_initeamselection" >
         <action
             android:id="@+id/action_frag_IniTeamSelection_to_main_navigation"
             app:destination="@id/main_navigation" />
     </fragment>
-    <action
-        android:id="@+id/action_global_collectionDemoFragment"
-        app:destination="@id/frag_IniTeamSelection"
-        app:enterAnim="@anim/fade_in" />
     <fragment
         android:id="@+id/frag_forgot"
         android:name="com.example.wdsportz.MainFragments.Frag_forgot"
-        android:label="fragment_frag_forgot"
-        tools:layout="@layout/fragment_frag_forgot" /><action android:id="@+id/action_global_frag_forgot" app:destination="@id/frag_forgot"/>
+        tools:layout="@layout/frag_forgotassword" /><action android:id="@+id/action_global_frag_forgot" app:destination="@id/frag_forgot"/><action android:id="@+id/action_global_frag_IniTeamSelection" app:destination="@id/frag_IniTeamSelection"/>
 </navigation>
