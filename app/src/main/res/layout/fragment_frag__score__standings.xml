@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ConstraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainFragments.frag_Score_Standings">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:id="@+id/labelLeagueName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:text="@string/hello_blank_fragment"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/labelLeagueName"
+        app:layout_constraintVertical_bias="0.541">
+
+        <TableLayout
+            android:id="@+id/TableScores"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/labelLeagueName">
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/labelRank"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif-black"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:text="Rank"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/imgTeamLogo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_weight="0" />
+
+                <TextView
+                    android:id="@+id/labelTeamName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif-black"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:text="Team"
+                    android:textAlignment="textStart"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/labelWon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif-black"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:text="W"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/labelDrawn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif-black"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:text="D"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/labelLost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif-black"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:text="L"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/labelFor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif-black"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:text="F"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/labelAgainst"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif-black"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:text="A"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/labelPoints"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif-black"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:text="Pts"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/labelForm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif-black"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:text="Form"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </TableRow>
+        </TableLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

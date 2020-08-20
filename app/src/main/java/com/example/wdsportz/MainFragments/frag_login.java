@@ -166,6 +166,7 @@ public class frag_login extends Fragment {
 
             }
         });
+
         btnSignUp.setOnClickListener(new OnClickListener(){
             public void onClick(final View view) {
                 Navigation.findNavController(view).navigate(R.id.globalAction_Register);
@@ -183,7 +184,6 @@ public class frag_login extends Fragment {
 
 
 
-
         Button button = view.findViewById(R.id.Btn_Test);
         button.setOnClickListener(new OnClickListener() {
             @Override
@@ -193,11 +193,10 @@ public class frag_login extends Fragment {
                 txtPassword.setText("Password1");
                 signIn.performClick();
 
+//                Navigation.findNavController(view).navigate(R.id.action_global_frag_IniTeamSelection);
             }
 
-
         });
-
     }
 
 

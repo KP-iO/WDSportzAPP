@@ -52,7 +52,6 @@ public class Frag_HomePage extends Fragment {
     private Frag_HomePage frag_homePage;
     private static final String TAG = "Home Fragment";
     FirebaseFirestore fireStoreDB = FirebaseFirestore.getInstance();
-    private RecyclerView recyclerView;
     private RecyclerView recyclerView1;
     private NewsFeedAdapter newsFeedAdapter;
     Context context;
@@ -100,7 +99,7 @@ public class Frag_HomePage extends Fragment {
         context = view.getContext();
 
         recyclerView1 = getView().findViewById(R.id.Main_feed);
-        recyclerView1.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
+        recyclerView1.setLayoutManager(new LinearLayoutManager(getContext()));
 
 
 // Implement error handling for all cases e.g (Name/ Logo not accessible) ------>
@@ -191,19 +190,7 @@ public class Frag_HomePage extends Fragment {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
 
-                ////// Change FROM download url to stroage url in firestore?
-
                             for (QueryDocumentSnapshot document : task.getResult()) {
-
-//                                Log.d("DOCUMENT PRINT :", document.getData().toString());
-//                                Log.d("Team Added to List ", document.get("Title").toString());
-
-//                                     * @param title
-//                                        * @param newsImageURL
-//                                        * @param newsDesc
-//                                        * @param date
-//                                        * @param chatbox_id
-//                                        * @param isWDRecommended
 
                                 AllNewsList.add(new NewsFeedViewModel(
                                         document.get("Title").toString(),
@@ -213,19 +200,9 @@ public class Frag_HomePage extends Fragment {
                                         document.get("Chatbox_ID").toString(),
                                         ((Boolean) document.get("WDReccomended"))));
 
-                                //Log.d(TAG, ("LOGO URL: " + list.));
-
                                 newsFeedAdapter = new NewsFeedAdapter(context, AllNewsList);
                                 recyclerView1.setAdapter(newsFeedAdapter);
 
-                            }
-
-                            // List check (in Log)
-                            for (int i = 0; i < AllNewsList.size() - 1; i++) {
-
-                                Log.d(TAG, (" News Title = " + AllNewsList.get(i).getTitle()));
-                                Log.d(TAG, " News Description =   " + AllNewsList.get(i).getNewsDesc());
-                                Log.d(TAG, "Image URL =   " + AllNewsList.get(i).getNewsImageURL());
                             }
 
                         } else {

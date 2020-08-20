@@ -46,6 +46,11 @@
         <item name="materialCardViewStyle">@color/colorTransparent</item>
     </style>
 
+    <style name="ShapeAppearance.MyApp.LargeComponent" parent="ShapeAppearance.MaterialComponents.LargeComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">4dp</item>
+    </style>
+
 
 
 </resources>

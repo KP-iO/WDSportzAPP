@@ -1,8 +1,6 @@
 package com.example.wdsportz.MainFragments;
 
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,7 +9,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,14 +22,9 @@ import com.example.wdsportz.R;
 import com.example.wdsportz.ViewModels.SelectTeamsRecyclerViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,31 +34,8 @@ import java.util.List;
 
 // For the feed inside the recycler view, inside one of the tabs. Each tabs's content is created by this
 public class Frag_iniTeamSelect_teams extends Fragment {
-    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+
     private frag_Register.OnFragmentInteractionListener mListener;
-    private static final int CAMERA_REQUEST_CODE =100;
-    private static final int STORAGE_REQUEST_CODE =200;
-    private static final int IMAGE_PICK_GALLERY_CODE =300;
-    private static final int IMAGE_PICK_CAMERA_CODE  =400;
-    //arrays of permissions to be requested
-    String cameraPermissions[];
-    String storagePermissions[];
-    ImageView avatar;
-    //uri of picked image
-    Uri image_uri;
-
-    //for checking profile or cover photo
-    String profileOrCoverPhoto;
-    ProgressDialog pd;
-    FirebaseUser user = firebaseAuth.getCurrentUser();
-    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-    DatabaseReference databaseReference;
-    ImageView avatarREG;
-
-    //storage
-    StorageReference storageReference;
-    //path where images of user profile will be stored
-    String storagePath = "Users_Profile_Cover_Imgs/";
 
     public static final String ARG_OBJECT = "object";
     private static final String TAG = "iniTeamSelect_teams";
