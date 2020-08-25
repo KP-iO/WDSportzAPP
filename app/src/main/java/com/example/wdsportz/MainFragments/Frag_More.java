@@ -104,15 +104,9 @@ public class Frag_More extends Fragment implements View.OnClickListener {
             public void onClick(View view) {
 
 //                Intent intent = new Intent(getActivity(), Frag_iniTeamSelect.class);
-//                // used to bundle strings and enable it to be collected
-////                Bundle bundle = new Bundle();
-////                bundle.putString("videoTitle", videoTitle);
-////                bundle.putString("videoUrl", videoUrl);
-////                bundle.putString("chatID", chatID);
-////                bundle.putString("videoDesc", videoDesc);
-////                intent.putExtras(bundle);
+//
 //                startActivity(intent);
-                Navigation.findNavController(view).navigate(R.id.action_global_editFavouriteTeams_PAGE);
+                Navigation.findNavController(view).navigate(R.id.action_global_frag_SubscribeMore);
             }
         });
 

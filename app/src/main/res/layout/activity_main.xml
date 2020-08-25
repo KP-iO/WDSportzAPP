@@ -31,7 +31,7 @@
             android:foregroundTint="#000E0808"
             app:defaultNavHost="true"
             app:navGraph="@navigation/main_navigation"
-            tools:layout="@layout/fragment_homepage" />
+            tools:layout="@layout/fragment_watch" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_nav"

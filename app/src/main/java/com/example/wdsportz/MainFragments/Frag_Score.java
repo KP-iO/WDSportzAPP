@@ -123,7 +123,49 @@ public class Frag_Score extends Fragment {
 
 
     private void iniScoreFeed(final Context context) {
-        Task<QuerySnapshot> docRef = fireStoreDB.collection("Scores")
+        Task<QuerySnapshot> isthmianNorth = fireStoreDB.collection("Leagues").document("Non League Div One - Isthmian North").collection("Scores")
+            .get()
+            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+
+////// Change FROM download url to stroage url in firestore?
+
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+
+
+                            Log.d(TAG, "DOCUMENT PRINT :" + document.getData().toString());
+                            Log.d(TAG, "Team Added to List " + document.get("eventId").toString());
+
+                            ogScoresList.add(new ScoreViewModel(document.get("homeName").toString(), document.get("awayName").toString(), document.get("homeScore").toString(), document.get("awayScore").toString(), document.get("homeLogo").toString(), document.get("awayLogo").toString(), document.get("eventDate").toString(), document.get("eventId").toString()));
+
+
+                            scoreFeedAdpater = new ScoreFeedAdpater(context, ogScoresList);
+                            recyclerViewScores.setAdapter(scoreFeedAdpater);
+
+                        }
+
+                        // List check (in Log)
+//                            for (int i = 0; i < ogScoresList.size() - 1; i++) {
+//
+//                                Log.d(TAG, ("ID = " + ogScoresList.get(i).getEventId()));
+//                                Log.d(TAG, "Home Team   " + ogScoresList.get(i).getHomeTeam());
+//                                Log.d(TAG, "Away Team   " + ogScoresList.get(i).getAwayTeam());
+//                                Log.d(TAG, "Home Score   " + ogScoresList.get(i).getHomeScore());
+//                                Log.d(TAG, "Away Score   " + ogScoresList.get(i).getAwayScore());
+//
+//                            }
+
+                    } else {
+                        Log.d(TAG, "No such document");
+                    }
+
+                }
+
+            });
+        Task<QuerySnapshot> isthmianSouth = fireStoreDB.collection("Leagues").document("Non League Div One - Isthmian South").collection("Scores")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
 
@@ -137,9 +179,51 @@ public class Frag_Score extends Fragment {
 
 
                                 Log.d(TAG, "DOCUMENT PRINT :" + document.getData().toString());
-                                Log.d(TAG, "Team Added to List " + document.get("event_id").toString());
+                                Log.d(TAG, "Team Added to List " + document.get("eventId").toString());
 
-                                ogScoresList.add(new ScoreViewModel(document.get("homeName").toString(), document.get("awayName").toString(), document.get("homeScore").toString(), document.get("awayScore").toString(), document.get("homeLogo").toString(), document.get("awayLogo").toString(), document.get("eventDate").toString(), document.get("event_id").toString()));
+                                ogScoresList.add(new ScoreViewModel(document.get("homeName").toString(), document.get("awayName").toString(), document.get("homeScore").toString(), document.get("awayScore").toString(), document.get("homeLogo").toString(), document.get("awayLogo").toString(), document.get("eventDate").toString(), document.get("eventId").toString()));
+
+
+                                scoreFeedAdpater = new ScoreFeedAdpater(context, ogScoresList);
+                                recyclerViewScores.setAdapter(scoreFeedAdpater);
+
+                            }
+
+                            // List check (in Log) East
+//                            for (int i = 0; i < ogScoresList.size() - 1; i++) {
+//
+//                                Log.d(TAG, ("ID = " + ogScoresList.get(i).getEventId()));
+//                                Log.d(TAG, "Home Team   " + ogScoresList.get(i).getHomeTeam());
+//                                Log.d(TAG, "Away Team   " + ogScoresList.get(i).getAwayTeam());
+//                                Log.d(TAG, "Home Score   " + ogScoresList.get(i).getHomeScore());
+//                                Log.d(TAG, "Away Score   " + ogScoresList.get(i).getAwayScore());
+//
+//                            }
+
+                        } else {
+                            Log.d(TAG, "No such document");
+                        }
+
+                    }
+
+                });
+        Task<QuerySnapshot> isthmianSouthEast = fireStoreDB.collection("Leagues").document("Non League Div One - Isthmian South East").collection("Scores")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+
+////// Change FROM download url to stroage url in firestore?
+
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+
+                                Log.d(TAG, "DOCUMENT PRINT :" + document.getData().toString());
+                                Log.d(TAG, "Team Added to List " + document.get("eventId").toString());
+
+                                ogScoresList.add(new ScoreViewModel(document.get("homeName").toString(), document.get("awayName").toString(), document.get("homeScore").toString(), document.get("awayScore").toString(), document.get("homeLogo").toString(), document.get("awayLogo").toString(), document.get("eventDate").toString(), document.get("eventId").toString()));
 
 
                                 scoreFeedAdpater = new ScoreFeedAdpater(context, ogScoresList);
@@ -165,7 +249,50 @@ public class Frag_Score extends Fragment {
                     }
 
                 });
-    }
+        Task<QuerySnapshot> isthmianCentral = fireStoreDB.collection("Leagues").document("Non League Premier - Isthmian").collection("Scores")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+
+////// Change FROM download url to stroage url in firestore?
+
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+
+                                Log.d(TAG, "DOCUMENT PRINT :" + document.getData().toString());
+                                Log.d(TAG, "Team Added to List " + document.get("eventId").toString());
+
+                                ogScoresList.add(new ScoreViewModel(document.get("homeName").toString(), document.get("awayName").toString(), document.get("homeScore").toString(), document.get("awayScore").toString(), document.get("homeLogo").toString(), document.get("awayLogo").toString(), document.get("eventDate").toString(), document.get("eventId").toString()));
+
+
+                                scoreFeedAdpater = new ScoreFeedAdpater(context, ogScoresList);
+                                recyclerViewScores.setAdapter(scoreFeedAdpater);
+
+                            }
+
+                            // List check (in Log)
+//                            for (int i = 0; i < ogScoresList.size() - 1; i++) {
+//
+//                                Log.d(TAG, ("ID = " + ogScoresList.get(i).getEventId()));
+//                                Log.d(TAG, "Home Team   " + ogScoresList.get(i).getHomeTeam());
+//                                Log.d(TAG, "Away Team   " + ogScoresList.get(i).getAwayTeam());
+//                                Log.d(TAG, "Home Score   " + ogScoresList.get(i).getHomeScore());
+//                                Log.d(TAG, "Away Score   " + ogScoresList.get(i).getAwayScore());
+//
+//                            }
+
+                        } else {
+                            Log.d(TAG, "No such document");
+                        }
+
+                    }
+
+                });
+
+}
 
     private void initCalenderSortBar(View view) {
 
@@ -242,10 +369,11 @@ public class Frag_Score extends Fragment {
     }
 
     private void sortbydate(Date selectedDate) {
-
+// is the list that we interchage into the recylcler
         dateSortedlist.clear();
 
 ////change ogScoresList to getitemsfrom current recycler and then sort by date
+        //og list thhat contains every single result
         for (int i = 0; i < ogScoresList.size(); i++) {
 
             //Format of the date
@@ -367,26 +495,34 @@ public class Frag_Score extends Fragment {
 
     private void getLeagueSelectedScores(String selectedLeague) {
 
-        //I need the scores for leagues here!!
-//        Log.d("TESTTTT", "initSortBar:YOU SELECTED " + selectedLeague);
-//        fireStoreDB.collection("Leagues")
-//                .get()
-//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                        if (task.isSuccessful()) {
-//                            for (QueryDocumentSnapshot document : task.getResult()) {
+        if (selectedLeague == "All Leagues"){
 
-                    //        leagueList.clear();
-                    //        scoreFeedAdpater = new ScoreFeedAdpater(getContext(),leagueList);
-                    //        recyclerViewScores.setAdapter(scoreFeedAdpater);
+            iniScoreFeed(getContext());
+        }
 
-//                            }
-//                        } else {
-//                            Log.d(TAG, "Error getting documents: ", task.getException());
-//                        }
-//                    }
-//                });
+        ogScoresList.clear();
+//        I need the scores for leagues here!!
+        Log.d("TESTTTT", "initSortBar:YOU SELECTED " + selectedLeague);
+        fireStoreDB.collection("Leagues").document(selectedLeague).collection("Scores")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+
+                            ogScoresList.add(new ScoreViewModel(document.get("homeName").toString(), document.get("awayName").toString(), document.get("homeScore").toString(), document.get("awayScore").toString(), document.get("homeLogo").toString(), document.get("awayLogo").toString(), document.get("eventDate").toString(), document.get("eventId").toString()));
+                            scoreFeedAdpater = new ScoreFeedAdpater(getContext(),ogScoresList);
+                            recyclerViewScores.setAdapter(scoreFeedAdpater);
+                            scoreFeedAdpater.notifyDataSetChanged();
+
+                            }
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
     }
 
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView
+<LinearLayout
     android:id="@+id/comments"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -65,8 +65,8 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/action_button_share"
         style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:layout_width="37dp"
-        android:layout_height="wrap_content"
+        android:layout_width="21dp"
+        android:layout_height="376dp"
         android:layout_marginTop="236dp"
         android:textSize="15sp"
         app:icon="?attr/actionModeShareDrawable"
@@ -119,4 +119,4 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+</LinearLayout>
