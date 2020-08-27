@@ -33,7 +33,7 @@ import java.util.List;
 // object in our collection.
 
 // For the feed inside the recycler view, inside one of the tabs. Each tabs's content is created by this
-public class Frag_iniTeamSelect_teams extends Fragment {
+public class Frag_SubscribeMoreTeams extends Fragment {
 
     private frag_Register.OnFragmentInteractionListener mListener;
 
@@ -65,32 +65,32 @@ public class Frag_iniTeamSelect_teams extends Fragment {
 
     }
 
-//    @Override
-//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//        // Do something that differs the Activity's menu here
-//        super.onCreateOptionsMenu(menu, inflater);
-//
-//        this.menu1 = menu;
-//
-//        MenuItem searchItem = menu1.findItem(R.id.search);
-//
-//        SearchView searchView = (SearchView) searchItem.getActionView();
-//
-////        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-////            @Override
-////            public boolean onQueryTextSubmit(String query) {
-////                return false;
-////            }
-////
-////            @Override
-////            public boolean onQueryTextChange(String newText) {
-////
-////                selectTeamsRecyclerViewAdapter.getFilter().filter(newText);
-////
-////                return false;
-////            }
-////        });
-//    }
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        // Do something that differs the Activity's menu here
+        super.onCreateOptionsMenu(menu, inflater);
+
+        this.menu1 = menu;
+
+        MenuItem searchItem = menu1.findItem(R.id.search);
+
+        SearchView searchView = (SearchView) searchItem.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                selectTeamsRecyclerViewAdapter.getFilter().filter(newText);
+
+                return false;
+            }
+        });
+    }
 
     @Override
     public boolean onOptionsItemSelected (MenuItem searchItem){

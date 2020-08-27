@@ -42,8 +42,10 @@ import com.google.android.exoplayer2.util.Util;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -53,9 +55,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Map;
+
+import static androidx.constraintlayout.motion.widget.MotionScene.TAG;
 
 public class videoPlayback_Activity extends AppCompatActivity {
 
@@ -79,11 +86,13 @@ public class videoPlayback_Activity extends AppCompatActivity {
     private ImageView mFullScreenIcon;
     private FrameLayout mFullScreenButton;
     MaterialButton shareAction1;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
 
     FirebaseAuth firebaseAuth;
 
-    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     boolean mExoPlayerFullscreen = false;
     String uid = user.getUid();
     WatchViewAdapter watchViewAdapter;
@@ -200,7 +209,7 @@ public class videoPlayback_Activity extends AppCompatActivity {
                 String uimg = user.getPhotoUrl().toString();
                 String reportID = "";
 
-                Comments comments = new Comments(comment_content,uid,uname,uimg,key, chatID,reportID,ServerValue.TIMESTAMP);
+                Comments comments = new Comments(comment_content,uid,uname,uimg,key, chatID,reportID, ServerValue.TIMESTAMP);
 
 
                 commentReference.setValue(comments).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -237,9 +246,38 @@ public class videoPlayback_Activity extends AppCompatActivity {
 
 
         });
-        Glide.with(this)
-                .load(currentUseImg)
-                .into(imageView);
+String UID = user.getUid();
+        db.collection("Users")
+                .whereEqualTo("uid", UID)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                String name = document.get("name").toString();
+                                String email = document.get("email").toString();
+                                String image = document.get("image").toString();
+//                                String cover = document.get("cover").toString();
+                                Log.d(TAG, image);
+
+                                Glide.with(getApplicationContext())
+                                        .load(image)
+                                        .into(imageView);
+
+                                //set data
+//                                holder.tv_name.setText(name);
+
+                            }
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+//
+//        Glide.with(this)
+//                .load(currentUseImg)
+//                .into(imageView);
         initVideoInfo();
         iniRvComment();
 

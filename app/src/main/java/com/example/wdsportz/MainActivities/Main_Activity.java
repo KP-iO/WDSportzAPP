@@ -1,9 +1,18 @@
 package com.example.wdsportz.MainActivities;
 
+import android.app.Dialog;
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +24,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.wdsportz.MainFragments.Frag_HomePage;
+import com.example.wdsportz.MainFragments.Frag_SubscribeMore;
 import com.example.wdsportz.MainFragments.Frag_Test_1;
 import com.example.wdsportz.MainFragments.Frag_iniTeamSelect;
 import com.example.wdsportz.MainFragments.Frag_socialWebOpen;
@@ -38,9 +48,9 @@ import com.google.firebase.database.FirebaseDatabase;
 
 //Change majority of 'px' dimensions settings to 'dp'
 
-public class Main_Activity extends AppCompatActivity implements Frag_Test_1.OnFragmentInteractionListener, Frag_iniTeamSelect.OnFragmentInteractionListener, Frag_HomePage.OnFragmentInteractionListener, Frag_Profile.OnFragmentInteractionListener, Frag_Notifications.OnFragmentInteractionListener, Frag_About.OnFragmentInteractionListener, Frag_Explore.OnFragmentInteractionListener, Frag_LiveGuide.OnFragmentInteractionListener, Frag_Settings.OnFragmentInteractionListener, Frag_socialWebOpen.OnFragmentInteractionListener {
+public class Main_Activity extends AppCompatActivity implements Frag_Test_1.OnFragmentInteractionListener, Frag_iniTeamSelect.OnFragmentInteractionListener, Frag_HomePage.OnFragmentInteractionListener, Frag_Profile.OnFragmentInteractionListener, Frag_Notifications.OnFragmentInteractionListener, Frag_About.OnFragmentInteractionListener, Frag_Explore.OnFragmentInteractionListener, Frag_LiveGuide.OnFragmentInteractionListener, Frag_Settings.OnFragmentInteractionListener, Frag_socialWebOpen.OnFragmentInteractionListener, Frag_SubscribeMore.OnFragmentInteractionListener {
     // Collect all listeners in one interface ^^^ and pass through to main activity?
-
+public boolean connected = false;
     public Toolbar toolbar;
     public BottomNavigationView bottomNav;
     public NavController navController;
@@ -58,8 +68,72 @@ public class Main_Activity extends AppCompatActivity implements Frag_Test_1.OnFr
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        checkInternet();
+
+        ConnectivityManager cm =
+                (ConnectivityManager)getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+
+
+
+
+//        Log.d("NTWRK", );
+
+
+        if(cm.getActiveNetwork()== null)
+        {
+
+
+            Dialog  dialog = new Dialog(Main_Activity.this);
+            dialog.setContentView(R.layout.alert_dialog);
+
+            Log.d("NTWRK", "Entered");
+            dialog.setCanceledOnTouchOutside(false);
+
+            dialog.getWindow().setLayout(WindowManager.LayoutParams.WRAP_CONTENT,WindowManager.LayoutParams.WRAP_CONTENT);
+
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+            dialog.getWindow().getAttributes().windowAnimations = R.style.Animation_Design_BottomSheetDialog;
+
+            Button tryAgain = dialog.findViewById(R.id.btn_try_again);
+
+            tryAgain.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    recreate();
+
+                }
+
+            });
+            dialog.show();
+
+        }
+
+        Log.d("NTWRK", "Cleared");
+
 
         setupNavigation();
+
+
+    }
+
+    private void checkInternet() {
+        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+            //we are connected to a network
+            connected = true;
+        }
+        else
+            connected = false;
+    }
+
+    private void networkChecker() {
+
+
+
+
+
     }
 
 

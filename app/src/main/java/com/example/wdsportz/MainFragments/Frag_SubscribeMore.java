@@ -39,7 +39,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class Frag_iniTeamSelect extends Fragment {
+public class Frag_SubscribeMore extends Fragment {
 
     public static final String TAG = "Frag_iniTeamSelect";
 
@@ -61,7 +61,7 @@ public class Frag_iniTeamSelect extends Fragment {
 
 
 
-    public Frag_iniTeamSelect() {
+    public Frag_SubscribeMore() {
         // Required empty public constructor
     }
 
@@ -77,7 +77,7 @@ public class Frag_iniTeamSelect extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        getActivity().findViewById(R.id.my_toolbar).setVisibility(View.VISIBLE);
+        getActivity().findViewById(R.id.main_feed_toolbar).setVisibility(View.VISIBLE);
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_initeamselection, container, false);
@@ -86,13 +86,13 @@ public class Frag_iniTeamSelect extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        getActivity().findViewById(R.id.my_toolbar).setVisibility(View.VISIBLE);
+//        getActivity().findViewById(R.id.my_toolbar).setVisibility(View.VISIBLE);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
-        getActivity().findViewById(R.id.my_toolbar).setVisibility(View.VISIBLE);
+        getActivity().findViewById(R.id.main_feed_toolbar).setVisibility(View.VISIBLE);
 
         viewPager = view.findViewById(R.id.iniSelectview_pager);
         tabLayout = view.findViewById(R.id.tab_layout);

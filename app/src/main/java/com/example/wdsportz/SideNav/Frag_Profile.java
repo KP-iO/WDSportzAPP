@@ -192,7 +192,7 @@ public class Frag_Profile extends Fragment {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 String name = document.get("name").toString();
                                 String email = document.get("email").toString();
-                                String image = document.get("image").toString();
+                                String image = String.valueOf(user.getPhotoUrl());
 //                                String cover = document.get("cover").toString();
                                 Log.d(TAG, image);
 
@@ -401,14 +401,13 @@ public class Frag_Profile extends Fragment {
                     case 0:
                         pd.setMessage("Updating Profile Picture");
                         profileOrCoverPhoto = "image";
-
                         showImagePicDiolog();
                         break;
                     case 1:
-                        pd.setMessage("Updating Cover Photo");
-                        profileOrCoverPhoto = "cover";
-                        showImagePicDiolog();
-                        break;
+//                        pd.setMessage("Updating Cover Photo");
+//                        profileOrCoverPhoto = "cover";
+//                        showImagePicDiolog();
+//                        break;
                     case 2:
                         //name clicked
                         pd.setMessage("Updating Name");
@@ -454,26 +453,50 @@ public class Frag_Profile extends Fragment {
                 //validate if user has entered something or not
                 if(!TextUtils.isEmpty(value)){
                     pd.show();
-                    HashMap<String, Object> result = new HashMap<>();
-                    result.put(key, value);
+                    String ID = user.getUid();
 
-                    databaseReference.child(user.getUid()).updateChildren(result)
+
+
+                    DocumentReference name = database.collection("Users").document(ID);
+
+// Set the "isCapital" field of the city 'DC'
+                            name
+                            .update(key, value)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
+                                    nameTv.setText(value);
                                     pd.dismiss();
-                                    Toast.makeText(getActivity(), "Updated...", Toast.LENGTH_SHORT).show();
-
+                                    Log.d(TAG, "DocumentSnapshot successfully updated!");
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
                                     pd.dismiss();
-                                    Toast.makeText(getActivity(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
-
+                                    Log.w(TAG, "Error updating document", e);
                                 }
                             });
+//                    HashMap<String, Object> result = new HashMap<>();
+//                    result.put(key, value);
+//
+////                    databaseReference.child(user.getUid()).updateChildren(result)
+//                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                                @Override
+//                                public void onSuccess(Void aVoid) {
+//                                    pd.dismiss();
+//                                    Toast.makeText(getActivity(), "Updated...", Toast.LENGTH_SHORT).show();
+//
+//                                }
+//                            })
+//                            .addOnFailureListener(new OnFailureListener() {
+//                                @Override
+//                                public void onFailure(@NonNull Exception e) {
+//                                    pd.dismiss();
+//                                    Toast.makeText(getActivity(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+//
+//                                }
+//                            });
 
                 }
                 else {
@@ -747,7 +770,24 @@ public class Frag_Profile extends Fragment {
 //                                            }
 //                                        });
 
-                            }
+                                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+
+                                        .setPhotoUri(uri)
+                                        .build();
+
+                                user.updateProfile(profileUpdates)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()) {
+                                                    Log.d(TAG, "User profile updated.");
+                                                }
+                                            }
+                                        });
+                                Log.d("Read", "Success"); }
+
+
+
                             else {
                                 //error
 

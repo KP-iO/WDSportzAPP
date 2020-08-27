@@ -7,11 +7,15 @@ package com.example.wdsportz.MainFragments;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -31,6 +35,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import com.bumptech.glide.Glide;
 import com.example.wdsportz.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -50,6 +55,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
 import java.util.HashMap;
 
 import static android.app.Activity.RESULT_OK;
@@ -83,9 +89,12 @@ public class frag_Register extends Fragment {
     String cameraPermissions[];
     String storagePermissions[];
     ImageView avatar;
+    StorageReference storageReference = FirebaseStorage.getInstance().getReference();
     //uri of picked image
     Uri image_uri;
     Uri image;
+   Uri image1;
+    Uri noIMG = Uri.parse("app/src/main/res/drawable/ic_profileimg.xml");
     //for checking profile or cover photo
     String profileOrCoverPhoto;
     ProgressDialog pd;
@@ -93,10 +102,12 @@ public class frag_Register extends Fragment {
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     DatabaseReference databaseReference;
     ImageView avatarREG;
+    public boolean imageSelected;
+    String downloadUri;
 
 //check
     //storage
-    StorageReference storageReference;
+//    StorageReference storageReference;
     //path where images of user profile will be stored
     String storagePath = "Users_Profile_Cover_Imgs/";
     String uid;
@@ -154,6 +165,7 @@ public class frag_Register extends Fragment {
         CheckBox checkBox = view.findViewById(R.id.ChkBoxTC);
         EditText confirm = view.findViewById(R.id.confirmText);
         avatarREG = view.findViewById(R.id.avatarReg);
+        imageSelected = false;
 
         //progress dialog
         pd = new ProgressDialog(getActivity());
@@ -162,7 +174,28 @@ public class frag_Register extends Fragment {
         cameraPermissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
         storagePermissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
         storageReference = FirebaseStorage.getInstance().getReference();
+//        image1 =storageReference.child("Users_Profile_Cover_Imgs/Linkedin.jpeg").getDownloadUrl();
 
+//        storageReference.child("Users_Profile_Cover_Imgs/Linkedin.jpeg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//            @Override
+//            public void onSuccess(Uri uri) {
+//                Glide.with(view)
+//                        .load(Uri.parse(String.valueOf(uri)))
+//                        .into(avatarREG);
+//                Log.d("Read", "Success");
+//
+//            }
+//        }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception exception) {
+//                // Handle any errors
+//            }
+//        });
+//        Uri path = Uri.parse("https://firebasestorage.googleapis.com/v0/b/wdsportz-3e91f.appspot.com/o/Users_Profile_Cover_Imgs%2FLinkedin.jpeg?alt=media&token=56f8a94b-8db6-4c4d-8237-8b1feb193cee");
+//        image = path;
+//        avatarREG.setIm(path);
+
+//        avatarREG.setImageBitmap(yourImageNotFoundBitmap);
         avatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -205,7 +238,9 @@ public class frag_Register extends Fragment {
                                        user = FirebaseAuth.getInstance().getCurrentUser();
                                         String email = user.getEmail();
                                          uid = user.getUid();
-                                        sendPicToDatabase();
+                                        Log.d("Uri Sent", String.valueOf(image));
+
+
 //                                        String uri =
 
 
@@ -234,24 +269,100 @@ public class frag_Register extends Fragment {
                                                         Log.w(TAG, "Error writing document", e);
                                                     }
                                                 });
+                                        Log.w("ImageBoolean", String.valueOf(imageSelected));
+
+                                                if(!imageSelected){
+
+                                                    storageReference.child("Users_Profile_Cover_Imgs/Linkedin.jpeg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+
+                                                        @Override
+
+                                                        public void onSuccess(Uri uri) {
+                                                            image = uri;
+                                                            downloadUri = image.toString();
+                                                            HashMap<String, Object> results = new HashMap<>();
+                                                            results.put("image", downloadUri);
 
 
+                                                            FirebaseFirestore database = FirebaseFirestore.getInstance();
 
-                                        // Used to make FirebaseProfile for user
-                                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                                .setDisplayName(userName)
-                                                .setPhotoUri(Uri.parse(String.valueOf(image)))
-                                                .build();
+                                                            database.collection("Users").document(uid)
+                                                                    .set(results, SetOptions.merge())
+                                                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                        @Override
+                                                                        public void onSuccess(Void aVoid) {
 
-                                        user.updateProfile(profileUpdates)
-                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<Void> task) {
-                                                        if (task.isSuccessful()) {
-                                                            Log.d(TAG, "User profile updated.");
+                                                                            Log.d(TAG, "DocumentSnapshot successfully written!");
+                                                                            pd.dismiss();
+                                                                        }
+                                                                    })
+                                                                    .addOnFailureListener(new OnFailureListener() {
+                                                                        @Override
+                                                                        public void onFailure(@NonNull Exception e) {
+
+                                                                            Log.w(TAG, "Error writing document", e);
+                                                                            pd.dismiss();
+                                                                        }
+                                                                    });
+//                                                            sendPicToDatabase();
+
+                                                            Log.d("Dummy Sent", String.valueOf(uri));
+                                                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                                                    .setDisplayName(userName)
+                                                                    .setPhotoUri(uri)
+                                                                    .build();
+
+                                                            user.updateProfile(profileUpdates)
+                                                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                        @Override
+                                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                                            if (task.isSuccessful()) {
+                                                                                Log.d(TAG, "User profile updated.");
+                                                                            }
+                                                                        }
+                                                                    });
+                                                            Log.d("Read", "Success");
+
                                                         }
-                                                    }
-                                                });
+                                                    }).addOnFailureListener(new OnFailureListener() {
+                                                        @Override
+                                                        public void onFailure(@NonNull Exception exception) {
+                                                            Log.d("`Dummy", "Fail");
+
+                                                        }
+                                                    });
+
+
+
+
+
+
+
+
+
+
+
+
+                                                }else {// Used to make FirebaseProfile for user
+                                                    sendPicToDatabase();
+                                                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                                            .setDisplayName(userName)
+                                                            .setPhotoUri(Uri.parse(String.valueOf(image)))
+                                                            .build();
+
+                                                    user.updateProfile(profileUpdates)
+                                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                @Override
+                                                                public void onComplete(@NonNull Task<Void> task) {
+                                                                    if (task.isSuccessful()) {
+                                                                        Log.d(TAG, "User profile updated.");
+                                                                    }
+                                                                }
+                                                            });
+
+
+                                                }
+
 
 
                                         Toast.makeText(getActivity(), "Registered successfully", Toast.LENGTH_SHORT).show();
@@ -306,6 +417,7 @@ public class frag_Register extends Fragment {
                     checkBoxConfirm = true;
                 } else {
                     checkBoxConfirm = false;
+                    pd.dismiss();
                     Toast.makeText(getActivity(), "Please read terms and conditions and tick", Toast.LENGTH_SHORT).show();
                 }
 
@@ -316,6 +428,7 @@ public class frag_Register extends Fragment {
                     passwordConfirmed = true;
                 } else {
                     passwordConfirmed = false;
+                    pd.dismiss();
                     Toast.makeText(getActivity(), "Password does not match re-enter", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -515,6 +628,7 @@ public class frag_Register extends Fragment {
 
             image = uri;
         avatarREG.setImageURI(image);
+        imageSelected = true;
 
 
 
@@ -543,6 +657,7 @@ public class frag_Register extends Fragment {
             Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, image_uri);
             startActivityForResult(cameraIntent, IMAGE_PICK_CAMERA_CODE);
+
 
     }
 
@@ -578,6 +693,7 @@ public class frag_Register extends Fragment {
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void aVoid) {
+
                                                 Log.d(TAG, "DocumentSnapshot successfully written!");
                                                 pd.dismiss();
                                             }
@@ -585,6 +701,7 @@ public class frag_Register extends Fragment {
                                         .addOnFailureListener(new OnFailureListener() {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
+
                                                 Log.w(TAG, "Error writing document", e);
                                                 pd.dismiss();
                                             }

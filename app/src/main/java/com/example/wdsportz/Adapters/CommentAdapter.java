@@ -35,9 +35,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Date;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -130,7 +128,123 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
 
 
 
+        holder.card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("CardClicked", "Yes");
 
+
+                String message = mData.get(position).getContent();
+                String uid = mData.get(position).getUid();
+                String userName =mData.get(position).getUname();
+                String chatID = mData.get(position).getChatID();
+                String key = mData.get(position).getKey();
+
+
+
+                pd = new ProgressDialog(mContext);
+        /* Show dialog containing options
+        1) Edit Profile Picture
+        2) Edit Cover photo
+        3) Edit Name
+        4) Edit Phone *
+
+         */
+
+                String options1 [] = {"Report Comment", "Delete Comment",
+//                "Delete Comment"
+                };
+
+                String options2 [] = {"Report Comment",
+//                "Delete Comment"
+                };
+
+
+
+
+
+
+                Log.d(TAG, uid);
+                Log.d(TAG,currentUID);
+
+                if (uid.equals(currentUID)){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                    // set title
+                    builder.setTitle("Choose Action");
+                    // set items to dialog
+                    builder.setItems(options1, (DialogInterface.OnClickListener) (dialog, which) -> {
+                        switch (which){
+                            case 0:
+                                pd.setMessage("Reporting Comment");
+                                reportComment = "image";
+
+
+
+
+                                reportComment(which);
+                                break;
+                            case 1:
+                                pd.setMessage("Deleting Comment");
+                                deleteCommment = "cover";
+
+
+                                deleteCommment(which);
+                                notifyDataSetChanged();
+                                break;
+
+                        }
+
+
+                    });
+                    builder.create().show();
+
+
+
+
+
+
+                }else {
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                    // set title
+                    builder.setTitle("Choose Action");
+                    // set items to dialog
+                    builder.setItems(options2, (DialogInterface.OnClickListener) (dialog, which) -> {
+                        switch (which){
+                            case 0:
+                                pd.setMessage("Reporting Comment");
+                                reportComment = "image";
+
+
+
+
+                                reportComment(which);
+                                break;
+
+                        }
+
+
+                    });
+                    builder.create().show();
+
+
+
+                }
+
+
+
+
+
+
+
+//                showEditProfileDialog(mContext,position);
+
+
+
+            }
+
+
+        });
 
 
 
@@ -171,17 +285,8 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
         holder.tv_content.setText(mData.get(position).getContent());
 
 
-        holder.card.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showEditProfileDialog(mContext,position);
 
 
-
-            }
-
-
-        });
 
 
 
@@ -221,143 +326,95 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
 
     private void showEditProfileDialog(Context context, int position) {
 
-        String message = mData.get(position).getContent();
-        String uid = mData.get(position).getUid();
-        String userName =mData.get(position).getUname();
-        String chatID = mData.get(position).getChatID();
-        String key = mData.get(position).getKey();
+
+    }
+
+    private void deleteCommment(int position ) {
+//        notifyDataSetChanged();
+
+//        String message = mData.get(position).getContent();
+//        String uid = mData.get(position).getUid();
+//        String userName =mData.get(position).getUname();
+
+//        String chatID = mData.get(position).getChatID();
+//        String key = mData.get(position).getKey();
 
 
+        Log.d("ChatID", String.valueOf(mData.size()));
+//        Log.d("Key",key);
 
-        pd = new ProgressDialog(context);
-        /* Show dialog containing options
-        1) Edit Profile Picture
-        2) Edit Cover photo
-        3) Edit Name
-        4) Edit Phone *
-
-         */
-
-      String options1 [] = {"Report Comment", "Delete Comment",
-//                "Delete Comment"
-    };
-
-        String options2 [] = {"Report Comment",
-//                "Delete Comment"
-        };
+        if(mData.size() > 1){
+            String chatID = mData.get(position).getChatID();
+            String key = mData.get(position).getKey();
 
 
+            DatabaseReference commentRef = firebaseDatabase.getReference();
+
+            commentRef.child("Comment").child(chatID).child(key).removeValue();
 
 
-
-
-        Log.d(TAG, uid);
-        Log.d(TAG,currentUID);
-
-        if (uid.equals(currentUID)){
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        // set title
-        builder.setTitle("Choose Action");
-        // set items to dialog
-        builder.setItems(options1, (DialogInterface.OnClickListener) (dialog, which) -> {
-            switch (which){
-                case 0:
-                    pd.setMessage("Reporting Comment");
-                    reportComment = "image";
+            Query applesQuery = commentRef.child("Comment").child(chatID).child(key);
 
 
 
 
-                    reportComment(which);
-                    break;
-                case 1:
-                    pd.setMessage("Deleting Comment");
-                    deleteCommment = "cover";
+            applesQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot appleSnapshot: dataSnapshot.getChildren()) {
+                        notifyDataSetChanged();
+                        appleSnapshot.getRef().removeValue();
 
-
-                    deleteCommment(which);
-                    notifyDataSetChanged();
-                    break;
-
-            }
-
-
-        });
-        builder.create().show();
-
-
-
-
-
-
-        }else {
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            // set title
-            builder.setTitle("Choose Action");
-            // set items to dialog
-            builder.setItems(options2, (DialogInterface.OnClickListener) (dialog, which) -> {
-                switch (which){
-                    case 0:
-                        pd.setMessage("Reporting Comment");
-                        reportComment = "image";
-
-
-
-
-                        reportComment(which);
-                        break;
-
+                    }
                 }
 
-
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Log.e(TAG, "onCancelled", databaseError.toException());
+                }
             });
-            builder.create().show();
 
+
+
+
+
+        }
+        else {
+            String chatID = mData.get(0).getChatID();
+            String key = mData.get(0).getKey();
+
+
+            DatabaseReference commentRef = firebaseDatabase.getReference();
+
+            commentRef.child("Comment").child(chatID).child(key).removeValue();
+
+
+            Query applesQuery = commentRef.child("Comment").child(chatID).child(key);
+
+
+
+
+            applesQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot appleSnapshot: dataSnapshot.getChildren()) {
+                        notifyDataSetChanged();
+                        appleSnapshot.getRef().removeValue();
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Log.e(TAG, "onCancelled", databaseError.toException());
+                }
+            });
 
 
         }
 
 
 
-
-
-
-
-    }
-
-    private void deleteCommment(int position ) {
-
-        String message = mData.get(position).getContent();
-        String uid = mData.get(position).getUid();
-        String userName =mData.get(position).getUname();
-        String chatID = mData.get(position).getChatID();
-        String key = mData.get(position).getKey();
-
-
-        DatabaseReference commentRef = firebaseDatabase.getReference();
-
-
-        Query applesQuery = commentRef.child("Comment").child(chatID).child(key);
-
-
-
-
-        applesQuery.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot appleSnapshot: dataSnapshot.getChildren()) {
-                    notifyDataSetChanged();
-                    appleSnapshot.getRef().removeValue();
-
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.e(TAG, "onCancelled", databaseError.toException());
-            }
-        });
 
 
 

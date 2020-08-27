@@ -2,6 +2,7 @@ package com.example.wdsportz;
 
 
 import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -33,6 +34,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
@@ -128,7 +130,7 @@ protected void onCreate(Bundle savedInstanceState) {
             String key = commentReference.getKey();
             String chatID = getIntent().getExtras().getString("chatID");
             String reportID = "";
-            Comments comments = new Comments(comment_content,uid,uname,uimg,key, chatID,reportID);
+            Comments comments = new Comments(comment_content,uid,uname,uimg,key, chatID,reportID, ServerValue.TIMESTAMP);
 
             commentReference.setValue(comments).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
@@ -185,7 +187,19 @@ protected void onCreate(Bundle savedInstanceState) {
 
 }
 
+    @Override
+    public void onConfigurationChanged(Configuration newConfiguration) {
+        super.onConfigurationChanged(newConfiguration);
+        youTubePlayerView.getPlayerUiController().getMenu().dismiss();
+    }
 
+    @Override
+    public void onBackPressed() {
+        if (youTubePlayerView.isFullScreen())
+            youTubePlayerView.exitFullScreen();
+        else
+            super.onBackPressed();
+    }
     private void iniRvComment() {
 
         RvComment.setLayoutManager(new LinearLayoutManager(this));
@@ -239,7 +253,9 @@ protected void onCreate(Bundle savedInstanceState) {
             @Override
             public void onReady(@NonNull YouTubePlayer youTubePlayer) {
                 YouTubePlayerUtils.loadOrCueVideo(
-                        youTubePlayer, getLifecycle(),video
+                        youTubePlayer,
+                        getLifecycle(),
+                        video
                         , 0f
                 );
                 addFullScreenListenerToPlayer();
@@ -252,8 +268,10 @@ protected void onCreate(Bundle savedInstanceState) {
         youTubePlayerView.addFullScreenListener(new YouTubePlayerFullScreenListener() {
             @Override
             public void onYouTubePlayerEnterFullScreen() {
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                 fullScreenHelper.enterFullScreen();
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
+
 //                addCustomActionsToPlayer();
             }
 
@@ -266,6 +284,7 @@ protected void onCreate(Bundle savedInstanceState) {
             }
         });
     }
+
 
 
     private void   showMessage(String message) {
