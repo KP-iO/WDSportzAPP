@@ -78,7 +78,7 @@ public class newsDetail extends Fragment {
     ScrollView scrollView;
 
     String postKey;
-    RecyclerView RvComment;
+    public RecyclerView RvComment;
     CommentAdapter commentAdapter;
     List<Comments> listComments;
     static String COMMENT_KEY = "Comment";

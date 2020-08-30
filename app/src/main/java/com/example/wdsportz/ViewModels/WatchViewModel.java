@@ -7,6 +7,7 @@ public class WatchViewModel {
     String videoURL;
     String chatBox_ID;
     String video_desc;
+    String live;
 
 //    public WatchViewModel() {
 //
@@ -16,14 +17,23 @@ public class WatchViewModel {
 //
 //    }
 
+    public WatchViewModel(String title, String videoimageURL, String videoURL, String chatBox_ID, String video_desc, String live) {
+        this.title = title;
+        this.videoimageURL = videoimageURL;
+        this.videoURL = videoURL;
+        this.chatBox_ID = chatBox_ID;
+        this.video_desc = video_desc;
+        this.live = live;
+    }
+
     public WatchViewModel(String title, String videoimageURL, String videoURL, String chatBox_ID, String video_desc) {
         this.title = title;
         this.videoimageURL = videoimageURL;
         this.videoURL = videoURL;
         this.chatBox_ID = chatBox_ID;
         this.video_desc = video_desc;
-    }
 
+    }
 
 
     public  String getChatBox_ID() {
@@ -60,4 +70,10 @@ public class WatchViewModel {
     }
 
     public void setVideo_desc(String video_desc) {this.video_desc = video_desc; }
+
+    public  String getLive() {
+        return live;
+    }
+
+    public void setLive(String chatBox_ID) {this.live = live; }
 }
