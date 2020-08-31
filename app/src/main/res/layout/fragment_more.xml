@@ -43,7 +43,7 @@
         android:layout_width="280dp"
         android:layout_height="55dp"
         android:text="Subscribe to more teams"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"

@@ -103,7 +103,7 @@ public class frag_login extends Fragment {
 
                     Log.d("OFCUSSSS","ORe");
                     guideline.setGuidelineBegin(100);
-                    ConsLayout_Login.getBackground().setColorFilter(Color.parseColor("EB0DB14B"), PorterDuff.Mode.SRC_OVER);
+                    ConsLayout_Login.getBackground().setColorFilter(Color.parseColor("#EB0DB14B"), PorterDuff.Mode.SRC_OVER);
 
 
                 } else {

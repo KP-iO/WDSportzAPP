@@ -928,7 +928,7 @@ public class Frag_Profile extends Fragment {
                                         }
                                     });
 
-                            database.collection("Leagues").document("Non League Div One - Northern North").collection("Teams")
+                            database.collection("Leagues").document("Non League Div One - Isthmian South East").collection("Teams")
                                     .whereEqualTo("teamName", listFavourite.get(i))
                                     .get()
                                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
