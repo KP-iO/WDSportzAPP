@@ -2,8 +2,11 @@ package com.example.wdsportz.MainFragments;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -14,9 +17,14 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.Guideline;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
+import androidx.transition.Fade;
+import androidx.transition.Transition;
+import androidx.transition.TransitionManager;
 
 import com.example.wdsportz.MainActivities.Auth_Activity;
 import com.example.wdsportz.R;
@@ -31,61 +39,29 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link frag_login.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link frag_login#newInstance} factory method to
- * create an instance of this fragment. 123
- */
-
 public class frag_login extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     private OnFragmentInteractionListener mListener;
     public FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private LoginViewModel viewModel;
     ProgressDialog pd;
-//    Button forgot;
+
+    Guideline guideline;
+    ConstraintLayout ConsLayout_Login;
+
     TextView forgot;
+    Button btnSignUp;
+    Button btnSignIn;
+
+    View linearLayoutCredentials;
 
     public frag_login() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment frag_Register.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static frag_login newInstance(String param1, String param2) {
-        frag_login fragment = new frag_login();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
         firebaseAuth = FirebaseAuth.getInstance();
     }
 
@@ -94,86 +70,124 @@ public class frag_login extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_loginpage, container, false);
+
     }
 
 
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        //Auto Sign In
         if (PreferenceUtils.getEmail(getContext()) != null && !PreferenceUtils.getEmail(getContext()).equals("")) {
-            ((Auth_Activity)getActivity()).goToMainFeed();
-        }else {
-
+            ((Auth_Activity) getActivity()).goToMainFeed();
         }
-
-        forgot = view.findViewById(R.id.txtForgot);
-
-        final TextView txtUsername = view.findViewById(R.id.username);
-        final TextView txtPassword = view.findViewById(R.id.password);
-        Button btnSignUp = view.findViewById(R.id.signUp);
-        Button signIn = view.findViewById(R.id.btn_signIn);
         viewModel = ViewModelProviders.of(requireActivity()).get(LoginViewModel.class);
-        signIn.setOnClickListener(new OnClickListener(){
-            public void onClick(final View view) {
-                pd = new ProgressDialog(getContext());
-                pd.setTitle("Authenticating");
-                pd.show();
+
+        btnSignIn = view.findViewById(R.id.btn_signIn);
+        btnSignUp = view.findViewById(R.id.signUp);
+        forgot = view.findViewById(R.id.txtForgot);
+        linearLayoutCredentials = view.findViewById(R.id.linearLayoutLogin);
+        guideline = view.findViewById(R.id.guideline2);
+        ConsLayout_Login = view.findViewById(R.id.ConstraintLayout_Login);
+
+//      Initially hide the content view.
+        linearLayoutCredentials.setVisibility(View.GONE);
+
+        TextView txtUsername = view.findViewById(R.id.txtUsername);
+        final TextView txtPassword = view.findViewById(R.id.txtPassword);
 
 
-                final String email = txtUsername.getText().toString();
-                final String password = txtPassword.getText().toString();
-//                viewModel.authenticate();
-                firebaseAuth.signInWithEmailAndPassword(email, password)   // Code used to authenticate user
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>(){
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task){
-                                if(task.isSuccessful()) {
-                                    viewModel.authenticate(email, password);
-                                    PreferenceUtils.saveEmail(email, getContext());
-                                    PreferenceUtils.savePassword(password, getContext());
-                                    ((Auth_Activity)getActivity()).goToMainFeed();
-                                    pd.dismiss();
+        View.OnFocusChangeListener focusListener = new View.OnFocusChangeListener() {
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus){
+
+                    Log.d("OFCUSSSS","ORe");
+                    guideline.setGuidelineBegin(100);
+                    ConsLayout_Login.getBackground().setColorFilter(Color.parseColor("EB0DB14B"), PorterDuff.Mode.SRC_OVER);
+
+
+                } else {
+
+                    guideline.setGuidelineBegin(357);
+                    ConsLayout_Login.getBackground().setColorFilter(Color.parseColor("#00FFFFFF"), PorterDuff.Mode.SRC_OVER);
+
+                }
+            }
+        };
+
+        txtUsername.setOnFocusChangeListener(focusListener);
+        txtPassword.setOnFocusChangeListener(focusListener);
+
+        btnSignIn.setOnClickListener(new OnClickListener() {
+              public void onClick(final View view) {
+
+               if (linearLayoutCredentials.getVisibility() == View.VISIBLE){
+
+                   //Sign In Process
+                    pd = new ProgressDialog(getContext());
+                    pd.setTitle("Authenticating");
+                    pd.show();
+
+                    final String email = txtUsername.getText().toString();
+                    final String password = txtPassword.getText().toString();
+                    firebaseAuth.signInWithEmailAndPassword(email, password)
+                            // Code used to authenticate user
+                            .addOnCompleteListener(new OnCompleteListener<AuthResult>(){
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task){
+                                    if(task.isSuccessful()) {
+                                        viewModel.authenticate(email, password);
+                                        PreferenceUtils.saveEmail(email, getContext());
+                                        PreferenceUtils.savePassword(password, getContext());
+                                        ((Auth_Activity)getActivity()).goToMainFeed();
+                                        pd.dismiss();
+
+                                    }
 
                                 }
 
+                            }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+
+                            if (e instanceof FirebaseAuthInvalidCredentialsException) {
+                                notifyUser("Invalid password");
+                            } else if (e instanceof FirebaseAuthInvalidUserException) {
+                                String errorCode =
+                                        ((FirebaseAuthInvalidUserException) e).getErrorCode();
+                                if (errorCode.equals("ERROR_USER_NOT_FOUND")) {
+                                    notifyUser("No matching account found with email");
+                                } else if (errorCode.equals("ERROR_USER_DISABLED")) {
+                                    notifyUser("User account has been disabled");
+                                } else {
+                                    notifyUser(e.getLocalizedMessage());
+                                }
                             }
-
-                        }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-
-                        if (e instanceof FirebaseAuthInvalidCredentialsException) {
-                            notifyUser("Invalid password");
-                        } else if (e instanceof FirebaseAuthInvalidUserException) {
-                            String errorCode =
-                                    ((FirebaseAuthInvalidUserException) e).getErrorCode();
-                            if (errorCode.equals("ERROR_USER_NOT_FOUND")) {
-                                notifyUser("No matching account found with email");
-                            } else if (errorCode.equals("ERROR_USER_DISABLED")) {
-                                notifyUser("User account has been disabled");
-                            } else {
-                                notifyUser(e.getLocalizedMessage());
-                            }
-                        }
-                }
-
-                    private void notifyUser(String toast) {
-                        pd.dismiss();
-                        Toast.makeText(getActivity(), toast, Toast.LENGTH_SHORT).show();
-
                     }
+
+                        private void notifyUser(String toast) {
+                            pd.dismiss();
+                            Toast.makeText(getActivity(), toast, Toast.LENGTH_SHORT).show();
+
+                        }
                     });
 
-            }
+
+                   } else {
+
+                   animateLinearLayout();
+               }
+              }
         });
+
+
 
         btnSignUp.setOnClickListener(new OnClickListener(){
             public void onClick(final View view) {
                 Navigation.findNavController(view).navigate(R.id.globalAction_Register);
 
-                                         }
+             }
         });
-
 
         forgot.setOnClickListener(new OnClickListener() {
             @Override
@@ -183,24 +197,39 @@ public class frag_login extends Fragment {
         });
 
 
-
         Button button = view.findViewById(R.id.Btn_Test);
         button.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                txtUsername.setText("Ore.yusuf@hotmail.co.uk");
+//                btnSignIn.performClick()
+                txtUsername.setText("Oreyusuf@hotmail.com");
                 txtPassword.setText("Password1");
-                signIn.performClick();
+                btnSignIn.performClick();
 
 //                Navigation.findNavController(view).navigate(R.id.action_global_frag_IniTeamSelection);
+            //    ((Auth_Activity)getActivity()).goToMainFeed();
+
+
+
             }
 
         });
     }
 
+    private void animateLinearLayout() {
 
-    // TODO: Rename method, update argument and hook method into UI event
+        Transition transition = new Fade();
+        transition.setDuration(600);
+        transition.addTarget(linearLayoutCredentials);
+
+        TransitionManager.beginDelayedTransition(getView().findViewById(R.id.ConstraintLayout_Login), transition);
+        linearLayoutCredentials.setVisibility(View.VISIBLE);
+
+    }
+
+
+
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -223,6 +252,8 @@ public class frag_login extends Fragment {
         super.onDetach();
         mListener = null;
     }
+
+
 
     /**
      * This interface must be implemented by activities that contain this

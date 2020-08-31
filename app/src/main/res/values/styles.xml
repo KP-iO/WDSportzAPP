@@ -1,7 +1,7 @@
 <resources>
 
     <!--  Base application theme. -->
-    <style name="AppTheme1" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/WD_yellow</item>
         <item name="colorPrimaryDark">@color/WD_Green</item>
@@ -10,14 +10,20 @@
         <item name="android:navigationBarColor">@color/colorBlack</item>
     </style>
 
-    <style name="AppTheme1.Launcher">
+    <style name="button1" parent="Widget.MaterialComponents.Button">
+<!--        for ini select button-->
+        <item name="backgroundTint">@color/WD_Green</item>
+    </style>
+
+
+    <style name="AppTheme.Launcher">
     <item name="android:windowBackground">@drawable/launch_screen</item>
         <item name="android:statusBarColor">@color/colorWhite</item>
     <!-- Optional, on Android 5+ you can modify the colorPrimaryDark color to match the windowBackground color for further branding-->
     <!-- <item name="colorPrimaryDark">@android:color/white</item> -->
     </style>
 
-    <style name="AppTheme1.NoActionBar">
+    <style name="AppTheme.NoActionBar">
         <item name="android:navigationBarColor">@color/colorBlack</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -41,15 +47,11 @@
     <style name="AppTheme1.PopupOverlay"
         parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="Theme.App"
-        parent="Theme.MaterialComponents">
-        <item name="materialCardViewStyle">@color/colorTransparent</item>
-    </style>
-
     <style name="ShapeAppearance.MyApp.LargeComponent" parent="ShapeAppearance.MaterialComponents.LargeComponent">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">4dp</item>
     </style>
+
 
 
 

@@ -45,8 +45,6 @@ public class Frag_iniTeamSelect extends Fragment {
 
     FirebaseFirestore fireStoreDB = FirebaseFirestore.getInstance();
 
-
-
     ArrayList<String> teamsPrefs;
     iniTeamSelectTabAdapter iniTeamSelectTabAdapter;
     ViewPager2 viewPager;
@@ -58,7 +56,6 @@ public class Frag_iniTeamSelect extends Fragment {
     Map<String, String> leagues = new LinkedHashMap<>();
 
     private OnFragmentInteractionListener mListener;
-
 
 
     public Frag_iniTeamSelect() {
@@ -96,7 +93,6 @@ public class Frag_iniTeamSelect extends Fragment {
 
         viewPager = view.findViewById(R.id.iniSelectview_pager);
         tabLayout = view.findViewById(R.id.tab_layout);
-
         //Here the pager and tablayout are assigned adapters in 'nameTabs function' Called in getLeaguesID
         getLeaguesID();
 
@@ -152,7 +148,6 @@ public class Frag_iniTeamSelect extends Fragment {
 
     public void NameTabs() {
 
-
         //SORT LEAGUES
         LinkedHashMap<String, String> sortedMap = new LinkedHashMap<>();
 
@@ -175,16 +170,17 @@ public class Frag_iniTeamSelect extends Fragment {
     public void setPageTitle(LinkedHashMap<String, String> sortedMap) {
 
         new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
-
-            for (int i = 0; i < position; i++) {
+            for (int i = 0; i < sortedMap.size(); i++) {
                 Log.d(TAG, "setPageTitle: " + position);
-                String value = (new ArrayList<String>(sortedMap.values())).get(position -1);
-                Log.d(TAG, "value"+value);
-                //String leagueNameSplit = value.split("-")[1];
-                tab.setText(value);
+                String value = (new ArrayList<String>(sortedMap.values())).get(position);
+                Log.d(TAG, "value "+value);
+
+                String s1 = value.substring(value.indexOf("-")+1);
+                s1.trim();
+
+                tab.setText(s1);
             }
         }).attach();
-
     }
 
 

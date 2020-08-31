@@ -18,19 +18,20 @@
         android:visibility="gone"
         app:contentInsetLeft="0dp"
         app:contentInsetStart="0dp"
-        app:contentInsetStartWithNavigation="0dp">
+        app:contentInsetStartWithNavigation="0dp"
+        app:title="">
 
         <TextView
             android:id="@+id/lbl_selectfavteams"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:text="Select Your Favourite Teams"
+            android:textAlignment="center"
             android:textColor="#FFFFFF"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:visibility="invisible" />
-        >
+            android:visibility="visible" />
 
     </androidx.appcompat.widget.Toolbar>
 

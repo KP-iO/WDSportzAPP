@@ -4,7 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/Watch_Tile"
-    style="@style/Theme.App"
     android:layout_width="220dp"
     android:layout_height="160dp"
     android:layout_marginBottom="5dp"

@@ -36,10 +36,16 @@
 
     <Button
         android:id="@+id/btn_finish"
+        style="@style/button1"
         android:layout_width="132dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="#0BBB54"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/iniselectbutton"
+        android:fontFamily="sans-serif-medium"
         android:text="Finish"
+        android:textAlignment="center"
+        android:textSize="16dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

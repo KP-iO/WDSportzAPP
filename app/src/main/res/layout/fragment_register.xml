@@ -7,27 +7,47 @@
     android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textView9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="Choose an image for your avatar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/avatarReg"
-        android:layout_width="150dp"
-        android:layout_height="136dp"
-        android:layout_marginTop="20dp"
-        android:background="@color/colorPrimary"
-        android:padding="5dp"
-        android:src="@drawable/ic_add_image"
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="29dp"
+        android:text="Choose an image for your avatar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/avatarRegCV"
+        android:layout_width="155dp"
+        android:layout_height="155dp"
+        android:layout_marginTop="4dp"
+        app:cardBackgroundColor="@color/WD_Green"
+        app:cardCornerRadius="250dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView9">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            app:cardCornerRadius="250dp">
+
+
+            <ImageView
+                android:id="@+id/avatarReg"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:background="@color/WD_Green"
+                android:padding="5dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_add_image" />
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.cardview.widget.CardView>
+
 
     <LinearLayout
         android:id="@+id/linearLayout3"
@@ -36,17 +56,20 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="40dp"
         android:layout_marginRight="10dp"
+        android:background="@drawable/register_fieldbackground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/avatarReg">
+        app:layout_constraintTop_toBottomOf="@+id/avatarRegCV">
 
         <TextView
             android:id="@+id/lblName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="1"
             android:baselineAligned="false"
             android:fontFamily="sans-serif"
+            android:paddingLeft="10dp"
             android:text="Username"
             android:textColor="@android:color/black"
             android:textSize="18sp"
@@ -57,41 +80,39 @@
             android:id="@+id/Name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:backgroundTint="#00404040"
+            android:gravity="center"
             android:hint="Enter Username"
             android:inputType="textPersonName"
             android:selectAllOnFocus="true"
             android:singleLine="true"
             android:textAlignment="viewEnd"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="#FFFFFF"
             android:textColorHint="?android:attr/textColorHint"
             android:textSize="18sp" />
     </LinearLayout>
-
-        <ImageView
-            android:id="@+id/line1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
-            app:srcCompat="@drawable/yellow_seperator_line" />
 
     <LinearLayout
         android:id="@+id/linearLayout4"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/register_fieldbackground"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/line1">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
         <TextView
             android:id="@+id/lblEmailAddress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:fontFamily="sans-serif"
             android:text="Email Address"
@@ -104,23 +125,15 @@
             android:id="@+id/Email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:backgroundTint="#00FFFFFF"
             android:hint="YourEmail@Domain.com"
             android:inputType="textEmailAddress"
             android:textAlignment="viewEnd"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="#FFFFFF"
             android:textSize="18sp" />
     </LinearLayout>
-
-        <ImageView
-            android:id="@+id/line2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
-            app:srcCompat="@drawable/yellow_seperator_line" />
 
 
     <LinearLayout
@@ -128,15 +141,19 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/register_fieldbackground"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/line2">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
 
         <TextView
             android:id="@+id/lblPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:fontFamily="sans-serif"
             android:text="Password"
@@ -149,28 +166,23 @@
             android:id="@+id/originalPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:backgroundTint="#00FFFFFF"
             android:hint="Enter Password"
             android:inputType="textPassword"
             android:textAlignment="viewEnd"
+            android:textColor="#FFFFFF"
             android:textSize="18sp" />
     </LinearLayout>
-
-    <ImageView
-        android:id="@+id/line0"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
-        app:srcCompat="@drawable/yellow_seperator_line" />
 
     <LinearLayout
         android:id="@+id/linearLayout6"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/register_fieldbackground"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/ChkBoxTC"
         app:layout_constraintEnd_toEndOf="parent"
@@ -183,6 +195,8 @@
             android:id="@+id/lblPassword2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:fontFamily="sans-serif"
             android:text="Confirm Password"
@@ -194,29 +208,23 @@
             android:id="@+id/confirmText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:backgroundTint="#00FFFFFF"
             android:hint="Confirm Password"
             android:inputType="textPassword"
             android:textAlignment="viewEnd"
+            android:textColor="#FFFFFF"
             android:textSize="18sp" />
 
     </LinearLayout>
-
-    <ImageView
-        android:id="@+id/line5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout6"
-        app:srcCompat="@drawable/yellow_seperator_line" />
 
     <CheckBox
         android:id="@+id/ChkBoxTC"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
+        android:buttonTint="@color/WD_Green"
         android:checked="false"
         android:text="I accept the terms and conditions"
         android:textColor="#827e7e"
@@ -229,8 +237,9 @@
         android:layout_width="132dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-
-        android:backgroundTint="#0BBB54"
+        android:background="@drawable/register_fieldbackground"
+        android:backgroundTint="@color/WD_yellow"
+        android:backgroundTintMode="src_over"
         android:text="Register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

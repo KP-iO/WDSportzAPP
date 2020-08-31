@@ -365,7 +365,6 @@ public class Frag_Score extends Fragment {
 
         });
 
-
     }
 
     private void sortbydate(Date selectedDate) {

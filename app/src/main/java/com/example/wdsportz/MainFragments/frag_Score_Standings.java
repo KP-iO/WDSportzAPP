@@ -119,6 +119,8 @@ public class frag_Score_Standings extends Fragment {
 
             View layout2 = LayoutInflater.from(getContext()).inflate(R.layout.score_standings_row, (ViewGroup) view.findViewById(R.id.TableScores), false);
 
+            layout2.setOnClickListener(v -> v.setBackgroundColor(getResources().getColor(R.color.red_100)));
+
             TextView txtRank = (TextView) layout2.findViewById(R.id.txtRankNum);
             txtRank.setText(leagueStanding.getTeamRank());
 

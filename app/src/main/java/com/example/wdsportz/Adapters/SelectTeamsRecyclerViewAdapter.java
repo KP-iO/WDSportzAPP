@@ -87,7 +87,6 @@ public class SelectTeamsRecyclerViewAdapter extends RecyclerView.Adapter<SelectT
 
         Glide.with(context)
                 .load(currentUrl)
-                .fitCenter()
                 .into(holder.ImageView);
   
         // Mark as selected

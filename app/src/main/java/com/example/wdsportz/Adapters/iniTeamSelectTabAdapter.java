@@ -27,26 +27,7 @@ public class iniTeamSelectTabAdapter extends FragmentStateAdapter {
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-//        Log.d("Fragment Position", String.valueOf(position));
-//
-//        if (position == 0) {
-//
-//            Log.d("Fragment Position", "POSSS 0");
-//            Fragment fragment = new Frag_iniTeamSelect_teams();
-//            Bundle args = new Bundle();
-//
-//            ArrayList<String> allLeagues = (new ArrayList<String>(Leagues.values()));
-//            args.putStringArrayList(Frag_iniTeamSelect_teams.ARG_OBJECT, allLeagues);
-//
-//            Log.d("all leagues: ", String.valueOf(allLeagues));
-//            fragment.setArguments(args);
-//            //for first tab
-//
-//            return fragment;
-//
-//        } else {
-//
-//            Log.d("Fragment Position", "POSSS > 1");
+
             Fragment fragment = new Frag_iniTeamSelect_teams();
             Bundle args = new Bundle();
 
