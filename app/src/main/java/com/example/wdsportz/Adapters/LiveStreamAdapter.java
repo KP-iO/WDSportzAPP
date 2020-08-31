@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.example.wdsportz.LivestreamFragment;
 import com.example.wdsportz.R;
 import com.example.wdsportz.ViewModels.WatchViewModel;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
@@ -31,6 +33,8 @@ public class LiveStreamAdapter extends RecyclerView.Adapter<LiveStreamAdapter.My
     private LayoutInflater lInflater;
     private ItemClickListener lClickListener;
     private Context context;
+    FirebaseFirestore firebaseDatabase = FirebaseFirestore.getInstance();
+
 
     public LiveStreamAdapter(Context context, List<WatchViewModel> list) {
         this.lInflater = LayoutInflater.from(context);
@@ -60,6 +64,11 @@ public class LiveStreamAdapter extends RecyclerView.Adapter<LiveStreamAdapter.My
         final String currentUrl = videoViewModels.get(position).getVideoImageURL();
         final String Video1 = (videoViewModels.get(position).getVideoURL());
         final String chat_ID = (videoViewModels.get(position).getChatBox_ID());
+
+        final String live = (videoViewModels.get(position).getLive());
+        if (live.equals("true") ){
+            holder.liveIndicator.setVisibility(View.VISIBLE);
+        }
 
         Glide.with(context)
                 .load(currentUrl)
@@ -100,6 +109,7 @@ public class LiveStreamAdapter extends RecyclerView.Adapter<LiveStreamAdapter.My
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView title;
         ImageButton btnimg;
+        ImageView liveIndicator;
         ItemClickListener itemClickListener;
         FirebaseFirestore fireStoreDB = FirebaseFirestore.getInstance();
 
@@ -109,6 +119,9 @@ public class LiveStreamAdapter extends RecyclerView.Adapter<LiveStreamAdapter.My
 
             title= itemView.findViewById(R.id.video_text);
             btnimg = itemView.findViewById(R.id.BtnImgVideo);
+            liveIndicator = itemView.findViewById(R.id.imageView2);
+
+
             btnimg.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
