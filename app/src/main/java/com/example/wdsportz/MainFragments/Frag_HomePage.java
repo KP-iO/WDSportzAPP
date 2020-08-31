@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -30,14 +28,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link Frag_Watch.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link Frag_Watch#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class Frag_HomePage extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -106,38 +96,38 @@ public class Frag_HomePage extends Fragment {
         newsFeed(context);
     }
 
-    //This initializes homepage filter menu in the activity's toolbar
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-
-        //Filter initizaled here!
-        inflater.inflate(R.menu.homepage_filter, menu);
-
-        this.menu = menu;
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
-        switch (item.getItemId()) {
-
-            case R.id.AllNews:
-                Log.d("ORE","LOOOOOK HERE1");
-                showAll(context,AllNewsList);
-                return true;
-            case R.id.Following:
-                Log.d("ORE","LOOOOOK HERE2");
-                showFollowingTeams();
-                return true;
-            case R.id.WDRecommended:
-                Log.d("ORE","LOOOOOK HERE3");
-                showWDRecommended();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
+//    //This initializes homepage filter menu in the activity's toolbar
+//    @Override
+//    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+//
+//        //Filter initizaled here!
+//        inflater.inflate(R.menu.homepage_filter, menu);
+//
+//        this.menu = menu;
+//        super.onCreateOptionsMenu(menu, inflater);
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle item selection
+//        switch (item.getItemId()) {
+//
+//            case R.id.AllNews:
+//                Log.d("ORE","LOOOOOK HERE1");
+//                showAll(context,AllNewsList);
+//                return true;
+//            case R.id.Following:
+//                Log.d("ORE","LOOOOOK HERE2");
+//                showFollowingTeams();
+//                return true;
+//            case R.id.WDRecommended:
+//                Log.d("ORE","LOOOOOK HERE3");
+//                showWDRecommended();
+//                return true;
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
+//    }
 
     private void showAll(final Context context, ArrayList allNewsList) {
 

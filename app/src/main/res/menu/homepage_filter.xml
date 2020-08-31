@@ -4,27 +4,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-<item
-    android:id="@+id/item3"
-    android:icon="@drawable/filter_icon48"
-    android:title="FilterButton"
-    app:showAsAction="always">
-    <menu>
-
-        <item
-            android:id="@+id/AllNews"
-            android:icon="@drawable/all_news_icon"
-            android:title="All News" />
-        <item
-            android:id="@+id/Following"
-            android:icon="@drawable/following_icon"
-            android:title="Following" />
-        <item
-            android:id="@+id/WDRecommended"
-            android:icon="@drawable/filter_icon48"
-            android:title="WD Recommended" />
-
-
-    </menu>
-</item>
+    <item
+        android:id="@+id/filter_btn"
+        android:icon="@drawable/drop_down_arrow_leagues"
+        android:title="FilterButton"
+        app:showAsAction="always"></item>
 </menu>

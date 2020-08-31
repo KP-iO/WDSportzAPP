@@ -5,11 +5,15 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -38,6 +42,7 @@ public class Frag_Watch extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerView recyclerView1;
 
+    Menu menu;
 
     private WatchViewAdapter watchViewAdapter;
     private LiveStreamAdapter liveStreamAdapter;
@@ -57,7 +62,38 @@ public class Frag_Watch extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
+        setHasOptionsMenu(true);
         return inflater.inflate(R.layout.fragment_watch, container, false);
+    }
+
+    //This initializes homepage filter menu in the activity's toolbar
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+
+        //Filter initizaled here!
+        inflater.inflate(R.menu.homepage_filter, menu);
+
+        this.menu = menu;
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+
+            case R.id.filter_btn:
+                Log.d("ORE", "LOOOOOK HERE1");
+                DialogFragment DialogFragment_WatchSort = new DialogFragment_WatchSort ();
+                DialogFragment_WatchSort.show(getParentFragmentManager(), "createDialog");
+
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event

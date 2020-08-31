@@ -23,6 +23,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.wdsportz.MainFragments.DialogFragment_WatchSort;
 import com.example.wdsportz.MainFragments.Frag_HomePage;
 import com.example.wdsportz.MainFragments.Frag_SubscribeMore;
 import com.example.wdsportz.MainFragments.Frag_Test_1;
@@ -48,7 +49,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 //Change majority of 'px' dimensions settings to 'dp'
 
-public class Main_Activity extends AppCompatActivity implements Frag_Test_1.OnFragmentInteractionListener, Frag_iniTeamSelect.OnFragmentInteractionListener, Frag_HomePage.OnFragmentInteractionListener, Frag_Profile.OnFragmentInteractionListener, Frag_Notifications.OnFragmentInteractionListener, Frag_About.OnFragmentInteractionListener, Frag_Explore.OnFragmentInteractionListener, Frag_LiveGuide.OnFragmentInteractionListener, Frag_Settings.OnFragmentInteractionListener, Frag_socialWebOpen.OnFragmentInteractionListener, Frag_SubscribeMore.OnFragmentInteractionListener {
+public class Main_Activity extends AppCompatActivity implements DialogFragment_WatchSort.OnFragmentInteractionListener,Frag_Test_1.OnFragmentInteractionListener, Frag_iniTeamSelect.OnFragmentInteractionListener, Frag_HomePage.OnFragmentInteractionListener, Frag_Profile.OnFragmentInteractionListener, Frag_Notifications.OnFragmentInteractionListener, Frag_About.OnFragmentInteractionListener, Frag_Explore.OnFragmentInteractionListener, Frag_LiveGuide.OnFragmentInteractionListener, Frag_Settings.OnFragmentInteractionListener, Frag_socialWebOpen.OnFragmentInteractionListener, Frag_SubscribeMore.OnFragmentInteractionListener {
     // Collect all listeners in one interface ^^^ and pass through to main activity?
 public boolean connected = false;
     public Toolbar toolbar;

@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,7 +18,6 @@ import com.bumptech.glide.Glide;
 import com.example.wdsportz.LivestreamFragment;
 import com.example.wdsportz.R;
 import com.example.wdsportz.ViewModels.WatchViewModel;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
@@ -104,12 +103,10 @@ public class LiveStreamAdapter extends RecyclerView.Adapter<LiveStreamAdapter.My
     }
 
 
-
-
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView title;
         ImageButton btnimg;
-        ImageView liveIndicator;
+        LinearLayout liveIndicator;
         ItemClickListener itemClickListener;
         FirebaseFirestore fireStoreDB = FirebaseFirestore.getInstance();
 
@@ -119,8 +116,9 @@ public class LiveStreamAdapter extends RecyclerView.Adapter<LiveStreamAdapter.My
 
             title= itemView.findViewById(R.id.video_text);
             btnimg = itemView.findViewById(R.id.BtnImgVideo);
-            liveIndicator = itemView.findViewById(R.id.imageView2);
+            liveIndicator = itemView.findViewById(R.id.Live_Indicator);
 
+            btnimg.setClipToOutline(true);
 
             btnimg.setOnClickListener(new View.OnClickListener() {
                 @Override
