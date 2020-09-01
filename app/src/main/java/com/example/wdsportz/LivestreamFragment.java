@@ -8,11 +8,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,7 +18,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.wdsportz.Adapters.CommentAdapter;
 import com.example.wdsportz.ViewModels.Comments;
 import com.example.wdsportz.utils.FullScreenHelper;
@@ -58,11 +55,9 @@ import java.util.List;
 public class LivestreamFragment extends AppCompatActivity {
 
     private OnFragmentInteractionListener mListener;
-    private VideoView videoView;
     private EditText editText;
-    private TextView textView, textView2, textView3;
-    private Button button;
-    private ImageView imageView;
+    private TextView txtVideoTitle;
+    private Button addButton;
     private MediaController mediaController;
     private Uri uri;
     String postKey;
@@ -76,7 +71,6 @@ public class LivestreamFragment extends AppCompatActivity {
 
     private SimpleExoPlayer simpleExoPlayer;
     private PlayerView playerView;
-
 
     FirebaseDatabase firebaseDatabase;
     String videoId;
@@ -103,30 +97,25 @@ protected void onCreate(Bundle savedInstanceState) {
 
 
     RvComment = findViewById(R.id.chat_box);
-    textView = findViewById(R.id.match_title);
-    textView2 = findViewById(R.id.desc);
-    imageView = findViewById(R.id.avatar);
+    txtVideoTitle = findViewById(R.id.Video_title);
     editText = findViewById(R.id.edit_box);
-    button = findViewById(R.id.add);
-    videoView =findViewById(R.id.Watch_view1);
+    addButton = findViewById(R.id.add);
     youTubePlayerView = findViewById(R.id.youtube_player_view);
-    String currentUseImg = user.getPhotoUrl().toString();
-
 
     firebaseAuth = FirebaseAuth.getInstance();
     firebaseUser = firebaseAuth.getCurrentUser();
     firebaseDatabase = FirebaseDatabase.getInstance();
 
-    button.setOnClickListener(new View.OnClickListener() {
+    addButton.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
 
-            button.setVisibility(View.INVISIBLE);
+            addButton.setVisibility(View.INVISIBLE);
             DatabaseReference commentReference =firebaseDatabase.getReference(COMMENT_KEY).child(getPostKey()).push();
             String comment_content = editText.getText().toString();
             String uid = firebaseUser.getUid();
             String uname = firebaseUser.getDisplayName();
-                String uimg = firebaseUser.getPhotoUrl().toString();
+            String uimg = firebaseUser.getPhotoUrl().toString();
             String key = commentReference.getKey();
             String chatID = getIntent().getExtras().getString("chatID");
             String reportID = "";
@@ -137,7 +126,7 @@ protected void onCreate(Bundle savedInstanceState) {
                 public void onSuccess(Void aVoid) {
                     showMessage("comment added");
                     editText.setText("");
-                    button.setVisibility(View.VISIBLE);
+                    addButton.setVisibility(View.VISIBLE);
 
 
                 }
@@ -149,41 +138,16 @@ protected void onCreate(Bundle savedInstanceState) {
                 }
             });
 
-
-
-
-
         }
-
-
-
-
-
-
-
-
-
-
     });
-
-
-
-
-
-
-
 
 
 //    setVideoView(context);
     iniRvComment();
     initYouTubePlayerView();
-    Glide.with(this)
-            .load(currentUseImg)
-            .into(imageView);
-
-
-
-
+//    Glide.with(this)
+//            .load(currentUseImg)
+//            .into(imageView);
 
 }
 

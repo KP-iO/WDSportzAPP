@@ -40,7 +40,7 @@
 
 
     <TextView
-        android:id="@+id/match_title"
+        android:id="@+id/Video_title"
         android:layout_width="141dp"
         android:layout_height="30dp"
         android:layout_marginStart="150dp"
@@ -61,7 +61,7 @@
         android:layout_marginTop="28dp"
         android:text="Chat"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/match_title" />
+        app:layout_constraintTop_toBottomOf="@+id/Video_title" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/action_button_share"

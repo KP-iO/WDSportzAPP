@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -55,6 +56,8 @@ public class frag_login extends Fragment {
 
     View linearLayoutCredentials;
 
+    InputMethodManager imm;
+
     public frag_login() {
         // Required empty public constructor
     }
@@ -96,14 +99,13 @@ public class frag_login extends Fragment {
         TextView txtUsername = view.findViewById(R.id.txtUsername);
         final TextView txtPassword = view.findViewById(R.id.txtPassword);
 
-
         View.OnFocusChangeListener focusListener = new View.OnFocusChangeListener() {
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus){
 
                     Log.d("OFCUSSSS","ORe");
                     guideline.setGuidelineBegin(100);
-                    ConsLayout_Login.getBackground().setColorFilter(Color.parseColor("EB0DB14B"), PorterDuff.Mode.SRC_OVER);
+                    ConsLayout_Login.getBackground().setColorFilter(Color.parseColor("#EB0DB14B"), PorterDuff.Mode.SRC_OVER);
 
 
                 } else {
@@ -117,6 +119,7 @@ public class frag_login extends Fragment {
 
         txtUsername.setOnFocusChangeListener(focusListener);
         txtPassword.setOnFocusChangeListener(focusListener);
+
 
         btnSignIn.setOnClickListener(new OnClickListener() {
               public void onClick(final View view) {
@@ -202,12 +205,12 @@ public class frag_login extends Fragment {
             @Override
             public void onClick(View v) {
 
-//                btnSignIn.performClick()
+//                btnSignIn.performClick();
                 txtUsername.setText("Oreyusuf@hotmail.com");
                 txtPassword.setText("Password1");
                 btnSignIn.performClick();
 
-//                Navigation.findNavController(view).navigate(R.id.action_global_frag_IniTeamSelection);
+              //  Navigation.findNavController(view).navigate(R.id.action_global_frag_IniTeamSelection);
             //    ((Auth_Activity)getActivity()).goToMainFeed();
 
 
@@ -253,8 +256,6 @@ public class frag_login extends Fragment {
         mListener = null;
     }
 
-
-
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -269,4 +270,5 @@ public class frag_login extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
 }

@@ -6,7 +6,7 @@
 
     <item
         android:id="@+id/filter_btn"
-        android:icon="@drawable/drop_down_arrow_leagues"
+        android:icon="@drawable/search_icon"
         android:title="FilterButton"
         app:showAsAction="always"></item>
 </menu>

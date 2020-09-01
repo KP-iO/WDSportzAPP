@@ -60,9 +60,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Map;
-
-import static androidx.constraintlayout.motion.widget.MotionScene.TAG;
 
 public class videoPlayback_Activity extends AppCompatActivity {
 
@@ -122,7 +119,7 @@ public class videoPlayback_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_videoplayback);
 
         RvComment =findViewById(R.id.chat_box);
-        textView = findViewById(R.id.match_title);
+        textView = findViewById(R.id.Video_title);
         textView2 = findViewById(R.id.desc);
         imageView = findViewById(R.id.avatar);
         editText = findViewById(R.id.comment_box);
@@ -320,7 +317,7 @@ String UID = user.getUid();
         TextView videoTitle;
         TextView videoDesc;
 
-        videoTitle = findViewById(R.id.match_title);
+        videoTitle = findViewById(R.id.Video_title);
 //        videoDesc = findViewById(R.id.match_Desc);
 
         videoTitle.setText(getIntent().getExtras().getString("videoTitle"));

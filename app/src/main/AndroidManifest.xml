@@ -39,14 +39,7 @@
         <activity
             android:name=".MainActivities.Main_Activity"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateVisible|adjustResize">
-            <intent-filter>
-                <action android:name="android.intent.action.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".MainFragments.Frag_Watch"
-            android:theme="@style/AppTheme">
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.DEFAULT" />
             </intent-filter>
@@ -63,35 +56,12 @@
             android:theme="@style/AppTheme"
             android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
             android:hardwareAccelerated="true"
+            android:windowSoftInputMode="adjustResize"
             >
             <intent-filter>
                 <action android:name="android.intent.action.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".MainFragments.Frag_iniTeamSelect"
-            android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustNothing">
-            <intent-filter>
-                <action android:name="android.intent.action.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".MainFragments.Frag_iniTeamSelect_teams"
-            android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustNothing">
-            <intent-filter>
-                <action android:name="android.intent.action.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".MainFragments.Frag_HomePage"
-            android:theme="@style/AppTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.DEFAULT" />
-            </intent-filter>
-        </activity>
-
         <service android:name=".Service.MyService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

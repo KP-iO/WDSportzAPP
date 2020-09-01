@@ -3,23 +3,17 @@ package com.example.wdsportz.MainFragments;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.Toast;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.example.wdsportz.MainActivities.Auth_Activity;
 import com.example.wdsportz.R;
-import com.example.wdsportz.utils.PreferenceUtils;
-import com.example.wdsportz.videoPlayback_Activity;
 import com.google.firebase.auth.FirebaseAuth;
 
 /**
@@ -27,7 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
  * Use the {@link Frag_More#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Frag_More extends Fragment implements View.OnClickListener {
+public class Frag_More extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -82,131 +76,142 @@ public class Frag_More extends Fragment implements View.OnClickListener {
 
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
-        final Button btnManageProfile = view.findViewById(R.id.btnManageProfile);
-        btnManageProfile.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Navigation.findNavController(view).navigate(R.id.action_global_frag_Profile);
-                }
-        });
+        String[] mobileArray = {"Android","IPhone","WindowsMobile","Blackberry",
+                "WebOS","Ubuntu","Windows7","Max OS X"};
 
-        final Button btnTnC = view.findViewById(R.id.btnTnC);
-        btnTnC.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_global_frag_About);
-            }
-        });
+            ArrayAdapter adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, mobileArray);
 
-        final Button btnSub = view.findViewById(R.id.btnSelectTeams);
-        btnSub.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            ListView listView = view.findViewById(R.id.listView);
+            listView.setAdapter(adapter);
+        }
 
-//                Intent intent = new Intent(getActivity(), Frag_iniTeamSelect.class);
+
+
+//        final Button btnManageProfile = view.findViewById(R.id.btnManageProfile);
+//        btnManageProfile.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    Navigation.findNavController(view).navigate(R.id.action_global_frag_Profile);
+//                }
+//        });
 //
-//                startActivity(intent);
-                Navigation.findNavController(view).navigate(R.id.action_global_frag_SubscribeMore);
-            }
-        });
+//        final Button btnTnC = view.findViewById(R.id.btnTnC);
+//        btnTnC.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Navigation.findNavController(view).navigate(R.id.action_global_frag_About);
+//            }
+//        });
+//
+//        final Button btnSub = view.findViewById(R.id.btnSelectTeams);
+//        btnSub.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+////                Intent intent = new Intent(getActivity(), Frag_iniTeamSelect.class);
+////
+////                startActivity(intent);
+//                Navigation.findNavController(view).navigate(R.id.action_global_frag_SubscribeMore);
+//            }
+//        });
+//
+//        final Button btnContact = view.findViewById(R.id.btnContactUs);
+//        btnContact.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                sendEmail();
+//            }
+//        });
+//
+//
+//        Button btnSignout = getView().findViewById(R.id.btnSignOut);
+//
+//        btnSignout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Log.d("Sign", "Signout pressed");
+//                firebaseAuth.getInstance().signOut();
+//                PreferenceUtils.saveEmail("", getContext());
+//                PreferenceUtils.savePassword("", getContext());
+//                goToLogIn();
+//            }
+//        });
+//
+//
+//        ImageButton btnFb = view.findViewById(R.id.imgBtn_fb);
+//        btnFb.setOnClickListener(this);
+//
+//        ImageButton btnInsta = view.findViewById(R.id.imgBtn_insta);
+//        btnInsta.setOnClickListener(this);
+//
+//        ImageButton btnSnapchat = view.findViewById(R.id.imgBtn_snapchat);
+//        btnSnapchat.setOnClickListener(this);
+//
+//        ImageButton btnTiktok = view.findViewById(R.id.imgBtn_tiktok);
+//        btnTiktok.setOnClickListener(this);
+//
+//        ImageButton btnTwitter = view.findViewById(R.id.imgBtn_twitter);
+//        btnTwitter.setOnClickListener(this);
+//
+//        ImageButton btnYt = view.findViewById(R.id.imgBtn_yt);
+//        btnYt.setOnClickListener(this);
 
-        final Button btnContact = view.findViewById(R.id.btnContactUs);
-        btnContact.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                sendEmail();
-            }
-        });
-
-
-        Button btnSignout = getView().findViewById(R.id.btnSignOut);
-
-        btnSignout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("Sign", "Signout pressed");
-                firebaseAuth.getInstance().signOut();
-                PreferenceUtils.saveEmail("", getContext());
-                PreferenceUtils.savePassword("", getContext());
-                goToLogIn();
-            }
-        });
-
-
-        ImageButton btnFb = view.findViewById(R.id.imgBtn_fb);
-        btnFb.setOnClickListener(this);
-
-        ImageButton btnInsta = view.findViewById(R.id.imgBtn_insta);
-        btnInsta.setOnClickListener(this);
-
-        ImageButton btnSnapchat = view.findViewById(R.id.imgBtn_snapchat);
-        btnSnapchat.setOnClickListener(this);
-
-        ImageButton btnTiktok = view.findViewById(R.id.imgBtn_tiktok);
-        btnTiktok.setOnClickListener(this);
-
-        ImageButton btnTwitter = view.findViewById(R.id.imgBtn_twitter);
-        btnTwitter.setOnClickListener(this);
-
-        ImageButton btnYt = view.findViewById(R.id.imgBtn_yt);
-        btnYt.setOnClickListener(this);
-
-    }
-
-    @Override
-    public void onClick(View view) {
-
-        Bundle bundle = new Bundle();
-        //fragment.setArguments(bundle);
-
-        switch(view.getId())
-        {
-            case R.id.imgBtn_fb:
-                bundle.putString("url", "https://www.facebook.com/WDSportz/");
-                Navigation.findNavController(view).navigate(R.id.action_global_frag_socialWebOpen, bundle);
-                break;
-
-            case R.id.imgBtn_insta:
-                bundle.putString("url", "https://www.instagram.com/wdsportz/?hl=en");
-                Navigation.findNavController(view).navigate(R.id.action_global_frag_socialWebOpen, bundle);
-                break;
-
-            case R.id.imgBtn_twitter:
-                bundle.putString("url", "https://twitter.com/WDSprtz?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor");
-                Navigation.findNavController(view).navigate(R.id.action_global_frag_socialWebOpen, bundle);
-                break;
-
-            case R.id.imgBtn_yt:
-                bundle.putString("url", "https://www.youtube.com/channel/UCdGTpvqXAQB1dbvlZC8Qk2g");
-                Navigation.findNavController(view).navigate(R.id.action_global_frag_socialWebOpen, bundle);
-                break;
-
-            case R.id.imgBtn_tiktok:
-                bundle.putString("url", "https://www.google.com");
-                Navigation.findNavController(view).navigate(R.id.action_global_frag_socialWebOpen, bundle);
-                break;
-
-            case R.id.imgBtn_snapchat:
-                bundle.putString("url", "https://www.google.com");
-                Navigation.findNavController(view).navigate(R.id.action_global_frag_socialWebOpen, bundle);
-                break;
-
-
-        }
-    }
-
-    public void sendEmail(){
-        Intent i = new Intent(Intent.ACTION_SEND);
-        i.setType("message/rfc822");
-        i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"recipient@example.com"});
-        i.putExtra(Intent.EXTRA_SUBJECT, "subject of email");
-        i.putExtra(Intent.EXTRA_TEXT   , "body of email");
-        try {
-            startActivity(Intent.createChooser(i, "Send mail..."));
-        } catch (android.content.ActivityNotFoundException ex) {
-            Toast.makeText(getActivity(), "There are no email clients installed.", Toast.LENGTH_SHORT).show();
-        }
-    }
+//    }
+//
+//    @Override
+//    public void onClick(View view) {
+//
+//        Bundle bundle = new Bundle();
+//        //fragment.setArguments(bundle);
+//
+//        switch(view.getId())
+//        {
+//            case R.id.imgBtn_fb:
+//                bundle.putString("url", "https://www.facebook.com/WDSportz/");
+//                Navigation.findNavController(view).navigate(R.id.action_global_frag_socialWebOpen, bundle);
+//                break;
+//
+//            case R.id.imgBtn_insta:
+//                bundle.putString("url", "https://www.instagram.com/wdsportz/?hl=en");
+//                Navigation.findNavController(view).navigate(R.id.action_global_frag_socialWebOpen, bundle);
+//                break;
+//
+//            case R.id.imgBtn_twitter:
+//                bundle.putString("url", "https://twitter.com/WDSprtz?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor");
+//                Navigation.findNavController(view).navigate(R.id.action_global_frag_socialWebOpen, bundle);
+//                break;
+//
+//            case R.id.imgBtn_yt:
+//                bundle.putString("url", "https://www.youtube.com/channel/UCdGTpvqXAQB1dbvlZC8Qk2g");
+//                Navigation.findNavController(view).navigate(R.id.action_global_frag_socialWebOpen, bundle);
+//                break;
+//
+//            case R.id.imgBtn_tiktok:
+//                bundle.putString("url", "https://www.google.com");
+//                Navigation.findNavController(view).navigate(R.id.action_global_frag_socialWebOpen, bundle);
+//                break;
+//
+//            case R.id.imgBtn_snapchat:
+//                bundle.putString("url", "https://www.google.com");
+//                Navigation.findNavController(view).navigate(R.id.action_global_frag_socialWebOpen, bundle);
+//                break;
+//
+//
+//        }
+//    }
+//
+//    public void sendEmail(){
+//        Intent i = new Intent(Intent.ACTION_SEND);
+//        i.setType("message/rfc822");
+//        i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"recipient@example.com"});
+//        i.putExtra(Intent.EXTRA_SUBJECT, "subject of email");
+//        i.putExtra(Intent.EXTRA_TEXT   , "body of email");
+//        try {
+//            startActivity(Intent.createChooser(i, "Send mail..."));
+//        } catch (android.content.ActivityNotFoundException ex) {
+//            Toast.makeText(getActivity(), "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+//        }
+//    }
 
 
     public void goToLogIn() {

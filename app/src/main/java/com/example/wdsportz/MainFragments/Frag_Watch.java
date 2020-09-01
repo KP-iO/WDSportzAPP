@@ -10,10 +10,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,9 +22,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.wdsportz.Adapters.LiveStreamAdapter;
 import com.example.wdsportz.Adapters.WatchViewAdapter;
 import com.example.wdsportz.R;
+import com.example.wdsportz.ViewModels.CategoriesModel;
 import com.example.wdsportz.ViewModels.WatchViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -39,6 +42,7 @@ public class Frag_Watch extends Fragment {
     private Frag_Watch fragwatch;
     private static final String TAG = "Video Activity";
     FirebaseFirestore fireStoreDB = FirebaseFirestore.getInstance();
+    ChipGroup chipGroupSort;
     private RecyclerView recyclerView;
     private RecyclerView recyclerView1;
 
@@ -86,8 +90,8 @@ public class Frag_Watch extends Fragment {
 
             case R.id.filter_btn:
                 Log.d("ORE", "LOOOOOK HERE1");
-                DialogFragment DialogFragment_WatchSort = new DialogFragment_WatchSort ();
-                DialogFragment_WatchSort.show(getParentFragmentManager(), "createDialog");
+//                DialogFragment DialogFragment_WatchSort = new DialogFragment_WatchSort ();
+//                DialogFragment_WatchSort.show(getParentFragmentManager(), "createDialog");
 
                 return true;
 
@@ -106,6 +110,20 @@ public class Frag_Watch extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         final Context context = view.getContext();
 
+        chipGroupSort = getView().findViewById(R.id.chipGroupSort);
+        chipGroupSort.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(ChipGroup chipGroup, int i) {
+                Chip chip = chipGroup.findViewById(i);
+                if(chip != null){
+                    //show selection
+                    Toast.makeText(getContext(), chip.getText().toString(),Toast.LENGTH_LONG).show();
+                } else {
+                    //Else show normal
+                }
+            }
+        });
+
         recyclerView = getView().findViewById(R.id.RecyclerViewV);
         recyclerView1 = getView().findViewById(R.id.RecyclerViewVM);
         int numberOfColumns = 2;
@@ -114,10 +132,45 @@ public class Frag_Watch extends Fragment {
 
 
 // Implement error handling for all cases e.g (Name/ Logo not accessible) ------>
-
+        RecyclerSort(context);
         BottomRecycler(context);
         TopRecycler(context);
+    }
 
+    private void RecyclerSort(Context context) {
+
+        Task<QuerySnapshot> docRef = fireStoreDB.collection("Categories")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            int i = 0;
+                            List<CategoriesModel> list = new ArrayList<>();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+
+                                Log.d(TAG, "DOCUMENT PRINT :" + document.getData().toString());
+                                list.add(new CategoriesModel(document.get("Name").toString(),document.getId()));
+
+                                Chip chip = (Chip) getLayoutInflater().inflate(R.layout.layout_chip_choice, chipGroupSort, false);
+                                chip.setText(list.get(i).getTitle());
+                                chipGroupSort.addView(chip);
+
+                                i = i +1;
+                            }
+
+
+
+
+                        } else {
+                            Log.d(TAG, "No such document");
+                        }
+
+                    }
+
+                });
 
     }
 
@@ -138,10 +191,6 @@ public class Frag_Watch extends Fragment {
 
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
-
-                                Log.d(TAG, "DOCUMENT PRINT :" + document.getData().toString());
-                                Log.d(TAG, "Team Added to List " + document.get("Match_Name").toString());
-
                                 list.add(new WatchViewModel(document.get("Match_Name").toString(), document.get("Match_Image").toString(), document.get("Match_Video").toString(), document.get("Chatbox_ID").toString(), document.get("Video_desc").toString(),document.get("Live").toString()));
 
                                 //Log.d(TAG, ("LOGO URL: " + list.));
@@ -151,13 +200,6 @@ public class Frag_Watch extends Fragment {
 
                             }
 
-                            // List check (in Log)
-                            for (int i = 0; i < list.size() - 1; i++) {
-
-                                Log.d(TAG, (" Team Name = " + list.get(i).getTitle()));
-                                Log.d(TAG, "List Url test   " + list.get(i).getVideoImageURL());
-                                Log.d(TAG, "Video Url test   " + list.get(i).getVideoURL());
-                            }
 
                         } else {
                             Log.d(TAG, "No such document");
@@ -212,17 +254,7 @@ public class Frag_Watch extends Fragment {
     }
 
 
-//
-//    @Override
-////    public void onAttach(Context context) {
-////        super.onAttach(context);
-////        if (context instanceof OnFragmentInteractionListener) {
-////            mListener = (OnFragmentInteractionListener) context;
-////        } else {
-////            throw new RuntimeException(context.toString()
-////                    + " must implement OnFragmentInteractionListener");
-////        }
-////    }
+
 
     @Override
     public void onDetach() {

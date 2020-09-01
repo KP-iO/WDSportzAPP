@@ -42,7 +42,7 @@
 
 
     <TextView
-        android:id="@+id/match_title"
+        android:id="@+id/Video_title"
         android:layout_width="141dp"
         android:layout_height="30dp"
         android:layout_marginStart="122dp"
@@ -91,7 +91,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/match_title" />
+        app:layout_constraintTop_toBottomOf="@+id/Video_title" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chat_box"
