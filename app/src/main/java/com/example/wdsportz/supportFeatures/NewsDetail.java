@@ -50,14 +50,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link newsDetail.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link newsDetail#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class newsDetail extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
@@ -99,14 +91,6 @@ public class newsDetail extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment newsDetail.
-     */
     // TODO: Rename and change types and number of parameters
     public static newsDetail newInstance(String param1, String param2) {
         newsDetail fragment = new newsDetail();

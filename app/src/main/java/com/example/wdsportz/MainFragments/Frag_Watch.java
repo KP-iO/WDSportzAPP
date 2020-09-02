@@ -191,7 +191,7 @@ public class Frag_Watch extends Fragment {
 
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
-                                list.add(new WatchViewModel(document.get("Match_Name").toString(), document.get("Match_Image").toString(), document.get("Match_Video").toString(), document.get("Chatbox_ID").toString(), document.get("Video_desc").toString(),document.get("Live").toString()));
+                                list.add(new WatchViewModel(document.get("Match_Name").toString(), document.get("Match_Image").toString(), document.get("Match_Video").toString(), document.get("Chatbox_ID").toString(), document.get("Video_desc").toString(), document.get("Live").toString(), document.get("Date").toString()));
 
                                 //Log.d(TAG, ("LOGO URL: " + list.));
 

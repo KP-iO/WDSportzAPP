@@ -40,6 +40,8 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.utils.YouTube
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -101,6 +103,12 @@ protected void onCreate(Bundle savedInstanceState) {
     editText = findViewById(R.id.edit_box);
     addButton = findViewById(R.id.add);
     youTubePlayerView = findViewById(R.id.youtube_player_view);
+    TextView date = findViewById(R.id.txtDate);
+    TextView desc = findViewById(R.id.txtDescription);
+    String dateTxt = getIntent().getExtras().getString("date");
+    String descTxt= getIntent().getExtras().getString("videoDesc");
+    date.setText(dateTxt);
+    desc.setText(descTxt);
 
     firebaseAuth = FirebaseAuth.getInstance();
     firebaseUser = firebaseAuth.getCurrentUser();
@@ -168,6 +176,7 @@ protected void onCreate(Bundle savedInstanceState) {
 
         RvComment.setLayoutManager(new LinearLayoutManager(this));
 
+
         String postKey1 = getIntent().getExtras().getString("chatID");
 
         DatabaseReference commentRef = firebaseDatabase.getReference(COMMENT_KEY).child(postKey1);
@@ -177,6 +186,7 @@ protected void onCreate(Bundle savedInstanceState) {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 listComments = new ArrayList<>();
+
 
                 for (DataSnapshot snap:dataSnapshot.getChildren()) {
 
@@ -191,6 +201,7 @@ protected void onCreate(Bundle savedInstanceState) {
                 }
 
                 commentAdapter = new CommentAdapter(LivestreamFragment.this,listComments);
+                Collections.reverse(listComments);
                 RvComment.setAdapter(commentAdapter);
             }
 
