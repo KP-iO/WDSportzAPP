@@ -63,12 +63,12 @@ public class LiveStreamAdapter extends RecyclerView.Adapter<LiveStreamAdapter.My
         final String currentUrl = videoViewModels.get(position).getVideoImageURL();
         final String Video1 = (videoViewModels.get(position).getVideoURL());
         final String chat_ID = (videoViewModels.get(position).getChatBox_ID());
-        final String date = (videoViewModels.get(position).getDate());
-        final String videoDesc = (videoViewModels.get(position).getVideo_desc());
 
-        final String live = (videoViewModels.get(position).getLive());
-        if (live.equals("true") ){
+        final Boolean live = (videoViewModels.get(position).getLive());
+        if (live == true ){
             holder.liveIndicator.setVisibility(View.VISIBLE);
+        } else {
+            holder.liveIndicator.setVisibility(View.INVISIBLE);
         }
 
         Glide.with(context)
@@ -82,8 +82,6 @@ public class LiveStreamAdapter extends RecyclerView.Adapter<LiveStreamAdapter.My
                 Bundle bundle = new Bundle();
                 bundle.putString("chatID",chat_ID);
                 bundle.putString("video", Video1);
-                bundle.putString("videoDesc", videoDesc);
-                bundle.putString("date", date);
                 intent.putExtras(bundle);
                 context.startActivity(intent);
 

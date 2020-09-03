@@ -46,12 +46,10 @@ public class ScoreFeedAdpater extends RecyclerView.Adapter<ScoreFeedAdpater.MyVi
         String ATeam = mData.get(i).getAwayTeam();
         String HTeamScore = mData.get(i).getHomeScore();
         String ATeamScore = mData.get(i).getAwayScore();
-        String date = mData.get(i).getEventDate();
         String homeImage = mData.get(i).getHomeIcon();
         String awayImage = mData.get(i).getAwayIcon();
 
 
-        holder.matchDate.setText(date);
         holder.awayName.setText(HTeam);
         holder.homeName.setText(ATeam);
         holder.awayScore.setText(ATeamScore);
@@ -64,10 +62,6 @@ public class ScoreFeedAdpater extends RecyclerView.Adapter<ScoreFeedAdpater.MyVi
         Glide.with(mContext)
                 .load(awayImage)
                 .into(holder.awayImage);
-
-
-
-
 
     }
 
@@ -89,13 +83,10 @@ public class ScoreFeedAdpater extends RecyclerView.Adapter<ScoreFeedAdpater.MyVi
             super(view);
             homeImage = view.findViewById(R.id.homeImg);
             awayImage = view.findViewById(R.id.awayImg);
-            matchDate = (TextView) view.findViewById(R.id.matchDate);
             awayName = (TextView) view.findViewById(R.id.awayName);
             homeName = (TextView) view.findViewById(R.id.homeName);
             awayScore = (TextView) view.findViewById(R.id.awayScore);
             homeScore = (TextView) view.findViewById(R.id.homeScore);
-
-
 
 
 //            view.setOnClickListener(new View.OnClickListener(){
