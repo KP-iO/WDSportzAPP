@@ -1,5 +1,7 @@
 package com.example.wdsportz.ViewModels;
 
+import java.util.Date;
+
 public class WatchViewModel {
 
     String title;
@@ -8,6 +10,7 @@ public class WatchViewModel {
     String chatBox_ID;
     String video_desc;
     String live;
+    String  date;
 
 //    public WatchViewModel() {
 //
@@ -17,13 +20,14 @@ public class WatchViewModel {
 //
 //    }
 
-    public WatchViewModel(String title, String videoimageURL, String videoURL, String chatBox_ID, String video_desc, String live) {
+    public WatchViewModel(String title, String videoimageURL, String videoURL, String chatBox_ID, String video_desc, String live, String date) {
         this.title = title;
         this.videoimageURL = videoimageURL;
         this.videoURL = videoURL;
         this.chatBox_ID = chatBox_ID;
         this.video_desc = video_desc;
         this.live = live;
+        this.date = date;
     }
 
     public WatchViewModel(String title, String videoimageURL, String videoURL, String chatBox_ID, String video_desc) {
@@ -33,6 +37,15 @@ public class WatchViewModel {
         this.chatBox_ID = chatBox_ID;
         this.video_desc = video_desc;
 
+    }
+
+    public WatchViewModel(String title, String videoimageURL, String videoURL, String chatBox_ID, String video_desc, String live) {
+        this.title = title;
+        this.videoimageURL = videoimageURL;
+        this.videoURL = videoURL;
+        this.chatBox_ID = chatBox_ID;
+        this.video_desc = video_desc;
+        this.live = live;
     }
 
 
@@ -76,4 +89,10 @@ public class WatchViewModel {
     }
 
     public void setLive(String chatBox_ID) {this.live = live; }
+
+    public  String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {this.live = date; }
 }

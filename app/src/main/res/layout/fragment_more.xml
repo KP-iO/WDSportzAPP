@@ -13,16 +13,6 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <ListView
-        android:id="@+id/listView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#CA0D0D"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/textView4"
         android:layout_width="0dp"
@@ -32,7 +22,6 @@
         android:textAlignment="center"
         android:textSize="28sp"
         android:textStyle="bold"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -43,7 +32,6 @@
         android:layout_height="55dp"
         android:layout_marginTop="8dp"
         android:text="Manage Profile"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
@@ -55,7 +43,7 @@
         android:layout_width="280dp"
         android:layout_height="55dp"
         android:text="Subscribe to more teams"
-        android:visibility="gone"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
@@ -70,7 +58,6 @@
         android:textAlignment="center"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnSelectTeams" />
@@ -83,7 +70,6 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:orientation="vertical"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3">
@@ -94,8 +80,7 @@
             android:layout_height="80dp"
             android:layout_marginTop="3dp"
             android:layout_weight="1"
-            android:orientation="horizontal"
-            android:visibility="gone">
+            android:orientation="horizontal">
 
             <ImageButton
                 android:id="@+id/imgBtn_fb"
@@ -104,8 +89,7 @@
                 android:layout_weight="1"
                 android:background="#00FFFFFF"
                 android:scaleType="fitCenter"
-                android:src="@drawable/fb"
-                android:visibility="gone" />
+                android:src="@drawable/fb" />
 
             <ImageButton
                 android:id="@+id/imgBtn_twitter"
@@ -115,8 +99,7 @@
                 android:layout_weight="1"
                 android:background="#00FFFFFF"
                 android:scaleType="fitCenter"
-                android:src="@drawable/twitter"
-                android:visibility="gone" />
+                android:src="@drawable/twitter" />
 
             <ImageButton
                 android:id="@+id/imgBtn_insta"
@@ -125,8 +108,7 @@
                 android:layout_weight="1"
                 android:background="#00FFFFFF"
                 android:scaleType="fitCenter"
-                android:src="@drawable/instagram"
-                android:visibility="gone" />
+                android:src="@drawable/instagram" />
 
         </LinearLayout>
 
@@ -136,7 +118,6 @@
             android:layout_marginTop="16dp"
             android:layout_weight="1"
             android:orientation="horizontal"
-            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -149,8 +130,7 @@
                 android:layout_weight="1"
                 android:background="#00FFFFFF"
                 android:scaleType="fitCenter"
-                android:src="@drawable/tiktok"
-                android:visibility="gone" />
+                android:src="@drawable/tiktok" />
 
             <ImageButton
                 android:id="@+id/imgBtn_yt"
@@ -159,8 +139,7 @@
                 android:layout_weight="1"
                 android:background="#00FFFFFF"
                 android:scaleType="fitCenter"
-                android:src="@drawable/youtube"
-                android:visibility="gone" />
+                android:src="@drawable/youtube" />
 
             <ImageButton
                 android:id="@+id/imgBtn_snapchat"
@@ -169,8 +148,7 @@
                 android:layout_weight="1"
                 android:background="#00FFFFFF"
                 android:scaleType="fitCenter"
-                android:src="@drawable/snapchat"
-                android:visibility="gone" />
+                android:src="@drawable/snapchat" />
         </LinearLayout>
     </LinearLayout>
 
@@ -180,7 +158,6 @@
         android:layout_height="55dp"
         android:layout_marginTop="16dp"
         android:text="Contact Us"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
@@ -192,7 +169,6 @@
         android:layout_height="55dp"
         android:layout_marginTop="6dp"
         android:text="Official Website"
-        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/btnSignOut"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -205,7 +181,6 @@
         android:layout_height="53dp"
         android:layout_marginEnd="13dp"
         android:text="Terms and Conditions"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnOfficialWeb" />
@@ -219,7 +194,6 @@
         android:layout_marginEnd="65dp"
         android:text="Sign Out"
         android:textColor="#FF0000"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
