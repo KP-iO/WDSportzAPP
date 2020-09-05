@@ -104,7 +104,7 @@ public class Frag_Score extends Fragment {
         final Context context = view.getContext();
         this.view = view;
         recyclerViewScores = getView().findViewById(R.id.scores_feed);
-        recyclerViewScores.setLayoutManager(new GridLayoutManager(context, 2));
+        recyclerViewScores.setLayoutManager(new GridLayoutManager(context, 1));
         btnfab_standings = getView().findViewById(R.id.fab_standings);
         iniScoreFeed(context);
         initCalenderSortBar(view);
@@ -147,16 +147,6 @@ public class Frag_Score extends Fragment {
 
                         }
 
-                        // List check (in Log)
-//                            for (int i = 0; i < ogScoresList.size() - 1; i++) {
-//
-//                                Log.d(TAG, ("ID = " + ogScoresList.get(i).getEventId()));
-//                                Log.d(TAG, "Home Team   " + ogScoresList.get(i).getHomeTeam());
-//                                Log.d(TAG, "Away Team   " + ogScoresList.get(i).getAwayTeam());
-//                                Log.d(TAG, "Home Score   " + ogScoresList.get(i).getHomeScore());
-//                                Log.d(TAG, "Away Score   " + ogScoresList.get(i).getAwayScore());
-//
-//                            }
 
                     } else {
                         Log.d(TAG, "No such document");
@@ -189,17 +179,6 @@ public class Frag_Score extends Fragment {
 
                             }
 
-                            // List check (in Log) East
-//                            for (int i = 0; i < ogScoresList.size() - 1; i++) {
-//
-//                                Log.d(TAG, ("ID = " + ogScoresList.get(i).getEventId()));
-//                                Log.d(TAG, "Home Team   " + ogScoresList.get(i).getHomeTeam());
-//                                Log.d(TAG, "Away Team   " + ogScoresList.get(i).getAwayTeam());
-//                                Log.d(TAG, "Home Score   " + ogScoresList.get(i).getHomeScore());
-//                                Log.d(TAG, "Away Score   " + ogScoresList.get(i).getAwayScore());
-//
-//                            }
-
                         } else {
                             Log.d(TAG, "No such document");
                         }
@@ -230,17 +209,6 @@ public class Frag_Score extends Fragment {
                                 recyclerViewScores.setAdapter(scoreFeedAdpater);
 
                             }
-
-                            // List check (in Log)
-//                            for (int i = 0; i < ogScoresList.size() - 1; i++) {
-//
-//                                Log.d(TAG, ("ID = " + ogScoresList.get(i).getEventId()));
-//                                Log.d(TAG, "Home Team   " + ogScoresList.get(i).getHomeTeam());
-//                                Log.d(TAG, "Away Team   " + ogScoresList.get(i).getAwayTeam());
-//                                Log.d(TAG, "Home Score   " + ogScoresList.get(i).getHomeScore());
-//                                Log.d(TAG, "Away Score   " + ogScoresList.get(i).getAwayScore());
-//
-//                            }
 
                         } else {
                             Log.d(TAG, "No such document");

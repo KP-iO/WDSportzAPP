@@ -53,7 +53,6 @@ public class frag_Score_Standings extends Fragment {
 
         SelectedLeague = getArguments().getString("SelectedLeague");
 
-
         return inflater.inflate(R.layout.fragment_frag__score__standings, container, false);
     }
 
@@ -119,6 +118,7 @@ public class frag_Score_Standings extends Fragment {
 
             View layout2 = LayoutInflater.from(getContext()).inflate(R.layout.score_standings_row, (ViewGroup) view.findViewById(R.id.TableScores), false);
 
+            //Onclick event
             layout2.setOnClickListener(v -> v.setBackgroundColor(getResources().getColor(R.color.red_100)));
 
             TextView txtRank = (TextView) layout2.findViewById(R.id.txtRankNum);
@@ -141,11 +141,11 @@ public class frag_Score_Standings extends Fragment {
             TextView txtLost = (TextView) layout2.findViewById(R.id.txtLost);
             txtLost.setText(leagueStanding.getTeamLose());
 
-            TextView txtFor = (TextView) layout2.findViewById(R.id.txtFor);
-            txtFor.setText(leagueStanding.getGoalsFor());
-
-            TextView txtAgainst = (TextView) layout2.findViewById(R.id.txtAgainst);
-            txtAgainst.setText(leagueStanding.getGoalsAgainst());
+//            TextView txtFor = (TextView) layout2.findViewById(R.id.txtFor);
+//            txtFor.setText(leagueStanding.getGoalsFor());
+//
+//            TextView txtAgainst = (TextView) layout2.findViewById(R.id.txtAgainst);
+//            txtAgainst.setText(leagueStanding.getGoalsAgainst());
 
             TextView txtPoints = (TextView) layout2.findViewById(R.id.txtPoints);
             txtPoints.setText(leagueStanding.getPoints());

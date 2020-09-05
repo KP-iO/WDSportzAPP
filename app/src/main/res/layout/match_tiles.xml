@@ -3,26 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/newsCard"
-    android:layout_width="200dp"
-    android:layout_height="200dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_gravity="fill"
     android:layout_margin="5dp"
-    app:cardBackgroundColor="#00271616"
-    app:cardElevation="2dp"
+    app:cardCornerRadius="0dp"
+    app:cardElevation="0dp"
     app:layout_anchorGravity="fill"
     app:layout_gravity="fill">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/homeImg"
-            android:layout_width="76dp"
-            android:layout_height="77dp"
-            android:layout_marginStart="7dp"
-            android:layout_marginTop="9dp"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="54dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="11dp"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/homeScore"
+            app:layout_constraintStart_toEndOf="@+id/homeName"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/blank_team_profile" />
 
@@ -32,84 +35,103 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="4dp"
             android:ellipsize="none"
-            android:maxLength="100"
-            android:maxLines="100"
+            android:gravity="center"
+            android:maxLines="2"
             android:scrollHorizontally="false"
             android:text="Hello World "
             android:textSize="17sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/homeImg"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/homeImg"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.47" />
 
         <TextView
             android:id="@+id/homeScore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="74dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
+            android:gravity="center"
             android:maxLength="50"
             android:maxLines="1"
             android:text="1"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/txtCenterLine"
             app:layout_constraintStart_toEndOf="@+id/homeImg"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/txtCenterLine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text=":"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
         <ImageView
             android:id="@+id/awayImg"
-            android:layout_width="76dp"
-            android:layout_height="77dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="11dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/homeImg"
+            android:layout_width="54dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="6dp"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/awayName"
+            app:layout_constraintStart_toEndOf="@+id/awayScore"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.529"
             app:srcCompat="@drawable/blank_team_profile" />
 
         <TextView
             android:id="@+id/awayScore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="74dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
+            android:gravity="center"
             android:maxLength="50"
             android:maxLines="1"
             android:text="1"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/awayImg"
-            app:layout_constraintTop_toBottomOf="@+id/homeImg" />
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/awayImg"
+            app:layout_constraintStart_toEndOf="@+id/txtCenterLine"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/awayName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="4dp"
             android:ellipsize="none"
-            android:maxLength="100"
-            android:maxLines="100"
+            android:gravity="center"
+            android:maxLines="2"
             android:scrollHorizontally="false"
             android:text="Hello World "
             android:textSize="17sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/awayImg"
-            app:layout_constraintTop_toBottomOf="@+id/homeImg" />
-
-        <TextView
-            android:id="@+id/matchDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:maxLength="70"
-            android:maxLines="3"
-            android:text="Hello World "
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.436" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

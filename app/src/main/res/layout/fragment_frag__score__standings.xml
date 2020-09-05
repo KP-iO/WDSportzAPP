@@ -10,12 +10,15 @@
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:id="@+id/labelLeagueName"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:maxLines="1"
         android:text="@string/hello_blank_fragment"
         android:textSize="36sp"
         android:textStyle="bold"
+        app:autoSizeTextType="uniform"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,6 +26,8 @@
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
         android:layout_weight="1"
         android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -33,22 +38,26 @@
 
         <TableLayout
             android:id="@+id/TableScores"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
             android:layout_marginTop="16dp"
+            android:layout_marginRight="4dp"
             android:layout_marginBottom="16dp"
+            android:stretchColumns="*"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/labelLeagueName">
 
             <TableRow
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp">
 
                 <TextView
                     android:id="@+id/labelRank"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="3dp"
@@ -56,7 +65,7 @@
                     android:fontFamily="sans-serif-black"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:text="Rank"
+                    android:text="Pos"
                     android:textAlignment="center"
                     android:textColor="#000000"
                     android:textSize="16sp"
@@ -64,23 +73,20 @@
 
                 <TextView
                     android:id="@+id/imgTeamLogo"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="3dp"
-                    android:layout_marginRight="3dp"
-                    android:layout_weight="0" />
+                    android:layout_weight="1" />
 
                 <TextView
                     android:id="@+id/labelTeamName"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="3dp"
                     android:layout_marginRight="3dp"
                     android:layout_weight="1"
                     android:fontFamily="sans-serif-black"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:text="Team"
                     android:textAlignment="textStart"
                     android:textColor="#000000"
                     android:textSize="16sp"
@@ -88,7 +94,7 @@
 
                 <TextView
                     android:id="@+id/labelWon"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="3dp"
@@ -103,24 +109,8 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/labelDrawn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="3dp"
-                    android:layout_marginRight="3dp"
-                    android:layout_weight="1"
-                    android:fontFamily="sans-serif-black"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:text="D"
-                    android:textAlignment="center"
-                    android:textColor="#000000"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
                     android:id="@+id/labelLost"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="3dp"
@@ -135,8 +125,8 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/labelFor"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/labelDrawn"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="3dp"
@@ -144,23 +134,7 @@
                     android:fontFamily="sans-serif-black"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:text="F"
-                    android:textAlignment="center"
-                    android:textColor="#000000"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/labelAgainst"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="3dp"
-                    android:layout_marginRight="3dp"
-                    android:layout_weight="1"
-                    android:fontFamily="sans-serif-black"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:text="A"
+                    android:text="D"
                     android:textAlignment="center"
                     android:textColor="#000000"
                     android:textSize="16sp"
@@ -168,7 +142,7 @@
 
                 <TextView
                     android:id="@+id/labelPoints"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="3dp"
@@ -184,7 +158,7 @@
 
                 <TextView
                     android:id="@+id/labelForm"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="3dp"

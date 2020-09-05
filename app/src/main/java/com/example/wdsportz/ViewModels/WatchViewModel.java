@@ -1,7 +1,5 @@
 package com.example.wdsportz.ViewModels;
 
-import java.util.Date;
-
 public class WatchViewModel {
 
     String title;
@@ -9,8 +7,8 @@ public class WatchViewModel {
     String videoURL;
     String chatBox_ID;
     String video_desc;
-    String live;
-    String  date;
+    Boolean live;
+    String Category;
 
 //    public WatchViewModel() {
 //
@@ -20,32 +18,30 @@ public class WatchViewModel {
 //
 //    }
 
-    public WatchViewModel(String title, String videoimageURL, String videoURL, String chatBox_ID, String video_desc, String live, String date) {
+    //Live Videos
+    public WatchViewModel(String title, String videoimageURL, String videoURL, String chatBox_ID, String video_desc, Boolean live) {
         this.title = title;
         this.videoimageURL = videoimageURL;
         this.videoURL = videoURL;
         this.chatBox_ID = chatBox_ID;
         this.video_desc = video_desc;
         this.live = live;
-        this.date = date;
     }
 
-    public WatchViewModel(String title, String videoimageURL, String videoURL, String chatBox_ID, String video_desc) {
+    public WatchViewModel(String title, String videoimageURL, String videoURL, String chatBox_ID, String video_desc, String Category) {
         this.title = title;
         this.videoimageURL = videoimageURL;
         this.videoURL = videoURL;
         this.chatBox_ID = chatBox_ID;
         this.video_desc = video_desc;
+        this.Category = Category;
 
-    }
+//        if(Category != null){
+//            this.Category = Category;
+//        } else {
+//            this.Category = "null";
+//        }
 
-    public WatchViewModel(String title, String videoimageURL, String videoURL, String chatBox_ID, String video_desc, String live) {
-        this.title = title;
-        this.videoimageURL = videoimageURL;
-        this.videoURL = videoURL;
-        this.chatBox_ID = chatBox_ID;
-        this.video_desc = video_desc;
-        this.live = live;
     }
 
 
@@ -84,15 +80,17 @@ public class WatchViewModel {
 
     public void setVideo_desc(String video_desc) {this.video_desc = video_desc; }
 
-    public  String getLive() {
+    public Boolean getLive() {
         return live;
     }
 
     public void setLive(String chatBox_ID) {this.live = live; }
 
-    public  String getDate() {
-        return date;
+    public String getCategory() {
+        return Category;
     }
 
-    public void setDate(String date) {this.live = date; }
+    public void setCategory(String category) {
+        Category = category;
+    }
 }
