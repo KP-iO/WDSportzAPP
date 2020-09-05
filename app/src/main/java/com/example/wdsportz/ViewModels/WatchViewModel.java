@@ -28,19 +28,18 @@ public class WatchViewModel {
         this.live = live;
     }
 
-    public WatchViewModel(String title, String videoimageURL, String videoURL, String chatBox_ID, String video_desc, String Category) {
+    public WatchViewModel(String title, String videoimageURL, String videoURL, String chatBox_ID, String video_desc, Object Category) {
         this.title = title;
         this.videoimageURL = videoimageURL;
         this.videoURL = videoURL;
         this.chatBox_ID = chatBox_ID;
         this.video_desc = video_desc;
-        this.Category = Category;
 
-//        if(Category != null){
-//            this.Category = Category;
-//        } else {
-//            this.Category = "null";
-//        }
+        if(Category != null){
+            this.Category = Category.toString();
+        } else {
+            this.Category = "null";
+        }
 
     }
 

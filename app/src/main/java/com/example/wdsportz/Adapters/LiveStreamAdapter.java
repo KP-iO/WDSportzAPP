@@ -42,13 +42,6 @@ public class LiveStreamAdapter extends RecyclerView.Adapter<LiveStreamAdapter.My
     }
 
 
-
-
-//    public WatchViewAdapter(Context context, List<VideoViewModel> videoViewModels) {
-//
-//    }
-
-
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -56,15 +49,15 @@ public class LiveStreamAdapter extends RecyclerView.Adapter<LiveStreamAdapter.My
     }
 
 
-
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, int position) {
+
         holder.title.setText(videoViewModels.get(position).getTitle());
         final String currentUrl = videoViewModels.get(position).getVideoImageURL();
         final String Video1 = (videoViewModels.get(position).getVideoURL());
         final String chat_ID = (videoViewModels.get(position).getChatBox_ID());
-
         final Boolean live = (videoViewModels.get(position).getLive());
+
         if (live == true ){
             holder.liveIndicator.setVisibility(View.VISIBLE);
         } else {

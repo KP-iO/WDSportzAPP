@@ -186,20 +186,16 @@ public class Frag_Watch extends Fragment {
 
                             List<WatchViewModel> list = new ArrayList<>();
 
-
 ////// Change FROM download url to stroage url in firestore?
 
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
-                                list.add(new WatchViewModel(document.get("Match_Name").toString(), document.get("Match_Image").toString(), document.get("Match_Video").toString(), document.get("Chatbox_ID").toString(), document.get("Video_desc").toString(), document.get("Live").toString(), document.get("Date").toString()));
-
-                                //Log.d(TAG, ("LOGO URL: " + list.));
+                                list.add(new WatchViewModel(document.get("Match_Name").toString(), document.get("Match_Image").toString(), document.get("Match_Video").toString(), document.get("Chatbox_ID").toString(), document.get("Video_desc").toString(), (Boolean) document.get("Live")));
 
                                 liveStreamAdapter = new LiveStreamAdapter(context, list);
                                 recyclerView1.setAdapter(liveStreamAdapter);
 
                             }
-
 
                         } else {
                             Log.d(TAG, "No such document");
@@ -226,14 +222,17 @@ public class Frag_Watch extends Fragment {
 
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
-
                                 Log.d(TAG, "DOCUMENT PRINT :" + document.getData().toString());
 
-                                list.add(new WatchViewModel(document.get("Match_Name").toString(), document.get("Match_Image").toString(), document.get("Match_Video").toString(), document.get("Chatbox_ID").toString(), document.get("Video_desc").toString()));
+                                list.add(new WatchViewModel(document.get("Match_Name").toString(),
+                                        document.get("Match_Image").toString(),
+                                        document.get("Match_Video").toString(),
+                                        document.get("Chatbox_ID").toString(),
+                                        document.get("Video_desc").toString(),
+                                        document.get("Category")));
 
                                 watchViewAdapter = new WatchViewAdapter(context, list);
                                 recyclerView.setAdapter(watchViewAdapter);
-
                             }
 
                             // List check (in Log)

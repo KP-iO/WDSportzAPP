@@ -47,8 +47,6 @@ public class SelectTeamsRecyclerViewAdapter extends RecyclerView.Adapter<SelectT
         this.context = context;
     }
 
-    ///Add new comment 
-
     // inflates the cell layout from xml when needed
     @Override
     @NonNull
