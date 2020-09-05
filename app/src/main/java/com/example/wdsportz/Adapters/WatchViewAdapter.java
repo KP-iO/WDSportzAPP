@@ -65,6 +65,7 @@ public class WatchViewAdapter extends RecyclerView.Adapter<WatchViewAdapter.MyVi
         holder.btnimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                throw new RuntimeException("Test Crash");
                 Intent intent = new Intent(context, videoPlayback_Activity.class);
                 // used to bundle strings and enable it to be collected
                 Bundle bundle = new Bundle();
@@ -75,10 +76,11 @@ public class WatchViewAdapter extends RecyclerView.Adapter<WatchViewAdapter.MyVi
                 intent.putExtras(bundle);
                 context.startActivity(intent);
 
-//                for (String key: bundle.keySet())
-//                {
-//                    Log.d ("myApplication", key + " is a key in the bundle");
-//                }
+
+                for (String key: bundle.keySet())
+                {
+                    Log.d ("myApplication", key + " is a key in the bundle");
+                }
             }
         });
 

@@ -32,6 +32,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.example.wdsportz.R;
+import com.example.wdsportz.utils.PreferenceUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -174,7 +175,7 @@ public class frag_Register extends Fragment {
                 pd.show();
 
                 final String userName = _txtfname.getText().toString();
-                final String email = _txtemail.getText().toString();
+                final String emailMain = _txtemail.getText().toString();
                 final String password = _txtpass.getText().toString();
                 final String confirmPass = confirm.getText().toString();
 //                final String image = avatarReg.g
@@ -185,7 +186,7 @@ public class frag_Register extends Fragment {
 
                 //   progressBar.setVisibility(View.VISIBLE);
                 if (passwordConfirmed && checkBoxConfirm) {
-                    firebaseAuth.createUserWithEmailAndPassword(email, password)      // code used to create user
+                    firebaseAuth.createUserWithEmailAndPassword(emailMain, password)      // code used to create user
                             .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
@@ -329,6 +330,8 @@ public class frag_Register extends Fragment {
 
                                         pd.dismiss();
                                         Navigation.findNavController(view).navigate(R.id.action_frag_Register_to_frag_IniTeamSelection2,bundle);
+                                        PreferenceUtils.saveEmail(emailMain, getContext());
+                                        PreferenceUtils.savePassword(password, getContext());
 
 
                                     } else {

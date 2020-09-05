@@ -110,6 +110,8 @@ public class Frag_Watch extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         final Context context = view.getContext();
 
+
+
         chipGroupSort = getView().findViewById(R.id.chipGroupSort);
         chipGroupSort.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
             @Override
