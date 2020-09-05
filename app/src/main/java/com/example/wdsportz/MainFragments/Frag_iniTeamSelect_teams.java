@@ -65,32 +65,32 @@ public class Frag_iniTeamSelect_teams extends Fragment {
 
     }
 
-//    @Override
-//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//        // Do something that differs the Activity's menu here
-//        super.onCreateOptionsMenu(menu, inflater);
-//
-//        this.menu1 = menu;
-//
-//        MenuItem searchItem = menu1.findItem(R.id.search);
-//
-//        SearchView searchView = (SearchView) searchItem.getActionView();
-//
-////        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-////            @Override
-////            public boolean onQueryTextSubmit(String query) {
-////                return false;
-////            }
-////
-////            @Override
-////            public boolean onQueryTextChange(String newText) {
-////
-////                selectTeamsRecyclerViewAdapter.getFilter().filter(newText);
-////
-////                return false;
-////            }
-////        });
-//    }
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        // Do something that differs the Activity's menu here
+        super.onCreateOptionsMenu(menu, inflater);
+
+        this.menu1 = menu;
+
+        MenuItem searchItem = menu1.findItem(R.id.search);
+
+        SearchView searchView = (SearchView) searchItem.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                selectTeamsRecyclerViewAdapter.getFilter().filter(newText);
+
+                return false;
+            }
+        });
+    }
 
     @Override
     public boolean onOptionsItemSelected (MenuItem searchItem){

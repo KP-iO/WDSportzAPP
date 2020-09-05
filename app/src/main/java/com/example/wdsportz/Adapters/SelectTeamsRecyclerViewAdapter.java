@@ -47,6 +47,7 @@ public class SelectTeamsRecyclerViewAdapter extends RecyclerView.Adapter<SelectT
         this.context = context;
     }
 
+    ///Add new comment 
 
     // inflates the cell layout from xml when needed
     @Override
@@ -130,7 +131,7 @@ public class SelectTeamsRecyclerViewAdapter extends RecyclerView.Adapter<SelectT
 
         return exampleFilter;
     }
-    // KP01
+
     private Filter exampleFilter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
