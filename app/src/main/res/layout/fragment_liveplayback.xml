@@ -2,6 +2,7 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:motion="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -25,18 +26,34 @@
             android:layout_height="wrap_content"
             app:enableLiveVideoUi="false"
             app:showFullScreenButton="true"
-
-            app:showYouTubeButton="false" />
+            app:showYouTubeButton="false"/>
 
     </RelativeLayout>
 
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="402dp"
+        android:layout_height="52dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="106dp"
+        android:layout_marginEnd="172dp"
+        app:adSize="BANNER"
+        app:adUnitId="ca-app-pub-3940256099942544/6300978111"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.39"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout3">
+
+    </com.google.android.gms.ads.AdView>
 
     <TextView
         android:id="@+id/Video_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="14dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="90dp"
         android:layout_marginEnd="16dp"
         android:maxLines="2"
         android:text="Match Title"
@@ -46,12 +63,12 @@
         app:autoSizeMaxTextSize="24sp"
         app:autoSizeMinTextSize="18sp"
         app:autoSizeTextType="uniform"
-        app:layout_constraintEnd_toStartOf="@+id/imgDropDown"
+        app:layout_constraintEnd_toStartOf="@+id/btnDropDown"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout3" />
 
     <ImageButton
-        android:id="@+id/imgDropDown"
+        android:id="@+id/btnDropDown"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -65,40 +82,41 @@
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="38dp"
         android:layout_height="46dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="90dp"
         android:layout_marginEnd="4dp"
         android:textSize="15sp"
         app:icon="?attr/actionModeShareDrawable"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout3" />
 
-    <View
-        android:id="@+id/view2"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:background="#515151"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/action_button_share" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constLayoutDescription"
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/motionLayoutDesc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        app:layoutDescription="@xml/video_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view2">
+        app:layout_constraintTop_toBottomOf="@+id/action_button_share"
+        tools:showPaths="true">
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#515151"
+            tools:layout_editor_absoluteX="16dp" />
 
         <TextView
             android:id="@+id/txtDate"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="0dp"
             android:maxLines="1"
-            android:text="textviewwww"
+            android:text="Date"
             android:textColor="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -106,25 +124,28 @@
             android:id="@+id/txtDescription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="12dp"
             android:text="TextView"
             android:textColor="#FFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtDate" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <View
-        android:id="@+id/view3"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:background="#515151"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constLayoutDescription" />
+        <View
+            android:id="@+id/view3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="#515151"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtDescription" />
+
+    </androidx.constraintlayout.motion.widget.MotionLayout>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
@@ -132,10 +153,9 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/motionLayoutDesc"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view3"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
             android:id="@+id/textView16"
@@ -151,7 +171,6 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
-            app:stackFromEnd="false"
             android:id="@+id/chat_box"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -160,15 +179,16 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="16dp"
             android:text="Chat"
-            app:layout_constraintBottom_toTopOf="@+id/edit_box"
+            app:layout_constraintBottom_toTopOf="@+id/comment_box"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView16" />
+            app:layout_constraintTop_toBottomOf="@+id/textView16"
+            app:stackFromEnd="false" />
 
         <EditText
-            android:id="@+id/edit_box"
+            android:id="@+id/comment_box"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="16dp"
@@ -195,7 +215,7 @@
             android:text="Add"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/edit_box" />
+            app:layout_constraintStart_toEndOf="@+id/comment_box" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

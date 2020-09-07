@@ -9,26 +9,43 @@ public class WatchViewModel {
     String video_desc;
     Boolean live;
     String Category;
+    String  date;
 
-//    public WatchViewModel() {
-//
-//    }
-
-//    public WatchViewModel(String league_name, String league_image, String league_url, String chatbox_id, String video_desc) {
-//
-//    }
+    /**
+     *
+     * @param title
+     * @param videoimageURL
+     * @param videoURL
+     * @param chatBox_ID
+     * @param video_desc
+     * @param live
+     * @param date
+     */
 
     //Live Videos
-    public WatchViewModel(String title, String videoimageURL, String videoURL, String chatBox_ID, String video_desc, Boolean live) {
+    public WatchViewModel(String title, String videoimageURL, String videoURL, String chatBox_ID, String video_desc, Boolean live, String date) {
         this.title = title;
         this.videoimageURL = videoimageURL;
         this.videoURL = videoURL;
         this.chatBox_ID = chatBox_ID;
         this.video_desc = video_desc;
         this.live = live;
+        this.date = date;
+
     }
 
-    public WatchViewModel(String title, String videoimageURL, String videoURL, String chatBox_ID, String video_desc, Object Category) {
+    /**
+     *
+     * @param title
+     * @param videoimageURL
+     * @param videoURL
+     * @param chatBox_ID
+     * @param video_desc
+     * @param Category
+     * @param date
+     */
+
+    public WatchViewModel(String title, String videoimageURL, String videoURL, String chatBox_ID, String video_desc, Object Category,String date) {
         this.title = title;
         this.videoimageURL = videoimageURL;
         this.videoURL = videoURL;
@@ -40,6 +57,7 @@ public class WatchViewModel {
         } else {
             this.Category = "null";
         }
+        this.date = date;
 
     }
 
@@ -84,6 +102,10 @@ public class WatchViewModel {
     }
 
     public void setLive(String chatBox_ID) {this.live = live; }
+
+    public  String getDate() {
+        return date;
+    }
 
     public String getCategory() {
         return Category;

@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.motion.widget.MotionLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -45,6 +46,8 @@ public class Frag_Watch extends Fragment {
     ChipGroup chipGroupSort;
     private RecyclerView recyclerView;
     private RecyclerView recyclerView1;
+
+    List<WatchViewModel> mainVideoList;
 
     Menu menu;
 
@@ -110,19 +113,40 @@ public class Frag_Watch extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         final Context context = view.getContext();
 
+        MotionLayout motionLayout = view.findViewById(R.id.Watch_MotionLayout);
+
         chipGroupSort = getView().findViewById(R.id.chipGroupSort);
         chipGroupSort.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(ChipGroup chipGroup, int i) {
                 Chip chip = chipGroup.findViewById(i);
-                if(chip != null){
+                if(chip != null) {
                     //show selection
-                    Toast.makeText(getContext(), chip.getText().toString(),Toast.LENGTH_LONG).show();
+                    List<WatchViewModel> sortedVideoList = new ArrayList<>();
+
+                    for (int x = 0; x < mainVideoList.size(); x++) {
+                        String str = mainVideoList.get(x).getCategory();
+
+                        if (str.startsWith(chip.getText().toString())) {
+                            sortedVideoList.add(mainVideoList.get(x));
+                        }
+
+                    }
+                    watchViewAdapter = new WatchViewAdapter(context, sortedVideoList);
+                    recyclerView.setAdapter(watchViewAdapter);
+                    motionLayout.transitionToEnd();
+//                    Toast.makeText(getContext(), chip.getText().toString(),Toast.LENGTH_LONG).show();
+
                 } else {
                     //Else show normal
+                    Toast.makeText(getContext(), "NONE",Toast.LENGTH_LONG).show();
+                    BottomRecycler(getContext());
+                    motionLayout.transitionToStart();
                 }
             }
         });
+
+        PopulateChipGroupSort(context);
 
         recyclerView = getView().findViewById(R.id.RecyclerViewV);
         recyclerView1 = getView().findViewById(R.id.RecyclerViewVM);
@@ -132,12 +156,13 @@ public class Frag_Watch extends Fragment {
 
 
 // Implement error handling for all cases e.g (Name/ Logo not accessible) ------>
-        RecyclerSort(context);
         BottomRecycler(context);
         TopRecycler(context);
     }
 
-    private void RecyclerSort(Context context) {
+
+
+    private void PopulateChipGroupSort(Context context) {
 
         Task<QuerySnapshot> docRef = fireStoreDB.collection("Categories")
                 .get()
@@ -150,7 +175,6 @@ public class Frag_Watch extends Fragment {
                             List<CategoriesModel> list = new ArrayList<>();
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
-
                                 Log.d(TAG, "DOCUMENT PRINT :" + document.getData().toString());
                                 list.add(new CategoriesModel(document.get("Name").toString(),document.getId()));
 
@@ -162,8 +186,6 @@ public class Frag_Watch extends Fragment {
                             }
 
 
-
-
                         } else {
                             Log.d(TAG, "No such document");
                         }
@@ -173,7 +195,6 @@ public class Frag_Watch extends Fragment {
                 });
 
     }
-
 
     private void TopRecycler(final Context context) {
         Task<QuerySnapshot> docRef = fireStoreDB.collection("Live Stream")
@@ -190,7 +211,14 @@ public class Frag_Watch extends Fragment {
 
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
-                                list.add(new WatchViewModel(document.get("Match_Name").toString(), document.get("Match_Image").toString(), document.get("Match_Video").toString(), document.get("Chatbox_ID").toString(), document.get("Video_desc").toString(), (Boolean) document.get("Live")));
+                                list.add(new WatchViewModel(
+                                        document.get("Match_Name").toString(),
+                                        document.get("Match_Image").toString(),
+                                        document.get("Match_Video").toString(),
+                                        document.get("Chatbox_ID").toString(),
+                                        document.get("Video_desc").toString(),
+                                        ((Boolean) document.get("Live")),
+                                        document.get("Date").toString()));
 
                                 liveStreamAdapter = new LiveStreamAdapter(context, list);
                                 recyclerView1.setAdapter(liveStreamAdapter);
@@ -215,7 +243,7 @@ public class Frag_Watch extends Fragment {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
 
-                            List<WatchViewModel> list = new ArrayList<>();
+                            mainVideoList = new ArrayList<>();
 
 
 ////// Change FROM download url to stroage url in firestore?
@@ -224,24 +252,27 @@ public class Frag_Watch extends Fragment {
 
                                 Log.d(TAG, "DOCUMENT PRINT :" + document.getData().toString());
 
-                                list.add(new WatchViewModel(document.get("Match_Name").toString(),
+                                mainVideoList.add(new WatchViewModel(
+                                        document.get("Match_Name").toString(),
                                         document.get("Match_Image").toString(),
                                         document.get("Match_Video").toString(),
                                         document.get("Chatbox_ID").toString(),
                                         document.get("Video_desc").toString(),
-                                        document.get("Category")));
+                                        String.valueOf(document.get("Category")),
+                                        document.get("Video_desc").toString()));
 
-                                watchViewAdapter = new WatchViewAdapter(context, list);
+
+                                watchViewAdapter = new WatchViewAdapter(context, mainVideoList);
                                 recyclerView.setAdapter(watchViewAdapter);
                             }
 
                             // List check (in Log)
-                            for (int i = 0; i < list.size() - 1; i++) {
-
-                                Log.d(TAG, (" Team Name = " + list.get(i).getTitle()));
-                                Log.d(TAG, "List Url test   " + list.get(i).getVideoImageURL());
-                                Log.d(TAG, "Video Url test   " + list.get(i).getVideoURL());
-                            }
+//                            for (int i = 0; i < list.size() - 1; i++) {
+//
+//                                Log.d(TAG, (" Team Name = " + list.get(i).getTitle()));
+//                                Log.d(TAG, "List Url test   " + list.get(i).getVideoImageURL());
+//                                Log.d(TAG, "Video Url test   " + list.get(i).getVideoURL());
+//                            }
 
                         } else {
                             Log.d(TAG, "No such document");

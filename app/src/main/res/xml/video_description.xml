@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetStart="@+id/start"
+        motion:constraintSetEnd="@+id/end"
+        motion:duration="1000">
+        <OnSwipe
+            motion:touchAnchorId="@+id/view2"
+            motion:touchAnchorSide="top"
+            motion:dragDirection="dragDown" />
+    </Transition>
+
+    <Transition
+        motion:constraintSetStart="@+id/start"
+        motion:constraintSetEnd="@+id/end"
+        motion:duration="1000">
+        <OnSwipe
+            motion:touchAnchorId="@+id/view3"
+            motion:touchAnchorSide="top"
+            motion:dragDirection="dragDown" />
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+
+        <Constraint
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="0dp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/txtDate"
+            android:layout_marginRight="0dp" />
+        <Constraint
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:id="@+id/view2"
+            app:layout_constraintTop_toTopOf="parent" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+
+        <Constraint
+            android:id="@+id/txtDate"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/view3"/>
+
+        <Constraint
+            android:id="@+id/txtDescription"
+            app:layout_constraintBottom_toBottomOf="@+id/view3"/>
+
+        <Constraint
+            android:id="@+id/view3"
+            app:layout_constraintTop_toTopOf="@id/view2"/>
+    </ConstraintSet>
+
+
+
+</MotionScene>

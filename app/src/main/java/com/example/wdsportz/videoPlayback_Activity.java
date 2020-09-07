@@ -26,7 +26,6 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.wdsportz.Adapters.CommentAdapter;
 import com.example.wdsportz.Adapters.WatchViewAdapter;
 import com.example.wdsportz.ViewModels.Comments;
@@ -125,7 +124,7 @@ public class videoPlayback_Activity extends AppCompatActivity {
         editText = findViewById(R.id.comment_box);
         button = findViewById(R.id.add);
         mExoPlayerView= findViewById(R.id.Watch_view1);
-        shareAction1 = findViewById(R.id.action_button_shareVP);
+        shareAction1 = findViewById(R.id.action_button_share);
         firebaseDatabase = firebaseDatabase.getInstance();
 
 
@@ -258,9 +257,9 @@ String UID = user.getUid();
 //                                String cover = document.get("cover").toString();
                                 Log.d(TAG, image);
 
-                                Glide.with(getApplicationContext())
-                                        .load(image)
-                                        .into(imageView);
+//                                Glide.with(getApplicationContext())
+//                                        .load(image)
+//                                        .into(imageView);
 
                                 //set data
 //                                holder.tv_name.setText(name);

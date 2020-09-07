@@ -23,7 +23,8 @@
         tools:layout="@layout/fragment_score">
         <action
             android:id="@+id/action_frag_scores_to_frag_Score_Standings"
-            app:destination="@id/frag_Score_Standings" />
+            app:destination="@id/frag_Score_Standings"
+            app:enterAnim="@anim/slide_in_right" />
     </fragment>
     <action
         android:id="@+id/action_global_frag_HomePage"

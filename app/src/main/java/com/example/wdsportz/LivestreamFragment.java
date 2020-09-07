@@ -1,20 +1,22 @@
 package com.example.wdsportz;
 
-
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
+import androidx.constraintlayout.motion.widget.MotionLayout;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -40,19 +42,8 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.utils.YouTube
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-
-
-/**
- * A simple {@link Fragment} subclass.
- * 
- * 
- * 
- */
-
-
 
 public class LivestreamFragment extends AppCompatActivity {
 
@@ -83,32 +74,24 @@ public class LivestreamFragment extends AppCompatActivity {
     private FullScreenHelper fullScreenHelper = new FullScreenHelper(this);
     String uid = user.getUid();
 
+    ConstraintLayout constLayoutDescription;
+    ImageButton btnDropdown;
+
     public LivestreamFragment() {
     }
-
-
-    String getVideoId() {
-        return videoId;
-    }
-
 
 @Override
 protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.fragment_liveplayback);
 
-
     RvComment = findViewById(R.id.chat_box);
     txtVideoTitle = findViewById(R.id.Video_title);
-    editText = findViewById(R.id.edit_box);
+    editText = findViewById(R.id.comment_box);
     addButton = findViewById(R.id.add);
     youTubePlayerView = findViewById(R.id.youtube_player_view);
-    TextView date = findViewById(R.id.txtDate);
-    TextView desc = findViewById(R.id.txtDescription);
-    String dateTxt = getIntent().getExtras().getString("date");
-    String descTxt= getIntent().getExtras().getString("videoDesc");
-    date.setText(dateTxt);
-    desc.setText(descTxt);
+
+    btnDropdown = findViewById(R.id.btnDropDown);
 
     firebaseAuth = FirebaseAuth.getInstance();
     firebaseUser = firebaseAuth.getCurrentUser();
@@ -119,7 +102,7 @@ protected void onCreate(Bundle savedInstanceState) {
         public void onClick(View view) {
 
             addButton.setVisibility(View.INVISIBLE);
-            DatabaseReference commentReference =firebaseDatabase.getReference(COMMENT_KEY).child(getPostKey()).push();
+            DatabaseReference commentReference = firebaseDatabase.getReference(COMMENT_KEY).child(getPostKey()).push();
             String comment_content = editText.getText().toString();
             String uid = firebaseUser.getUid();
             String uname = firebaseUser.getDisplayName();
@@ -127,7 +110,7 @@ protected void onCreate(Bundle savedInstanceState) {
             String key = commentReference.getKey();
             String chatID = getIntent().getExtras().getString("chatID");
             String reportID = "";
-            Comments comments = new Comments(comment_content,uid,uname,uimg,key, chatID,reportID, ServerValue.TIMESTAMP);
+            Comments comments = new Comments(comment_content, uid, uname, uimg, key, chatID, reportID, ServerValue.TIMESTAMP);
 
             commentReference.setValue(comments).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
@@ -141,7 +124,7 @@ protected void onCreate(Bundle savedInstanceState) {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    showMessage("fail to add comment: "+e.getMessage());
+                    showMessage("fail to add comment: " + e.getMessage());
 
                 }
             });
@@ -149,15 +132,44 @@ protected void onCreate(Bundle savedInstanceState) {
         }
     });
 
-
-//    setVideoView(context);
     iniRvComment();
     initYouTubePlayerView();
-//    Glide.with(this)
-//            .load(currentUseImg)
-//            .into(imageView);
+    iniVideoDescription();
 
 }
+
+    private void iniVideoDescription() {
+
+    TextView date = findViewById(R.id.txtDate);
+    TextView desc = findViewById(R.id.txtDescription);
+    String dateTxt = getIntent().getExtras().getString("date");
+    String descTxt= getIntent().getExtras().getString("videoDesc");
+
+    date.setText(dateTxt);
+    desc.setText(descTxt);
+
+    MotionLayout motionLayout = findViewById(R.id.motionLayoutDesc);
+    motionLayout.transitionToEnd();
+
+    btnDropdown.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            Log.d("desc check", dateTxt + descTxt);
+
+            if(date.getHeight() == 0){
+
+                motionLayout.transitionToStart();
+
+            }else{
+
+                motionLayout.transitionToEnd();
+            }
+
+        }
+    });
+    }
+
 
     @Override
     public void onConfigurationChanged(Configuration newConfiguration) {
@@ -172,21 +184,19 @@ protected void onCreate(Bundle savedInstanceState) {
         else
             super.onBackPressed();
     }
+
     private void iniRvComment() {
 
         RvComment.setLayoutManager(new LinearLayoutManager(this));
-
 
         String postKey1 = getIntent().getExtras().getString("chatID");
 
         DatabaseReference commentRef = firebaseDatabase.getReference(COMMENT_KEY).child(postKey1);
 
-
         commentRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 listComments = new ArrayList<>();
-
 
                 for (DataSnapshot snap:dataSnapshot.getChildren()) {
 
@@ -215,10 +225,6 @@ protected void onCreate(Bundle savedInstanceState) {
 
     }
 
-
-
-
-
     private void initYouTubePlayerView() {
         String video = getIntent().getExtras().getString("video");
 
@@ -237,7 +243,6 @@ protected void onCreate(Bundle savedInstanceState) {
             }
         });
     }
-
 
     private void addFullScreenListenerToPlayer() {
         youTubePlayerView.addFullScreenListener(new YouTubePlayerFullScreenListener() {
@@ -260,13 +265,9 @@ protected void onCreate(Bundle savedInstanceState) {
         });
     }
 
-
-
-    private void   showMessage(String message) {
+    private void showMessage(String message) {
         Toast.makeText(LivestreamFragment.this, message,Toast.LENGTH_LONG).show();
     }
-
-
 
     public String getPostKey() {
         postKey = getIntent().getExtras().getString("chatID");
@@ -278,6 +279,7 @@ protected void onCreate(Bundle savedInstanceState) {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
 //    public void onAttach(Context context) {
 //        super.onAttach(context);
 //        if (context instanceof OnFragmentInteractionListener) {
