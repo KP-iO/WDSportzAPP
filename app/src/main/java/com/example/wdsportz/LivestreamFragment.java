@@ -76,6 +76,7 @@ public class LivestreamFragment extends AppCompatActivity {
 
     ConstraintLayout constLayoutDescription;
     ImageButton btnDropdown;
+    Boolean isVisible;
 
     public LivestreamFragment() {
     }
@@ -144,30 +145,34 @@ protected void onCreate(Bundle savedInstanceState) {
     TextView desc = findViewById(R.id.txtDescription);
     String dateTxt = getIntent().getExtras().getString("date");
     String descTxt= getIntent().getExtras().getString("videoDesc");
-
-    date.setText(dateTxt);
-    desc.setText(descTxt);
+//
+//    date.setText(dateTxt);
+//    desc.setText(descTxt);
 
     MotionLayout motionLayout = findViewById(R.id.motionLayoutDesc);
     motionLayout.transitionToEnd();
 
-    btnDropdown.setOnClickListener(new View.OnClickListener() {
+        isVisible = false;
+
+        btnDropdown.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-
             Log.d("desc check", dateTxt + descTxt);
 
-            if(date.getHeight() == 0){
+            if(isVisible == true){
 
                 motionLayout.transitionToStart();
+                isVisible = false;
 
             }else{
 
                 motionLayout.transitionToEnd();
+                isVisible = true;
             }
 
         }
     });
+
     }
 
 

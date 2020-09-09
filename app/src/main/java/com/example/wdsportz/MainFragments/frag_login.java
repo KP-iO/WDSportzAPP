@@ -206,7 +206,7 @@ public class frag_login extends Fragment {
             public void onClick(View v) {
 
 //                btnSignIn.performClick();
-                txtUsername.setText("Oreyusuf@hotmail.com");
+                txtUsername.setText("Ore.yusuf@hotmail.co.uk");
                 txtPassword.setText("Password1");
                 btnSignIn.performClick();
 

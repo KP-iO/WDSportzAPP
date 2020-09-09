@@ -170,9 +170,9 @@ public class Frag_Profile extends Fragment {
         avatarIv = view.findViewById(R.id.UserImg);
         delete = view.findViewById(R.id.deleteAcc);
         nameTv = view.findViewById(R.id.nameTv);
-        emailTv = view.findViewById(R.id.emailTv);
+        emailTv = view.findViewById(R.id.TxtEmail);
         fab = view.findViewById(R.id.Edit_Profile);
-        coverIv = view.findViewById(R.id.coverIv);
+        coverIv = view.findViewById(R.id.headerbackground);
         RvTeams = view.findViewById(R.id.favouriteTeamRV);
         uid = user.getUid();
 
@@ -840,8 +840,6 @@ public class Frag_Profile extends Fragment {
         RvTeams.setLayoutManager(new LinearLayoutManager(getContext()));
 
         String userID = user.getUid();
-
-
 
         DocumentReference docRef = database.collection("Users").document(uid);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {

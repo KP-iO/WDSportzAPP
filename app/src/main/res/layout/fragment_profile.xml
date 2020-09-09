@@ -2,162 +2,174 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/linearLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SideNav.Frag_Profile">
 
 
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/headerConstraint"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <ImageView
-        android:id="@+id/coverIv"
-        android:layout_width="0dp"
-        android:layout_height="220dp"
-        android:background="#4BFFDB00"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/UserImg"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginTop="12dp"
-            android:background="@color/colorPrimary"
-            android:src="@drawable/ic_add_image"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/nameTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Name"
-        android:textAlignment="center"
-        android:textColor="@color/colorBlack"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/UserImg"
-        app:layout_constraintVertical_bias="0.011" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout3"
-        android:layout_width="397dp"
-        android:layout_height="469dp"
-        android:layout_marginStart="6dp"
-        android:layout_marginTop="33dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/coverIv">
-
-        <Button
-            android:id="@+id/Edit_Profile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="Manage Profile"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-        <TextView
-            android:id="@+id/textView13"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Email Address:"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Edit_Profile" />
-
-        <TextView
-            android:id="@+id/emailTv"
-            android:layout_width="234dp"
-            android:layout_height="33dp"
-            android:layout_marginStart="156dp"
-            android:layout_marginTop="20dp"
-            android:text="Email Address:"
-            android:textSize="20sp"
-            android:autoSizeTextType="uniform"
-            android:autoSizeMinTextSize="12sp"
-            android:autoSizeMaxTextSize="100sp"
-            android:autoSizeStepGranularity="2sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Edit_Profile" />
-
-        <TextView
-            android:id="@+id/textView12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Something else"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView13" />
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="32dp"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView12">
-
-            <TextView
-                android:id="@+id/textView15"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Your Favourite Teams"
-                android:textAlignment="center"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/favouriteTeamRV"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-
-        </LinearLayout>
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    <Button
-        android:id="@+id/deleteAcc"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="DELETE ACCOUNT"
-        android:visibility="invisible"
-        app:layout_constraintTop_toBottomOf="@id/constraintLayout3" />
+        android:isScrollContainer="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/headerbackground"
+                android:layout_width="0dp"
+                android:layout_height="220dp"
+                android:background="#4BFFDB00"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/avatarRegCV"
+                android:layout_width="155dp"
+                android:layout_height="155dp"
+                app:cardBackgroundColor="@color/WD_Green"
+                app:cardCornerRadius="250dp"
+                app:layout_constraintBottom_toBottomOf="@+id/headerbackground"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/headerbackground"
+                app:layout_constraintVertical_bias="0.18">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center"
+                    app:cardCornerRadius="250dp">
 
 
-</ScrollView>
+                    <ImageView
+                        android:id="@+id/UserImg"
+                        android:layout_width="150dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/WD_Green"
+                        android:padding="5dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_add_image" />
+
+                </androidx.cardview.widget.CardView>
+
+            </androidx.cardview.widget.CardView>
+
+
+            <TextView
+                android:id="@+id/nameTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="Name"
+                android:textAlignment="center"
+                android:textColor="@color/colorBlack"
+                android:textSize="25sp"
+                app:layout_constraintBottom_toBottomOf="@+id/headerbackground"
+                app:layout_constraintEnd_toEndOf="@+id/headerbackground"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/avatarRegCV" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout3"
+                android:layout_width="416dp"
+                android:layout_height="511dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/headerbackground">
+
+                <Button
+                    android:id="@+id/Edit_Profile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="Edit Profile"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <TextView
+                    android:id="@+id/TxtEmail"
+                    android:layout_width="234dp"
+                    android:layout_height="33dp"
+                    android:layout_marginEnd="4dp"
+                    android:autoSizeMaxTextSize="100sp"
+                    android:autoSizeMinTextSize="12sp"
+                    android:autoSizeStepGranularity="2sp"
+                    android:autoSizeTextType="uniform"
+                    android:text="Users Email"
+                    android:textSize="20sp"
+                    app:autoSizeTextType="uniform"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView13"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView13"
+                    app:layout_constraintTop_toTopOf="@+id/textView13" />
+
+                <TextView
+                    android:id="@+id/textView13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Email Address:"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/Edit_Profile" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="24dp"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView13">
+
+                    <TextView
+                        android:id="@+id/textView15"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="Your Favourite Teams"
+                        android:textAlignment="center"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/favouriteTeamRV"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+
+                </LinearLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <Button
+                android:id="@+id/deleteAcc"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="DELETE ACCOUNT"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/constraintLayout3" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
