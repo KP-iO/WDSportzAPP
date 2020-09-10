@@ -145,12 +145,12 @@ protected void onCreate(Bundle savedInstanceState) {
     TextView desc = findViewById(R.id.txtDescription);
     String dateTxt = getIntent().getExtras().getString("date");
     String descTxt= getIntent().getExtras().getString("videoDesc");
-//
-//    date.setText(dateTxt);
-//    desc.setText(descTxt);
+
+    date.setText(dateTxt);
+    desc.setText(descTxt);
 
     MotionLayout motionLayout = findViewById(R.id.motionLayoutDesc);
-    motionLayout.transitionToEnd();
+//    motionLayout.transitionToEnd();
 
         isVisible = false;
 

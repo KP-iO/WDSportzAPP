@@ -74,12 +74,6 @@ public boolean connected = false;
         ConnectivityManager cm =
                 (ConnectivityManager)getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
 
-
-
-
-//        Log.d("NTWRK", );
-
-
         if(cm.getActiveNetwork()== null)
         {
 
@@ -162,10 +156,8 @@ public boolean connected = false;
                 String email = profile.getEmail();
                 Uri photoUrl = profile.getPhotoUrl();
 
-
             }
         }
-
 
         navController = Navigation.findNavController(this, R.id.NavHostFragment);
 
@@ -182,7 +174,6 @@ public boolean connected = false;
                 switch (item.getItemId()) {
                     case R.id.nav_home:
                         navController.navigate(R.id.action_global_frag_HomePage);
-                        Log.d("Bottom Nav Test", "nav_home");
 
                         break;
 
@@ -208,6 +199,8 @@ public boolean connected = false;
                 return true;
             }
         });
+
+        bottomNav.setSelectedItemId(R.id.nav_watch);
 
     }
 

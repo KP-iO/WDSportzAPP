@@ -7,24 +7,29 @@
     <Transition
         motion:constraintSetStart="@+id/start"
         motion:constraintSetEnd="@+id/end"
-        motion:duration="1000">
+        app:motionInterpolator="easeInOut">
         <OnSwipe
-            motion:touchAnchorId="@+id/view2"
             motion:touchAnchorSide="top"
-            motion:dragDirection="dragDown" />
-    </Transition>
-
-    <Transition
-        motion:constraintSetStart="@+id/start"
-        motion:constraintSetEnd="@+id/end"
-        motion:duration="1000">
-        <OnSwipe
-            motion:touchAnchorId="@+id/view3"
-            motion:touchAnchorSide="top"
-            motion:dragDirection="dragDown" />
+            motion:dragDirection="dragUp" />
     </Transition>
 
     <ConstraintSet android:id="@+id/start">
+
+        <Constraint
+            android:id="@+id/txtDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:padding="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="Date"
+            android:textSize="16dp"
+            android:textColor="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
 
     </ConstraintSet>
 
@@ -33,15 +38,8 @@
         <Constraint
             android:id="@+id/txtDate"
             android:layout_height="0dp"
+            android:layout_width="0dp"
             app:layout_constraintBottom_toBottomOf="@+id/view3"/>
-
-        <Constraint
-            android:id="@+id/txtDescription"
-            app:layout_constraintBottom_toBottomOf="@+id/view3"/>
-
-        <Constraint
-            android:id="@+id/view3"
-            app:layout_constraintTop_toTopOf="@id/view2"/>
 
     </ConstraintSet>
 
