@@ -81,10 +81,15 @@ public class frag_login extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         //Auto Sign In
-        if (PreferenceUtils.getEmail(getContext()) != null && !PreferenceUtils.getEmail(getContext()).equals("")) {
-            ((Auth_Activity) getActivity()).goToMainFeed();
-        }
-        viewModel = ViewModelProviders.of(requireActivity()).get(LoginViewModel.class);
+            if (PreferenceUtils.getEmail(getContext()) != null && !PreferenceUtils.getEmail(getContext()).equals("")) {
+                try {
+                    ((Auth_Activity) getActivity()).goToMainFeed();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+                viewModel = ViewModelProviders.of(requireActivity()).get(LoginViewModel.class);
 
         btnSignIn = view.findViewById(R.id.btn_signIn);
         btnSignUp = view.findViewById(R.id.signUp);

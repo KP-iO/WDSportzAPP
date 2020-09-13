@@ -73,6 +73,7 @@ public class LiveStreamAdapter extends RecyclerView.Adapter<LiveStreamAdapter.My
         holder.btnimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                throw new RuntimeException("Test Crash");
                 Intent intent = new Intent(context, LivestreamFragment.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("chatID",chat_ID);

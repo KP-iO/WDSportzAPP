@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.lifecycle:lifecycle-runtime:2.2.0@aar">
     <CLASSES>
-      <root url="file:///usr/local/Cellar/gradle/6.4.1/libexec/caches/transforms-2/files-2.1/9f7bbf06af6bd6aae749ab4592809fbb/lifecycle-runtime-2.2.0/AndroidManifest.xml" />
-      <root url="jar:///usr/local/Cellar/gradle/6.4.1/libexec/caches/transforms-2/files-2.1/9f7bbf06af6bd6aae749ab4592809fbb/lifecycle-runtime-2.2.0/jars/classes.jar!/" />
-      <root url="file:///usr/local/Cellar/gradle/6.4.1/libexec/caches/transforms-2/files-2.1/9f7bbf06af6bd6aae749ab4592809fbb/lifecycle-runtime-2.2.0/res" />
+      <root url="file:///usr/local/Cellar/gradle/6.4.1/libexec/caches/transforms-2/files-2.1/2e7fcdce6f8c0ba6e39f7c7f4b1a8644/lifecycle-runtime-2.2.0/AndroidManifest.xml" />
+      <root url="jar:///usr/local/Cellar/gradle/6.4.1/libexec/caches/transforms-2/files-2.1/2e7fcdce6f8c0ba6e39f7c7f4b1a8644/lifecycle-runtime-2.2.0/jars/classes.jar!/" />
+      <root url="file:///usr/local/Cellar/gradle/6.4.1/libexec/caches/transforms-2/files-2.1/2e7fcdce6f8c0ba6e39f7c7f4b1a8644/lifecycle-runtime-2.2.0/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
