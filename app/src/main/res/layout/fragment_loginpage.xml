@@ -6,9 +6,9 @@
     android:id="@+id/ConstraintLayout_Login"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_xxhdpi"
-    android:backgroundTintMode="src_over"
-    android:focusableInTouchMode="true">
+    android:background="@drawable/sign_in_background_bottom"
+    android:fitsSystemWindows="true"
+    android:focusableInTouchMode="false">
 
 
     <Button
@@ -17,7 +17,6 @@
         android:layout_width="113dp"
         android:layout_height="31dp"
         android:text="TEST_btn"
-        android:visibility="gone"
         app:iconTint="#000000"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -25,33 +24,27 @@
 
     <!--        android:text="@string/password1" />-->
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="347dp" />
-
 
     <LinearLayout
         android:id="@+id/linearLayoutLogin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="24dp"
         android:animateLayoutChanges="true"
+        android:background="@drawable/loginsection_rounded"
         android:orientation="vertical"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline2">
+        app:layout_constraintTop_toBottomOf="@+id/imageView4">
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#FFDE17"
             android:paddingLeft="10dp"
             android:paddingTop="10dp"
             android:text="EMAIL"
@@ -65,7 +58,7 @@
             android:layout_height="40dp"
             android:layout_weight="1.5"
             android:autofillHints=""
-            android:background="#FFDE17"
+            android:background="#00FFFFFF"
             android:editable="true"
             android:ems="10"
             android:inputType="textEmailAddress"
@@ -77,7 +70,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#FFDE17"
             android:paddingLeft="10dp"
             android:paddingTop="10dp"
             android:text="PASSWORD"
@@ -91,7 +83,7 @@
             android:layout_height="35dp"
             android:layout_weight="1.5"
             android:autofillHints=""
-            android:background="#F7DF11"
+            android:background="#00FFFFFF"
             android:ems="10"
             android:inputType="textPassword"
             android:paddingLeft="20dp"
@@ -101,10 +93,10 @@
             android:id="@+id/txtForgot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="0dp"
-            android:background="@color/WD_yellow"
+            android:layout_marginEnd="0dp"
             android:clickable="true"
-            android:paddingBottom="4dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="5dp"
             android:text="@string/forgot_password"
             android:textAlignment="textEnd"
             android:textColor="#FAF3F3"
@@ -117,7 +109,7 @@
         android:layout_width="0dp"
         android:layout_height="64dp"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="60dp"
         android:backgroundTint="@color/WD_yellow"
         android:hapticFeedbackEnabled="true"
@@ -152,5 +144,32 @@
         app:layout_constraintVertical_bias="0.0"
         app:strokeColor="@color/WD_yellow"
         app:strokeWidth="5dp" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="490dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/sign_in_screen_background_top" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="226dp"
+        android:layout_height="226dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3"
+        app:layout_constraintVertical_bias="0.581"
+        app:srcCompat="@drawable/wd_logo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
