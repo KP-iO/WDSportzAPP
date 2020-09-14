@@ -60,8 +60,6 @@ public boolean connected = false;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     DatabaseReference databaseReference;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);

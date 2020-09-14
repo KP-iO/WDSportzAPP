@@ -50,7 +50,7 @@ public class LivestreamFragment extends AppCompatActivity {
     private OnFragmentInteractionListener mListener;
     private EditText editText;
     private TextView txtVideoTitle;
-    private Button addButton;
+    private Button addCommentButton;
     private MediaController mediaController;
     private Uri uri;
     String postKey;
@@ -76,20 +76,20 @@ public class LivestreamFragment extends AppCompatActivity {
 
     ConstraintLayout constLayoutDescription;
     ImageButton btnDropdown;
-    Boolean isVisible;
+    Boolean isVisible = false;
 
     public LivestreamFragment() {
     }
 
-@Override
-protected void onCreate(Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.fragment_liveplayback);
 
     RvComment = findViewById(R.id.chat_box);
     txtVideoTitle = findViewById(R.id.Video_title);
     editText = findViewById(R.id.comment_box);
-    addButton = findViewById(R.id.add);
+    addCommentButton = findViewById(R.id.add);
     youTubePlayerView = findViewById(R.id.youtube_player_view);
 
     btnDropdown = findViewById(R.id.btnDropDown);
@@ -98,11 +98,11 @@ protected void onCreate(Bundle savedInstanceState) {
     firebaseUser = firebaseAuth.getCurrentUser();
     firebaseDatabase = FirebaseDatabase.getInstance();
 
-    addButton.setOnClickListener(new View.OnClickListener() {
+    addCommentButton.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
 
-            addButton.setVisibility(View.INVISIBLE);
+            addCommentButton.setVisibility(View.INVISIBLE);
             DatabaseReference commentReference = firebaseDatabase.getReference(COMMENT_KEY).child(getPostKey()).push();
             String comment_content = editText.getText().toString();
             String uid = firebaseUser.getUid();
@@ -118,7 +118,7 @@ protected void onCreate(Bundle savedInstanceState) {
                 public void onSuccess(Void aVoid) {
                     showMessage("comment added");
                     editText.setText("");
-                    addButton.setVisibility(View.VISIBLE);
+                    addCommentButton.setVisibility(View.VISIBLE);
 
 
                 }
@@ -141,38 +141,36 @@ protected void onCreate(Bundle savedInstanceState) {
 
     private void iniVideoDescription() {
 
-    TextView date = findViewById(R.id.txtDate);
-    TextView desc = findViewById(R.id.txtDescription);
-    String dateTxt = getIntent().getExtras().getString("date");
-    String descTxt= getIntent().getExtras().getString("videoDesc");
+        TextView date = findViewById(R.id.txtDate);
+        TextView desc = findViewById(R.id.txtDescription);
+        String dateTxt = getIntent().getExtras().getString("date");
+        String descTxt = getIntent().getExtras().getString("videoDesc");
 
-    date.setText(dateTxt);
-    desc.setText(descTxt);
+        date.setText(dateTxt);
+        desc.setText(descTxt);
 
-    MotionLayout motionLayout = findViewById(R.id.motionLayoutDesc);
-//    motionLayout.transitionToEnd();
-
-        isVisible = false;
+        MotionLayout motionLayout = findViewById(R.id.motionLayoutDesc);
 
         btnDropdown.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Log.d("desc check", dateTxt + descTxt);
+            @Override
+            public void onClick(View v) {
+                Log.d("desc check", dateTxt + descTxt);
 
-            if(isVisible == true){
+               // motionLayout.transitionToEnd();
 
-                motionLayout.transitionToStart();
-                isVisible = false;
+                if (isVisible == false){
 
-            }else{
+                    motionLayout.transitionToEnd();
+                    isVisible = true;
 
-                motionLayout.transitionToEnd();
-                isVisible = true;
+                }else{
+                    isVisible = false;
+                     motionLayout.transitionToStart();
+
+                }
+
             }
-
-        }
-    });
-
+        });
     }
 
 
