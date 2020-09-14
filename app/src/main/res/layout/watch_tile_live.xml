@@ -28,7 +28,7 @@
             android:layout_margin="3dp"
             android:background="@drawable/roundcorner"
             android:scaleType="fitXY"
-            android:src="@android:color/holo_blue_dark"
+            android:src="#FF0000"
             app:layout_constraintBottom_toTopOf="@+id/video_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
