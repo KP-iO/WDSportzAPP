@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.wdsportz.Adapters.LiveStreamAdapter;
 import com.example.wdsportz.Adapters.WatchViewAdapter;
 import com.example.wdsportz.R;
+import com.example.wdsportz.SpacesItemDecoration;
 import com.example.wdsportz.ViewModels.CategoriesModel;
 import com.example.wdsportz.ViewModels.WatchViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -44,8 +45,8 @@ public class Frag_Watch extends Fragment {
     private static final String TAG = "Video Activity";
     FirebaseFirestore fireStoreDB = FirebaseFirestore.getInstance();
     ChipGroup chipGroupSort;
-    private RecyclerView recyclerView;
-    private RecyclerView recyclerView1;
+    private RecyclerView bottomRecyclerView;
+    private RecyclerView topRecyclerView;
 
     List<WatchViewModel> mainVideoList;
 
@@ -133,7 +134,7 @@ public class Frag_Watch extends Fragment {
 
                     }
                     watchViewAdapter = new WatchViewAdapter(context, sortedVideoList);
-                    recyclerView.setAdapter(watchViewAdapter);
+                    bottomRecyclerView.setAdapter(watchViewAdapter);
                     motionLayout.transitionToEnd();
 //                    Toast.makeText(getContext(), chip.getText().toString(),Toast.LENGTH_LONG).show();
 
@@ -145,17 +146,18 @@ public class Frag_Watch extends Fragment {
                 }
             }
         });
-
         PopulateChipGroupSort(context);
 
-        recyclerView = getView().findViewById(R.id.RecyclerViewV);
-        recyclerView1 = getView().findViewById(R.id.RecyclerViewVM);
-        int numberOfColumns = 2;
-        recyclerView.setLayoutManager(new GridLayoutManager(context, numberOfColumns));
-        recyclerView1.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
+        topRecyclerView = getView().findViewById(R.id.RecyclerViewVM);
+        topRecyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
+
+        bottomRecyclerView = getView().findViewById(R.id.RecyclerViewV);
+        bottomRecyclerView.setLayoutManager(new GridLayoutManager(context, 2));
+        int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.default_gap);
+        bottomRecyclerView.addItemDecoration(new SpacesItemDecoration(spacingInPixels));
 
 
-// Implement error handling for all cases e.g (Name/ Logo not accessible) ------>
+    // Implement error handling for all cases e.g (Name/ Logo not accessible) ------>
         BottomRecycler(context);
         TopRecycler(context);
     }
@@ -221,7 +223,7 @@ public class Frag_Watch extends Fragment {
                                         document.get("Date").toString()));
 
                                 liveStreamAdapter = new LiveStreamAdapter(context, list);
-                                recyclerView1.setAdapter(liveStreamAdapter);
+                                topRecyclerView.setAdapter(liveStreamAdapter);
 
                             }
 
@@ -235,6 +237,8 @@ public class Frag_Watch extends Fragment {
     }
 
     private void BottomRecycler(final Context context) {
+
+
         Task<QuerySnapshot> docRef = fireStoreDB.collection("Videos")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -263,16 +267,9 @@ public class Frag_Watch extends Fragment {
 
 
                                 watchViewAdapter = new WatchViewAdapter(context, mainVideoList);
-                                recyclerView.setAdapter(watchViewAdapter);
+                                bottomRecyclerView.setAdapter(watchViewAdapter);
                             }
 
-                            // List check (in Log)
-//                            for (int i = 0; i < list.size() - 1; i++) {
-//
-//                                Log.d(TAG, (" Team Name = " + list.get(i).getTitle()));
-//                                Log.d(TAG, "List Url test   " + list.get(i).getVideoImageURL());
-//                                Log.d(TAG, "Video Url test   " + list.get(i).getVideoURL());
-//                            }
 
                         } else {
                             Log.d(TAG, "No such document");
@@ -281,8 +278,9 @@ public class Frag_Watch extends Fragment {
                     }
 
                 });
-    }
 
+
+    }
 
 
 

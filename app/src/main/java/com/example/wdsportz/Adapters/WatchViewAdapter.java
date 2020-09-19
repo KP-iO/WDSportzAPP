@@ -76,11 +76,6 @@ public class WatchViewAdapter extends RecyclerView.Adapter<WatchViewAdapter.MyVi
                 intent.putExtras(bundle);
                 context.startActivity(intent);
 
-
-                for (String key: bundle.keySet())
-                {
-                    Log.d ("myApplication", key + " is a key in the bundle");
-                }
             }
         });
 
@@ -93,8 +88,6 @@ public class WatchViewAdapter extends RecyclerView.Adapter<WatchViewAdapter.MyVi
         return videoViewModels.size();
 
     }
-
-
 
 
      public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

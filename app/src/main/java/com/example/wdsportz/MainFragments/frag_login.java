@@ -2,16 +2,13 @@ package com.example.wdsportz.MainFragments;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +16,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.constraintlayout.widget.Guideline;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
@@ -55,8 +53,8 @@ public class frag_login extends Fragment {
     Button btnSignIn;
 
     View linearLayoutCredentials;
+    View view;
 
-    InputMethodManager imm;
 
     public frag_login() {
         // Required empty public constructor
@@ -84,13 +82,16 @@ public class frag_login extends Fragment {
         if (PreferenceUtils.getEmail(getContext()) != null && !PreferenceUtils.getEmail(getContext()).equals("")) {
             ((Auth_Activity) getActivity()).goToMainFeed();
         }
+
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         viewModel = ViewModelProviders.of(requireActivity()).get(LoginViewModel.class);
 
+        this.view = view;
         btnSignIn = view.findViewById(R.id.btn_signIn);
         btnSignUp = view.findViewById(R.id.signUp);
         forgot = view.findViewById(R.id.txtForgot);
         linearLayoutCredentials = view.findViewById(R.id.linearLayoutLogin);
-        //guideline = view.findViewById(R.id.guideline2);
+//        guideline = view.findViewById(R.id.guideline2);
         ConsLayout_Login = view.findViewById(R.id.ConstraintLayout_Login);
 
 //      Initially hide the content view.
@@ -104,9 +105,8 @@ public class frag_login extends Fragment {
 //                if (hasFocus){
 //
 //                    Log.d("OFCUSSSS","ORe");
-//                    guideline.setGuidelineBegin(100);
-//                    ConsLayout_Login.getBackground().setColorFilter(Color.parseColor("#EB0DB14B"), PorterDuff.Mode.SRC_OVER);
 //
+//                    ConsLayout_Login.getBackground().setColorFilter(Color.parseColor("#EB0DB14B"), PorterDuff.Mode.SRC_OVER);
 //
 //                } else {
 //
@@ -116,9 +116,24 @@ public class frag_login extends Fragment {
 //                }
 //            }
 //        };
-
+//
 //        txtUsername.setOnFocusChangeListener(focusListener);
 //        txtPassword.setOnFocusChangeListener(focusListener);
+
+//        getView().setOnKeyListener(new View.OnKeyListener() {
+//            @Override
+//            public boolean onKey(View v, int keyCode, KeyEvent event) {
+//
+////                if (event.getAction() == KeyEvent.ACTION_UP | keyCode == KeyEvent.KEYCODE_BACK){
+////
+////                    Log.e("OREEE","LOOOOK HERE");
+////
+////                    return true;
+////                }
+//                Log.e("Oreeee","LOOOOOOK");
+//                return true;
+//            }
+//        });
 
 
         btnSignIn.setOnClickListener(new OnClickListener() {
@@ -205,14 +220,13 @@ public class frag_login extends Fragment {
             @Override
             public void onClick(View v) {
 
-//                btnSignIn.performClick();
+                btnSignIn.performClick();
                 txtUsername.setText("Ore.yusuf@hotmail.co.uk");
                 txtPassword.setText("Password1");
                 btnSignIn.performClick();
 
-              //  Navigation.findNavController(view).navigate(R.id.action_global_frag_IniTeamSelection);
+//                Navigation.findNavController(view).navigate(R.id.action_global_frag_IniTeamSelection);
             //    ((Auth_Activity)getActivity()).goToMainFeed();
-
 
 
             }
@@ -223,11 +237,17 @@ public class frag_login extends Fragment {
     private void animateLinearLayout() {
 
         Transition transition = new Fade();
-        transition.setDuration(600);
+        transition.setDuration(1200);
         transition.addTarget(linearLayoutCredentials);
 
         TransitionManager.beginDelayedTransition(getView().findViewById(R.id.ConstraintLayout_Login), transition);
         linearLayoutCredentials.setVisibility(View.VISIBLE);
+
+        ConstraintLayout constraintLayout = getView().findViewById(R.id.ConstraintLayout_Login);
+        ConstraintSet constraintSet = new ConstraintSet();
+        constraintSet.clone(constraintLayout);
+        constraintSet.connect(R.id.btn_signIn,ConstraintSet.TOP,R.id.linearLayoutLogin,ConstraintSet.BOTTOM,24);
+        constraintSet.applyTo(constraintLayout);
 
     }
 
@@ -238,6 +258,7 @@ public class frag_login extends Fragment {
             mListener.onFragmentInteraction(uri);
         }
     }
+
 
     @Override
     public void onAttach(Context context) {

@@ -1,9 +1,14 @@
 package com.example.wdsportz.Adapters;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -42,13 +47,15 @@ public class ScoreFeedAdpater extends RecyclerView.Adapter<ScoreFeedAdpater.MyVi
 
     @Override
     public void onBindViewHolder(@NonNull ScoreFeedAdpater.MyViewHolder holder, int i) {
+
+        holder.matchDate = mData.get(i).getEventDate();
+
         String HTeam = mData.get(i).getHomeTeam();
         String ATeam = mData.get(i).getAwayTeam();
         String HTeamScore = mData.get(i).getHomeScore();
         String ATeamScore = mData.get(i).getAwayScore();
         String homeImage = mData.get(i).getHomeIcon();
         String awayImage = mData.get(i).getAwayIcon();
-
 
         holder.awayName.setText(HTeam);
         holder.homeName.setText(ATeam);
@@ -65,22 +72,16 @@ public class ScoreFeedAdpater extends RecyclerView.Adapter<ScoreFeedAdpater.MyVi
 
     }
 
-
-    @Override
-    public int getItemCount(){
-//        int i = 2;
-//        return i;
-        return mData.size();
-    }
-
     public class MyViewHolder extends RecyclerView.ViewHolder{
-        public TextView  matchDate, awayName, homeName, awayScore, homeScore;
+        public TextView awayName, homeName, awayScore, homeScore;
         ImageView homeImage, awayImage;
 
-
+        String matchDate;
 
         public MyViewHolder(View view){
             super(view);
+
+
             homeImage = view.findViewById(R.id.homeImg);
             awayImage = view.findViewById(R.id.awayImg);
             awayName = (TextView) view.findViewById(R.id.awayName);
@@ -88,21 +89,57 @@ public class ScoreFeedAdpater extends RecyclerView.Adapter<ScoreFeedAdpater.MyVi
             awayScore = (TextView) view.findViewById(R.id.awayScore);
             homeScore = (TextView) view.findViewById(R.id.homeScore);
 
+            view.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
 
-//            view.setOnClickListener(new View.OnClickListener(){
-//                @Override
-//                public void onClick(View v){
-//                    int pos = getAdapterPosition();
-//                    if (pos != RecyclerView.NO_POSITION){
-//                        Movie clickedDataItem = movieList.get(pos);
-//                        Intent intent = new Intent(mContext, DetailActivity.class);
-//                        intent.putExtra("movies", clickedDataItem );
-//                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                        mContext.startActivity(intent);
-//                        Toast.makeText(v.getContext(), "You clicked " + clickedDataItem.getOriginalTitle(), Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-//            });
+                    displayPopupWindow(v,matchDate);
+
+                }
+            });
         }
     }
+
+
+    private void displayPopupWindow(View anchorView, String matchDate) {
+
+        PopupWindow popup = new PopupWindow(mContext);
+        View layout = LayoutInflater.from(mContext).inflate(R.layout.popup_content, null);
+        popup.setContentView(layout);
+
+       TextView txtDate = layout.findViewById(R.id.txtDate);
+       TextView txtLocation = layout.findViewById(R.id.txtDate);
+
+       txtDate.setText(matchDate);
+
+        // Set content width and height
+        popup.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
+        popup.setWidth(WindowManager.LayoutParams.WRAP_CONTENT);
+        // Closes the popup window when touch outside of it - when looses focus
+        popup.setOutsideTouchable(true);
+        popup.setFocusable(true);
+        // Show anchored to button
+        popup.setBackgroundDrawable(new BitmapDrawable());
+        popup.showAsDropDown(anchorView);
+
+        anchorView.setBackgroundColor(Color.parseColor("#FF0DB14B"));
+        popup.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                                       @Override
+                                       public void onDismiss() {
+                                           anchorView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                                       }
+                                   }
+
+        );
+
+
+
+    }
+
+    @Override
+    public int getItemCount(){
+        return mData.size();
+    }
+
+
 }

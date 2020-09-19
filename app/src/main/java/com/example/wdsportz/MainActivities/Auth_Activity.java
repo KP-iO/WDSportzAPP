@@ -29,7 +29,7 @@ public class Auth_Activity extends AppCompatActivity implements Frag_iniTeamSele
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.auth_main);
@@ -47,7 +47,6 @@ public class Auth_Activity extends AppCompatActivity implements Frag_iniTeamSele
         super.onResume();
         myToolbar.setVisibility(View.GONE);
     }
-
 
 
 /// SEARCH ->
@@ -86,5 +85,6 @@ public class Auth_Activity extends AppCompatActivity implements Frag_iniTeamSele
     public void onFragmentInteraction(Uri uri){
         //you can leave it empty
     }
+
 
 }

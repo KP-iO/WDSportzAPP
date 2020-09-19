@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:motion="http://schemas.android.com/apk/res-auto"
     android:id="@+id/ConstraintLayoutVp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#26230A"
+    android:isScrollContainer="true"
     android:orientation="vertical">
 
     <FrameLayout
         android:id="@+id/main_media_frame"
         android:layout_width="0dp"
-        android:layout_height="320dp"
+        android:layout_height="260dp"
         android:background="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,140 +29,130 @@
     </FrameLayout>
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout4"
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="402dp"
+        android:layout_height="52dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        app:adSize="BANNER"
+        app:adUnitId="ca-app-pub-3940256099942544/6300978111"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.39"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/main_media_frame">
+
+    </com.google.android.gms.ads.AdView>
+
+    <TextView
+        android:id="@+id/Video_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:maxLines="2"
+        android:text="Match Title"
+        android:textColor="#FFFEFE"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:autoSizeMaxTextSize="24sp"
+        app:autoSizeMinTextSize="18sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintEnd_toStartOf="@+id/btnDropDown"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_media_frame">
+        app:layout_constraintTop_toBottomOf="@+id/adView" />
 
-
-        <com.google.android.gms.ads.AdView
-            android:id="@+id/adView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:adSize="BANNER"
-            app:adUnitId="ca-app-pub-3940256099942544/6300978111"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.39"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-        </com.google.android.gms.ads.AdView>
-
-        <TextView
-            android:id="@+id/Video_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:maxLines="2"
-            android:text="Match Title"
-            android:textColor="#FFFEFE"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:autoSizeMaxTextSize="24sp"
-            app:autoSizeMinTextSize="18sp"
-            app:autoSizeTextType="uniform"
-            app:layout_constraintEnd_toStartOf="@+id/btnDropDown"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/adView" />
-
-        <ImageButton
-            android:id="@+id/btnDropDown"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/WD_Green"
-            app:layout_constraintBottom_toBottomOf="@+id/action_button_share"
-            app:layout_constraintEnd_toStartOf="@+id/action_button_share"
-            app:layout_constraintTop_toTopOf="@+id/action_button_share"
-            app:srcCompat="@android:drawable/arrow_down_float" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/action_button_share"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="38dp"
-            android:layout_height="46dp"
-            android:textSize="15sp"
-            app:icon="?attr/actionModeShareDrawable"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/Video_title" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayouttest"
-        android:layout_width="0dp"
+    <ImageButton
+        android:id="@+id/btnDropDown"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:backgroundTint="@color/WD_Green"
+        app:layout_constraintBottom_toBottomOf="@+id/Video_title"
+        app:layout_constraintEnd_toStartOf="@+id/action_button_share"
+        app:layout_constraintTop_toTopOf="@+id/action_button_share"
+        app:srcCompat="@android:drawable/arrow_down_float" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/action_button_share"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="38dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="90dp"
+        android:layout_marginEnd="4dp"
+        android:textSize="15sp"
+        app:icon="?attr/actionModeShareDrawable"
+        app:layout_constraintBottom_toBottomOf="@+id/Video_title"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout3" />
+
+
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/motionLayoutDesc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layoutDescription="@xml/video_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
+        app:layout_constraintTop_toBottomOf="@+id/action_button_share"
+        tools:showPaths="true">
 
         <View
             android:id="@+id/view2"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#515151"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/txtDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="4dp"
-            android:maxLines="1"
             android:text="Date"
             android:textColor="#FFFFFF"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textSize="16dp" />
 
         <TextView
             android:id="@+id/txtDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="8dp"
-            android:text="TextView"
+            android:textSize="16dp"
             android:textColor="#FFFFFF"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtDate"
-            app:layout_constraintVertical_bias="0.0" />
+            android:layout_marginStart="16dp" />
 
         <View
             android:id="@+id/view3"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:background="#515151"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtDescription" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.motion.widget.MotionLayout>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout5"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/motionLayoutDesc"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayouttest">
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
             android:id="@+id/textView16"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:text="Comments"
             android:textColor="#FFFFFF"
             android:textSize="18sp"
@@ -169,12 +162,14 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/chat_box"
-            android:layout_width="334dp"
-            android:layout_height="119dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
             android:text="Chat"
+            app:layout_constraintBottom_toTopOf="@+id/comment_box"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView16"
@@ -183,7 +178,7 @@
         <EditText
             android:id="@+id/comment_box"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="16dp"
@@ -198,17 +193,19 @@
             app:layout_constraintEnd_toStartOf="@+id/add"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/chat_box" />
+            app:layout_constraintTop_toTopOf="@+id/add" />
 
         <Button
             android:id="@+id/add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="94dp"
+            android:layout_height="41dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
             android:text="Add"
-            app:layout_constraintBottom_toBottomOf="@+id/comment_box"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/comment_box"
-            app:layout_constraintTop_toTopOf="@+id/comment_box" />
+            app:layout_constraintStart_toEndOf="@+id/comment_box" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
