@@ -50,7 +50,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class newsDetail extends Fragment {
+public class NewsDetail extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -87,13 +87,13 @@ public class newsDetail extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public newsDetail() {
+    public NewsDetail() {
         // Required empty public constructor
     }
 
     // TODO: Rename and change types and number of parameters
-    public static newsDetail newInstance(String param1, String param2) {
-        newsDetail fragment = new newsDetail();
+    public static NewsDetail newInstance(String param1, String param2) {
+        NewsDetail fragment = new NewsDetail();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

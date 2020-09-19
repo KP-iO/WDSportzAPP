@@ -135,7 +135,7 @@ public class newsDetail extends Fragment {
         RvComment = getView().findViewById(R.id.chat_box);
         textView2 = getView().findViewById(R.id.desc);
         imageView1 = getView().findViewById(R.id.avatar);
-        editText = getView().findViewById(R.id.edit_box);
+        editText = getView().findViewById(R.id.comment_box);
         button = getView().findViewById(R.id.add);
         shareAction = getView().findViewById(R.id.action_button_share);
 

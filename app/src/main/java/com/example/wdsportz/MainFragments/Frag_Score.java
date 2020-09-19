@@ -121,7 +121,7 @@ public class Frag_Score extends Fragment {
 
     }
 
-
+// Array containing  document path then iterate through
     private void iniScoreFeed(final Context context) {
         Task<QuerySnapshot> isthmianNorth = fireStoreDB.collection("Leagues").document("Non League Div One - Isthmian North").collection("Scores")
             .get()
@@ -418,10 +418,11 @@ public class Frag_Score extends Fragment {
         LeagueSpinner = view.findViewById(R.id.spinner_team_league);
 
         // LEAGUES
+        //For drop down menu
         List<String> spinnerArrayLeagues = new ArrayList<String>();
-        spinnerArrayLeagues.add("All Leagues");
+        spinnerArrayLeagues.add("All Leagues"); // for first option adding all leagues
 
-        fireStoreDB.collection("Leagues")
+        fireStoreDB.collection("Leagues")// where we get all leagues
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -435,7 +436,7 @@ public class Frag_Score extends Fragment {
                         }
                     }
                 });
-
+// creating the adaptwr for the spinner
 
         LeagueSpinnerAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, spinnerArrayLeagues);
         LeagueSpinner.setAdapter(LeagueSpinnerAdapter);

@@ -90,7 +90,7 @@ public class frag_login extends Fragment {
         btnSignUp = view.findViewById(R.id.signUp);
         forgot = view.findViewById(R.id.txtForgot);
         linearLayoutCredentials = view.findViewById(R.id.linearLayoutLogin);
-        guideline = view.findViewById(R.id.guideline2);
+        //guideline = view.findViewById(R.id.guideline2);
         ConsLayout_Login = view.findViewById(R.id.ConstraintLayout_Login);
 
 //      Initially hide the content view.
@@ -99,26 +99,26 @@ public class frag_login extends Fragment {
         TextView txtUsername = view.findViewById(R.id.txtUsername);
         final TextView txtPassword = view.findViewById(R.id.txtPassword);
 
-        View.OnFocusChangeListener focusListener = new View.OnFocusChangeListener() {
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus){
+//        View.OnFocusChangeListener focusListener = new View.OnFocusChangeListener() {
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                if (hasFocus){
+//
+//                    Log.d("OFCUSSSS","ORe");
+//                    guideline.setGuidelineBegin(100);
+//                    ConsLayout_Login.getBackground().setColorFilter(Color.parseColor("#EB0DB14B"), PorterDuff.Mode.SRC_OVER);
+//
+//
+//                } else {
+//
+//                    guideline.setGuidelineBegin(357);
+//                    ConsLayout_Login.getBackground().setColorFilter(Color.parseColor("#00FFFFFF"), PorterDuff.Mode.SRC_OVER);
+//
+//                }
+//            }
+//        };
 
-                    Log.d("OFCUSSSS","ORe");
-                    guideline.setGuidelineBegin(100);
-                    ConsLayout_Login.getBackground().setColorFilter(Color.parseColor("#EB0DB14B"), PorterDuff.Mode.SRC_OVER);
-
-
-                } else {
-
-                    guideline.setGuidelineBegin(357);
-                    ConsLayout_Login.getBackground().setColorFilter(Color.parseColor("#00FFFFFF"), PorterDuff.Mode.SRC_OVER);
-
-                }
-            }
-        };
-
-        txtUsername.setOnFocusChangeListener(focusListener);
-        txtPassword.setOnFocusChangeListener(focusListener);
+//        txtUsername.setOnFocusChangeListener(focusListener);
+//        txtPassword.setOnFocusChangeListener(focusListener);
 
 
         btnSignIn.setOnClickListener(new OnClickListener() {

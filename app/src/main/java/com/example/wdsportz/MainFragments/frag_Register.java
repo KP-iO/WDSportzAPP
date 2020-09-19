@@ -230,7 +230,7 @@ public class frag_Register extends Fragment {
 
                                                 if(!imageSelected){
 
-                                                    storageReference.child("Users_Profile_Cover_Imgs/Linkedin.jpeg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                                    storageReference.child("Users_Profile_Cover_Imgs/WDLOGO.png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
 
                                                         @Override
 

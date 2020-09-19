@@ -5,7 +5,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
@@ -24,6 +27,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 
 public class frag_Score_Standings extends Fragment {
@@ -31,7 +35,9 @@ public class frag_Score_Standings extends Fragment {
     private static final String TAG = "frag_Score_Standings" ;
     String SelectedLeague;
     FirebaseFirestore fireStoreDB = FirebaseFirestore.getInstance();
-
+    Spinner LeagueSpinner;
+    ArrayAdapter<String> LeagueSpinnerAdapter;
+    String LeagueSpinnerSelectedStr;
     View view;
     TableLayout tableScores;
     ArrayList<LeagueStandingsModel> leagueStandings = new ArrayList<>();
@@ -67,7 +73,9 @@ public class frag_Score_Standings extends Fragment {
 
         tableScores = view.findViewById(R.id.TableScores);
 
+
         loadTable();
+        initLeagueSortBar();
     }
 
     private void loadTable() {
@@ -158,4 +166,117 @@ public class frag_Score_Standings extends Fragment {
         }
     }
 
-}
+    private void initLeagueSortBar() {
+
+        ///// Team league spinner
+
+        LeagueSpinner = view.findViewById(R.id.spinner_team_league1);
+        View standingRow =  view.findViewById(R.id.standingRow);
+
+        // LEAGUES
+        //For drop down menu
+        List<String> spinnerArrayLeagues = new ArrayList<String>();
+        spinnerArrayLeagues.add("All Leagues"); // for first option adding all leagues
+
+        fireStoreDB.collection("Leagues")// where we get all leagues
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                spinnerArrayLeagues.add(document.getId());
+                            }
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+// creating the adaptwr for the spinner
+
+        LeagueSpinnerAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, spinnerArrayLeagues);
+        LeagueSpinner.setAdapter(LeagueSpinnerAdapter);
+        LeagueSpinner.setSelection(0);
+
+        LeagueSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            public void onItemSelected (AdapterView < ? > arg0, View view,int position, long id){
+
+                Log.d("View", "View is now deleted!");
+                int item = LeagueSpinner.getSelectedItemPosition();
+                LeagueSpinnerSelectedStr = LeagueSpinner.getItemAtPosition(item).toString();
+                Log.d("TESTTTT", "initSortBar:YOU SELECTED " + LeagueSpinnerSelectedStr);
+
+
+            tableScores.removeViewsInLayout(1, tableScores.getChildCount()-1);
+
+
+                getLeagueSelectedLeague(LeagueSpinnerSelectedStr);
+
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                //Nothing happen
+            }
+
+        });
+
+    }
+
+    public void removeView()
+    {
+        tableScores.removeAllViews();
+    }
+
+    private void getLeagueSelectedLeague(String leagueSpinnerSelectedStr) {
+
+
+
+
+        leagueStandings.clear();
+
+
+
+
+            fireStoreDB.collection("Leagues")
+                    .document(leagueSpinnerSelectedStr)
+                    .collection("Standings")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+//                                tableScores.removeAllViews();
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+
+
+                                    leagueStandings.add(new LeagueStandingsModel(
+                                            document.get("teamId").toString(),
+                                            document.get("rank").toString(),
+                                            document.get("teamName").toString(),
+                                            document.get("win").toString(),
+                                            document.get("draw").toString(),
+                                            document.get("lose").toString(),
+                                            document.get("goalsFor").toString(),
+                                            document.get("goalsAgainst").toString(),
+                                            "NULLLL",
+                                            document.get("logo").toString(),
+                                            document.get("form").toString(),
+                                            document.get("points").toString()
+                                    ));
+                                }
+
+                                //add row and model....to function to do work
+                                addNewRow(leagueStandings);
+                            } else {
+                                Log.d(TAG, "Error getting documents: ", task.getException());
+                            }
+                        }
+                    });
+
+        }
+    }
+

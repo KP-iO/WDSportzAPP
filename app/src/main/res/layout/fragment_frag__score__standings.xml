@@ -28,7 +28,7 @@
             android:orientation="vertical">
 
             <Spinner
-                android:id="@+id/spinner_team_league"
+                android:id="@+id/spinner_team_league1"
                 android:layout_width="0dp"
                 android:layout_height="54dp"
                 android:gravity="center"
@@ -73,6 +73,7 @@
         app:layout_constraintTop_toBottomOf="@+id/labelLeagueName">
 
         <TableLayout
+            android:background="@color/blue_100"
             android:id="@+id/TableScores"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
