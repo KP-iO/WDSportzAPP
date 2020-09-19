@@ -1,12 +1,12 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.media:media:1.0.1@aar">
     <ANNOTATIONS>
-      <root url="jar:///usr/local/Cellar/gradle/6.4.1/libexec/caches/transforms-2/files-2.1/91ea68c6bc06275b943129ee3f829ca7/media-1.0.1/annotations.zip!/" />
+      <root url="jar:///usr/local/Cellar/gradle/6.4.1/libexec/caches/transforms-2/files-2.1/82c2f8d416d70ff954281de19131c989/media-1.0.1/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="file:///usr/local/Cellar/gradle/6.4.1/libexec/caches/transforms-2/files-2.1/91ea68c6bc06275b943129ee3f829ca7/media-1.0.1/AndroidManifest.xml" />
-      <root url="jar:///usr/local/Cellar/gradle/6.4.1/libexec/caches/transforms-2/files-2.1/91ea68c6bc06275b943129ee3f829ca7/media-1.0.1/jars/classes.jar!/" />
-      <root url="file:///usr/local/Cellar/gradle/6.4.1/libexec/caches/transforms-2/files-2.1/91ea68c6bc06275b943129ee3f829ca7/media-1.0.1/res" />
+      <root url="file:///usr/local/Cellar/gradle/6.4.1/libexec/caches/transforms-2/files-2.1/82c2f8d416d70ff954281de19131c989/media-1.0.1/AndroidManifest.xml" />
+      <root url="jar:///usr/local/Cellar/gradle/6.4.1/libexec/caches/transforms-2/files-2.1/82c2f8d416d70ff954281de19131c989/media-1.0.1/jars/classes.jar!/" />
+      <root url="file:///usr/local/Cellar/gradle/6.4.1/libexec/caches/transforms-2/files-2.1/82c2f8d416d70ff954281de19131c989/media-1.0.1/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

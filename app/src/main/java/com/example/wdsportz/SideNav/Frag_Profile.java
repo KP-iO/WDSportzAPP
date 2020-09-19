@@ -387,7 +387,10 @@ public class Frag_Profile extends Fragment {
 
          */
 
-        String options [] = {"Edit Profile Picture", "Edit Cover photo", "Edit Name", "Edit Phone"};
+        String options [] = {"Edit Profile Picture",
+
+//                "Edit Cover photo", "Edit Name", "Edit Phone"
+        };
         //alert dialog
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
