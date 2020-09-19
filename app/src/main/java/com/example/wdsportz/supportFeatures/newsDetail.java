@@ -50,7 +50,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class NewsDetail extends Fragment {
+public class newsDetail extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -87,13 +87,13 @@ public class NewsDetail extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public NewsDetail() {
+    public newsDetail() {
         // Required empty public constructor
     }
 
     // TODO: Rename and change types and number of parameters
-    public static NewsDetail newInstance(String param1, String param2) {
-        NewsDetail fragment = new NewsDetail();
+    public static newsDetail newInstance(String param1, String param2) {
+        newsDetail fragment = new newsDetail();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -135,7 +135,7 @@ public class NewsDetail extends Fragment {
         RvComment = getView().findViewById(R.id.chat_box);
         textView2 = getView().findViewById(R.id.desc);
         imageView1 = getView().findViewById(R.id.avatar);
-//        editText = getView().findViewById(R.id.edit_box);
+        editText = getView().findViewById(R.id.edit_box);
         button = getView().findViewById(R.id.add);
         shareAction = getView().findViewById(R.id.action_button_share);
 
