@@ -1,9 +1,13 @@
 package com.example.wdsportz.Adapters;
 
 import android.content.Context;
+import android.graphics.drawable.BitmapDrawable;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -88,21 +92,36 @@ public class ScoreFeedAdpater extends RecyclerView.Adapter<ScoreFeedAdpater.MyVi
             awayScore = (TextView) view.findViewById(R.id.awayScore);
             homeScore = (TextView) view.findViewById(R.id.homeScore);
 
+            view.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
 
-//            view.setOnClickListener(new View.OnClickListener(){
-//                @Override
-//                public void onClick(View v){
-//                    int pos = getAdapterPosition();
-//                    if (pos != RecyclerView.NO_POSITION){
-//                        Movie clickedDataItem = movieList.get(pos);
-//                        Intent intent = new Intent(mContext, DetailActivity.class);
-//                        intent.putExtra("movies", clickedDataItem );
-//                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                        mContext.startActivity(intent);
-//                        Toast.makeText(v.getContext(), "You clicked " + clickedDataItem.getOriginalTitle(), Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-//            });
+                    displayPopupWindow(v);
+                }
+            });
         }
     }
+
+
+    private void displayPopupWindow(View anchorView) {
+
+        PopupWindow popup = new PopupWindow(mContext);
+
+//        return new ScoreFeedAdpater.MyViewHolder(from(mContext).inflate(R.layout.match_tiles, parent,false));
+
+        View layout = LayoutInflater.from(mContext).inflate(R.layout.popup_content, null);
+        popup.setContentView(layout);
+        // Set content width and height
+        popup.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
+        popup.setWidth(WindowManager.LayoutParams.WRAP_CONTENT);
+        // Closes the popup window when touch outside of it - when looses focus
+        popup.setOutsideTouchable(true);
+        popup.setFocusable(true);
+        // Show anchored to button
+        popup.setBackgroundDrawable(new BitmapDrawable());
+        popup.showAsDropDown(anchorView);
+
+    }
+
+
 }

@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wdsportz.Adapters.SelectTeamsRecyclerViewAdapter;
 import com.example.wdsportz.R;
+import com.example.wdsportz.SpacesItemDecoration;
 import com.example.wdsportz.ViewModels.SelectTeamsRecyclerViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -113,7 +114,11 @@ public class Frag_iniTeamSelect_teams extends Fragment {
         //The recycler view has been created using the references as above.
         recyclerView.setLayoutManager(new GridLayoutManager(context , numberOfColumns));
 
-    // Implement error handling for all cases e.g (Name/ Logo not accessible) ------>
+        int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.Three_Wide_gap);
+        recyclerView.addItemDecoration(new SpacesItemDecoration(spacingInPixels));
+
+
+        // Implement error handling for all cases e.g (Name/ Logo not accessible) ------>
     //// Create a new method for the code below.
     ///+++ Or possibly migrate to the SelectTeamsRecyclerViewAdapter class
 

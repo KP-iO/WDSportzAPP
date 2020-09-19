@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,8 +53,8 @@ public class frag_login extends Fragment {
     Button btnSignIn;
 
     View linearLayoutCredentials;
+    View view;
 
-    InputMethodManager imm;
 
     public frag_login() {
         // Required empty public constructor
@@ -83,9 +83,10 @@ public class frag_login extends Fragment {
             ((Auth_Activity) getActivity()).goToMainFeed();
         }
 
-
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         viewModel = ViewModelProviders.of(requireActivity()).get(LoginViewModel.class);
 
+        this.view = view;
         btnSignIn = view.findViewById(R.id.btn_signIn);
         btnSignUp = view.findViewById(R.id.signUp);
         forgot = view.findViewById(R.id.txtForgot);
@@ -118,6 +119,21 @@ public class frag_login extends Fragment {
 //
 //        txtUsername.setOnFocusChangeListener(focusListener);
 //        txtPassword.setOnFocusChangeListener(focusListener);
+
+//        getView().setOnKeyListener(new View.OnKeyListener() {
+//            @Override
+//            public boolean onKey(View v, int keyCode, KeyEvent event) {
+//
+////                if (event.getAction() == KeyEvent.ACTION_UP | keyCode == KeyEvent.KEYCODE_BACK){
+////
+////                    Log.e("OREEE","LOOOOK HERE");
+////
+////                    return true;
+////                }
+//                Log.e("Oreeee","LOOOOOOK");
+//                return true;
+//            }
+//        });
 
 
         btnSignIn.setOnClickListener(new OnClickListener() {
@@ -204,12 +220,12 @@ public class frag_login extends Fragment {
             @Override
             public void onClick(View v) {
 
-//                btnSignIn.performClick();
+                btnSignIn.performClick();
                 txtUsername.setText("Ore.yusuf@hotmail.co.uk");
                 txtPassword.setText("Password1");
                 btnSignIn.performClick();
 
-              //  Navigation.findNavController(view).navigate(R.id.action_global_frag_IniTeamSelection);
+//                Navigation.findNavController(view).navigate(R.id.action_global_frag_IniTeamSelection);
             //    ((Auth_Activity)getActivity()).goToMainFeed();
 
 
@@ -242,6 +258,7 @@ public class frag_login extends Fragment {
             mListener.onFragmentInteraction(uri);
         }
     }
+
 
     @Override
     public void onAttach(Context context) {

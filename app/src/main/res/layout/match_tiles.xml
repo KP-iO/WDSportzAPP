@@ -7,6 +7,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="fill"
     android:layout_margin="5dp"
+    android:translationZ="0dp"
     app:cardCornerRadius="0dp"
     app:cardElevation="0dp"
     app:layout_anchorGravity="fill"

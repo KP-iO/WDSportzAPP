@@ -2,7 +2,6 @@ package com.example.wdsportz;
 
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -12,16 +11,17 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.motion.widget.MotionLayout;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -62,29 +62,25 @@ import java.util.ArrayList;
 
 public class videoPlayback_Activity extends AppCompatActivity {
 
+    private static final String TAG = "Video Activity";
+
     private EditText editText;
-    private TextView textView, textView2;
-    private Button button;
-    private ImageView imageView, imgAvatar;
-    MediaSource videoSource;
-    private Uri uri;
+    private TextView txtVideoTitle;
+    private Button addCommentButton;
     String postKey;
     RecyclerView RvComment;
     CommentAdapter commentAdapter;
     ArrayList<Comments> listComments;
     static String COMMENT_KEY = "Comment";
-    private SimpleExoPlayer simpleExoPlayer;
+    ImageButton btnDropdown;
+
     private PlayerView mExoPlayerView;
 
-    private static final String TAG = "Video Activity";
-    FirebaseDatabase commentsDatabase;
-    DatabaseReference reference;
     private ImageView mFullScreenIcon;
     private FrameLayout mFullScreenButton;
     MaterialButton shareAction1;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
 
     FirebaseAuth firebaseAuth;
 
@@ -110,27 +106,26 @@ public class videoPlayback_Activity extends AppCompatActivity {
     private  DataSource.Factory dataSourceFactory;
 
     private SimpleExoPlayer player;
-
+    Boolean isVisible = false;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_videoplayback);
 
-        RvComment =findViewById(R.id.chat_box);
-        textView = findViewById(R.id.Video_title);
-        textView2 = findViewById(R.id.desc);
-        imageView = findViewById(R.id.avatar);
+        RvComment = findViewById(R.id.chat_box);
+        txtVideoTitle = findViewById(R.id.Video_title);
         editText = findViewById(R.id.comment_box);
-        button = findViewById(R.id.add);
-        mExoPlayerView= findViewById(R.id.Watch_view1);
+        addCommentButton = findViewById(R.id.add);
+        btnDropdown = findViewById(R.id.btnDropDown);
         shareAction1 = findViewById(R.id.action_button_share);
-        firebaseDatabase = firebaseDatabase.getInstance();
 
+        firebaseAuth = FirebaseAuth.getInstance();
+//        firebaseUser = firebaseAuth.getCurrentUser();
+        firebaseDatabase = FirebaseDatabase.getInstance();
 
-        String currentUseImg = user.getPhotoUrl().toString();
-        Log.d("DEBUGGGGGGGGGGGGGGGGGG", "Oncreate Launched");
-        super.onCreate(savedInstanceState);
+        mExoPlayerView= findViewById(R.id.Watch_view1);
 
         dataSourceFactory = new DefaultDataSourceFactory(this, Util.getUserAgent(this, getString(R.string.app_name)));
 
@@ -189,13 +184,10 @@ public class videoPlayback_Activity extends AppCompatActivity {
         });
 
 
-        button.setOnClickListener(new View.OnClickListener() {
-
+       addCommentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-
-
-                button.setVisibility(View.INVISIBLE);
+                addCommentButton.setVisibility(View.INVISIBLE);
                 DatabaseReference commentReference =firebaseDatabase.getReference(COMMENT_KEY).child(getPostKey()).push();
                 String key = commentReference.getKey();
                 String chatID = getIntent().getExtras().getString("chatID");
@@ -207,16 +199,12 @@ public class videoPlayback_Activity extends AppCompatActivity {
 
                 Comments comments = new Comments(comment_content,uid,uname,uimg,key, chatID,reportID, ServerValue.TIMESTAMP);
 
-
                 commentReference.setValue(comments).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         showMessage("comment added");
                         editText.setText("");
-                        button.setVisibility(View.VISIBLE);
-                        InputMethodManager imm = (InputMethodManager) getApplicationContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
-                        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-
+                        addCommentButton.setVisibility(View.VISIBLE);
 
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -232,16 +220,8 @@ public class videoPlayback_Activity extends AppCompatActivity {
 
             }
 
-
-
-
-
-
-
-
-
-
         });
+
 String UID = user.getUid();
         db.collection("Users")
                 .whereEqualTo("uid", UID)
@@ -312,19 +292,36 @@ String UID = user.getUid();
     }
 
     public void initVideoInfo(){
+        TextView date = findViewById(R.id.txtDate);
+        TextView desc = findViewById(R.id.txtDescription);
+        String dateTxt = getIntent().getExtras().getString("date");
+        String descTxt = getIntent().getExtras().getString("videoDesc");
 
-        TextView videoTitle;
-        TextView videoDesc;
+        date.setText(dateTxt);
+        desc.setText(descTxt);
 
-        videoTitle = findViewById(R.id.Video_title);
-//        videoDesc = findViewById(R.id.match_Desc);
+        MotionLayout motionLayout = findViewById(R.id.motionLayoutDesc);
 
-        videoTitle.setText(getIntent().getExtras().getString("videoTitle"));
-//        videoDesc.setText(getIntent().getExtras().getString("videoDesc"));
+        btnDropdown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("desc check", dateTxt + descTxt);
 
-//        Log.d("Match Desc", String.valueOf(videoDesc));
+                // motionLayout.transitionToEnd();
 
+                if (isVisible == false){
 
+                    motionLayout.transitionToEnd();
+                    isVisible = true;
+
+                }else{
+                    isVisible = false;
+                    motionLayout.transitionToStart();
+
+                }
+
+            }
+        });
     }
 
 
@@ -473,6 +470,7 @@ String UID = user.getUid();
         intent1.putExtra(Intent.EXTRA_TEXT, shareBody);
         startActivity(Intent.createChooser(intent1, "Share Using"));
     }
+
     public String getPostKey() {
         String postKey = getIntent().getExtras().getString("chatID");
         return postKey;
