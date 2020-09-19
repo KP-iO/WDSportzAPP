@@ -135,18 +135,15 @@ public class Frag_Score extends Fragment {
 
                         for (QueryDocumentSnapshot document : task.getResult()) {
 
-
                             Log.d(TAG, "DOCUMENT PRINT :" + document.getData().toString());
                             Log.d(TAG, "Team Added to List " + document.get("eventId").toString());
 
                             ogScoresList.add(new ScoreViewModel(document.get("homeName").toString(), document.get("awayName").toString(), document.get("homeScore").toString(), document.get("awayScore").toString(), document.get("homeLogo").toString(), document.get("awayLogo").toString(), document.get("eventDate").toString(), document.get("eventId").toString()));
 
-
                             scoreFeedAdpater = new ScoreFeedAdpater(context, ogScoresList);
                             recyclerViewScores.setAdapter(scoreFeedAdpater);
 
                         }
-
 
                     } else {
                         Log.d(TAG, "No such document");
