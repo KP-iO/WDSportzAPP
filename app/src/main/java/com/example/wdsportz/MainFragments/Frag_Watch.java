@@ -130,6 +130,8 @@ public class Frag_Watch extends Fragment {
 
                         if (str.startsWith(chip.getText().toString())) {
                             sortedVideoList.add(mainVideoList.get(x));
+                        } else {
+                            Toast.makeText(getContext(), "No Videos Available",Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -140,7 +142,6 @@ public class Frag_Watch extends Fragment {
 
                 } else {
                     //Else show normal
-                    Toast.makeText(getContext(), "NONE",Toast.LENGTH_LONG).show();
                     BottomRecycler(getContext());
                     motionLayout.transitionToStart();
                 }
