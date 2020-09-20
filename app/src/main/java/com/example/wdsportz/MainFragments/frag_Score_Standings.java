@@ -43,6 +43,8 @@ public class frag_Score_Standings extends Fragment {
     ArrayList<LeagueStandingsModel> leagueStandings = new ArrayList<>();
 //    LeagueStandingsModel leagueStanding;
 
+    int i = 0;
+
     public frag_Score_Standings() {
         // Required empty public constructor
     }
@@ -176,7 +178,7 @@ public class frag_Score_Standings extends Fragment {
         // LEAGUES
         //For drop down menu
         List<String> spinnerArrayLeagues = new ArrayList<String>();
-        spinnerArrayLeagues.add("All Leagues"); // for first option adding all leagues
+        spinnerArrayLeagues.add("Select a League"); // for first option adding all leagues
 
         fireStoreDB.collection("Leagues")// where we get all leagues
                 .get()
@@ -196,7 +198,7 @@ public class frag_Score_Standings extends Fragment {
 
         LeagueSpinnerAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, spinnerArrayLeagues);
         LeagueSpinner.setAdapter(LeagueSpinnerAdapter);
-        LeagueSpinner.setSelection(0);
+        //LeagueSpinner.setSelection(0);
 
         LeagueSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -206,14 +208,24 @@ public class frag_Score_Standings extends Fragment {
                 int item = LeagueSpinner.getSelectedItemPosition();
                 LeagueSpinnerSelectedStr = LeagueSpinner.getItemAtPosition(item).toString();
                 Log.d("TESTTTT", "initSortBar:YOU SELECTED " + LeagueSpinnerSelectedStr);
+                i = i + 1;
+
+                if (i == 2) {
+                    try {
+
+                        getView().findViewById(R.id.labelLeagueName).setVisibility(View.GONE);
+
+                    } catch (Exception e) {
+
+                        Log.e("error", "ore yusuf");
+
+                    }
+                }
 
 
             tableScores.removeViewsInLayout(1, tableScores.getChildCount()-1);
 
-
                 getLeagueSelectedLeague(LeagueSpinnerSelectedStr);
-
-
 
             }
 
