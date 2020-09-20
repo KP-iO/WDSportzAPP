@@ -43,6 +43,8 @@ import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
+
 ////////// --------> The below line should get rid of the need to import each fragment.
 
 // Note: Change name of other classes to 'ClassName'_Fragment
@@ -62,12 +64,16 @@ public boolean connected = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+//        CustomActivityOnCrash.install(this);
+//        throw new RuntimeException("Boom!");
         setTheme(R.style.AppTheme);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         checkInternet();
+
 
         ConnectivityManager cm =
                 (ConnectivityManager)getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);

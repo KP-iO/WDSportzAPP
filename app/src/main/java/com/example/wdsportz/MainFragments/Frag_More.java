@@ -94,7 +94,9 @@ public class Frag_More extends Fragment implements View.OnClickListener {
         btnTnC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_global_frag_About);
+                throw new RuntimeException("Test Crash");
+
+//                Navigation.findNavController(view).navigate(R.id.action_global_frag_About);
             }
         });
 
