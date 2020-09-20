@@ -138,7 +138,7 @@ public class Frag_Score extends Fragment {
                             Log.d(TAG, "DOCUMENT PRINT :" + document.getData().toString());
                             Log.d(TAG, "Team Added to List " + document.get("eventId").toString());
 
-                            ogScoresList.add(new ScoreViewModel(document.get("homeName").toString(), document.get("awayName").toString(), document.get("homeScore").toString(), document.get("awayScore").toString(), document.get("homeLogo").toString(), document.get("awayLogo").toString(), document.get("eventDate").toString(), document.get("eventId").toString()));
+                            ogScoresList.add(new ScoreViewModel(document.get("homeName").toString(), document.get("awayName").toString(), document.get("homeScore").toString(), document.get("awayScore").toString(), document.get("homeLogo").toString(), document.get("awayLogo").toString(), document.get("eventDate").toString(), document.get("eventId").toString(), document.get("venue").toString()));
 
                             scoreFeedAdpater = new ScoreFeedAdpater(context, ogScoresList);
                             recyclerViewScores.setAdapter(scoreFeedAdpater);
@@ -168,7 +168,7 @@ public class Frag_Score extends Fragment {
                                 Log.d(TAG, "DOCUMENT PRINT :" + document.getData().toString());
                                 Log.d(TAG, "Team Added to List " + document.get("eventId").toString());
 
-                                ogScoresList.add(new ScoreViewModel(document.get("homeName").toString(), document.get("awayName").toString(), document.get("homeScore").toString(), document.get("awayScore").toString(), document.get("homeLogo").toString(), document.get("awayLogo").toString(), document.get("eventDate").toString(), document.get("eventId").toString()));
+                                ogScoresList.add(new ScoreViewModel(document.get("homeName").toString(), document.get("awayName").toString(), document.get("homeScore").toString(), document.get("awayScore").toString(), document.get("homeLogo").toString(), document.get("awayLogo").toString(), document.get("eventDate").toString(), document.get("eventId").toString(), document.get("venue").toString()));
 
 
                                 scoreFeedAdpater = new ScoreFeedAdpater(context, ogScoresList);
@@ -199,7 +199,7 @@ public class Frag_Score extends Fragment {
                                 Log.d(TAG, "DOCUMENT PRINT :" + document.getData().toString());
                                 Log.d(TAG, "Team Added to List " + document.get("eventId").toString());
 
-                                ogScoresList.add(new ScoreViewModel(document.get("homeName").toString(), document.get("awayName").toString(), document.get("homeScore").toString(), document.get("awayScore").toString(), document.get("homeLogo").toString(), document.get("awayLogo").toString(), document.get("eventDate").toString(), document.get("eventId").toString()));
+                                ogScoresList.add(new ScoreViewModel(document.get("homeName").toString(), document.get("awayName").toString(), document.get("homeScore").toString(), document.get("awayScore").toString(), document.get("homeLogo").toString(), document.get("awayLogo").toString(), document.get("eventDate").toString(), document.get("eventId").toString(), document.get("venue").toString()));
 
 
                                 scoreFeedAdpater = new ScoreFeedAdpater(context, ogScoresList);
@@ -230,7 +230,7 @@ public class Frag_Score extends Fragment {
                                 Log.d(TAG, "DOCUMENT PRINT :" + document.getData().toString());
                                 Log.d(TAG, "Team Added to List " + document.get("eventId").toString());
 
-                                ogScoresList.add(new ScoreViewModel(document.get("homeName").toString(), document.get("awayName").toString(), document.get("homeScore").toString(), document.get("awayScore").toString(), document.get("homeLogo").toString(), document.get("awayLogo").toString(), document.get("eventDate").toString(), document.get("eventId").toString()));
+                                ogScoresList.add(new ScoreViewModel(document.get("homeName").toString(), document.get("awayName").toString(), document.get("homeScore").toString(), document.get("awayScore").toString(), document.get("homeLogo").toString(), document.get("awayLogo").toString(), document.get("eventDate").toString(), document.get("eventId").toString(), document.get("venue").toString()));
 
 
                                 scoreFeedAdpater = new ScoreFeedAdpater(context, ogScoresList);
@@ -478,7 +478,7 @@ public class Frag_Score extends Fragment {
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
 
-                            ogScoresList.add(new ScoreViewModel(document.get("homeName").toString(), document.get("awayName").toString(), document.get("homeScore").toString(), document.get("awayScore").toString(), document.get("homeLogo").toString(), document.get("awayLogo").toString(), document.get("eventDate").toString(), document.get("eventId").toString()));
+                            ogScoresList.add(new ScoreViewModel(document.get("homeName").toString(), document.get("awayName").toString(), document.get("homeScore").toString(), document.get("awayScore").toString(), document.get("homeLogo").toString(), document.get("awayLogo").toString(), document.get("eventDate").toString(), document.get("eventId").toString(), document.get("venue").toString()));
                             scoreFeedAdpater = new ScoreFeedAdpater(getContext(),ogScoresList);
                             recyclerViewScores.setAdapter(scoreFeedAdpater);
                             scoreFeedAdpater.notifyDataSetChanged();

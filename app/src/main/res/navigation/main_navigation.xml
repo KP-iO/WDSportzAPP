@@ -106,7 +106,7 @@
         app:destination="@id/frag_login3" />
     <fragment
         android:id="@+id/newsDetail"
-        android:name="com.example.wdsportz.supportFeatures.NewsDetail"
+        android:name="com.example.wdsportz.supportFeatures.newsDetail"
         tools:layout="@layout/fragment_news_detail" />
     <action
         android:id="@+id/action_global_newsDetail"

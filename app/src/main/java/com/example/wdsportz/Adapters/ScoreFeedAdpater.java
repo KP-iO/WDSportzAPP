@@ -49,6 +49,7 @@ public class ScoreFeedAdpater extends RecyclerView.Adapter<ScoreFeedAdpater.MyVi
     public void onBindViewHolder(@NonNull ScoreFeedAdpater.MyViewHolder holder, int i) {
 
         holder.matchDate = mData.get(i).getEventDate();
+        holder.venue = mData.get(i).getVenue();
 
         String HTeam = mData.get(i).getHomeTeam();
         String ATeam = mData.get(i).getAwayTeam();
@@ -76,7 +77,8 @@ public class ScoreFeedAdpater extends RecyclerView.Adapter<ScoreFeedAdpater.MyVi
         public TextView awayName, homeName, awayScore, homeScore;
         ImageView homeImage, awayImage;
 
-        String matchDate;
+        String matchDate, venue;
+
 
         public MyViewHolder(View view){
             super(view);
@@ -93,7 +95,7 @@ public class ScoreFeedAdpater extends RecyclerView.Adapter<ScoreFeedAdpater.MyVi
                 @Override
                 public void onClick(View v){
 
-                    displayPopupWindow(v,matchDate);
+                    displayPopupWindow(v,matchDate, venue);
 
                 }
             });
@@ -101,16 +103,17 @@ public class ScoreFeedAdpater extends RecyclerView.Adapter<ScoreFeedAdpater.MyVi
     }
 
 
-    private void displayPopupWindow(View anchorView, String matchDate) {
+    private void displayPopupWindow(View anchorView, String matchDate, String venue) {
 
         PopupWindow popup = new PopupWindow(mContext);
         View layout = LayoutInflater.from(mContext).inflate(R.layout.popup_content, null);
         popup.setContentView(layout);
 
        TextView txtDate = layout.findViewById(R.id.txtDate);
-       TextView txtLocation = layout.findViewById(R.id.txtDate);
+       TextView txtLocation = layout.findViewById(R.id.txtLocation);
 
        txtDate.setText(matchDate);
+       txtLocation.setText(venue);
 
         // Set content width and height
         popup.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);

@@ -112,6 +112,14 @@ public class Frag_More extends Fragment implements View.OnClickListener {
 //            }
 //        });
 
+        final Button webpage = view.findViewById(R.id.btnOfficialWeb);
+        webpage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                webPageOpen(view);
+            }
+        });
+
         final Button btnContact = view.findViewById(R.id.btnContactUs);
         btnContact.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,6 +163,14 @@ public class Frag_More extends Fragment implements View.OnClickListener {
 
     }
 
+    private void webPageOpen(View view) {
+
+        Bundle bundle = new Bundle();
+
+        bundle.putString("url", "https://wdsportz.com/");
+        Navigation.findNavController(view).navigate(R.id.action_global_frag_socialWebOpen, bundle);
+    }
+
     @Override
     public void onClick(View view) {
 
@@ -164,17 +180,17 @@ public class Frag_More extends Fragment implements View.OnClickListener {
         switch(view.getId())
         {
             case R.id.imgBtn_fb:
-                bundle.putString("url", "https://www.facebook.com/WDSportz/");
+                bundle.putString("url", "https://www.google.com");
                 Navigation.findNavController(view).navigate(R.id.action_global_frag_socialWebOpen, bundle);
                 break;
 
             case R.id.imgBtn_insta:
-                bundle.putString("url", "https://www.instagram.com/wdsportz/?hl=en");
+                bundle.putString("url", "https://www.instagram.com/wdsportzofficial/");
                 Navigation.findNavController(view).navigate(R.id.action_global_frag_socialWebOpen, bundle);
                 break;
 
             case R.id.imgBtn_twitter:
-                bundle.putString("url", "https://twitter.com/WDSprtz?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor");
+                bundle.putString("url", "https://twitter.com/WDSportz_");
                 Navigation.findNavController(view).navigate(R.id.action_global_frag_socialWebOpen, bundle);
                 break;
 

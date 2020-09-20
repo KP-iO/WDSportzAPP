@@ -25,6 +25,9 @@ import com.example.wdsportz.ViewModels.Comments;
 import com.example.wdsportz.utils.FullScreenHelper;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.ui.PlayerView;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -58,6 +61,8 @@ public class LivestreamFragment extends AppCompatActivity {
     CommentAdapter commentAdapter;
     List<Comments> listComments;
     static String COMMENT_KEY = "Comment";
+
+    AdView mAdView;
 
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
@@ -97,6 +102,46 @@ public class LivestreamFragment extends AppCompatActivity {
     firebaseAuth = FirebaseAuth.getInstance();
     firebaseUser = firebaseAuth.getCurrentUser();
     firebaseDatabase = FirebaseDatabase.getInstance();
+
+
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+
+        mAdView.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                // Code to be executed when an ad finishes loading.
+            }
+
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+                // Code to be executed when an ad request fails.
+            }
+
+            @Override
+            public void onAdOpened() {
+                // Code to be executed when an ad opens an overlay that
+                // covers the screen.
+            }
+
+            @Override
+            public void onAdClicked() {
+                // Code to be executed when the user clicks on an ad.
+            }
+
+            @Override
+            public void onAdLeftApplication() {
+                // Code to be executed when the user has left the app.
+            }
+
+            @Override
+            public void onAdClosed() {
+                // Code to be executed when the user is about to return
+                // to the app after tapping on an ad.
+            }
+        });
 
     addCommentButton.setOnClickListener(new View.OnClickListener() {
         @Override

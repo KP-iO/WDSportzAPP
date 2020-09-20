@@ -99,6 +99,7 @@
 
 
                 <TextView
+                    android:visibility="gone"
                     android:id="@+id/TxtEmail"
                     android:layout_width="234dp"
                     android:layout_height="33dp"
@@ -116,6 +117,7 @@
                     app:layout_constraintTop_toTopOf="@+id/textView13" />
 
                 <TextView
+                    android:visibility="gone"
                     android:id="@+id/textView13"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
