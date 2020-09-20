@@ -146,49 +146,58 @@ public class frag_login extends Fragment {
                     pd.setTitle("Authenticating");
                     pd.show();
 
+
                     final String email = txtUsername.getText().toString();
                     final String password = txtPassword.getText().toString();
-                    firebaseAuth.signInWithEmailAndPassword(email, password)
-                            // Code used to authenticate user
-                            .addOnCompleteListener(new OnCompleteListener<AuthResult>(){
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task){
-                                    if(task.isSuccessful()) {
-                                        viewModel.authenticate(email, password);
-                                        PreferenceUtils.saveEmail(email, getContext());
-                                        PreferenceUtils.savePassword(password, getContext());
-                                        ((Auth_Activity)getActivity()).goToMainFeed();
-                                        pd.dismiss();
+        if (email.isEmpty() || password.isEmpty()){
 
-                                    }
+            Toast.makeText(getActivity(), "Email an password cannot be empty",Toast.LENGTH_SHORT).show();
+            pd.dismiss();
+            }else {
 
-                                }
+    firebaseAuth.signInWithEmailAndPassword(email, password)
+            // Code used to authenticate user
+            .addOnCompleteListener(new OnCompleteListener<AuthResult>(){
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task){
+                    if(task.isSuccessful()) {
+                        viewModel.authenticate(email, password);
+                        PreferenceUtils.saveEmail(email, getContext());
+                        PreferenceUtils.savePassword(password, getContext());
+                        ((Auth_Activity)getActivity()).goToMainFeed();
+                        pd.dismiss();
 
-                            }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-
-                            if (e instanceof FirebaseAuthInvalidCredentialsException) {
-                                notifyUser("Invalid password");
-                            } else if (e instanceof FirebaseAuthInvalidUserException) {
-                                String errorCode =
-                                        ((FirebaseAuthInvalidUserException) e).getErrorCode();
-                                if (errorCode.equals("ERROR_USER_NOT_FOUND")) {
-                                    notifyUser("No matching account found with email");
-                                } else if (errorCode.equals("ERROR_USER_DISABLED")) {
-                                    notifyUser("User account has been disabled");
-                                } else {
-                                    notifyUser(e.getLocalizedMessage());
-                                }
-                            }
                     }
 
-                        private void notifyUser(String toast) {
-                            pd.dismiss();
-                            Toast.makeText(getActivity(), toast, Toast.LENGTH_SHORT).show();
+                }
 
-                        }
-                    });
+            }).addOnFailureListener(new OnFailureListener() {
+        @Override
+        public void onFailure(@NonNull Exception e) {
+
+            if (e instanceof FirebaseAuthInvalidCredentialsException) {
+                notifyUser("Invalid password");
+            } else if (e instanceof FirebaseAuthInvalidUserException) {
+                String errorCode =
+                        ((FirebaseAuthInvalidUserException) e).getErrorCode();
+                if (errorCode.equals("ERROR_USER_NOT_FOUND")) {
+                    notifyUser("No matching account found with email");
+                } else if (errorCode.equals("ERROR_USER_DISABLED")) {
+                    notifyUser("User account has been disabled");
+                } else {
+                    notifyUser(e.getLocalizedMessage());
+                }
+            }
+        }
+
+        private void notifyUser(String toast) {
+            pd.dismiss();
+            Toast.makeText(getActivity(), toast, Toast.LENGTH_SHORT).show();
+
+        }
+    });
+}
+
 
 
                    } else {
