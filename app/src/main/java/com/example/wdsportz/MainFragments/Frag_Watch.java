@@ -126,19 +126,23 @@ public class Frag_Watch extends Fragment {
                     List<WatchViewModel> sortedVideoList = new ArrayList<>();
 
                     for (int x = 0; x < mainVideoList.size(); x++) {
+
                         String str = mainVideoList.get(x).getCategory();
 
                         if (str.startsWith(chip.getText().toString())) {
                             sortedVideoList.add(mainVideoList.get(x));
-                        } else {
-                            Toast.makeText(getContext(), "No Videos Available",Toast.LENGTH_SHORT).show();
                         }
-
                     }
-                    watchViewAdapter = new WatchViewAdapter(context, sortedVideoList);
-                    bottomRecyclerView.setAdapter(watchViewAdapter);
-                    motionLayout.transitionToEnd();
-//                    Toast.makeText(getContext(), chip.getText().toString(),Toast.LENGTH_LONG).show();
+
+                        if (sortedVideoList.size() == 0) {
+
+                                Toast.makeText(context, "No Videos Available...Please Select Another Category", Toast.LENGTH_SHORT).show();
+
+                            } else {
+                                watchViewAdapter = new WatchViewAdapter(context, sortedVideoList);
+                                bottomRecyclerView.setAdapter(watchViewAdapter);
+                                motionLayout.transitionToEnd();
+                            }
 
                 } else {
                     //Else show normal
@@ -156,7 +160,6 @@ public class Frag_Watch extends Fragment {
         bottomRecyclerView.setLayoutManager(new GridLayoutManager(context, 2));
         int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.default_gap);
         bottomRecyclerView.addItemDecoration(new SpacesItemDecoration(spacingInPixels));
-
 
     // Implement error handling for all cases e.g (Name/ Logo not accessible) ------>
         BottomRecycler(context);
