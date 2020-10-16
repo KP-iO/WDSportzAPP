@@ -23,6 +23,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.wdsportz.CheckLiveStreamPassword_DialogFragment;
 import com.example.wdsportz.MainFragments.DialogFragment_WatchSort;
 import com.example.wdsportz.MainFragments.Frag_HomePage;
 import com.example.wdsportz.MainFragments.Frag_SubscribeMore;
@@ -43,15 +44,13 @@ import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
-
 ////////// --------> The below line should get rid of the need to import each fragment.
 
 // Note: Change name of other classes to 'ClassName'_Fragment
 
 //Change majority of 'px' dimensions settings to 'dp'
 
-public class Main_Activity extends AppCompatActivity implements DialogFragment_WatchSort.OnFragmentInteractionListener,Frag_Test_1.OnFragmentInteractionListener, Frag_iniTeamSelect.OnFragmentInteractionListener, Frag_HomePage.OnFragmentInteractionListener, Frag_Profile.OnFragmentInteractionListener, Frag_Notifications.OnFragmentInteractionListener, Frag_About.OnFragmentInteractionListener, Frag_Explore.OnFragmentInteractionListener, Frag_LiveGuide.OnFragmentInteractionListener, Frag_Settings.OnFragmentInteractionListener, Frag_socialWebOpen.OnFragmentInteractionListener, Frag_SubscribeMore.OnFragmentInteractionListener {
+public class Main_Activity extends AppCompatActivity implements DialogFragment_WatchSort.OnFragmentInteractionListener,Frag_Test_1.OnFragmentInteractionListener, Frag_iniTeamSelect.OnFragmentInteractionListener, Frag_HomePage.OnFragmentInteractionListener, Frag_Profile.OnFragmentInteractionListener, Frag_Notifications.OnFragmentInteractionListener, Frag_About.OnFragmentInteractionListener, Frag_Explore.OnFragmentInteractionListener, Frag_LiveGuide.OnFragmentInteractionListener, Frag_Settings.OnFragmentInteractionListener, Frag_socialWebOpen.OnFragmentInteractionListener, Frag_SubscribeMore.OnFragmentInteractionListener, CheckLiveStreamPassword_DialogFragment.OnFragmentInteractionListener {
     // Collect all listeners in one interface ^^^ and pass through to main activity?
 public boolean connected = false;
     public Toolbar toolbar;

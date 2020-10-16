@@ -1,6 +1,7 @@
 package com.example.wdsportz.Adapters;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,14 +9,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.navigation.Navigation;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.wdsportz.CheckLiveStreamPassword_DialogFragment;
 import com.example.wdsportz.LivestreamFragment;
 import com.example.wdsportz.R;
 import com.example.wdsportz.ViewModels.WatchViewModel;
@@ -25,21 +30,23 @@ import java.util.List;
 
 import static android.view.LayoutInflater.from;
 
-/**
- * Created by khrishawn
- */
-public class LiveStreamAdapter extends RecyclerView.Adapter<LiveStreamAdapter.MyViewHolder> {
+public class LiveStreamAdapter extends RecyclerView.Adapter<LiveStreamAdapter.MyViewHolder> implements CheckLiveStreamPassword_DialogFragment.Listener{
     private List<WatchViewModel> videoViewModels;
     private LayoutInflater lInflater;
     private ItemClickListener lClickListener;
     private Context context;
+    private FragmentManager fm;
     FirebaseFirestore firebaseDatabase = FirebaseFirestore.getInstance();
+    private String userSubmittedPassword;
+    boolean allowAccess = false;
+    private String passwordForSelected;
+    private Bundle selectedBundle;
 
-
-    public LiveStreamAdapter(Context context, List<WatchViewModel> list) {
+    public LiveStreamAdapter(Context context, List<WatchViewModel> list, FragmentManager fm) {
         this.lInflater = LayoutInflater.from(context);
         this.videoViewModels = list;
         this.context = context;
+        this.fm = fm;
     }
 
 
@@ -60,11 +67,20 @@ public class LiveStreamAdapter extends RecyclerView.Adapter<LiveStreamAdapter.My
         final Boolean live = (videoViewModels.get(position).getLive());
         final String date = (videoViewModels.get(position).getDate());
         final String videoDesc = (videoViewModels.get(position).getVideo_desc());
+        final String accessPassword = (videoViewModels.get(position).getAccessPassword());
+
+        if (accessPassword != "null"){
+
+            holder.img_locked.setImageResource(R.drawable.lock);
+        } else {
+
+            holder.img_locked.setImageResource(R.drawable.unlock);
+        }
 
         if (live == true ){
             holder.liveIndicator.setVisibility(View.VISIBLE);
         } else {
-            holder.liveIndicator.setVisibility(View.INVISIBLE);
+            holder.liveIndicator.setVisibility(View.GONE);
         }
 
         Glide.with(context)
@@ -74,26 +90,80 @@ public class LiveStreamAdapter extends RecyclerView.Adapter<LiveStreamAdapter.My
         holder.btnimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                throw new RuntimeException("Test Crash");
-                Intent intent = new Intent(context, LivestreamFragment.class);
+
                 Bundle bundle = new Bundle();
-                bundle.putString("chatID",chat_ID);
+                bundle.putString("chatID", chat_ID);
                 bundle.putString("video", Video1);
                 bundle.putString("videoDesc", videoDesc);
                 bundle.putString("date", date);
-                intent.putExtras(bundle);
-                context.startActivity(intent);
 
-//                Navigation.findNavController(v).navigate(R.id.action_global_livestreamFragment, bundle);
-                for (String key: bundle.keySet())
-                {
-                    Log.d ("myApplication", key + " is a key in the bundle");
-                }
+//              Check password for livestream...
+                selectedBundle = bundle;
+                checkUserLiveStreamPass(videoViewModels.get(position).getAccessPassword());
+
             }
-
         });
 
+    }
 
+    private void checkUserLiveStreamPass(String accessPassword) {
+        //Loading sign for users??
+        passwordForSelected = accessPassword;
+        Log.d("passwordForSelected", passwordForSelected);
+
+        if (passwordForSelected == "null") {
+
+            Intent intent = new Intent(context, LivestreamFragment.class);
+            intent.putExtras(selectedBundle);
+            context.startActivity(intent);
+
+        } else {
+
+            DialogFragment checkLiveStreamPassword_DialogFragment = new CheckLiveStreamPassword_DialogFragment();
+            ((CheckLiveStreamPassword_DialogFragment) checkLiveStreamPassword_DialogFragment).setListener(LiveStreamAdapter.this);
+            checkLiveStreamPassword_DialogFragment.show(fm, "CheckPassword");
+
+        }
+
+    }
+
+    @Override
+    public void returnData(String result) {
+        Log.d("test1", "returnData: " + result);
+        userSubmittedPassword = result;
+
+        Log.d("test2", "returnData: " + passwordForSelected);
+
+        if(passwordForSelected.matches(userSubmittedPassword)){
+            Log.d("test", "TRUEEEE");
+            Intent intent = new Intent(context, LivestreamFragment.class);
+            intent.putExtras(selectedBundle);
+            context.startActivity(intent);
+
+        } else {
+
+            Log.d("test", "FALSEEE");
+            invalidLiveStreamPass();
+        }
+    }
+
+
+    private void invalidLiveStreamPass() {
+
+        new AlertDialog.Builder(context)
+                .setTitle("Incorrect Password")
+                .setMessage("The password you have entered is incorrect, a password can be requested from ' w.ude@wdsportz.com ' ")
+
+                // Specifying a listener allows you to take an action before dismissing the dialog.
+                // The dialog is automatically dismissed when a dialog button is clicked.
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Continue
+                    }
+                })
+
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
 
     @Override
@@ -103,11 +173,11 @@ public class LiveStreamAdapter extends RecyclerView.Adapter<LiveStreamAdapter.My
 
     }
 
-
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView title;
         ImageButton btnimg;
         LinearLayout liveIndicator;
+        ImageView img_locked;
         ItemClickListener itemClickListener;
         FirebaseFirestore fireStoreDB = FirebaseFirestore.getInstance();
 
@@ -118,6 +188,7 @@ public class LiveStreamAdapter extends RecyclerView.Adapter<LiveStreamAdapter.My
             title= itemView.findViewById(R.id.video_text);
             btnimg = itemView.findViewById(R.id.BtnImgVideo);
             liveIndicator = itemView.findViewById(R.id.Live_Indicator);
+            img_locked = itemView.findViewById(R.id.img_locked);
 
             btnimg.setClipToOutline(true);
 
@@ -127,22 +198,10 @@ public class LiveStreamAdapter extends RecyclerView.Adapter<LiveStreamAdapter.My
 //                    Intent i= new Intent(view.getContext(),VideoPlayback.class);
                     Log.d("CLICK", title.getText() + "  Clicked");
 
-//                    int itemPosition = getLayoutPosition();
-//                    Log.d("position", Integer.toString(itemPosition));
-//
-//                    MyViewHolder item = (MyViewHolder) WatchViewModel.getItem(itemPosition);
-//                    String url = item.getUrl();
-
-
-//                    view.getContext().startActivity(i);
-
 
                 }
             });
         }
-
-
-
 
 
         @Override

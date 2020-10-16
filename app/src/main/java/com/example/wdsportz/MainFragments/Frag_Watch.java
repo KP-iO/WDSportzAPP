@@ -217,6 +217,15 @@ public class Frag_Watch extends Fragment {
 
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
+//                                this.title = title;
+//                                this.videoimageURL = videoimageURL;
+//                                this.videoURL = videoURL;
+//                                this.chatBox_ID = chatBox_ID;
+//                                this.video_desc = video_desc;
+//                                this.live = live;
+//                                this.date = date;
+//                                this.accessPassword = accessPassword;
+
                                 list.add(new WatchViewModel(
                                         document.get("Match_Name").toString(),
                                         document.get("Match_Image").toString(),
@@ -224,9 +233,10 @@ public class Frag_Watch extends Fragment {
                                         document.get("Chatbox_ID").toString(),
                                         document.get("Video_desc").toString(),
                                         ((Boolean) document.get("Live")),
-                                        document.get("Date").toString()));
+                                        document.get("Date").toString(),
+                                        document.get("Access_Password").toString()));
 
-                                liveStreamAdapter = new LiveStreamAdapter(context, list);
+                                liveStreamAdapter = new LiveStreamAdapter(context, list, getParentFragmentManager());
                                 topRecyclerView.setAdapter(liveStreamAdapter);
 
                             }

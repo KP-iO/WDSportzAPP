@@ -1,5 +1,7 @@
 package com.example.wdsportz.ViewModels;
 
+import android.util.Log;
+
 public class WatchViewModel {
 
     String title;
@@ -10,6 +12,7 @@ public class WatchViewModel {
     Boolean live;
     String Category;
     String  date;
+    String accessPassword;
 
     /**
      *
@@ -23,7 +26,7 @@ public class WatchViewModel {
      */
 
     //Live Videos
-    public WatchViewModel(String title, String videoimageURL, String videoURL, String chatBox_ID, String video_desc, Boolean live, String date) {
+    public WatchViewModel(String title, String videoimageURL, String videoURL, String chatBox_ID, String video_desc, Boolean live, String date, String accessPassword) {
         this.title = title;
         this.videoimageURL = videoimageURL;
         this.videoURL = videoURL;
@@ -32,6 +35,13 @@ public class WatchViewModel {
         this.live = live;
         this.date = date;
 
+        if(accessPassword == ""){
+            this.accessPassword = "null";
+        } else {
+            this.accessPassword = accessPassword;
+        }
+
+        Log.d("Model Test",  accessPassword);
     }
 
     /**
@@ -113,5 +123,9 @@ public class WatchViewModel {
 
     public void setCategory(String category) {
         Category = category;
+    }
+
+    public String getAccessPassword() {
+        return accessPassword;
     }
 }

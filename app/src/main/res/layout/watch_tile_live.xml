@@ -20,6 +20,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/img_locked"
+            android:layout_width="26dp"
+            android:layout_height="23dp"
+            android:scaleType="fitXY"
+            android:translationZ="1dp"
+            app:layout_constraintBottom_toBottomOf="@+id/Live_Indicator"
+            app:layout_constraintEnd_toStartOf="@+id/Live_Indicator"
+            app:layout_constraintHorizontal_bias="0.96"
+            app:layout_constraintStart_toEndOf="@+id/video_text"
+            app:layout_constraintTop_toTopOf="@+id/Live_Indicator"
+            app:srcCompat="@drawable/unlock" />
+
         <ImageButton
             android:id="@+id/BtnImgVideo"
             android:layout_width="0dp"
@@ -28,7 +41,6 @@
             android:layout_margin="3dp"
             android:background="@drawable/roundcorner"
             android:scaleType="fitXY"
-            android:src="#FF0000"
             app:layout_constraintBottom_toTopOf="@+id/video_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
