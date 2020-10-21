@@ -5,7 +5,7 @@
     android:id="@+id/ConstraintLayoutVp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainFragments.frag_Score_Standings">
+    tools:context="ypw.app.wdsportz.MainFragments.frag_Score_Standings">
 
     <TextView
         android:id="@+id/labelLeagueName"

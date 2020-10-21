@@ -8,7 +8,7 @@
     <include app:graph="@navigation/main_navigation" />
     <fragment
         android:id="@+id/frag_login"
-        android:name="com.example.wdsportz.MainFragments.frag_login"
+        android:name="ypw.app.wdsportz.MainFragments.frag_login"
         tools:layout="@layout/fragment_loginpage" >
         <action
             android:id="@+id/action_frag_login_to_mobile_navigation1"
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/frag_Register"
-        android:name="com.example.wdsportz.MainFragments.frag_Register"
+        android:name="ypw.app.wdsportz.MainFragments.frag_Register"
         tools:layout="@layout/fragment_register" >
         <action
             android:id="@+id/action_RegisterToLogin"
@@ -31,7 +31,7 @@
 
     <fragment
         android:id="@+id/frag_IniTeamSelection"
-        android:name="com.example.wdsportz.MainFragments.Frag_iniTeamSelect"
+        android:name="ypw.app.wdsportz.MainFragments.Frag_iniTeamSelect"
         tools:layout="@layout/fragment_initeamselection" >
         <action
             android:id="@+id/action_frag_IniTeamSelection_to_main_navigation"
@@ -39,6 +39,6 @@
     </fragment>
     <fragment
         android:id="@+id/frag_forgot"
-        android:name="com.example.wdsportz.MainFragments.Frag_forgot"
+        android:name="ypw.app.wdsportz.MainFragments.Frag_forgot"
         tools:layout="@layout/frag_forgotassword" /><action android:id="@+id/action_global_frag_forgot" app:destination="@id/frag_forgot"/><action android:id="@+id/action_global_frag_IniTeamSelection" app:destination="@id/frag_IniTeamSelection"/>
 </navigation>

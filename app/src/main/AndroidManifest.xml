@@ -21,14 +21,14 @@
 
 
         <activity
-            android:name=".MainActivities.Auth_Activity"
+            android:name="ypw.app.wdsportz.MainActivities.Auth_Activity"
             android:label="@string/wdsportz"
             android:theme="@style/AppTheme.Launcher"
             android:windowSoftInputMode="adjustResize">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivities.Auth_Activity" />
+                android:value="ypw.app.wdsportz.MainActivities.Auth_Activity" />
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,7 +38,7 @@
         </activity>
 
         <activity
-            android:name=".MainActivities.Main_Activity"
+            android:name="ypw.app.wdsportz.MainActivities.Main_Activity"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
@@ -46,14 +46,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".videoPlayback_Activity"
+            android:name="ypw.app.wdsportz.videoPlayback_Activity"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".LivestreamFragment"
+            android:name="ypw.app.wdsportz.LivestreamFragment"
             android:theme="@style/AppTheme"
             android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
             android:hardwareAccelerated="true"
@@ -63,7 +63,7 @@
                 <action android:name="android.intent.action.DEFAULT" />
             </intent-filter>
         </activity>
-        <service android:name=".Service.MyService">
+        <service android:name="ypw.app.wdsportz.Service.MyService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
