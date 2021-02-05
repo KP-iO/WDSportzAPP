@@ -24,11 +24,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import ypw.app.wdsportz.Adapters.ScoreFeedAdpater;
-import ypw.app.wdsportz.CustomAppBarLayoutBehavior;
-import ypw.app.wdsportz.Model.League;
 import com.example.wdsportz.R;
-import ypw.app.wdsportz.ViewModels.ScoreViewModel;
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 import com.github.sundeepk.compactcalendarview.domain.Event;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -47,6 +43,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import ypw.app.wdsportz.Adapters.ScoreFeedAdpater;
+import ypw.app.wdsportz.CustomAppBarLayoutBehavior;
+import ypw.app.wdsportz.Model.League;
+import ypw.app.wdsportz.ViewModels.ScoreViewModel;
+
 public class Frag_Score extends Fragment {
 
     FirebaseFirestore fireStoreDB = FirebaseFirestore.getInstance();
@@ -56,7 +57,7 @@ public class Frag_Score extends Fragment {
     private RecyclerView recyclerViewScores;
 
     private AppBarLayout appBarLayout;
-    private final SimpleDateFormat dateFormat = new SimpleDateFormat("d MMMM yyyy", /*Locale.getDefault()*/Locale.ENGLISH);
+    private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy", /*Locale.getDefault()*/Locale.ENGLISH);
     private CompactCalendarView compactCalendarView;
     private boolean isExpanded = false;
 

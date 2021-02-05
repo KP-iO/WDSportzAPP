@@ -1,7 +1,6 @@
 package ypw.app.wdsportz.Adapters;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,8 +13,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,13 +22,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
 
-import ypw.app.wdsportz.CheckLiveStreamPassword_DialogFragment;
 import ypw.app.wdsportz.LivestreamFragment;
 import ypw.app.wdsportz.ViewModels.WatchViewModel;
 
 import static android.view.LayoutInflater.from;
 
-public class LiveStreamAdapter extends RecyclerView.Adapter<LiveStreamAdapter.MyViewHolder> implements CheckLiveStreamPassword_DialogFragment.Listener {
+public class LiveStreamAdapter extends RecyclerView.Adapter<LiveStreamAdapter.MyViewHolder> {
     private List<WatchViewModel> videoViewModels;
     private LayoutInflater lInflater;
     private ItemClickListener lClickListener;
@@ -98,76 +94,57 @@ public class LiveStreamAdapter extends RecyclerView.Adapter<LiveStreamAdapter.My
                 bundle.putString("videoDesc", videoDesc);
                 bundle.putString("date", date);
 
-//              Check password for livestream...
                 selectedBundle = bundle;
-                checkUserLiveStreamPass(videoViewModels.get(position).getAccessPassword());
+
+                Intent intent = new Intent(context, LivestreamFragment.class);
+                intent.putExtras(selectedBundle);
+                context.startActivity(intent);
 
             }
         });
 
     }
 
-    private void checkUserLiveStreamPass(String accessPassword) {
-        //Loading sign for users??
-        passwordForSelected = accessPassword;
-        Log.d("passwordForSelected", passwordForSelected);
-
-        if (passwordForSelected == "null") {
-
-            Intent intent = new Intent(context, LivestreamFragment.class);
-            intent.putExtras(selectedBundle);
-            context.startActivity(intent);
-
-        } else {
-
-            DialogFragment checkLiveStreamPassword_DialogFragment = new CheckLiveStreamPassword_DialogFragment();
-            ((CheckLiveStreamPassword_DialogFragment) checkLiveStreamPassword_DialogFragment).setListener(LiveStreamAdapter.this);
-            checkLiveStreamPassword_DialogFragment.show(fm, "CheckPassword");
-
-        }
-
-    }
-
-    @Override
-    public void returnData(String result) {
-        Log.d("test1", "returnData: " + result);
-        userSubmittedPassword = result;
-
-        Log.d("test2", "returnData: " + passwordForSelected);
-
-        if(passwordForSelected.matches(userSubmittedPassword)){
-            Log.d("test", "TRUEEEE");
-            Intent intent = new Intent(context, LivestreamFragment.class);
-            intent.putExtras(selectedBundle);
-            context.startActivity(intent);
-
-        } else {
-
-            Log.d("test", "FALSEEE");
-            invalidLiveStreamPass();
-        }
-    }
-
-
-    private void invalidLiveStreamPass() {
-
-        TextView showText = new TextView(context);
-        showText.setText("The password you have entered is incorrect, a password can be requested from ' w.ude@wdsportz.com ' ");
-        showText.setTextIsSelectable(true);
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        // Build the Dialog
-        builder.setView(showText)
-                .setTitle("Incorrect Password")
-                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Continue
-                    }
-                })
-
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .show();
-
-    }
+//    @Override
+//    public void returnData(String result) {
+//        Log.d("test1", "returnData: " + result);
+//        userSubmittedPassword = result;
+//
+//        Log.d("test2", "returnData: " + passwordForSelected);
+//
+//        if(passwordForSelected.matches(userSubmittedPassword)){
+//            Log.d("test", "TRUEEEE");
+//            Intent intent = new Intent(context, LivestreamFragment.class);
+//            intent.putExtras(selectedBundle);
+//            context.startActivity(intent);
+//
+//        } else {
+//
+//            Log.d("test", "FALSEEE");
+//            invalidLiveStreamPass();
+//        }
+//    }
+//
+//
+//    private void invalidLiveStreamPass() {
+//
+//        TextView showText = new TextView(context);
+//        showText.setText("The password you have entered is incorrect, a password can be requested from ' w.ude@wdsportz.com ' ");
+//        showText.setTextIsSelectable(true);
+//        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+//        // Build the Dialog
+//        builder.setView(showText)
+//                .setTitle("Incorrect Password")
+//                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        // Continue
+//                    }
+//                })
+//
+//                .setIcon(android.R.drawable.ic_dialog_alert)
+//                .show();
+//
+//    }
 
     @Override
     public int getItemCount() {
@@ -200,8 +177,6 @@ public class LiveStreamAdapter extends RecyclerView.Adapter<LiveStreamAdapter.My
                 public void onClick(View view) {
 //                    Intent i= new Intent(view.getContext(),VideoPlayback.class);
                     Log.d("CLICK", title.getText() + "  Clicked");
-
-
                 }
             });
         }

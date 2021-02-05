@@ -23,20 +23,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import ypw.app.wdsportz.CheckLiveStreamPassword_DialogFragment;
-import ypw.app.wdsportz.MainFragments.DialogFragment_WatchSort;
-import ypw.app.wdsportz.MainFragments.Frag_HomePage;
-import ypw.app.wdsportz.MainFragments.Frag_SubscribeMore;
-import ypw.app.wdsportz.MainFragments.Frag_Test_1;
-import ypw.app.wdsportz.MainFragments.Frag_iniTeamSelect;
-import ypw.app.wdsportz.MainFragments.Frag_socialWebOpen;
 import com.example.wdsportz.R;
-import ypw.app.wdsportz.SideNav.Frag_About;
-import ypw.app.wdsportz.SideNav.Frag_Explore;
-import ypw.app.wdsportz.SideNav.Frag_LiveGuide;
-import ypw.app.wdsportz.SideNav.Frag_Notifications;
-import ypw.app.wdsportz.SideNav.Frag_Profile;
-import ypw.app.wdsportz.SideNav.Frag_Settings;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -44,11 +31,19 @@ import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-////////// --------> The below line should get rid of the need to import each fragment.
-
-// Note: Change name of other classes to 'ClassName'_Fragment
-
-//Change majority of 'px' dimensions settings to 'dp'
+import ypw.app.wdsportz.CheckLiveStreamPassword_DialogFragment;
+import ypw.app.wdsportz.MainFragments.DialogFragment_WatchSort;
+import ypw.app.wdsportz.MainFragments.Frag_HomePage;
+import ypw.app.wdsportz.MainFragments.Frag_SubscribeMore;
+import ypw.app.wdsportz.MainFragments.Frag_Test_1;
+import ypw.app.wdsportz.MainFragments.Frag_iniTeamSelect;
+import ypw.app.wdsportz.MainFragments.Frag_socialWebOpen;
+import ypw.app.wdsportz.SideNav.Frag_About;
+import ypw.app.wdsportz.SideNav.Frag_Explore;
+import ypw.app.wdsportz.SideNav.Frag_LiveGuide;
+import ypw.app.wdsportz.SideNav.Frag_Notifications;
+import ypw.app.wdsportz.SideNav.Frag_Profile;
+import ypw.app.wdsportz.SideNav.Frag_Settings;
 
 public class Main_Activity extends AppCompatActivity implements DialogFragment_WatchSort.OnFragmentInteractionListener,Frag_Test_1.OnFragmentInteractionListener, Frag_iniTeamSelect.OnFragmentInteractionListener, Frag_HomePage.OnFragmentInteractionListener, Frag_Profile.OnFragmentInteractionListener, Frag_Notifications.OnFragmentInteractionListener, Frag_About.OnFragmentInteractionListener, Frag_Explore.OnFragmentInteractionListener, Frag_LiveGuide.OnFragmentInteractionListener, Frag_Settings.OnFragmentInteractionListener, Frag_socialWebOpen.OnFragmentInteractionListener, Frag_SubscribeMore.OnFragmentInteractionListener, CheckLiveStreamPassword_DialogFragment.OnFragmentInteractionListener {
     // Collect all listeners in one interface ^^^ and pass through to main activity?
@@ -61,59 +56,146 @@ public boolean connected = false;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     DatabaseReference databaseReference;
 
+//    BillingClient billingClient;
+//
+//    SkuDetails skuDetails;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-//        CustomActivityOnCrash.install(this);
-//        throw new RuntimeException("Boom!");
         setTheme(R.style.AppTheme);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+//////////////////////////////////////PAYMENT
+//        PurchasesUpdatedListener purchasesUpdatedListener = new PurchasesUpdatedListener() {
+//            @Override
+//            public void onPurchasesUpdated(@NonNull BillingResult billingResult, @Nullable List<Purchase> list) {
+//
+//            }
+//        };
+//
+//        billingClient = billingClient.newBuilder(this)
+//                .setListener(purchasesUpdatedListener)
+//                .enablePendingPurchases()
+//                .build();
+//
+//        billingClient.startConnection(new BillingClientStateListener() {
+//            @Override
+//            public void onBillingSetupFinished(BillingResult billingResult) {
+//                Log.e("billing setup", String.valueOf(billingResult.getResponseCode()));
+//                if (billingResult.getResponseCode() ==  BillingClient.BillingResponseCode.OK) {
+//                    // The BillingClient is ready. You can query purchases here.
+//                    Log.e("billing setup", "Billing sETUP: ok --> Grab profuycts ");
+//                    grabProducts();
+//
+//                }
+//            }
+//            @Override
+//            public void onBillingServiceDisconnected() {
+//                // Try to restart the connection on the next request to
+//                // Google Play by calling the startConnection() method.
+//                Log.e("billing setup", "Disconneted");
+//            }
+//        });
+
+
+        ////// Use the method????
         checkInternet();
 
+                ///^^^^^^^^^>>>>> All of this >>>>>> to go inside 'checkInternet'?
+                ConnectivityManager cm =
+                        (ConnectivityManager)getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        ConnectivityManager cm =
-                (ConnectivityManager)getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+                if(cm.getActiveNetwork()== null)
+                {
+                    Dialog  dialog = new Dialog(Main_Activity.this);
+                    dialog.setContentView(R.layout.alert_dialog);
 
-        if(cm.getActiveNetwork()== null)
-        {
+                    Log.d("NTWRK", "Entered");
+                    dialog.setCanceledOnTouchOutside(false);
 
+                    dialog.getWindow().setLayout(WindowManager.LayoutParams.WRAP_CONTENT,WindowManager.LayoutParams.WRAP_CONTENT);
 
-            Dialog  dialog = new Dialog(Main_Activity.this);
-            dialog.setContentView(R.layout.alert_dialog);
+                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-            Log.d("NTWRK", "Entered");
-            dialog.setCanceledOnTouchOutside(false);
+                    dialog.getWindow().getAttributes().windowAnimations = R.style.Animation_Design_BottomSheetDialog;
 
-            dialog.getWindow().setLayout(WindowManager.LayoutParams.WRAP_CONTENT,WindowManager.LayoutParams.WRAP_CONTENT);
+                    Button tryAgain = dialog.findViewById(R.id.btn_try_again);
 
-            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    tryAgain.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            recreate();
 
-            dialog.getWindow().getAttributes().windowAnimations = R.style.Animation_Design_BottomSheetDialog;
+                        }
 
-            Button tryAgain = dialog.findViewById(R.id.btn_try_again);
-
-            tryAgain.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    recreate();
+                    });
+                    dialog.show();
 
                 }
 
-            });
-            dialog.show();
-
-        }
-
-        Log.d("NTWRK", "Cleared");
+                Log.d("NTWRK", "Cleared");
 
 
         setupNavigation();
-
-
     }
+
+//    private void grabProducts() {
+//
+//        List<String> skuList = new ArrayList<>();
+//        skuList.add("test_video_product_1");
+//
+//        SkuDetailsParams.Builder params = SkuDetailsParams.newBuilder();
+//        params.setSkusList(skuList).setType(BillingClient.SkuType.INAPP);
+//        billingClient.querySkuDetailsAsync(params.build(),
+//                new SkuDetailsResponseListener() {
+//                    @Override
+//                    public void onSkuDetailsResponse(@NonNull BillingResult billingResult, List<SkuDetails> list) {
+//                        Log.e("BILLING Result", String.valueOf(billingResult.getResponseCode()));
+//                        Log.e("Sku Details", String.valueOf(list.size()));
+//                        Log.e("Sku Details", String.valueOf(list.get(0)));
+//                        skuDetails = list.get(0);
+//
+//                    }
+//                });
+//
+//        Log.e("billingClient", String.valueOf(billingClient.isReady()));
+//    }
+
+//    public void startPurchasing() {
+//        Log.e("StartPurchasing", "");
+//        //Check if skudetails null?
+//
+//        // An activity reference from which the billing flow will be launched.
+//        Activity activity = getParent();
+//
+//        // Retrieve a value for "skuDetails" by calling querySkuDetailsAsync().
+//        BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
+//                .setSkuDetails(skuDetails)
+//                .build();
+//
+////        billingClient.startConnection(new BillingClientStateListener() {
+////
+////            @Override
+////            public void onBillingSetupFinished(@NonNull BillingResult billingResult) {
+////                Log.e("purchasingBillingRestart", String.valueOf(billingResult.getResponseCode()));
+////            }
+////
+////            @Override
+////            public void onBillingServiceDisconnected() {
+////                Log.e("purchasingBillingRestart", "FAILED- DISCONNECTED");
+////            }
+////        });
+//
+//        String responseCode = billingClient.launchBillingFlow(activity, billingFlowParams).getDebugMessage();
+//
+//        Log.e("launchBillingFlow", responseCode);
+//    }
+
+
 
     private void checkInternet() {
         ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -125,15 +207,6 @@ public boolean connected = false;
         else
             connected = false;
         ///show the user a message
-    }
-
-    ///????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
-    private void networkChecker() {
-
-
-
-
-
     }
 
 
@@ -203,7 +276,7 @@ public boolean connected = false;
             }
         });
 
-        bottomNav.setSelectedItemId(R.id.nav_watch);
+        bottomNav.setSelectedItemId(R.id.nav_home);
 
     }
 

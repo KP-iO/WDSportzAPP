@@ -1,5 +1,6 @@
 package ypw.app.wdsportz.MainFragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,6 +22,15 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.billingclient.api.BillingClient;
+import com.android.billingclient.api.BillingClientStateListener;
+import com.android.billingclient.api.BillingFlowParams;
+import com.android.billingclient.api.BillingResult;
+import com.android.billingclient.api.Purchase;
+import com.android.billingclient.api.PurchasesUpdatedListener;
+import com.android.billingclient.api.SkuDetails;
+import com.android.billingclient.api.SkuDetailsParams;
+import com.android.billingclient.api.SkuDetailsResponseListener;
 import com.example.wdsportz.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -48,15 +59,18 @@ public class Frag_Watch extends Fragment {
     ChipGroup chipGroupSort;
     private RecyclerView bottomRecyclerView;
     private RecyclerView topRecyclerView;
-
     List<WatchViewModel> mainVideoList;
+
+    Context context;
 
     Menu menu;
 
     private WatchViewAdapter watchViewAdapter;
     private LiveStreamAdapter liveStreamAdapter;
 
-    String VidUri;
+    BillingClient billingClient;
+    SkuDetails skuDetails;
+
 
     public Frag_Watch() {
         // Required empty public constructor
@@ -65,6 +79,86 @@ public class Frag_Watch extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        ////////////////////////////////////PAYMENT
+        PurchasesUpdatedListener purchasesUpdatedListener = new PurchasesUpdatedListener() {
+            @Override
+            public void onPurchasesUpdated(@NonNull BillingResult billingResult, @Nullable List<Purchase> purchases) {
+                if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK
+                        && purchases != null) {
+                } else if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.USER_CANCELED) {
+                    // Handle an error caused by a user cancelling the purchase flow.
+                } else {
+                    // Handle any other error codes.
+                }
+
+            }
+        };
+
+        billingClient = billingClient.newBuilder(getContext())
+                .setListener(purchasesUpdatedListener)
+                .enablePendingPurchases()
+                .build();
+
+        billingClient.startConnection(new BillingClientStateListener() {
+            @Override
+            public void onBillingSetupFinished(BillingResult billingResult) {
+                Log.e("billing setup", String.valueOf(billingResult.getResponseCode()));
+                if (billingResult.getResponseCode() ==  BillingClient.BillingResponseCode.OK) {
+                    // The BillingClient is ready. You can query purchases here.
+                    Log.e("billing setup", "Billing sETUP: ok --> Grab profuycts ");
+                    //grabProducts();
+
+                }
+            }
+            @Override
+            public void onBillingServiceDisconnected() {
+                // Try to restart the connection on the next request to
+                // Google Play by calling the startConnection() method.
+                Log.e("billing setup", "Disconneted");
+            }
+        });
+
+    }
+
+    private void grabProducts() {
+
+        List<String> skuList = new ArrayList<>();
+        skuList.add("test_video_product_1");
+
+        SkuDetailsParams.Builder params = SkuDetailsParams.newBuilder();
+        params.setSkusList(skuList).setType(BillingClient.SkuType.INAPP);
+        billingClient.querySkuDetailsAsync(params.build(),
+                new SkuDetailsResponseListener() {
+                    @Override
+                    public void onSkuDetailsResponse(@NonNull BillingResult billingResult, List<SkuDetails> list) {
+                        Log.e("BILLING Result", String.valueOf(billingResult.getResponseCode()));
+                        Log.e("Sku Details", String.valueOf(list.get(0)));
+                        skuDetails = list.get(0);
+
+                        Log.e("Sku Details: Price check", skuDetails.getPrice());
+
+                    }
+                });
+
+        Log.e("billingClient", String.valueOf(billingClient.isReady()));
+    }
+
+    public void startPurchasing() {
+        Log.e("StartPurchasing", "hehe");
+        //Check if skudetails null?
+
+        // An activity reference from which the billing flow will be launched.
+        Activity activity = this.getActivity();
+        Log.e("StartPurchasing2", activity.toString());
+        // Retrieve a value for "skuDetails" by calling querySkuDetailsAsync().
+        BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
+                .setSkuDetails(skuDetails)
+                .build();
+
+        String responseCode = billingClient.launchBillingFlow(activity, billingFlowParams).getDebugMessage();
+
+        Log.e("launchBillingFlow CODE:", responseCode);
     }
 
     @Override
@@ -74,6 +168,11 @@ public class Frag_Watch extends Fragment {
 
         setHasOptionsMenu(true);
         return inflater.inflate(R.layout.fragment_watch, container, false);
+    }
+
+
+    @Override
+    public void setSharedElementReturnTransition(@Nullable Object transition) {
     }
 
     //This initializes homepage filter menu in the activity's toolbar
@@ -113,7 +212,19 @@ public class Frag_Watch extends Fragment {
     }
 
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        final Context context = view.getContext();
+        this.context = getContext();
+
+        Button btnPaymentTest = view.findViewById(R.id.btnPayment);
+        btnPaymentTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Log.e("test", "btnPaymentTest");
+                startPurchasing();
+
+
+                }
+            });
 
         MotionLayout motionLayout = view.findViewById(R.id.Watch_MotionLayout);
 
@@ -152,6 +263,7 @@ public class Frag_Watch extends Fragment {
                 }
             }
         });
+
         PopulateChipGroupSort(context);
 
         topRecyclerView = getView().findViewById(R.id.RecyclerViewVM);
@@ -166,8 +278,6 @@ public class Frag_Watch extends Fragment {
         BottomRecycler(context);
         TopRecycler(context);
     }
-
-
 
     private void PopulateChipGroupSort(Context context) {
 
@@ -280,7 +390,6 @@ public class Frag_Watch extends Fragment {
                                         String.valueOf(document.get("Category")),
                                         document.get("Video_desc").toString()));
 
-
                                 watchViewAdapter = new WatchViewAdapter(context, mainVideoList);
                                 bottomRecyclerView.setAdapter(watchViewAdapter);
                             }
@@ -296,7 +405,6 @@ public class Frag_Watch extends Fragment {
 
 
     }
-
 
 
     @Override

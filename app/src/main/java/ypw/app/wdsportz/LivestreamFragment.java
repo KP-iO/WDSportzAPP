@@ -50,6 +50,8 @@ import ypw.app.wdsportz.Adapters.CommentAdapter;
 import ypw.app.wdsportz.ViewModels.Comments;
 import ypw.app.wdsportz.utils.FullScreenHelper;
 
+
+
 public class LivestreamFragment extends AppCompatActivity {
 
     private OnFragmentInteractionListener mListener;
@@ -271,14 +273,16 @@ public class LivestreamFragment extends AppCompatActivity {
             }
         });
 
-
-
     }
 
     private void initYouTubePlayerView() {
         String video = getIntent().getExtras().getString("video");
 
-//        Log.d(TAG, videoId );
+        youTubePlayerView.getPlayerUiController().enableLiveVideoUi(true);
+        youTubePlayerView.getPlayerUiController().showYouTubeButton(false);
+        youTubePlayerView.getPlayerUiController().showMenuButton(false);
+
+
         getLifecycle().addObserver(youTubePlayerView);
         youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
             @Override
@@ -330,14 +334,5 @@ public class LivestreamFragment extends AppCompatActivity {
         void onFragmentInteraction(Uri uri);
     }
 
-//    public void onAttach(Context context) {
-//        super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
-//    }
 
 }

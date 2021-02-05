@@ -4,26 +4,28 @@
 
     <item
         android:id="@+id/nav_home"
-
         android:icon="@drawable/home_icon"
         android:title="@string/nav_home"
-        android:visible="false" />
+        android:visible="true" />
+
+
+    <item
+        android:id="@+id/nav_score"
+        android:icon="@drawable/score_icon"
+        android:title="@string/nav_score"
+        android:visible="true" />
 
     <item
         android:id="@+id/nav_watch"
         android:icon="@drawable/watch_icon"
         android:title="@string/nav_watch"
         android:visible="true" />
+
     <item
-        android:id="@+id/nav_score"
-        android:icon="@drawable/score_icon"
-        android:title="@string/nav_score"
+        android:id="@+id/nav_more"
+        android:icon="@drawable/more_icon"
+        android:title="@string/nav_more"
         android:visible="true" />
-    <item
-    android:id="@+id/nav_more"
-    android:icon="@drawable/more_icon"
-    android:title="@string/nav_more"
-    android:visible="true" />
 
 
 </menu>

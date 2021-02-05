@@ -20,7 +20,7 @@
     <string name="login_failed">"Login failed"</string>
     <string name="nav_home">Home</string>
     <string name="nav_more">More</string>
-    <string name="nav_score">Score</string>
+    <string name="nav_score">Scores</string>
     <string name="nav_watch">Watch</string>
     <string name="player_error">Error initializing YouTube player: %s</string>
     <string name="seek_to">Jump To</string>

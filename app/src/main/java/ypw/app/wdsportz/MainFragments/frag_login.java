@@ -25,10 +25,7 @@ import androidx.transition.Fade;
 import androidx.transition.Transition;
 import androidx.transition.TransitionManager;
 
-import ypw.app.wdsportz.MainActivities.Auth_Activity;
 import com.example.wdsportz.R;
-import ypw.app.wdsportz.ViewModels.LoginViewModel;
-import ypw.app.wdsportz.utils.PreferenceUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -36,6 +33,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
+
+import ypw.app.wdsportz.MainActivities.Auth_Activity;
+import ypw.app.wdsportz.ViewModels.LoginViewModel;
+import ypw.app.wdsportz.utils.PreferenceUtils;
 
 
 public class frag_login extends Fragment {
@@ -54,6 +55,7 @@ public class frag_login extends Fragment {
 
     View linearLayoutCredentials;
     View view;
+    boolean isUp;
 
 
     public frag_login() {
@@ -64,6 +66,7 @@ public class frag_login extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         firebaseAuth = FirebaseAuth.getInstance();
+        isUp = false;
     }
 
     @Override
@@ -100,41 +103,6 @@ public class frag_login extends Fragment {
         TextView txtUsername = view.findViewById(R.id.txtUsername);
         final TextView txtPassword = view.findViewById(R.id.txtPassword);
 
-//        View.OnFocusChangeListener focusListener = new View.OnFocusChangeListener() {
-//            public void onFocusChange(View v, boolean hasFocus) {
-//                if (hasFocus){
-//
-//                    Log.d("OFCUSSSS","ORe");
-//
-//                    ConsLayout_Login.getBackground().setColorFilter(Color.parseColor("#EB0DB14B"), PorterDuff.Mode.SRC_OVER);
-//
-//                } else {
-//
-//                    guideline.setGuidelineBegin(357);
-//                    ConsLayout_Login.getBackground().setColorFilter(Color.parseColor("#00FFFFFF"), PorterDuff.Mode.SRC_OVER);
-//
-//                }
-//            }
-//        };
-//
-//        txtUsername.setOnFocusChangeListener(focusListener);
-//        txtPassword.setOnFocusChangeListener(focusListener);
-
-//        getView().setOnKeyListener(new View.OnKeyListener() {
-//            @Override
-//            public boolean onKey(View v, int keyCode, KeyEvent event) {
-//
-////                if (event.getAction() == KeyEvent.ACTION_UP | keyCode == KeyEvent.KEYCODE_BACK){
-////
-////                    Log.e("OREEE","LOOOOK HERE");
-////
-////                    return true;
-////                }
-//                Log.e("Oreeee","LOOOOOOK");
-//                return true;
-//            }
-//        });
-
 
         btnSignIn.setOnClickListener(new OnClickListener() {
               public void onClick(final View view) {
@@ -145,7 +113,6 @@ public class frag_login extends Fragment {
                     pd = new ProgressDialog(getContext());
                     pd.setTitle("Authenticating");
                     pd.show();
-
 
                     final String email = txtUsername.getText().toString();
                     final String password = txtPassword.getText().toString();
@@ -197,12 +164,9 @@ public class frag_login extends Fragment {
         }
     });
 }
-
-
-
                    } else {
 
-                   animateLinearLayout();
+                   animateLogin();
                }
               }
         });
@@ -229,10 +193,12 @@ public class frag_login extends Fragment {
             @Override
             public void onClick(View v) {
 
+/*
                 btnSignIn.performClick();
                 txtUsername.setText("Ore.yusuf@hotmail.co.uk");
                 txtPassword.setText("Password1");
                 btnSignIn.performClick();
+*/
 
 //                Navigation.findNavController(view).navigate(R.id.action_global_frag_IniTeamSelection);
             //    ((Auth_Activity)getActivity()).goToMainFeed();
@@ -243,7 +209,7 @@ public class frag_login extends Fragment {
         });
     }
 
-    private void animateLinearLayout() {
+    private void animateLogin() {
 
         Transition transition = new Fade();
         transition.setDuration(1200);
@@ -257,6 +223,10 @@ public class frag_login extends Fragment {
         constraintSet.clone(constraintLayout);
         constraintSet.connect(R.id.btn_signIn,ConstraintSet.TOP,R.id.linearLayoutLogin,ConstraintSet.BOTTOM,24);
         constraintSet.applyTo(constraintLayout);
+
+        // slide the view from below itself to the current position
+
+//        onSlideViewButtonClick(getView().findViewById(R.id.linearLayoutLogin));
 
     }
 

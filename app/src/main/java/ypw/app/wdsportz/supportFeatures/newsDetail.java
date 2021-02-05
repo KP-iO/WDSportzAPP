@@ -25,9 +25,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import ypw.app.wdsportz.Adapters.CommentAdapter;
 import com.example.wdsportz.R;
-import ypw.app.wdsportz.ViewModels.Comments;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -48,6 +46,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import ypw.app.wdsportz.Adapters.CommentAdapter;
+import ypw.app.wdsportz.ViewModels.Comments;
 
 
 public class newsDetail extends Fragment {
@@ -117,7 +118,7 @@ public class newsDetail extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_news_detail, container, false);
+        return inflater.inflate(R.layout.fragment_newsfullview, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

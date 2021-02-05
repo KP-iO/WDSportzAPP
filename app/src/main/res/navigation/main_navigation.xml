@@ -105,12 +105,12 @@
         android:id="@+id/action_global_frag_login3"
         app:destination="@id/frag_login3" />
     <fragment
-        android:id="@+id/newsDetail"
+        android:id="@+id/newsFullView"
         android:name="ypw.app.wdsportz.supportFeatures.newsDetail"
-        tools:layout="@layout/fragment_news_detail" />
+        tools:layout="@layout/fragment_newsfullview" />
     <action
         android:id="@+id/action_global_newsDetail"
-        app:destination="@id/newsDetail" />
+        app:destination="@id/newsFullView" />
     <fragment
         android:id="@+id/livestreamFragment"
         android:name="ypw.app.wdsportz.LivestreamFragment"

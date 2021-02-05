@@ -25,6 +25,10 @@
 
     <ConstraintSet android:id="@+id/start">
 
+        <Constraint
+            app:layout_editor_absoluteY="305dp"
+            app:layout_editor_absoluteX="190dp"
+            android:id="@+id/btnPayment" />
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">

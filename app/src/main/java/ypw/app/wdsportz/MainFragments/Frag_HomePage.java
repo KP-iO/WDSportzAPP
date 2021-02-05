@@ -16,9 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import ypw.app.wdsportz.Adapters.NewsFeedAdapter;
 import com.example.wdsportz.R;
-import ypw.app.wdsportz.ViewModels.NewsFeedViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -26,6 +24,9 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+
+import ypw.app.wdsportz.Adapters.NewsFeedAdapter;
+import ypw.app.wdsportz.ViewModels.NewsFeedViewModel;
 
 
 public class Frag_HomePage extends Fragment {
@@ -91,8 +92,6 @@ public class Frag_HomePage extends Fragment {
         recyclerView1 = getView().findViewById(R.id.Main_feed);
         recyclerView1.setLayoutManager(new LinearLayoutManager(getContext()));
 
-
-// Implement error handling for all cases e.g (Name/ Logo not accessible) ------>
         newsFeed(context);
     }
 

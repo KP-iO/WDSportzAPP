@@ -14,7 +14,7 @@
         android:fitsSystemWindows="true"
         android:theme="@style/AppTheme1.AppBarOverlay"
         app:expanded="false"
-        app:layout_behavior="com.example.wdsportz.YPW.example.wdsportz.CustomAppBarLayoutBehavior">
+        app:layout_behavior="ypw.app.wdsportz.CustomAppBarLayoutBehavior">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapsingToolbarLayout"
@@ -51,10 +51,12 @@
 
                     <Button
                         android:id="@+id/date_picker_button"
+                        style="@style/Widget.AppCompat.Button.Borderless"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:drawableLeft="@drawable/calender_logo"
+                        android:elevation="0dp"
                         android:text="TODAY"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
